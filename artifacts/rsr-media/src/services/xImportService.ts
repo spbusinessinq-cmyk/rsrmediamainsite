@@ -1,6 +1,5 @@
 // PENDING BACKEND — DO NOT USE IN PRODUCTION
-export async function importXPost(url: string): Promise<any> {
-  // TODO: Replace with real API call to import X post content
-  console.log("Simulating X post import from:", url);
-  throw new Error("Not implemented");
+// Replace with a real API call to POST /api/import-x when backend is connected.
+export async function importXPost(_url: string): Promise<never> {
+  throw new Error("X import requires backend — not implemented.");
 }
