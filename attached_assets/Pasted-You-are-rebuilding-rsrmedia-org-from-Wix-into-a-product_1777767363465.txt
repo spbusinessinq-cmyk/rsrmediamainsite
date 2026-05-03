@@ -1,0 +1,143 @@
+You are rebuilding rsrmedia.org from Wix into a production-ready RSR Media website built for Replit, GitHub, and EdgeOne deployment.
+
+PROJECT GOAL:
+Create a complete, polished, fast, responsive React + Vite site for “RSR Media” that feels like a serious media/intelligence network interface, not a generic Wix/business site.
+
+BRAND:
+RSR Media is the public media arm connected to the broader RSR Intelligence Network ecosystem. The site should explain RSR Media, link it to RSR Intelligence Network, Pacific Systems, RSR Press Corps, reports, shows, and public tip submission.
+
+TECH STACK:
+1. Use React + Vite.
+2. Use TypeScript if project already uses it.
+3. Use clean CSS modules or global CSS.
+4. No paid APIs.
+5. No fake live data.
+6. No broken buttons.
+7. No dead navigation.
+8. Must build successfully.
+9. Must be EdgeOne-ready.
+10. Must work as static SPA.
+
+VISUAL STYLE:
+11. Black/dark charcoal base.
+12. Steel-gray borders.
+13. Emerald/ice-blue accents.
+14. RSR command-interface vibe.
+15. Subtle scanlines.
+16. Subtle animated grid.
+17. Subtle glow only on active elements.
+18. No cheesy Matrix overload.
+19. No bright neon cyberpunk.
+20. No purple crypto dashboard look.
+21. Make it feel like CIA terminal + Splinter Cell + modern newsroom.
+22. Use strong spacing.
+23. Use clean typography.
+24. Use section labels.
+25. Use glass panels.
+26. Use thin borders.
+27. Use restrained motion.
+28. Add hover states.
+29. Add page transition feel.
+30. Add professional responsive layouts.
+
+SITE PAGES:
+31. Home
+32. About
+33. RSR Intelligence Network
+34. Pacific Systems
+35. Press Corps
+36. Broadcasts / Shows
+37. Reports / Publications
+38. Submit Tip
+39. Contact
+40. 404 page
+
+GLOBAL REQUIREMENTS:
+41. Sticky top nav.
+42. Mobile hamburger menu.
+43. RSR Media logo/text lockup.
+44. Live UTC clock in header.
+45. “Signal > Noise” tagline.
+46. Active nav state.
+47. Footer on every page.
+48. Footer includes RSR Media, RSR Intelligence Network, Pacific Systems, Press Corps.
+49. Footer includes “Independent media and intelligence analysis network.”
+50. No placeholder lorem ipsum.
+
+HOME PAGE:
+51. Hero headline: “RSR Media”
+52. Subheadline: “Independent media, field reporting, and intelligence-driven analysis.”
+53. Supporting copy explaining RSR Media clearly.
+54. Primary CTA: “Explore the Network”
+55. Secondary CTA: “Submit a Tip”
+56. Animated background grid.
+57. System status strip.
+58. Cards for Media, Intelligence, Data, Press Corps.
+59. “Built for signal, not noise” section.
+60. Add “What We Cover” section.
+61. Add coverage categories: politics, institutions, corruption, infrastructure, technology, conflict, civil society.
+62. Add “How RSR Works” section.
+63. Add 3-step pipeline: Observe → Verify → Publish.
+64. Add featured ecosystem section.
+65. Add final CTA.
+
+ABOUT PAGE:
+66. Explain RSR Media mission.
+67. Explain that it is built for public reporting and analysis.
+68. Explain calm, evidence-first journalism.
+69. Include “What we are” and “What we are not.”
+70. Not partisan propaganda.
+71. Not rumor chasing.
+72. Not entertainment-first news.
+73. Evidence-first, systems-focused, public-facing media.
+74. Add editorial principles.
+75. Principles: verification, transparency, context, independence, correction discipline.
+
+RSR INTELLIGENCE NETWORK PAGE:
+76. Explain parent ecosystem.
+77. RSR Intelligence Network = broader analysis/intelligence infrastructure.
+78. RSR Media = public publishing arm.
+79. Pacific Systems = data infrastructure layer.
+80. Press Corps = field reporting layer.
+81. Use system cards.
+82. Add network diagram style section.
+83. Add copy: “Media is the front-end. Intelligence is the architecture.”
+84. Include CTA to visit intelligence network, but use placeholder href if final URL unknown.
+85. Make external links easy to update.
+
+PACIFIC SYSTEMS PAGE:
+86. Explain Pacific Systems as data/infrastructure division.
+87. Position as data layer supporting monitoring, indexing, records, structured analysis.
+88. Do not fake live datasets.
+89. Include honest status: “Infrastructure layer — expanding.”
+90. Include modules: Signals, Datasets, Index, Method, Access.
+91. Explain each module.
+92. Add “No mock data” badge.
+93. Add methodology section.
+94. Explain structured data, source review, indexing, and analysis support.
+95. Add CTA: “Explore Data Infrastructure.”
+
+PRESS CORPS PAGE:
+96. Explain RSR Press Corps.
+97. Field reporting.
+98. Public interviews.
+99. Event coverage.
+100. Tip intake.
+101. Contributor network.
+102. Add “Become a contributor” CTA.
+103. Add “Submit a field report” CTA.
+104. Add field standards.
+105. Standards: document, verify, stay lawful, avoid confrontation, preserve source context.
+106. Add press-style cards.
+107. Add future credential language carefully: “press operations and contributor coordination,” not fake credentials.
+
+BROADCASTS / SHOWS PAGE:
+108. Create show grid.
+109. Include The Transmission.
+110. Include The Briefing Room.
+111. Include The Citadel Files.
+112. Include Ground Zero.
+113. Include Doctrine Sessions.
+114. Include Eyes of the Republic.
+115. Include The Command Directive.
+116. Each show gets title, description, format
