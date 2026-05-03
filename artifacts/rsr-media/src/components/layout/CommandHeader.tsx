@@ -166,18 +166,29 @@ export function CommandHeader() {
           />
           <div className="flex items-baseline gap-2 whitespace-nowrap">
             <span
-              className="text-foreground"
               style={{
                 fontFamily: "'Orbitron', sans-serif",
                 fontWeight: 900,
                 fontSize: '0.85rem',
                 letterSpacing: '0.08em',
-                textShadow: '0 0 12px rgba(0,224,164,0.25)',
+                color: '#f4f6f8',
+                textShadow: '0 0 14px rgba(255,255,255,0.35), 0 0 6px rgba(0,224,164,0.18)',
               }}
             >
               RSR MEDIA
             </span>
-            <span className="hidden md:inline font-mono text-[0.5rem] tracking-[0.18em] text-muted-foreground/35 uppercase">
+            <span
+              className="hidden xl:inline"
+              style={{
+                fontFamily: "'Orbitron', sans-serif",
+                fontWeight: 600,
+                fontSize: '0.52rem',
+                letterSpacing: '0.18em',
+                textTransform: 'uppercase',
+                color: 'rgba(255,179,71,0.78)',
+                textShadow: '0 0 10px rgba(255,179,71,0.28)',
+              }}
+            >
               // POWERED BY PACIFIC SYSTEMS
             </span>
           </div>

@@ -1,0 +1,162 @@
+RSR MEDIA FINAL SIGNAL COLOR + HEADER LOCKUP PASS
+
+SCOPE:
+Frontend only.
+Do not break routes.
+Do not break admin.
+Do not break reports.
+Do not break videos.
+Do not break EdgeOne deploy.
+Fast polish pass only.
+
+MAIN GOAL:
+1. Make platform sections color-coded.
+2. Make RSR MEDIA header lockup stronger.
+3. Make boxes/cards more visible.
+4. Keep Splinter Cell / cyber command vibe.
+
+HEADER LOCKUP:
+1. Fix the header brand so it reads as ONE clean line:
+   RSR MEDIA // POWERED BY PACIFIC SYSTEMS
+2. Do not stack RSR MEDIA into two lines.
+3. Do not show “signal network” under the logo in the header.
+4. Left header should be:
+   [small RSR logo] RSR MEDIA // POWERED BY PACIFIC SYSTEMS
+5. RSR MEDIA = white / steel.
+6. POWERED BY PACIFIC SYSTEMS = amber.
+7. Use Orbitron.
+8. Make text sharp, compact, and readable.
+9. Add subtle glow:
+   white text glow for RSR MEDIA
+   amber glow for Pacific Systems.
+10. Ensure header still fits on desktop.
+11. On smaller screens, hide the Pacific tagline before wrapping.
+
+PLATFORM COLOR SYSTEM:
+12. Add global CSS variables:
+   --rsr-green: #00ff9c;
+   --rsr-red: #ff2b2b;
+   --rsr-blue: #1da1f2;
+   --rsr-amber: #ffb347;
+   --rsr-steel: #1a1c1f;
+13. RSR core UI stays emerald/steel.
+14. YouTube/Broadcasts = red accent.
+15. X/Twitter = blue accent.
+16. TikTok = emerald accent.
+17. Pacific Systems = amber accent.
+18. Black Dog/Security = red/dark crimson accent.
+
+YOUTUBE / BROADCASTS:
+19. Broadcast video cards should use red hover glow.
+20. Red should be subtle, not full neon.
+21. Video card default:
+   border rgba(255,255,255,0.08)
+22. Video card hover:
+   border rgba(255,43,43,0.45)
+   box-shadow 0 0 28px rgba(255,43,43,0.22)
+23. YouTube buttons/links use red.
+24. Broadcasts page title can keep white, with red small accent line.
+25. Homepage Broadcasts cards also get red hover glow.
+
+X / TWITTER:
+26. X links/cards/buttons use blue accent.
+27. X hover:
+   border rgba(29,161,242,0.45)
+   box-shadow 0 0 24px rgba(29,161,242,0.22)
+28. RSRINTEL social cards use blue accent.
+29. Keep RSR Intel page blue/steel.
+
+TIKTOK:
+30. TikTok cards/buttons use emerald accent.
+31. TikTok hover:
+   border rgba(0,255,156,0.45)
+   box-shadow 0 0 24px rgba(0,255,156,0.20)
+
+PACIFIC SYSTEMS:
+32. Pacific links/cards use amber accent.
+33. Pacific hover:
+   border rgba(255,179,71,0.45)
+   box-shadow 0 0 26px rgba(255,179,71,0.20)
+34. Header “POWERED BY PACIFIC SYSTEMS” uses amber.
+
+GLOBAL CARD / BOX UMPH:
+35. Current boxes are too faint.
+36. Increase visibility of all major panels.
+37. Create/reuse a common class if possible:
+   command-panel / rsr-card / glass-panel.
+38. Default panel:
+   border 1px solid rgba(0,224,164,0.16)
+   background rgba(5,7,8,0.72)
+   box-shadow 0 0 22px rgba(0,224,164,0.08), inset 0 0 18px rgba(255,255,255,0.025)
+39. Hover panel:
+   border-color rgba(0,224,164,0.45)
+   box-shadow 0 0 34px rgba(0,224,164,0.18), inset 0 0 18px rgba(255,255,255,0.035)
+40. Add subtle corner bracket accents to cards where already used.
+41. Do not over-round corners.
+42. Prefer sharp corners or tiny radius.
+43. Make panels visible on dark background without hover.
+44. Apply to hero right signal stack.
+45. Apply to contact card.
+46. Apply to CTA clusters.
+47. Apply to report cards.
+48. Apply to mission cards.
+49. Apply to network cards.
+50. Apply to armory cards.
+51. Apply to admin cards if safe.
+
+SCROLLBAR:
+52. Keep custom dark scrollbar.
+53. Make scrollbar thinner and tactical.
+54. Track black.
+55. Thumb emerald with low opacity.
+56. Hover brighter emerald.
+57. Firefox scrollbar-color too.
+
+HERO:
+58. Keep layout.
+59. Make the CTA boxes slightly stronger.
+60. “READ REPORTS” primary button keeps emerald.
+61. “HOTLINE” keeps emerald/steel.
+62. “CHANNELS” neutral.
+63. “RSR INTEL” blue hover.
+64. “ARMORY” amber hover.
+65. “SYSTEMS” amber/green hover.
+66. Signal Stack panel should be more visible.
+67. Contact panel should be more visible.
+
+CHANNELS PAGE:
+68. X card gets blue.
+69. YouTube card gets red.
+70. TikTok card gets emerald.
+71. Hotline card gets emerald.
+72. Email card gets steel/green.
+73. Hover glows match platform.
+
+SYSTEMS DROPDOWN:
+74. Pacific item amber.
+75. Black Dog item red.
+76. Armory item amber/steel.
+77. Dropdown panel stronger and visible.
+78. No clipping.
+79. z-index high.
+
+FOOTER:
+80. Keep footer clean.
+81. Add platform color accents to footer links:
+   YouTube red
+   X blue
+   TikTok emerald
+   Pacific amber
+   Black Dog red
+82. Keep “Powered by RSR Intelligence Network / Engineered by Pacific Systems / Secured through Black Dog” readable.
+
+BUILD:
+83. Run npm/pnpm build used by this project.
+84. Fix any TypeScript errors.
+85. Do not introduce new dependency.
+86. Confirm output remains dist.
+87. No console spam.
+
+GIT:
+88. After build passes, commit with:
+   Final signal color and header polish

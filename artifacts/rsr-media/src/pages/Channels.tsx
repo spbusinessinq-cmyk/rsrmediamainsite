@@ -104,7 +104,7 @@ export default function Channels() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mb-20">
           <a href={X_URL} target="_blank" rel="noopener noreferrer"
             onClick={() => trackOutboundClick('X Channels Overview', X_URL)}
-            className="p-5 border border-border/22 bg-card/6 hover:border-accent/30 hover:bg-accent/[0.03] transition-all corner-bracket group flex flex-col">
+            className="card-x p-5 bg-card/6 corner-bracket group flex flex-col">
             <div className="font-mono text-[0.58rem] text-muted-foreground/35 tracking-widest uppercase mb-2">X / SOCIAL</div>
             <div className="text-xl font-mono font-bold mb-2">𝕏 RSRINTEL</div>
             <p className="font-sans text-sm text-muted-foreground leading-relaxed flex-1 mb-4">Dispatches, report alerts, and public signal tracking.</p>
@@ -113,7 +113,7 @@ export default function Channels() {
 
           <a href={YOUTUBE_URL} target="_blank" rel="noopener noreferrer"
             onClick={() => trackOutboundClick('YouTube Channels Overview', YOUTUBE_URL)}
-            className="p-5 border border-border/22 bg-card/6 hover:border-destructive/22 hover:bg-destructive/[0.025] transition-all corner-bracket group flex flex-col">
+            className="card-youtube p-5 bg-card/6 corner-bracket group flex flex-col">
             <div className="font-mono text-[0.58rem] text-muted-foreground/35 tracking-widest uppercase mb-2">VIDEO</div>
             <div className="font-bold text-base mb-2" style={ORBITRON_BOLD}>YouTube</div>
             <p className="font-sans text-sm text-muted-foreground leading-relaxed flex-1 mb-4">Broadcasts, video reports, and commentary.</p>
@@ -123,7 +123,7 @@ export default function Channels() {
           {tiktokConfigured && (
             <a href={TIKTOK_URL} target="_blank" rel="noopener noreferrer"
               onClick={() => trackOutboundClick('TikTok Channels Overview', TIKTOK_URL)}
-              className="p-5 border border-border/22 bg-card/6 hover:border-border/45 hover:bg-card/18 transition-all corner-bracket group flex flex-col">
+              className="card-tiktok p-5 bg-card/6 corner-bracket group flex flex-col">
               <div className="font-mono text-[0.58rem] text-muted-foreground/35 tracking-widest uppercase mb-2">TIKTOK</div>
               <div className="flex items-center gap-2 mb-2">
                 <TikTokIcon className="w-4 h-4 text-foreground/55" />
@@ -135,7 +135,7 @@ export default function Channels() {
           )}
 
           <a href={PHONE_HREF} onClick={() => trackOutboundClick('Hotline Channels Overview', PHONE_HREF)}
-            className="p-5 border border-border/22 bg-card/6 hover:border-primary/25 hover:bg-primary/[0.03] transition-all corner-bracket group flex flex-col">
+            className="card-rsr p-5 bg-card/6 corner-bracket group flex flex-col">
             <div className="font-mono text-[0.58rem] text-muted-foreground/35 tracking-widest uppercase mb-2">HOTLINE</div>
             <div className="font-bold text-base mb-2" style={ORBITRON_BOLD}>{PHONE_DISPLAY}</div>
             <p className="font-sans text-sm text-muted-foreground leading-relaxed flex-1 mb-4">Call during shows or leave tips for the newsroom.</p>
@@ -143,7 +143,7 @@ export default function Channels() {
           </a>
 
           <a href={`mailto:${SITE_EMAIL}`}
-            className="p-5 border border-border/22 bg-card/6 hover:border-primary/25 hover:bg-primary/[0.03] transition-all corner-bracket group flex flex-col">
+            className="card-rsr p-5 bg-card/6 corner-bracket group flex flex-col">
             <div className="font-mono text-[0.58rem] text-muted-foreground/35 tracking-widest uppercase mb-2">EMAIL</div>
             <div className="font-mono text-sm font-bold mb-2 break-all">{SITE_EMAIL}</div>
             <p className="font-sans text-sm text-muted-foreground leading-relaxed flex-1 mb-4">Newsroom contact for tips and corrections.</p>

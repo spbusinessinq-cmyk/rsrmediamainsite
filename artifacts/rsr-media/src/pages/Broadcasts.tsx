@@ -51,7 +51,7 @@ export default function Broadcasts() {
             {VIDEOS.map((v, i) => (
               <motion.div key={v.id}
                 initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07 }}>
-                <div className="border border-border/22 bg-card/8 corner-bracket overflow-hidden flex flex-col hover-glow-emerald transition-all h-full">
+                <div className="card-youtube corner-bracket overflow-hidden flex flex-col h-full bg-card/8">
                   {v.embedUrl ? (
                     <div className="w-full aspect-video bg-black shrink-0">
                       <iframe

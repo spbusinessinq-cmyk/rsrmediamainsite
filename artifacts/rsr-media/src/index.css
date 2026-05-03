@@ -87,6 +87,13 @@
   --accent-glow: 0 0 22px rgba(41,182,246,0.22);
   --crimson-glow: 0 0 22px rgba(220,38,38,0.25);
 
+  /* ── Platform Signal Colors ───────── */
+  --rsr-green: #00ff9c;
+  --rsr-red: #ff2b2b;
+  --rsr-blue: #1da1f2;
+  --rsr-amber: #ffb347;
+  --rsr-steel: #1a1c1f;
+
   /* ── Typography ───────────────────── */
   /* Orbitron: primary RSR interface font — nav, headings, UI labels, hero, buttons */
   --app-font-display: 'Orbitron', sans-serif;
@@ -242,6 +249,58 @@
 }
 .hover-glow-emerald:hover {
   box-shadow: 0 0 24px rgba(0, 224, 164, 0.10), inset 0 0 18px rgba(0, 224, 164, 0.035);
+}
+
+/* ── Platform Card Hover Glows ─────────────────────────── */
+/* All cards: visible default border + subtle inner highlight,
+   platform-tinted hover glow. Apply to <a> / <div> cards. */
+.card-base {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(5, 7, 8, 0.72);
+  box-shadow: inset 0 0 18px rgba(255, 255, 255, 0.022);
+  transition: border-color 0.28s ease, box-shadow 0.28s ease, background 0.28s ease;
+}
+
+/* YouTube / Broadcasts — red */
+.card-youtube { border: 1px solid rgba(255, 255, 255, 0.08); transition: border-color 0.28s ease, box-shadow 0.28s ease; }
+.card-youtube:hover {
+  border-color: rgba(255, 43, 43, 0.45);
+  box-shadow: 0 0 28px rgba(255, 43, 43, 0.22), inset 0 0 18px rgba(255, 43, 43, 0.04);
+}
+
+/* X / Twitter — blue */
+.card-x { border: 1px solid rgba(255, 255, 255, 0.08); transition: border-color 0.28s ease, box-shadow 0.28s ease; }
+.card-x:hover {
+  border-color: rgba(29, 161, 242, 0.45);
+  box-shadow: 0 0 24px rgba(29, 161, 242, 0.22), inset 0 0 18px rgba(29, 161, 242, 0.04);
+}
+
+/* TikTok — emerald */
+.card-tiktok { border: 1px solid rgba(255, 255, 255, 0.08); transition: border-color 0.28s ease, box-shadow 0.28s ease; }
+.card-tiktok:hover {
+  border-color: rgba(0, 255, 156, 0.45);
+  box-shadow: 0 0 24px rgba(0, 255, 156, 0.20), inset 0 0 18px rgba(0, 255, 156, 0.04);
+}
+
+/* Pacific Systems — amber */
+.card-pacific { border: 1px solid rgba(255, 255, 255, 0.08); transition: border-color 0.28s ease, box-shadow 0.28s ease; }
+.card-pacific:hover {
+  border-color: rgba(255, 179, 71, 0.45);
+  box-shadow: 0 0 26px rgba(255, 179, 71, 0.20), inset 0 0 18px rgba(255, 179, 71, 0.04);
+}
+
+/* Black Dog / Security — crimson */
+.card-blackdog { border: 1px solid rgba(255, 255, 255, 0.08); transition: border-color 0.28s ease, box-shadow 0.28s ease; }
+.card-blackdog:hover {
+  border-color: rgba(220, 38, 38, 0.45);
+  box-shadow: 0 0 26px rgba(220, 38, 38, 0.20), inset 0 0 18px rgba(220, 38, 38, 0.04);
+}
+
+/* RSR core — emerald (default platform) */
+.card-rsr { border: 1px solid rgba(255, 255, 255, 0.08); transition: border-color 0.28s ease, box-shadow 0.28s ease; }
+.card-rsr:hover {
+  border-color: rgba(0, 224, 164, 0.45);
+  box-shadow: 0 0 26px rgba(0, 224, 164, 0.18), inset 0 0 18px rgba(0, 224, 164, 0.04);
 }
 
 /* ── Tactical Scrollbar (WebKit + Firefox) ─────────────── */
