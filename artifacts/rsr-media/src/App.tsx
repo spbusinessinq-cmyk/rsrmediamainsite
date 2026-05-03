@@ -14,6 +14,7 @@ import Reports from "@/pages/Reports";
 import ReportDetail from "@/pages/ReportDetail";
 import Network from "@/pages/Network";
 import PacificSystems from "@/pages/PacificSystems";
+import RSRIntel from "@/pages/RSRIntel";
 import BlackDog from "@/pages/BlackDog";
 import Armory from "@/pages/Armory";
 import Hotline from "@/pages/Hotline";
@@ -33,6 +34,7 @@ function Router() {
       <Route path="/reports/:slug" component={ReportDetail} />
       <Route path="/network" component={Network} />
       <Route path="/pacific-systems" component={PacificSystems} />
+      <Route path="/rsr-intel" component={RSRIntel} />
       <Route path="/black-dog" component={BlackDog} />
       <Route path="/armory" component={Armory} />
       <Route path="/hotline" component={Hotline} />

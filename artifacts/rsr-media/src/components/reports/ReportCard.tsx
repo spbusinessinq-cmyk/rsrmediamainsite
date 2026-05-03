@@ -21,7 +21,7 @@ export function ReportCard({ report, featured }: ReportCardProps) {
     <Link
       href={`/reports/${report.slug}`}
       data-testid={`card-report-${report.id}`}
-      className={`block border bg-card/20 corner-bracket hover:bg-card/40 transition-all group overflow-hidden ${
+      className={`block border bg-card/20 corner-bracket hover:bg-card/40 transition-all group overflow-hidden hover-glow-emerald ${
         featured
           ? 'border-amber-500/30 hover:border-amber-500/60'
           : 'border-border/50 hover:border-primary/50'

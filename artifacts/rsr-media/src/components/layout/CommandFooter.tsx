@@ -3,7 +3,7 @@ import { Link } from 'wouter';
 import {
   ARMORY_URL, RSR_INTEL_URL, PACIFIC_SYSTEMS_URL, BLACK_DOG_URL,
   SITE_EMAIL, SITE_PHONE, X_URL, YOUTUBE_URL, TIKTOK_URL, TIKTOK_HANDLE,
-  isYouTubeConfigured, isTikTokConfigured,
+  isTikTokConfigured,
 } from '@/config/site';
 import { trackOutboundClick } from '@/lib/analytics';
 
@@ -45,7 +45,6 @@ function FooterLink({ href, children, external, accent }: {
 }
 
 export function CommandFooter() {
-  const ytConfigured = isYouTubeConfigured();
   const ttConfigured = isTikTokConfigured();
 
   return (
@@ -55,7 +54,8 @@ export function CommandFooter() {
         <div className="flex whitespace-nowrap py-1.5">
           <div className="animate-marquee flex gap-14 items-center font-mono text-[0.58rem] text-muted-foreground/25 tracking-widest uppercase">
             {['// RSR MEDIA — SIGNAL NETWORK', '// PUBLIC REPORTING', '// VERIFICATION FIRST', '// COMMUNITY SIGNAL', '// SIGNAL > NOISE',
-              '// RSR MEDIA — SIGNAL NETWORK', '// PUBLIC REPORTING', '// VERIFICATION FIRST', '// COMMUNITY SIGNAL', '// SIGNAL > NOISE'].map((m, i) => (
+              '// POWERED BY RSR INTELLIGENCE NETWORK', '// ENGINEERED BY PACIFIC SYSTEMS',
+              '// RSR MEDIA — SIGNAL NETWORK', '// PUBLIC REPORTING', '// VERIFICATION FIRST'].map((m, i) => (
               <span key={i} className="shrink-0">{m}</span>
             ))}
           </div>
@@ -68,34 +68,31 @@ export function CommandFooter() {
 
           {/* Col 1: Brand */}
           <div className="col-span-2 md:col-span-1 lg:col-span-1">
-            <Link href="/" className="flex items-center gap-2.5 mb-5 group">
+            <Link href="/" className="flex items-center gap-2.5 mb-4 group">
               <img src="/rsr-logo.png" alt="RSR Media" className="h-8 w-8 object-contain group-hover:opacity-80 transition-opacity"
                 onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
-              <div className="flex flex-col leading-none">
-                <span className="font-serif font-bold text-sm leading-none">RSR MEDIA</span>
-                <span className="font-mono text-[0.5rem] text-muted-foreground/40 tracking-widest mt-0.5">PUBLIC SIGNAL NETWORK</span>
-              </div>
+              <span className="font-bold text-sm" style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '0.78rem', letterSpacing: '0.04em' }}>
+                RSR MEDIA
+              </span>
             </Link>
-            <p className="font-mono text-[0.6rem] text-primary/40 tracking-widest mb-3">SIGNAL &gt; NOISE</p>
-            <p className="font-sans text-sm text-muted-foreground/60 leading-relaxed">
+            <p className="font-mono text-[0.58rem] text-primary/40 tracking-widest mb-3">SIGNAL &gt; NOISE</p>
+            <p className="font-sans text-sm text-muted-foreground/60 leading-relaxed mb-4">
               Independent. Verification-first. Community-facing.
             </p>
             {/* Social icons */}
-            <div className="flex gap-2 mt-4">
+            <div className="flex gap-2 mb-4">
               <a href={X_URL} target="_blank" rel="noopener noreferrer"
                 onClick={() => trackOutboundClick('Footer X', X_URL)}
                 className="w-7 h-7 flex items-center justify-center border border-border/25 text-muted-foreground hover:text-accent hover:border-accent/40 transition-colors font-bold text-[0.7rem]"
                 title="X / RSRINTEL">
                 𝕏
               </a>
-              {ytConfigured && (
-                <a href={YOUTUBE_URL} target="_blank" rel="noopener noreferrer"
-                  onClick={() => trackOutboundClick('Footer YouTube', YOUTUBE_URL)}
-                  className="w-7 h-7 flex items-center justify-center border border-border/25 text-muted-foreground hover:text-destructive hover:border-destructive/30 transition-colors"
-                  title="YouTube">
-                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                </a>
-              )}
+              <a href={YOUTUBE_URL} target="_blank" rel="noopener noreferrer"
+                onClick={() => trackOutboundClick('Footer YouTube', YOUTUBE_URL)}
+                className="w-7 h-7 flex items-center justify-center border border-border/25 text-muted-foreground hover:text-destructive hover:border-destructive/30 transition-colors"
+                title="YouTube">
+                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              </a>
               {ttConfigured && (
                 <a href={TIKTOK_URL} target="_blank" rel="noopener noreferrer"
                   onClick={() => trackOutboundClick('Footer TikTok', TIKTOK_URL)}
@@ -105,9 +102,25 @@ export function CommandFooter() {
                 </a>
               )}
             </div>
-            <p className="font-mono text-[0.52rem] text-muted-foreground/30 tracking-wider mt-3 leading-relaxed">
-              Social counts are manually updated unless analytics API is connected.
-            </p>
+            {/* Powered by */}
+            <div className="space-y-1">
+              <p className="font-mono text-[0.55rem] text-muted-foreground/30 tracking-wider">
+                Powered by{' '}
+                <a href={RSR_INTEL_URL} target="_blank" rel="noopener noreferrer"
+                  onClick={() => trackOutboundClick('Footer Powered RSR Intel', RSR_INTEL_URL)}
+                  className="text-primary/35 hover:text-primary/60 transition-colors">
+                  RSR Intelligence Network
+                </a>
+              </p>
+              <p className="font-mono text-[0.55rem] text-muted-foreground/30 tracking-wider">
+                Engineered by{' '}
+                <a href={PACIFIC_SYSTEMS_URL} target="_blank" rel="noopener noreferrer"
+                  onClick={() => trackOutboundClick('Footer Powered Pacific', PACIFIC_SYSTEMS_URL)}
+                  className="text-amber-500/35 hover:text-amber-500/60 transition-colors">
+                  Pacific Systems
+                </a>
+              </p>
+            </div>
           </div>
 
           {/* Col 2: Reports */}
@@ -130,7 +143,8 @@ export function CommandFooter() {
           <div>
             <FooterHeading>CHANNELS</FooterHeading>
             <ul className="flex flex-col gap-2.5">
-              <li><FooterLink href="/channels">Public Channels</FooterLink></li>
+              <li><FooterLink href="/channels">Broadcasts</FooterLink></li>
+              <li><FooterLink href="/channels">All Channels</FooterLink></li>
               <li>
                 <a href={X_URL} target="_blank" rel="noopener noreferrer"
                   onClick={() => trackOutboundClick('Footer X Channels', X_URL)}
@@ -138,15 +152,13 @@ export function CommandFooter() {
                   X / @RSRINTEL ↗
                 </a>
               </li>
-              {ytConfigured && (
-                <li>
-                  <a href={YOUTUBE_URL} target="_blank" rel="noopener noreferrer"
-                    onClick={() => trackOutboundClick('Footer YouTube Channels', YOUTUBE_URL)}
-                    className="font-mono text-[0.7rem] text-muted-foreground hover:text-foreground transition-colors tracking-wider">
-                    YouTube ↗
-                  </a>
-                </li>
-              )}
+              <li>
+                <a href={YOUTUBE_URL} target="_blank" rel="noopener noreferrer"
+                  onClick={() => trackOutboundClick('Footer YouTube Channels', YOUTUBE_URL)}
+                  className="font-mono text-[0.7rem] text-muted-foreground hover:text-foreground transition-colors tracking-wider">
+                  YouTube ↗
+                </a>
+              </li>
               {ttConfigured && (
                 <li>
                   <a href={TIKTOK_URL} target="_blank" rel="noopener noreferrer"
@@ -161,11 +173,6 @@ export function CommandFooter() {
                   Hotline: {PHONE_DISPLAY}
                 </a>
               </li>
-              <li>
-                <a href={`mailto:${SITE_EMAIL}`} className="font-mono text-[0.7rem] text-muted-foreground hover:text-foreground transition-colors tracking-wider break-all">
-                  {SITE_EMAIL}
-                </a>
-              </li>
             </ul>
           </div>
 
@@ -174,11 +181,12 @@ export function CommandFooter() {
             <FooterHeading>NETWORK</FooterHeading>
             <ul className="flex flex-col gap-2.5">
               <li><FooterLink href="/network">Network Map</FooterLink></li>
+              <li><FooterLink href="/rsr-intel" accent="text-primary/65 hover:text-primary">RSR Intel →</FooterLink></li>
               <li>
                 <a href={RSR_INTEL_URL} target="_blank" rel="noopener noreferrer"
-                  onClick={() => trackOutboundClick('Footer RSR Intel', RSR_INTEL_URL)}
+                  onClick={() => trackOutboundClick('Footer RSR Intel Ext', RSR_INTEL_URL)}
                   className="font-mono text-[0.7rem] text-muted-foreground hover:text-primary transition-colors tracking-wider">
-                  RSR Intel ↗
+                  RSR Intel (External) ↗
                 </a>
               </li>
               <li>
@@ -210,14 +218,16 @@ export function CommandFooter() {
             <FooterHeading>SITE</FooterHeading>
             <ul className="flex flex-col gap-2.5 mb-6">
               <li><FooterLink href="/">Home</FooterLink></li>
-              <li><FooterLink href="/about">About</FooterLink></li>
               <li><FooterLink href="/mission">Mission</FooterLink></li>
               <li><FooterLink href="/hotline">Hotline</FooterLink></li>
               <li><FooterLink href="/channels">Channels</FooterLink></li>
-              <li><FooterLink href="/contact">Contact</FooterLink></li>
               <li><FooterLink href="/pacific-systems">Pacific Systems</FooterLink></li>
-              <li><FooterLink href="/black-dog">Black Dog</FooterLink></li>
+              <li><FooterLink href="/rsr-intel">RSR Intel</FooterLink></li>
+              <li><FooterLink href="/contact">Contact</FooterLink></li>
             </ul>
+            <Link href="/admin" className="font-mono text-[0.6rem] text-muted-foreground/22 hover:text-muted-foreground/50 transition-colors tracking-widest uppercase">
+              Operator Access →
+            </Link>
           </div>
 
         </div>
@@ -226,15 +236,14 @@ export function CommandFooter() {
       {/* Bottom bar */}
       <div className="border-t border-border/20 bg-card/10 py-4">
         <div className="mx-auto px-4 sm:px-6 max-w-[1280px] flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="font-mono text-[0.6rem] text-muted-foreground/40 tracking-widest">
+          <p className="font-mono text-[0.58rem] text-muted-foreground/38 tracking-widest">
             &copy; {new Date().getFullYear()} RSR MEDIA — ALL RIGHTS RESERVED
           </p>
-          <div className="flex items-center gap-5">
-            <span className="font-mono text-[0.6rem] text-primary/30 tracking-widest">SIGNAL &gt; NOISE</span>
-            <span className="text-border/30">|</span>
-            <Link href="/admin" className="font-mono text-[0.58rem] text-muted-foreground/20 hover:text-muted-foreground transition-colors tracking-widest uppercase">
-              Operator Access
-            </Link>
+          <div className="flex items-center gap-4 flex-wrap justify-center">
+            <span className="font-mono text-[0.58rem] text-primary/28 tracking-widest">SIGNAL &gt; NOISE</span>
+            <span className="font-mono text-[0.55rem] text-muted-foreground/22 tracking-widest">
+              Powered by RSR Intelligence Network · Engineered by Pacific Systems
+            </span>
           </div>
         </div>
       </div>

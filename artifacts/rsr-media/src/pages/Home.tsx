@@ -65,8 +65,8 @@ export default function Home() {
 
               {/* Hero title — Orbitron */}
               <h1
-                className="text-[4rem] sm:text-[5.5rem] md:text-[7rem] lg:text-[8rem] xl:text-[9rem] font-bold tracking-tight text-foreground uppercase leading-[0.88] mb-6 select-none"
-                style={ORBITRON_BOLD}
+                className="text-[4rem] sm:text-[5.5rem] md:text-[7rem] lg:text-[8rem] xl:text-[9rem] font-black uppercase leading-[0.88] mb-6 select-none text-foreground"
+                style={{ fontFamily: "'Orbitron', sans-serif", fontWeight: 900, letterSpacing: '-0.04em' }}
               >
                 RSR<br />MEDIA
               </h1>
@@ -139,7 +139,7 @@ export default function Home() {
             {/* ── RIGHT: Signal Stack only ── */}
             <div className="flex flex-col gap-4 justify-center">
               <div
-                className="border border-border/20 bg-card/[0.08] corner-bracket overflow-hidden"
+                className="border border-border/20 bg-card/[0.08] corner-bracket overflow-hidden hover-glow-emerald"
                 style={{ boxShadow: '0 0 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.03)' }}
               >
                 <div className="border-b border-border/20 px-5 py-3 flex items-center justify-between bg-card/15">
@@ -211,48 +211,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── LATEST REPORTS ──────────────────────────────────────── */}
-      <section className="py-16 bg-background border-b border-border/15">
-        <div className="mx-auto px-4 sm:px-6 max-w-[1360px]">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <div className="font-mono text-[0.58rem] text-muted-foreground/35 tracking-widest uppercase flex items-center gap-2 mb-2">
-                <span className="w-5 h-px bg-border/45" /> // LATEST.REPORTS
-              </div>
-              <h2 className="text-2xl uppercase tracking-tight" style={ORBITRON_BOLD}>REPORTS</h2>
-            </div>
-            <Link href="/reports" className="font-mono text-[0.62rem] text-primary hover:underline tracking-widest uppercase hidden sm:block">
-              View All →
-            </Link>
-          </div>
-
-          {latestReports.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {latestReports.map(r => <ReportCard key={r.id} report={r} />)}
-            </div>
-          ) : (
-            <div className="border border-border/20 bg-card/8 corner-bracket p-12 text-center">
-              <div className="font-mono text-xs text-muted-foreground/35 tracking-widest uppercase mb-3">// ARCHIVE EMPTY</div>
-              <p className="font-sans text-base text-muted-foreground mb-5">No published reports yet.</p>
-              <Link href="/reports" className="font-mono text-xs text-primary hover:underline tracking-widest uppercase">
-                CHECK REPORT ARCHIVE →
-              </Link>
-            </div>
-          )}
-
-          <div className="mt-6 text-center sm:hidden">
-            <Link href="/reports" className="font-mono text-[0.65rem] text-primary hover:underline tracking-widest uppercase">
-              VIEW ALL REPORTS →
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── VIDEO PREVIEW ───────────────────────────────────────── */}
+      {/* ─── BROADCASTS ──────────────────────────────────────────── */}
       {VIDEOS.length > 0 && (
         <section className="py-16 bg-card/[0.03] border-b border-border/12">
           <div className="mx-auto px-4 sm:px-6 max-w-[1360px]">
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center justify-between mb-4">
               <div>
                 <div className="font-mono text-[0.58rem] text-muted-foreground/35 tracking-widest uppercase flex items-center gap-2 mb-2">
                   <span className="w-5 h-px bg-border/45" /> // LATEST.VIDEO
@@ -263,11 +226,12 @@ export default function Home() {
                 All Videos →
               </Link>
             </div>
+            <p className="font-sans text-sm text-muted-foreground mb-8">Latest RSR video and live programming.</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {VIDEOS.slice(0, 3).map((v, i) => (
                 <motion.div key={v.id}
                   initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}>
-                  <div className="border border-border/22 bg-card/8 corner-bracket overflow-hidden flex flex-col">
+                  <div className="border border-border/22 bg-card/8 corner-bracket overflow-hidden flex flex-col hover-glow-emerald transition-all">
                     {v.embedUrl ? (
                       <div className="w-full aspect-video bg-black">
                         <iframe
@@ -311,6 +275,43 @@ export default function Home() {
           </div>
         </section>
       )}
+
+      {/* ─── LATEST REPORTS ──────────────────────────────────────── */}
+      <section className="py-16 bg-background border-b border-border/15">
+        <div className="mx-auto px-4 sm:px-6 max-w-[1360px]">
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <div className="font-mono text-[0.58rem] text-muted-foreground/35 tracking-widest uppercase flex items-center gap-2 mb-2">
+                <span className="w-5 h-px bg-border/45" /> // LATEST.REPORTS
+              </div>
+              <h2 className="text-2xl uppercase tracking-tight" style={ORBITRON_BOLD}>REPORTS</h2>
+            </div>
+            <Link href="/reports" className="font-mono text-[0.62rem] text-primary hover:underline tracking-widest uppercase hidden sm:block">
+              View All →
+            </Link>
+          </div>
+
+          {latestReports.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {latestReports.map(r => <ReportCard key={r.id} report={r} />)}
+            </div>
+          ) : (
+            <div className="border border-border/20 bg-card/8 corner-bracket p-12 text-center">
+              <div className="font-mono text-xs text-muted-foreground/35 tracking-widest uppercase mb-3">// ARCHIVE EMPTY</div>
+              <p className="font-sans text-base text-muted-foreground mb-5">No published reports yet.</p>
+              <Link href="/reports" className="font-mono text-xs text-primary hover:underline tracking-widest uppercase">
+                CHECK REPORT ARCHIVE →
+              </Link>
+            </div>
+          )}
+
+          <div className="mt-6 text-center sm:hidden">
+            <Link href="/reports" className="font-mono text-[0.65rem] text-primary hover:underline tracking-widest uppercase">
+              VIEW ALL REPORTS →
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* ─── CHANNELS TEASE ──────────────────────────────────────── */}
       <section className="py-10 bg-card/[0.02] border-b border-border/12">

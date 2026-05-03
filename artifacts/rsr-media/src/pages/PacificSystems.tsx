@@ -144,8 +144,12 @@ export default function PacificSystems() {
           <p className="font-sans text-lg md:text-xl text-foreground leading-relaxed mb-5">
             Pacific Systems is the structured data infrastructure connected to the broader RSR ecosystem. It organizes signals, datasets, records, and methods that support analysis, public reporting, and long-form investigations.
           </p>
-          <p className="font-sans text-base text-muted-foreground leading-relaxed">
+          <p className="font-sans text-base text-muted-foreground leading-relaxed mb-4">
             Pacific Systems is a separate, independently operated application — access, outputs, and administrative functions are all managed externally. It feeds RSR Media's reporting layer without being part of the editorial interface directly.
+          </p>
+          <p className="font-mono text-[0.62rem] text-muted-foreground/38 tracking-widest border-t border-border/15 pt-4 leading-relaxed" style={{ color: 'rgba(245,158,11,0.45)' }}>
+            // Pacific Systems provides the data infrastructure layer supporting RSR's structured analysis and reporting workflows.
+            Engineered and powered by Pacific Systems.
           </p>
         </div>
 

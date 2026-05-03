@@ -1,0 +1,170 @@
+RSR MEDIA FINAL FRONTEND POLISH PASS — HEADER, GLOW, BROADCASTS ABOVE REPORTS, RSR INTEL PAGE, PACIFIC POWERED-BY COPY
+
+SCOPE:
+Frontend only.
+Do not touch backend/admin logic.
+Do not break report CRUD.
+Do not break video embeds.
+Do not break ADMIN4451 login.
+Do not add APIs.
+
+1. Restore subtle green glow around command boxes.
+2. Not neon overload — use tasteful emerald edge glow.
+3. Add hover glow to:
+   - hero shell
+   - Signal Stack
+   - CTA buttons
+   - report cards
+   - video cards
+   - system cards
+4. Glow style:
+   box-shadow: 0 0 24px rgba(0, 224, 164, 0.10), inset 0 0 18px rgba(0, 224, 164, 0.035)
+5. Border stays steel by default, green on active/hover.
+6. Add tiny blue accents only for X/manual review/secondary status.
+
+HEADER FIX:
+7. Header still needs to be sharper.
+8. Make header feel like a premium RSR command bar.
+9. Increase header contrast.
+10. Add subtle green bottom glow line.
+11. Use Orbitron for nav and brand.
+12. The “RSR MEDIA” wordmark in header should not look bubbly.
+13. If the current font appears rounded/bubbly, use Orbitron uppercase with font-weight 700/800 and letter spacing.
+14. Header brand should be one line:
+    RSR MEDIA
+15. Remove visible subtitle under logo in header.
+16. Header nav:
+    Home
+    Broadcasts
+    Reports
+    Mission
+    Channels
+    RSR Intel
+    Network
+    Hotline
+    Systems ▼
+17. Keep nav one line.
+18. If too cramped, move Network into Systems dropdown.
+19. Systems dropdown items:
+    Pacific Systems
+    Black Dog Security
+    RSR Armory
+20. RSR Intel gets its own dedicated nav link/page.
+21. Right side:
+    X
+    YouTube
+    TikTok
+    Local time
+    Weather chip
+    Nominal
+22. Header must not wrap on desktop.
+23. Mobile hamburger must work.
+
+HERO FONT:
+24. The huge RSR MEDIA letters look too bubbly.
+25. Force a sharper Orbitron/tech display style.
+26. Use Orbitron Black/ExtraBold if available.
+27. If Orbitron still looks wrong, use CSS:
+    font-family: Orbitron, Rajdhani, system-ui;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+28. Keep scanline fill effect if it looks sharp.
+29. Do not use rounded/bubbly font.
+30. Headline should feel hard-edged.
+
+HOME ORDER:
+31. Move Broadcasts section above Reports.
+32. Home section order:
+    Hero
+    Broadcasts
+    Reports
+    Hotline / Call-in
+    Mission Preview
+    Network / Systems Bridge
+33. Broadcasts should be the first content block after hero.
+34. Reports below broadcasts.
+35. Keep video embeds working.
+36. Make Broadcasts header:
+    BROADCASTS
+    Latest RSR video and live programming.
+37. Keep “All Videos” link to Channels or Videos page.
+
+RSR INTEL PAGE:
+38. Create dedicated route /rsr-intel.
+39. Add nav link: RSR Intel.
+40. Page title:
+    RSR INTELLIGENCE NETWORK
+41. Subtitle:
+    Analysis engine powering the RSR ecosystem.
+42. Copy:
+    RSR Media is the public-facing media layer. RSR Intelligence Network provides the deeper analytical architecture, system mapping, signal interpretation, and long-form intelligence context behind the broader RSR operation.
+43. Add CTA:
+    Open RSR Intel ↗
+44. Link to https://www.rsrintel.com/#/
+45. Add sections:
+    What RSR Intel Does
+    How It Supports RSR Media
+    Signal > Noise Method
+    Public Analysis Pipeline
+46. Add method flow:
+    Observe → Verify → Analyze → Publish
+47. Add cards:
+    Systems Analysis
+    Dossiers
+    World Monitoring
+    Investigations
+    Public Reports
+48. Do not fake live metrics.
+49. Make this page visually strong with blue/green/steel accents.
+50. Use RSR Intelligence tone.
+
+PACIFIC POWERED-BY COPY:
+51. Add this phrase somewhere prominent but accurate:
+    “Engineered and powered by Pacific Systems.”
+52. Put it in footer or Network/System bridge.
+53. On Pacific page, add:
+    “Pacific Systems provides the data infrastructure layer supporting RSR’s structured analysis and reporting workflows.”
+54. On RSR Intel page, add:
+    “Data infrastructure support is engineered through Pacific Systems.”
+55. Do not overstate automation if not connected.
+56. Keep it accurate.
+
+NETWORK PAGE:
+57. Update ecosystem language:
+    RSR Media = public newsroom/media layer
+    RSR Intelligence Network = analytical engine
+    Pacific Systems = data infrastructure
+    Black Dog = security/cyber system
+    Armory = public shop
+58. Add “Powered by RSR Intel. Engineered by Pacific Systems.” line.
+59. Make the relationship obvious.
+
+FOOTER:
+60. Add:
+    Powered by RSR Intelligence Network
+    Engineered and supported by Pacific Systems
+61. Footer links:
+    RSR Intel
+    Pacific Systems
+    Black Dog
+    Armory
+    X
+    YouTube
+    TikTok
+    Hotline
+    Operator Access
+62. Keep footer readable.
+
+FINAL VISUAL CHECK:
+63. Green glow restored but tasteful.
+64. Header sharp.
+65. Hero font sharp, not bubbly.
+66. Broadcasts above Reports.
+67. RSR Intel dedicated page exists.
+68. Pacific Systems powered/engineered copy exists.
+69. Systems dropdown works.
+70. Build passes.
+71. No backend changes.
+72. No fake stats.
+73. No broken video embeds.
