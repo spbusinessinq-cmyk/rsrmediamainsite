@@ -1,15 +1,7 @@
-// Manual video cards — add entries here to display on the Channels page.
-// Do NOT add fake stats, fake view counts, or fake thumbnails.
-//
-// Fields:
-//   id          — unique string
-//   title       — video title
-//   description — short description
-//   youtubeUrl  — full YouTube watch URL (https://www.youtube.com/watch?v=...)
-//   embedUrl    — YouTube embed URL (https://www.youtube.com/embed/VIDEO_ID)
-//               — leave blank to show thumbnail/link card instead of embed
-//   thumbnail   — optional thumbnail URL (leave blank to auto-use embed thumbnail)
-//   publishedAt — optional ISO date string
+// RSR Media — Video archive.
+// Add entries here to display embeds on Channels page and homepage preview.
+// Do NOT add fake stats, view counts, or subscriber numbers.
+// Embed URLs: https://www.youtube.com/embed/VIDEO_ID
 
 export interface Video {
   id: string;
@@ -22,13 +14,25 @@ export interface Video {
 }
 
 export const VIDEOS: Video[] = [
-  // Example — uncomment and fill with real video IDs:
-  // {
-  //   id: "intro-001",
-  //   title: "RSR Media — Channel Introduction",
-  //   description: "An introduction to the RSR Media YouTube channel and what to expect.",
-  //   youtubeUrl: "https://www.youtube.com/watch?v=VIDEO_ID_HERE",
-  //   embedUrl: "https://www.youtube.com/embed/VIDEO_ID_HERE",
-  //   publishedAt: "2025-01-01",
-  // },
+  {
+    id: 'latest-live-001',
+    title: 'Latest Live',
+    description: 'RSR Media live broadcast — public accountability journalism, community reporting, and open-line discussion.',
+    youtubeUrl: 'https://www.youtube.com/live/xS8GcPDbZI8?si=HqRPNHLSm0gX61cf',
+    embedUrl: 'https://www.youtube.com/embed/xS8GcPDbZI8',
+  },
+  {
+    id: 'structure-of-power-ep1',
+    title: 'The Structure of Power — Episode 1',
+    description: 'Episode 1 of The Structure of Power series. Examining the systems, institutions, and networks that shape public life.',
+    youtubeUrl: 'https://youtu.be/sGz0GRfe_C4?si=12BgJ5M70WyLL1jT',
+    embedUrl: 'https://www.youtube.com/embed/sGz0GRfe_C4',
+  },
+  {
+    id: 'welcome-rsr-media',
+    title: 'Welcome to Red State Rhetoric Media',
+    description: 'An introduction to RSR Media — independent reporting, community signal, and what we stand for.',
+    youtubeUrl: 'https://youtu.be/zYkhGXuJoig?si=HdtqZnkRfzqfYYCY',
+    embedUrl: 'https://www.youtube.com/embed/zYkhGXuJoig',
+  },
 ];

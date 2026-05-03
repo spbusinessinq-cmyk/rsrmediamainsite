@@ -6,6 +6,8 @@ import { ExternalSystemCard } from "@/components/ui-system/ExternalSystemCard";
 import { ReportCard } from "@/components/reports/ReportCard";
 import { getPublishedReports } from "@/hooks/useReports";
 import { NETWORK_LINKS } from "@/data/networkLinks";
+import { VIDEOS } from "@/data/videos";
+import { YOUTUBE_URL } from "@/config/site";
 import {
   RSR_INTEL_URL, ARMORY_URL, SITE_EMAIL, SITE_PHONE, X_URL,
 } from "@/config/site";
@@ -245,6 +247,70 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ─── VIDEO PREVIEW ───────────────────────────────────────── */}
+      {VIDEOS.length > 0 && (
+        <section className="py-16 bg-card/[0.03] border-b border-border/12">
+          <div className="mx-auto px-4 sm:px-6 max-w-[1360px]">
+            <div className="flex items-center justify-between mb-8">
+              <div>
+                <div className="font-mono text-[0.58rem] text-muted-foreground/35 tracking-widest uppercase flex items-center gap-2 mb-2">
+                  <span className="w-5 h-px bg-border/45" /> // LATEST.VIDEO
+                </div>
+                <h2 className="text-2xl uppercase tracking-tight" style={ORBITRON_BOLD}>BROADCASTS</h2>
+              </div>
+              <Link href="/channels" className="font-mono text-[0.62rem] text-primary hover:underline tracking-widest uppercase hidden sm:block">
+                All Videos →
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {VIDEOS.slice(0, 3).map((v, i) => (
+                <motion.div key={v.id}
+                  initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}>
+                  <div className="border border-border/22 bg-card/8 corner-bracket overflow-hidden flex flex-col">
+                    {v.embedUrl ? (
+                      <div className="w-full aspect-video bg-black">
+                        <iframe
+                          src={v.embedUrl}
+                          title={v.title}
+                          loading="lazy"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          allowFullScreen
+                          className="w-full h-full border-0"
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-full aspect-video bg-card/18 flex items-center justify-center border-b border-border/15">
+                        <svg className="w-10 h-10 text-muted-foreground/18" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                      </div>
+                    )}
+                    <div className="p-4 flex flex-col flex-1">
+                      <div className="font-bold text-sm mb-2 text-foreground/88 leading-snug" style={ORBITRON_BOLD}>{v.title}</div>
+                      <p className="font-sans text-sm text-muted-foreground leading-relaxed flex-1 mb-3">{v.description}</p>
+                      <a href={v.youtubeUrl} target="_blank" rel="noopener noreferrer"
+                        onClick={() => trackOutboundClick(`Home Video: ${v.title}`, v.youtubeUrl)}
+                        className="inline-flex items-center gap-1.5 font-mono text-[0.58rem] text-muted-foreground/45 hover:text-foreground transition-colors tracking-widest uppercase mt-auto">
+                        <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        WATCH ON YOUTUBE
+                      </a>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+            <div className="mt-5 flex items-center justify-between">
+              <a href={YOUTUBE_URL} target="_blank" rel="noopener noreferrer"
+                onClick={() => trackOutboundClick('Home YouTube Channel', YOUTUBE_URL)}
+                className="font-mono text-[0.6rem] text-muted-foreground/45 hover:text-foreground tracking-widest uppercase hidden sm:block">
+                YOUTUBE: @RedStateRhetoricMedia ↗
+              </a>
+              <Link href="/channels" className="font-mono text-[0.6rem] text-primary hover:underline tracking-widest uppercase sm:hidden">
+                VIEW ALL VIDEOS →
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ─── CHANNELS TEASE ──────────────────────────────────────── */}
       <section className="py-10 bg-card/[0.02] border-b border-border/12">

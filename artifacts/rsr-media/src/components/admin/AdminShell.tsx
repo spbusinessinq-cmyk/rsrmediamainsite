@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'wouter';
 import { LayoutDashboard, FileText, Send, Settings, LogOut, TerminalSquare, Import, BarChart2, Lock } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -11,6 +11,7 @@ interface AdminShellProps {
 export function AdminShell({ children }: AdminShellProps) {
   const [location] = useLocation();
   const { logout } = useAdminAuth();
+  const [confirmLock, setConfirmLock] = useState(false);
 
   const navItems = [
     { href: '/admin', label: 'DASHBOARD', icon: LayoutDashboard, exact: true },
@@ -20,6 +21,16 @@ export function AdminShell({ children }: AdminShellProps) {
     { href: '/admin/analytics', label: 'ANALYTICS', icon: BarChart2 },
     { href: '/admin/settings', label: 'SETTINGS', icon: Settings },
   ];
+
+  function handleLock() {
+    if (!confirmLock) {
+      setConfirmLock(true);
+      setTimeout(() => setConfirmLock(false), 3000);
+      return;
+    }
+    logout();
+    window.location.replace('/admin');
+  }
 
   return (
     <div className="min-h-[100dvh] flex flex-col md:flex-row bg-background text-foreground font-sans">
@@ -47,8 +58,8 @@ export function AdminShell({ children }: AdminShellProps) {
 
         {/* Status bar */}
         <div className="px-4 py-2 flex items-center justify-between border-b border-border/20 bg-card/10">
-          <span className="font-mono text-[0.58rem] text-primary/55 tracking-widest uppercase">// ADMIN TERMINAL</span>
-          <span className="flex items-center gap-1.5 font-mono text-[0.55rem] text-primary/50 tracking-widest uppercase">
+          <span className="font-mono text-[0.58rem] text-primary/50 tracking-widest uppercase">// ADMIN TERMINAL</span>
+          <span className="flex items-center gap-1.5 font-mono text-[0.55rem] text-primary/45 tracking-widest uppercase">
             <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
             UNLOCKED
           </span>
@@ -90,12 +101,17 @@ export function AdminShell({ children }: AdminShellProps) {
             EXIT TO SITE
           </Link>
           <button
-            onClick={logout}
-            className="flex items-center justify-center gap-2 px-3 py-1.5 w-full text-muted-foreground/50 hover:text-destructive transition-colors tracking-widest uppercase"
-            style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '0.55rem', letterSpacing: '0.1em' }}
+            onClick={handleLock}
+            className={cn(
+              'flex items-center justify-center gap-2 px-3 py-2 w-full transition-all tracking-widest uppercase border w-full',
+              confirmLock
+                ? 'border-destructive/50 text-destructive bg-destructive/8 hover:bg-destructive hover:text-white'
+                : 'border-border/30 text-muted-foreground/70 hover:text-destructive hover:border-destructive/40 hover:bg-destructive/5'
+            )}
+            style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '0.58rem', letterSpacing: '0.1em' }}
           >
             <Lock className="w-3 h-3" />
-            LOCK TERMINAL
+            {confirmLock ? 'CONFIRM LOCK' : 'LOCK TERMINAL'}
           </button>
         </div>
       </aside>

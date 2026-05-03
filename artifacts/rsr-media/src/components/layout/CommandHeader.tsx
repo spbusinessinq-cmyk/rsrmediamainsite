@@ -186,6 +186,15 @@ export function CommandHeader() {
           )}
           <div className="w-px h-5 bg-border/30 mx-0.5" />
           <UTCClock />
+          {/* TODO: Connect live weather endpoint here when available. Static chip until then. */}
+          <div
+            className="font-mono text-[0.58rem] tracking-widest text-muted-foreground/40 bg-black/25 px-2 py-1 border border-border/25 whitespace-nowrap cursor-default select-none hidden xl:flex items-center gap-1"
+            title="Local weather integration pending"
+          >
+            <span className="text-muted-foreground/25">WEATHER</span>
+            <span className="text-muted-foreground/18 mx-0.5">//</span>
+            <span className="text-muted-foreground/35">LOCAL READY</span>
+          </div>
           <StatusPill label="NOMINAL" status="nominal" />
         </div>
 

@@ -1,0 +1,141 @@
+RSR MEDIA TARGETED FRONTEND PASS — LOCAL TIME, WEATHER CHIP, VIDEO EMBEDS, LOCK TERMINAL, PACIFIC PAGE
+
+SCOPE:
+Frontend/static only.
+Do not add backend.
+Do not break admin.
+Do not break reports.
+Do not break Import X.
+Do not break ADMIN4451 login.
+
+LOCAL TIME:
+1. Replace UTC-only header time with user/local browser time.
+2. Use Intl.DateTimeFormat from browser.
+3. Show compact format:
+   LOCAL 6:31 PM
+4. Add small timezone abbreviation if possible:
+   PDT / PST / local timezone.
+5. Do not hardcode Los Angeles.
+6. Add tooltip/title with full local date/time.
+7. Keep tactical style.
+
+WEATHER CHIP:
+8. Add small weather chip in header near time/status.
+9. Since no backend/API, use browser geolocation optionally.
+10. Do not force location permission.
+11. If permission allowed, show:
+    LOCATION // --°
+12. If no weather API exists, show:
+    WEATHER // LINK PENDING
+13. Better static-safe version:
+    WEATHER // LOCAL READY
+14. Add future TODO in code:
+    Connect weather endpoint later.
+15. Do not fake real weather temperature.
+16. Make chip tactical, tiny, clean.
+17. If using browser geolocation only, do not display exact coordinates.
+18. No paid API.
+19. No broken fetch calls.
+20. Header order:
+    X / YouTube / TikTok icons
+    Local time
+    Weather chip
+    Nominal
+
+YOUTUBE VIDEOS:
+21. Embed these three videos on Channels page and/or Videos section.
+22. Video 1:
+    title: The Structure of Power — Episode 1
+    url: https://youtu.be/sGz0GRfe_C4?si=12BgJ5M70WyLL1jT
+    embed: https://www.youtube.com/embed/sGz0GRfe_C4
+23. Video 2:
+    title: Welcome to Red State Rhetoric Media
+    url: https://youtu.be/zYkhGXuJoig?si=HdtqZnkRfzqfYYCY
+    embed: https://www.youtube.com/embed/zYkhGXuJoig
+24. Video 3:
+    title: Latest Live
+    url: https://www.youtube.com/live/xS8GcPDbZI8?si=HqRPNHLSm0gX61cf
+    embed: https://www.youtube.com/embed/xS8GcPDbZI8
+25. Add these to src/data/videos.ts.
+26. Display videos as responsive 16:9 iframe cards.
+27. Use dark glass video frames.
+28. Add title, short description, Watch on YouTube button.
+29. Lazy-load iframes.
+30. No fake views/subscribers.
+31. Add homepage video preview section with latest 1 or 3 videos.
+32. Channels page should show full video grid.
+33. Make YouTube card active, no longer “pending.”
+
+LOCK TERMINAL:
+34. Fix Lock Terminal button.
+35. Clicking Lock Terminal must clear admin sessionStorage auth.
+36. Route user back to /admin login screen.
+37. Change sidebar label to:
+    LOCK TERMINAL
+38. Add confirmation optional:
+    “Lock operator terminal?”
+39. Exit to Site button routes to /.
+40. Lock Terminal should not be disabled-looking.
+41. Admin login still uses ADMIN4451.
+
+PACIFIC SYSTEMS PAGE:
+42. Pacific Systems needs its own full page.
+43. Ensure route exists:
+    /pacific
+    and/or /pacific-systems
+44. Header Systems dropdown should link to internal Pacific page OR external label clearly.
+45. Public nav Systems dropdown:
+    Pacific Systems — internal overview
+    Open Pacific Systems App — external
+46. Pacific page title:
+    PACIFIC SYSTEMS
+47. Subtitle:
+    Structured Data Infrastructure
+48. Kicker:
+    RSR ECOSYSTEM // DATA LAYER
+49. Copy:
+    Pacific Systems is the structured data infrastructure connected to the broader RSR ecosystem. It organizes signals, datasets, records, and methods that support analysis, public reporting, and long-form investigations.
+50. Add CTA:
+    OPEN PACIFIC SYSTEMS ↗
+51. External link:
+    https://rsrindexnet.edgeone.app/
+52. Add modules:
+    Signals
+    Datasets
+    Records
+    Method
+    Access
+53. Add section:
+    How Pacific Supports RSR Media
+54. Add flow:
+    Intake → Organize → Index → Review → Support Reporting
+55. Add “What it is not”:
+    No fake live counters.
+    Not a replacement for verification.
+    Not editorial content by itself.
+56. Use amber accent.
+57. Use Orbitron primary.
+58. No clipped circular graphics.
+59. No fake metrics.
+60. Make this page full, premium, and finished.
+
+HEADER / FONT:
+61. Orbitron remains primary interface font.
+62. IBM Plex Mono only for tiny readouts.
+63. Inter only for long article bodies.
+64. Header must not wrap.
+65. Systems dropdown must work and show items.
+
+FINAL CHECK:
+66. Build passes.
+67. Header local time works.
+68. Weather chip does not fake data.
+69. YouTube videos embed correctly.
+70. Channels page shows video grid.
+71. Homepage video preview works.
+72. Lock Terminal works.
+73. Admin login works after lock.
+74. Pacific page exists and looks complete.
+75. No backend added.
+76. No fake weather.
+77. No fake video stats.
