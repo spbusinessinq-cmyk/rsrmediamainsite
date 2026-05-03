@@ -1,0 +1,318 @@
+RSR MEDIA FINAL GOD-PASS — DESIGN + BACKEND + X ARTICLE IMPORT + ADMIN CONTROL
+
+MISSION:
+Turn this into the real RSR Media command website. The current layout is still too empty, too flat, too dashboard-test looking. Rebuild the public site and operator backend so the owner can add/edit reports, paste X article links, manage public content, and see analytics once backend is connected.
+
+OFFICIAL INFO:
+1. Site: rsrmedia.org
+2. Email: newsroom@rsrmedia.org
+3. Hotline: 16315142480
+4. RSR Intel: https://www.rsrintel.com/#/
+5. Pacific Systems: https://rsrindexnet.edgeone.app/
+6. Black Dog: https://blackdogmain12.edgeone.app/
+7. Armory: https://rsrarmory.store
+
+BRUTAL CLEANUP:
+8. Remove Live Desk everywhere.
+9. Remove Press Corps from public nav.
+10. Remove giant faded logo watermark.
+11. Remove sloppy logo side panels.
+12. Use no logo in hero unless it is small, clean, and intentional.
+13. Header can use text-only RSR MEDIA if logo looks bad.
+14. Kill fake backend warnings on public pages.
+15. Kill fake live metrics.
+16. Kill fake 0 view counts on public cards.
+17. Kill fake broadcasts if not active.
+18. Kill “synced just now,” “connected 2ms,” and fake security claims.
+19. Public pages must look finished, not scaffolded.
+20. Admin can show pending backend notices.
+
+PUBLIC NAV:
+21. Home
+22. About
+23. Reports
+24. Mission
+25. Network
+26. Pacific Systems
+27. Black Dog
+28. Armory
+29. Tip Line
+30. Contact
+31. Admin only in footer as “Operator Access.”
+
+DESIGN DIRECTION:
+32. Orbitron headings/nav/buttons.
+33. IBM Plex Mono readouts.
+34. Black base.
+35. Steel gray borders.
+36. Emerald active states.
+37. Amber only Pacific Systems.
+38. Red only Black Dog.
+39. More glass cards.
+40. More sectional panels.
+41. More boxed hierarchy.
+42. Strong max-width alignment.
+43. No random giant empty space.
+44. No sideways cut-off diagrams.
+45. No elements overlapping.
+46. No hero side art unless it improves the page.
+47. All pages must have consistent left/right margins.
+48. Use 1280px max-width content shell.
+49. Use responsive grids.
+50. Normal slow scroll. No scroll-jacking.
+
+HOME PAGE:
+51. Hero left:
+    RSR MEDIA
+    Independent media. Public reporting. Community signal.
+52. Hero right:
+    Replace logo panel with clean “Signal Console.”
+53. Signal Console rows:
+    Newsroom: Active
+    Tip Line: Open
+    Reports: Manual Review
+    Intel Network: Linked
+54. Add hotline: 16315142480
+55. Add newsroom email.
+56. CTA buttons:
+    Read Reports
+    Submit Tip
+    Visit RSR Intel
+    Shop Armory
+57. Under hero add “Command Links” cards:
+    Reports
+    Tip Line
+    Mission
+    Network
+58. Add “Latest Reports” section from real reports data.
+59. If no reports, polished empty state.
+60. Add “Network Properties” external cards:
+    RSR Intel
+    Pacific Systems
+    Black Dog
+    Armory
+
+REPORTS SYSTEM:
+61. Reports are the core publishing hub.
+62. Public route: /reports
+63. Detail route: /reports/:slug
+64. Admin route: /admin/reports
+65. Reports must come from a persistent source.
+66. For Replit preview, use localStorage fallback.
+67. For production backend, scaffold API routes.
+68. Report fields:
+    id
+    title
+    slug
+    excerpt
+    body
+    author
+    category
+    status
+    tags
+    sourceLinks
+    xUrl
+    publishedAt
+    updatedAt
+    featured
+69. Status options:
+    Draft
+    Published
+    Updated
+    Archived
+70. Public only shows Published/Updated.
+71. Admin shows all.
+72. Add create report.
+73. Add edit report.
+74. Add delete report.
+75. Add preview report.
+76. Add publish/unpublish.
+77. Add featured toggle.
+78. Add markdown-style body support.
+79. Add source links editor.
+80. Add tags editor.
+
+X ARTICLE IMPORT:
+81. Add “Import from X” tool in admin.
+82. User pastes X article/post URL.
+83. System creates draft report with xUrl saved.
+84. Since X scraping requires API/backend access, do not fake scrape.
+85. Try metadata fetch only if server endpoint exists.
+86. If metadata fails, create draft with URL and ask owner to fill title/body.
+87. Add button: “Open X Source.”
+88. Add public report button: “Read original on X.”
+89. Add future endpoint scaffold:
+    POST /api/import-x
+90. Endpoint accepts { url }
+91. Endpoint returns title/excerpt/sourceUrl if available.
+92. If not available, return safe fallback.
+93. Never claim full X import works unless it does.
+
+BACKEND:
+94. Add Express or lightweight API server if project supports it.
+95. If static-only EdgeOne deployment, document that backend requires EdgeOne Functions or separate API.
+96. Create backend scaffold:
+    /api/reports
+    /api/reports/:id
+    /api/analytics/pageview
+    /api/analytics/summary
+    /api/admin/login
+    /api/import-x
+97. Use local JSON/db adapter abstraction.
+98. Do not hardcode fake data.
+99. Admin should work in browser using localStorage fallback now.
+100. API integration can replace localStorage later.
+
+ADMIN:
+101. Route: /admin
+102. Owner-only.
+103. No signup.
+104. No public accounts.
+105. Passcode gate for now.
+106. Config constant:
+    ADMIN_PASSCODE = "CHANGE_ME_BEFORE_DEPLOY"
+107. README must warn to replace with real auth.
+108. Admin sidebar:
+    Dashboard
+    Reports
+    Import X
+    Tips
+    Analytics
+    Settings
+109. Remove Broadcasts tab unless actually useful.
+110. Dashboard shows:
+    Published Reports
+    Draft Reports
+    Featured Reports
+    Last Updated
+111. Analytics section shows pending backend unless connected.
+112. Reports editor must fully work locally.
+113. Settings can edit display hotline/email locally for preview.
+114. Public site uses config defaults.
+
+ANALYTICS:
+115. Add analytics abstraction.
+116. Track page views only if endpoint exists.
+117. Track report views only if endpoint exists.
+118. Track outbound clicks:
+    RSR Intel
+    Pacific Systems
+    Black Dog
+    Armory
+119. Track tip clicks.
+120. Track hotline clicks.
+121. Admin analytics dashboard should not fake numbers.
+122. Show “Analytics backend pending connection” when unavailable.
+
+TIP LINE:
+123. Hotline everywhere: 16315142480
+124. Email everywhere: newsroom@rsrmedia.org
+125. Tip form creates mailto.
+126. Subject:
+    RSR TIP LINE — [Topic]
+127. Body includes all fields.
+128. Add click-to-call link: tel:16315142480
+129. Add warning against illegal/classified/hacked material.
+130. Add source protection note.
+
+PACIFIC SYSTEMS PAGE:
+131. Current diagram is messy and clipped.
+132. Rebuild as clean bridge page.
+133. Use amber accent.
+134. Add title: PACIFIC SYSTEMS
+135. Subtitle: Structured Data Infrastructure.
+136. Text:
+    Pacific Systems is the data infrastructure layer connected to the broader RSR ecosystem. It organizes signals, datasets, records, and methods that support structured analysis.
+137. Add 5 glass cards:
+    Signals
+    Datasets
+    Records
+    Method
+    Access
+138. Add CTA: Open Pacific Systems.
+139. Link to https://rsrindexnet.edgeone.app/
+140. No fake counters.
+141. No clipped circular diagram.
+
+BLACK DOG PAGE:
+142. Keep red/steel style but polish spacing.
+143. Title: BLACK DOG SECURITY.
+144. Make it clear external system.
+145. CTA: Open Black Dog.
+146. Link to https://blackdogmain12.edgeone.app/
+147. No fake access claims.
+
+NETWORK PAGE:
+148. Explain ecosystem clearly.
+149. RSR Media = public home.
+150. RSR Intel = deeper analysis/intelligence site.
+151. Pacific Systems = data infrastructure.
+152. Black Dog = cyber/security.
+153. Armory = merch.
+154. Use beautiful external property cards.
+155. No Press Corps page.
+
+MISSION PAGE:
+156. Title: Our Promise to the Community.
+157. Make it serious and clean.
+158. Use:
+    Truth over speed.
+    People over parties.
+    Evidence over rumor.
+    Community over clout.
+    Corrections over ego.
+159. Add pledge section.
+160. Add what we will not do.
+
+ABOUT PAGE:
+161. Explain RSR Media accurately.
+162. No “100% factual.”
+163. Use “verification-first.”
+164. Mention independent, community-facing, public reporting.
+165. Explain RSR Intel/Pacific Systems relationship.
+
+CONTACT:
+166. Only newsroom@rsrmedia.org.
+167. Only 16315142480.
+168. Contact cards all route to newsroom email with different subjects.
+169. Add correction request mailto.
+170. Add partnership mailto.
+
+ARMORY:
+171. Link to rsrarmory.store.
+172. No fake product feed.
+173. Add clean external shop card.
+
+LAYOUT FIXES:
+174. Header alignment perfect.
+175. Nav not cramped.
+176. Hero fills screen but not awkward.
+177. Content below fold visible.
+178. No clipped graphics.
+179. No random side watermark.
+180. No horizontal scroll.
+181. Mobile works.
+182. Tablet works.
+183. 1440p works.
+184. 1080p works.
+
+FINAL CHECK:
+185. Build passes.
+186. All routes work.
+187. Admin reports can be created.
+188. Admin reports appear publicly when published.
+189. X URL can be attached to reports.
+190. Tip form works.
+191. Hotline links work.
+192. External links work.
+193. No fake data.
+194. No Live Desk.
+195. No Press Corps nav.
+196. No public backend warnings.
+197. No sloppy logos.
+198. Pacific page not clipped.
+199. Admin usable.
+200. Site feels like RSR Media command console.
+
+GO HARD:
+Make this look like the official command website of a serious independent media network. Not a Replit demo. Not a Wix replacement. Not a fake dashboard. Finished, sharp, glassy, aligned, operational.

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link, useLocation } from 'wouter';
-import { LayoutDashboard, FileText, Send, Settings, LogOut, TerminalSquare } from 'lucide-react';
+import { LayoutDashboard, FileText, Send, Settings, LogOut, TerminalSquare, Import, BarChart2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useAdminAuth } from '@/hooks/useAdminAuth';
 
 interface AdminShellProps {
   children: React.ReactNode;
@@ -9,11 +10,14 @@ interface AdminShellProps {
 
 export function AdminShell({ children }: AdminShellProps) {
   const [location] = useLocation();
+  const { logout } = useAdminAuth();
 
   const navItems = [
-    { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
+    { href: '/admin', label: 'Dashboard', icon: LayoutDashboard, exact: true },
     { href: '/admin/reports', label: 'Reports', icon: FileText },
-    { href: '/admin/tips', label: 'Tips Queue', icon: Send },
+    { href: '/admin/import-x', label: 'Import X', icon: Import },
+    { href: '/admin/tips', label: 'Tips', icon: Send },
+    { href: '/admin/analytics', label: 'Analytics', icon: BarChart2 },
     { href: '/admin/settings', label: 'Settings', icon: Settings },
   ];
 
@@ -21,12 +25,13 @@ export function AdminShell({ children }: AdminShellProps) {
     <div className="min-h-[100dvh] flex flex-col md:flex-row bg-background text-foreground font-sans">
 
       {/* Sidebar */}
-      <aside className="w-full md:w-64 border-r border-border/30 bg-card/50 flex flex-col">
+      <aside className="w-full md:w-56 border-r border-border/30 bg-card/30 flex flex-col shrink-0">
+        {/* Logo */}
         <div className="p-4 border-b border-border/30 flex items-center justify-between md:justify-start gap-3">
           <Link href="/" className="flex items-center gap-2 group">
             <img
               src="/rsr-logo.png"
-              alt="RSR Media"
+              alt="RSR"
               className="h-7 w-7 object-contain"
               onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
             />
@@ -37,14 +42,14 @@ export function AdminShell({ children }: AdminShellProps) {
           </div>
         </div>
 
-        <div className="p-3 font-mono text-[0.65rem] text-primary/70 tracking-widest uppercase border-b border-border/20">
+        <div className="px-4 py-2 font-mono text-[0.6rem] text-primary/60 tracking-widest uppercase border-b border-border/20">
           // ADMIN TERMINAL
         </div>
 
-        <nav className="flex-1 py-3 flex flex-col gap-1 px-2">
+        <nav className="flex-1 py-3 flex flex-col gap-0.5 px-2 overflow-y-auto">
           {navItems.map(item => {
-            const isActive = item.href === '/admin'
-              ? location === '/admin'
+            const isActive = item.exact
+              ? location === item.href
               : location.startsWith(item.href);
             return (
               <Link
@@ -53,33 +58,38 @@ export function AdminShell({ children }: AdminShellProps) {
                 className={cn(
                   'flex items-center gap-3 px-3 py-2 font-mono text-xs tracking-wider transition-colors',
                   isActive
-                    ? 'bg-primary/10 text-primary border border-primary/20'
-                    : 'text-muted-foreground hover:bg-card hover:text-foreground border border-transparent'
+                    ? 'bg-primary/10 text-primary border-l-2 border-primary'
+                    : 'text-muted-foreground hover:bg-card hover:text-foreground border-l-2 border-transparent'
                 )}
               >
-                <item.icon className="w-4 h-4" />
+                <item.icon className="w-3.5 h-3.5 shrink-0" />
                 {item.label}
               </Link>
             );
           })}
         </nav>
 
-        <div className="p-4 border-t border-border/30">
+        <div className="p-3 border-t border-border/30 space-y-1">
           <Link
             href="/"
-            className="flex items-center justify-center gap-2 px-3 py-2 w-full text-muted-foreground hover:text-foreground font-mono text-xs transition-colors border border-border/50 hover:bg-card"
+            className="flex items-center justify-center gap-2 px-3 py-2 w-full text-muted-foreground hover:text-foreground font-mono text-xs transition-colors border border-border/40 hover:bg-card"
           >
-            <LogOut className="w-4 h-4" />
+            <LogOut className="w-3.5 h-3.5" />
             EXIT TO SITE
           </Link>
+          <button
+            onClick={logout}
+            className="flex items-center justify-center gap-2 px-3 py-1.5 w-full text-muted-foreground/50 hover:text-destructive font-mono text-[0.6rem] transition-colors tracking-widest uppercase"
+          >
+            LOCK TERMINAL
+          </button>
         </div>
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col min-w-0">
-        {/* Warning Banner */}
-        <div className="w-full bg-amber-500/10 border-b border-amber-500/30 text-amber-500 text-xs font-mono py-1.5 px-4 text-center tracking-widest uppercase">
-          OWNER ACCESS ONLY — Admin backend pending connection
+      <main className="flex-1 flex flex-col min-w-0 overflow-hidden">
+        <div className="w-full bg-amber-500/10 border-b border-amber-500/30 text-amber-500 text-[0.65rem] font-mono py-1 px-4 text-center tracking-widest uppercase">
+          ADMIN TERMINAL — LOCAL STORAGE ACTIVE — CONNECT BACKEND TO PERSIST ON SERVER
         </div>
         <div className="flex-1 overflow-auto p-4 md:p-8">
           {children}

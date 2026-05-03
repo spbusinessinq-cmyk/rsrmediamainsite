@@ -32,6 +32,6 @@ export interface Report {
   tags: string[];
   sourceLinks: { label: string; url: string }[];
   status: ReportStatus;
-  viewCountPlaceholder: null;
+  featured: boolean;
   xUrl?: string;
 }

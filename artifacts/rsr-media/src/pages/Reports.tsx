@@ -3,7 +3,7 @@ import { Link } from 'wouter';
 import { useSEO } from '@/lib/seo';
 import { SectionHeader } from '@/components/ui-system/SectionHeader';
 import { ReportCard } from '@/components/reports/ReportCard';
-import { REPORTS } from '@/data/reports';
+import { getPublishedReports } from '@/hooks/useReports';
 import { ReportCategory } from '@/types/report';
 import { Search } from 'lucide-react';
 
@@ -15,13 +15,13 @@ const CATEGORIES: ReportCategory[] = [
 export default function Reports() {
   useSEO({
     title: "Reports",
-    description: "Public report archive reviewed before publication. Independent media reporting from RSR Media.",
+    description: "Public report archive — reviewed before publication. Independent media reporting from RSR Media.",
   });
 
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState<ReportCategory | null>(null);
 
-  const published = REPORTS.filter(r => r.status === 'published');
+  const published = getPublishedReports();
 
   const filtered = useMemo(() => {
     let r = published;
@@ -35,7 +35,9 @@ export default function Reports() {
       );
     }
     return r;
-  }, [published, activeCategory, search]);
+  }, [published.length, activeCategory, search]);
+
+  const featured = published.filter(r => r.featured);
 
   return (
     <div className="w-full pt-12 pb-24 overflow-x-hidden">
@@ -44,20 +46,35 @@ export default function Reports() {
         <SectionHeader
           tag="// PUBLIC.REPORT.ARCHIVE"
           title="REPORTS"
-          subtitle="Reports are reviewed before publication and updated as new information becomes available. Weekly updates can be added manually by the operator."
+          subtitle="Reports are reviewed before publication. Published when verified — not on a publish-first schedule."
         />
 
-        {/* Accuracy note */}
-        <div className="glass-panel corner-bracket border border-border/40 p-5 mb-10">
-          <p className="font-mono text-xs text-muted-foreground tracking-wider leading-relaxed">
-            RSR Media prioritizes accuracy over speed. Reports are published when reviewed and verified — not on a publish-first schedule.
-          </p>
-        </div>
-
-        {published.length > 0 && (
+        {published.length === 0 ? (
+          <div className="glass-panel corner-bracket border border-border/40 p-16 text-center">
+            <div className="font-mono text-xs text-muted-foreground tracking-widest uppercase mb-4">// ARCHIVE.PENDING</div>
+            <p className="font-sans text-lg text-muted-foreground mb-2">No public reports loaded yet.</p>
+            <p className="font-sans text-sm text-muted-foreground mb-8">
+              Weekly reports will appear here after review and publication.
+            </p>
+            <Link href="/tip-line" className="font-mono text-xs text-primary hover:underline tracking-widest uppercase">
+              Submit a tip for future reporting →
+            </Link>
+          </div>
+        ) : (
           <>
+            {featured.length > 0 && (
+              <div className="mb-12">
+                <div className="font-mono text-xs text-amber-500 tracking-widest uppercase flex items-center gap-2 mb-5">
+                  <span className="w-6 h-px bg-amber-500" /> // FEATURED
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  {featured.map(r => <ReportCard key={r.id} report={r} featured />)}
+                </div>
+              </div>
+            )}
+
             {/* Search */}
-            <div className="relative mb-6">
+            <div className="relative mb-5">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
               <input
                 type="text"
@@ -86,38 +103,25 @@ export default function Reports() {
                 </button>
               ))}
             </div>
+
+            {filtered.length === 0 ? (
+              <div className="glass-panel corner-bracket border border-border/40 p-12 text-center">
+                <p className="font-sans text-muted-foreground mb-4">No reports match your search.</p>
+                <button
+                  onClick={() => { setSearch(''); setActiveCategory(null); }}
+                  className="font-mono text-xs text-primary hover:underline tracking-widest uppercase"
+                >
+                  Clear filters
+                </button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                {filtered.map(r => <ReportCard key={r.id} report={r} />)}
+              </div>
+            )}
           </>
         )}
 
-        {/* Report Grid or Empty State */}
-        {published.length === 0 ? (
-          <div className="glass-panel corner-bracket border border-border/40 p-16 text-center">
-            <div className="font-mono text-xs text-muted-foreground tracking-widest uppercase mb-4">// ARCHIVE.PENDING</div>
-            <p className="font-sans text-muted-foreground mb-2 text-lg">No public reports loaded yet.</p>
-            <p className="font-sans text-sm text-muted-foreground mb-8">
-              Weekly reports will appear here after review.
-            </p>
-            <Link href="/tip-line" className="font-mono text-xs text-primary hover:underline tracking-widest uppercase">
-              Submit a tip for future reporting →
-            </Link>
-          </div>
-        ) : filtered.length === 0 ? (
-          <div className="glass-panel corner-bracket border border-border/40 p-12 text-center">
-            <p className="font-sans text-muted-foreground mb-4">No reports match your search.</p>
-            <button
-              onClick={() => { setSearch(''); setActiveCategory(null); }}
-              className="font-mono text-xs text-primary hover:underline tracking-widest uppercase"
-            >
-              Clear filters
-            </button>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {filtered.map(r => <ReportCard key={r.id} report={r} />)}
-          </div>
-        )}
-
-        {/* Bottom CTAs */}
         <div className="mt-16 flex flex-col sm:flex-row items-start gap-8 border-t border-border/30 pt-10">
           <div>
             <div className="font-mono text-xs text-muted-foreground tracking-widest uppercase mb-2">HAVE A TIP?</div>
