@@ -21,6 +21,7 @@ import Hotline from "@/pages/Hotline";
 import Contact from "@/pages/Contact";
 import AdminDashboard from "@/pages/AdminDashboard";
 import Channels from "@/pages/Channels";
+import Broadcasts from "@/pages/Broadcasts";
 
 const queryClient = new QueryClient();
 
@@ -32,15 +33,22 @@ function Router() {
       <Route path="/mission" component={Mission} />
       <Route path="/reports" component={Reports} />
       <Route path="/reports/:slug" component={ReportDetail} />
+      <Route path="/broadcasts" component={Broadcasts} />
+      <Route path="/channels" component={Channels} />
+      <Route path="/hotline" component={Hotline} />
+      {/* /tips and /tip-line alias to Hotline */}
+      <Route path="/tips" component={Hotline} />
+      <Route path="/tip-line" component={Hotline} />
       <Route path="/network" component={Network} />
+      {/* Canonical paths */}
       <Route path="/pacific-systems" component={PacificSystems} />
       <Route path="/rsr-intel" component={RSRIntel} />
       <Route path="/black-dog" component={BlackDog} />
       <Route path="/armory" component={Armory} />
-      <Route path="/hotline" component={Hotline} />
-      <Route path="/tip-line" component={Hotline} />
+      {/* Short aliases for nav and Systems dropdown */}
+      <Route path="/pacific" component={PacificSystems} />
+      <Route path="/security" component={BlackDog} />
       <Route path="/contact" component={Contact} />
-      <Route path="/channels" component={Channels} />
       {/* Admin routes — all handled by AdminDashboard via internal route matching */}
       <Route path="/admin" component={AdminDashboard} />
       <Route path="/admin/reports" component={AdminDashboard} />

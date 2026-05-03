@@ -215,29 +215,23 @@ export default function Channels() {
             </div>
           </div>
 
-          {/* Video Grid */}
+          {/* Broadcasts teaser — full grid lives at /broadcasts */}
           <div>
-            <div className="font-mono text-[0.62rem] text-muted-foreground/40 tracking-widest uppercase mb-5">// VIDEO ARCHIVE</div>
+            <div className="font-mono text-[0.62rem] text-muted-foreground/40 tracking-widest uppercase mb-4">// LATEST BROADCAST</div>
             {VIDEOS.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                {VIDEOS.map((v, i) => (
-                  <motion.div key={v.id}
-                    initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}>
-                    <VideoCard video={v} />
-                  </motion.div>
-                ))}
+              <div className="grid sm:grid-cols-2 gap-4 mb-5">
+                <VideoCard video={VIDEOS[0]} />
               </div>
             ) : (
-              <div className="border border-border/22 bg-card/6 corner-bracket p-10 text-center">
-                <Play className="w-8 h-8 text-muted-foreground/18 mx-auto mb-4" />
-                <p className="font-sans text-base text-muted-foreground mb-5">No video entries configured yet.</p>
-                <a href={YOUTUBE_URL} target="_blank" rel="noopener noreferrer"
-                  onClick={() => trackOutboundClick('YouTube Channel Open No Videos', YOUTUBE_URL)}
-                  className="inline-flex items-center gap-1.5 font-mono text-xs text-primary hover:underline tracking-widest uppercase">
-                  Open YouTube Channel <ExternalLink className="w-3 h-3" />
-                </a>
+              <div className="border border-border/22 bg-card/6 corner-bracket p-8 text-center mb-5">
+                <Play className="w-8 h-8 text-muted-foreground/18 mx-auto mb-3" />
+                <p className="font-sans text-sm text-muted-foreground">No broadcasts configured yet.</p>
               </div>
             )}
+            <Link href="/broadcasts"
+              className="inline-flex items-center gap-2 font-mono text-[0.62rem] text-primary border border-primary/30 px-5 py-2.5 hover:bg-primary/10 transition-colors tracking-widest uppercase corner-bracket">
+              VIEW ALL BROADCASTS →
+            </Link>
           </div>
         </section>
 

@@ -143,7 +143,7 @@ export function CommandFooter() {
           <div>
             <FooterHeading>CHANNELS</FooterHeading>
             <ul className="flex flex-col gap-2.5">
-              <li><FooterLink href="/channels">Broadcasts</FooterLink></li>
+              <li><FooterLink href="/broadcasts" accent="text-primary/65 hover:text-primary">Broadcasts</FooterLink></li>
               <li><FooterLink href="/channels">All Channels</FooterLink></li>
               <li>
                 <a href={X_URL} target="_blank" rel="noopener noreferrer"

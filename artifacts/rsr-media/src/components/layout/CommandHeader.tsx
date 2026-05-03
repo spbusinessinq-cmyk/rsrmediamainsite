@@ -4,8 +4,8 @@ import { Menu, X, Youtube, ChevronDown } from 'lucide-react';
 import { UTCClock } from './UTCClock';
 import { StatusPill } from '../ui-system/StatusPill';
 import {
-  ARMORY_URL, X_URL, YOUTUBE_URL, TIKTOK_URL,
-  PACIFIC_SYSTEMS_URL, BLACK_DOG_URL,
+  X_URL, YOUTUBE_URL, TIKTOK_URL,
+  ARMORY_URL, BLACK_DOG_URL, PACIFIC_SYSTEMS_URL,
   isYouTubeConfigured, isTikTokConfigured,
 } from '@/config/site';
 import { trackOutboundClick } from '@/lib/analytics';
@@ -18,46 +18,45 @@ function TikTokIcon({ className }: { className?: string }) {
   );
 }
 
-// Main nav — Network moved into Systems dropdown to prevent wrapping
+// Main nav — exact routes, no ambiguous startsWith
 const MAIN_LINKS = [
   { href: '/', label: 'HOME', exact: true },
-  { href: '/channels', label: 'BROADCASTS', matchHref: '/channels' },
-  { href: '/reports', label: 'REPORTS' },
-  { href: '/mission', label: 'MISSION' },
-  { href: '/channels', label: 'CHANNELS', matchHref: '/channels' },
-  { href: '/rsr-intel', label: 'RSR INTEL' },
-  { href: '/hotline', label: 'HOTLINE' },
+  { href: '/broadcasts', label: 'BROADCASTS', exact: true },
+  { href: '/reports', label: 'REPORTS', prefix: true },
+  { href: '/mission', label: 'MISSION', exact: true },
+  { href: '/channels', label: 'CHANNELS', exact: true },
+  { href: '/rsr-intel', label: 'RSR INTEL', exact: true },
+  { href: '/hotline', label: 'HOTLINE', exact: true },
 ];
 
-// Systems dropdown — RSR Intel has own nav link, Network Map added here
+// Routes that activate the Systems dropdown indicator
+const SYSTEMS_PATHS = ['/pacific', '/pacific-systems', '/security', '/black-dog', '/armory'];
+
 const SYSTEMS_ITEMS = [
   {
-    href: '/pacific-systems',
+    href: '/pacific',
     label: 'Pacific Systems',
-    desc: 'Structured data infrastructure. Engineered for the RSR ecosystem.',
+    desc: 'Structured data infrastructure for the RSR ecosystem.',
     internal: true,
+    accent: '#f59e0b',
   },
   {
-    href: BLACK_DOG_URL,
+    href: '/security',
     label: 'Black Dog Security',
-    desc: 'Cyber, security, and defensive infrastructure.',
-    internal: false,
-  },
-  {
-    href: ARMORY_URL,
-    label: 'RSR Armory',
-    desc: 'Official merchandise. Proceeds support operations.',
-    internal: false,
-  },
-  {
-    href: '/network',
-    label: 'Network Map',
-    desc: 'RSR ecosystem architecture and all connected properties.',
+    desc: 'Security and cyber system. Secured infrastructure.',
     internal: true,
+    accent: '#ef4444',
+  },
+  {
+    href: '/armory',
+    label: 'RSR Armory',
+    desc: 'Official merchandise shop. Proceeds support operations.',
+    internal: true,
+    accent: '',
   },
 ];
 
-function SystemsDropdown() {
+function SystemsDropdown({ isActive }: { isActive: boolean }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -68,68 +67,57 @@ function SystemsDropdown() {
     }
     document.addEventListener('keydown', onKey);
     document.addEventListener('mousedown', onMouse);
-    return () => { document.removeEventListener('keydown', onKey); document.removeEventListener('mousedown', onMouse); };
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('mousedown', onMouse);
+    };
   }, []);
 
   return (
-    <div ref={ref} className="relative">
+    <div ref={ref} className="relative" style={{ isolation: 'isolate' }}>
       <button
         onClick={() => setOpen(v => !v)}
-        className={`flex items-center gap-1 text-[0.6rem] tracking-[0.1em] uppercase px-2 py-2 transition-all whitespace-nowrap ${
-          open ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
+        className={`flex items-center gap-1 text-[0.6rem] tracking-[0.1em] uppercase px-2 py-2 transition-all whitespace-nowrap relative ${
+          open || isActive ? 'text-primary' : 'text-muted-foreground/70 hover:text-foreground'
         }`}
         style={{ fontFamily: "'Orbitron', sans-serif", fontWeight: 700 }}
       >
         SYSTEMS
         <ChevronDown className={`w-2.5 h-2.5 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
+        {(open || isActive) && <span className="absolute bottom-0 left-1 right-1 h-px bg-primary" />}
       </button>
 
       {open && (
-        <div className="absolute top-full right-0 mt-1.5 w-64 bg-[hsl(0_0%_4%)] border border-border/40 shadow-2xl z-[200] overflow-hidden"
-          style={{ boxShadow: '0 8px 40px rgba(0,0,0,0.75), 0 0 0 1px rgba(255,255,255,0.04), inset 0 1px 0 rgba(255,255,255,0.05)' }}>
-          <div className="px-3 py-2 border-b border-border/25 flex items-center gap-2">
-            <span className="font-mono text-[0.52rem] text-muted-foreground/35 tracking-widest uppercase">// RSR ECOSYSTEM</span>
+        <div
+          className="absolute top-full left-0 w-60 border border-border/40 z-[9999] overflow-hidden"
+          style={{
+            background: 'hsl(0 0% 4%)',
+            boxShadow: '0 8px 40px rgba(0,0,0,0.85), 0 0 0 1px rgba(255,255,255,0.04), inset 0 1px 0 rgba(255,255,255,0.05), 0 0 16px rgba(16,185,129,0.06)',
+          }}
+        >
+          <div className="px-3 py-2 border-b border-border/20 flex items-center gap-2">
+            <span className="font-mono text-[0.52rem] text-muted-foreground/35 tracking-widest uppercase">// RSR SYSTEMS</span>
           </div>
           {SYSTEMS_ITEMS.map(item => (
-            item.internal ? (
-              <Link
-                key={item.label}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className="flex items-start justify-between gap-3 px-4 py-3.5 hover:bg-white/[0.04] transition-colors group border-b border-border/10 last:border-0 block"
-              >
-                <div className="flex-1 min-w-0">
-                  <div className="text-[0.62rem] text-foreground/82 tracking-[0.06em] uppercase mb-0.5 group-hover:text-primary transition-colors"
-                    style={{ fontFamily: "'Orbitron', sans-serif", fontWeight: 600 }}>
-                    {item.label}
-                  </div>
-                  <div className="font-mono text-[0.55rem] text-muted-foreground/45 tracking-wide leading-relaxed">
-                    {item.desc}
-                  </div>
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setOpen(false)}
+              className="flex items-start justify-between gap-3 px-4 py-3.5 hover:bg-white/[0.05] transition-colors group border-b border-border/10 last:border-0 block"
+            >
+              <div className="flex-1 min-w-0">
+                <div
+                  className="text-[0.62rem] tracking-[0.06em] uppercase mb-0.5 transition-colors group-hover:opacity-100"
+                  style={{ fontFamily: "'Orbitron', sans-serif", fontWeight: 600, color: item.accent || 'rgba(255,255,255,0.8)', opacity: 0.75 }}
+                >
+                  {item.label}
                 </div>
-                <span className="text-muted-foreground/25 group-hover:text-primary/55 transition-colors text-xs mt-0.5 shrink-0">→</span>
-              </Link>
-            ) : (
-              <a
-                key={item.label}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => { setOpen(false); trackOutboundClick(`Systems: ${item.label}`, item.href); }}
-                className="flex items-start justify-between gap-3 px-4 py-3.5 hover:bg-white/[0.04] transition-colors group border-b border-border/10 last:border-0"
-              >
-                <div className="flex-1 min-w-0">
-                  <div className="text-[0.62rem] text-foreground/82 tracking-[0.06em] uppercase mb-0.5 group-hover:text-primary transition-colors"
-                    style={{ fontFamily: "'Orbitron', sans-serif", fontWeight: 600 }}>
-                    {item.label}
-                  </div>
-                  <div className="font-mono text-[0.55rem] text-muted-foreground/45 tracking-wide leading-relaxed">
-                    {item.desc}
-                  </div>
+                <div className="font-mono text-[0.55rem] text-muted-foreground/40 tracking-wide leading-relaxed">
+                  {item.desc}
                 </div>
-                <span className="text-muted-foreground/25 group-hover:text-primary/55 transition-colors text-xs mt-0.5 shrink-0">↗</span>
-              </a>
-            )
+              </div>
+              <span className="text-muted-foreground/25 group-hover:text-primary/55 transition-colors text-xs mt-0.5 shrink-0">→</span>
+            </Link>
           ))}
         </div>
       )}
@@ -143,13 +131,15 @@ export function CommandHeader() {
   const ytConfigured = isYouTubeConfigured();
   const ttConfigured = isTikTokConfigured();
 
-  const isActive = (link: typeof MAIN_LINKS[number]) => {
-    if (link.exact) return location === link.href;
-    const match = link.matchHref ?? link.href;
-    return location.startsWith(match);
+  const isLinkActive = (link: typeof MAIN_LINKS[number]): boolean => {
+    if (link.href === '/hotline') return location === '/hotline' || location === '/tips' || location === '/tip-line';
+    if (link.prefix) return location === link.href || location.startsWith(link.href + '/');
+    return location === link.href;
   };
 
-  const linkClass = (active: boolean) =>
+  const isSystemsActive = SYSTEMS_PATHS.some(p => location === p || location.startsWith(p + '/'));
+
+  const linkCls = (active: boolean) =>
     `relative text-[0.6rem] tracking-[0.1em] uppercase px-2 py-2 transition-all whitespace-nowrap font-bold ${
       active ? 'text-primary' : 'text-muted-foreground/70 hover:text-foreground'
     }`;
@@ -159,9 +149,9 @@ export function CommandHeader() {
       className="sticky top-0 z-50 w-full bg-[hsl(0_0%_3%)] border-b border-border/25 backdrop-blur-md"
       style={{ boxShadow: '0 1px 0 rgba(16,185,129,0.10), 0 4px 24px rgba(16,185,129,0.04), 0 2px 8px rgba(0,0,0,0.4)' }}
     >
-      <div className="mx-auto px-4 max-w-[1440px] h-16 flex items-center gap-1.5">
+      <div className="mx-auto px-4 max-w-[1440px] h-16 flex items-center gap-0">
 
-        {/* Logo — one-line lockup */}
+        {/* Logo lockup */}
         <Link href="/" className="flex items-center gap-2.5 shrink-0 group mr-3" data-testid="nav-home">
           <img
             src="/rsr-logo.png"
@@ -170,22 +160,22 @@ export function CommandHeader() {
             onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
           />
           <span
-            className="text-[0.78rem] tracking-[0.08em] text-foreground whitespace-nowrap"
-            style={{ fontFamily: "'Orbitron', sans-serif", fontWeight: 900, letterSpacing: '0.06em' }}
+            className="text-foreground whitespace-nowrap"
+            style={{ fontFamily: "'Orbitron', sans-serif", fontWeight: 900, fontSize: '0.78rem', letterSpacing: '0.06em' }}
           >
             RSR MEDIA
           </span>
         </Link>
 
-        <div className="hidden lg:block w-px h-5 bg-border/25 mr-1" />
+        <div className="hidden lg:block w-px h-5 bg-border/25 mr-1 shrink-0" />
 
-        {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-0 flex-1 overflow-hidden" aria-label="Main navigation">
+        {/* Desktop Nav — NO overflow-hidden (would clip dropdown) */}
+        <nav className="hidden lg:flex items-center gap-0 flex-1 min-w-0" aria-label="Main navigation">
           {MAIN_LINKS.map(link => {
-            const active = isActive(link);
+            const active = isLinkActive(link);
             return (
               <Link key={`${link.href}-${link.label}`} href={link.href}
-                className={linkClass(active)}
+                className={linkCls(active)}
                 style={{ fontFamily: "'Orbitron', sans-serif", fontWeight: 700 }}
               >
                 {link.label}
@@ -193,10 +183,25 @@ export function CommandHeader() {
               </Link>
             );
           })}
-          <SystemsDropdown />
+          <SystemsDropdown isActive={isSystemsActive} />
         </nav>
 
-        {/* Right: Social + Clock + Weather + Status */}
+        {/* Header badge — ecosystem branding, xl+ only */}
+        <div className="hidden xl:flex items-center gap-1 border border-border/15 bg-card/6 px-2 py-1 mx-2 shrink-0">
+          <Link href="/pacific"
+            className="font-mono text-[0.5rem] tracking-widest transition-colors hover:opacity-80 whitespace-nowrap"
+            style={{ color: 'rgba(245,158,11,0.5)' }}>
+            ENG.PACIFIC
+          </Link>
+          <span className="text-muted-foreground/18 text-[0.5rem] mx-0.5">//</span>
+          <Link href="/security"
+            className="font-mono text-[0.5rem] tracking-widest transition-colors hover:opacity-80 whitespace-nowrap"
+            style={{ color: 'rgba(239,68,68,0.45)' }}>
+            SEC.BLACK DOG
+          </Link>
+        </div>
+
+        {/* Right: social + clock + weather + status */}
         <div className="hidden lg:flex items-center gap-1.5 ml-auto shrink-0">
           <a href={X_URL} target="_blank" rel="noopener noreferrer"
             onClick={() => trackOutboundClick('Nav X Icon', X_URL)}
@@ -222,14 +227,13 @@ export function CommandHeader() {
           )}
           <div className="w-px h-5 bg-border/25 mx-0.5" />
           <UTCClock />
-          {/* TODO: Connect live weather endpoint here when available. Static chip until then. */}
           <div
-            className="font-mono text-[0.57rem] tracking-widest text-muted-foreground/35 bg-black/20 px-2 py-1 border border-border/20 whitespace-nowrap cursor-default select-none hidden xl:flex items-center gap-1"
+            className="font-mono text-[0.52rem] tracking-widest text-muted-foreground/28 bg-black/20 px-2 py-1 border border-border/15 whitespace-nowrap cursor-default select-none hidden xl:flex items-center gap-1"
             title="Local weather — integration pending"
           >
-            <span className="text-muted-foreground/22">WEATHER</span>
-            <span className="text-muted-foreground/15 mx-0.5">//</span>
-            <span className="text-muted-foreground/30">LOCAL READY</span>
+            <span className="text-muted-foreground/20">WTHR</span>
+            <span className="text-muted-foreground/12">//</span>
+            <span className="text-muted-foreground/25">READY</span>
           </div>
           <StatusPill label="NOMINAL" status="nominal" />
         </div>
@@ -251,11 +255,12 @@ export function CommandHeader() {
             <UTCClock />
             <StatusPill label="NOMINAL" status="nominal" />
           </div>
+
           <nav className="grid grid-cols-3 gap-x-2 gap-y-0.5">
             {MAIN_LINKS.map(link => {
-              const active = isActive(link);
+              const active = isLinkActive(link);
               return (
-                <Link key={`mob-${link.href}-${link.label}`} href={link.href}
+                <Link key={`mob-${link.href}`} href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`text-[0.58rem] tracking-[0.08em] uppercase py-2.5 px-2 transition-colors ${
                     active ? 'text-primary font-bold' : 'text-foreground/75 hover:text-primary'
@@ -268,31 +273,33 @@ export function CommandHeader() {
             })}
           </nav>
 
-          {/* Systems expanded */}
+          {/* Systems section */}
           <div className="border-t border-border/20 pt-2">
             <div className="font-mono text-[0.52rem] text-muted-foreground/30 tracking-widest uppercase mb-2 px-2">// SYSTEMS</div>
-            <div className="grid grid-cols-2 gap-1">
+            <div className="grid grid-cols-3 gap-1">
               {SYSTEMS_ITEMS.map(item => (
-                item.internal ? (
-                  <Link key={item.label} href={item.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="text-[0.56rem] tracking-[0.06em] uppercase py-2.5 px-2 text-muted-foreground/65 hover:text-foreground transition-colors"
-                    style={{ fontFamily: "'Orbitron', sans-serif", fontWeight: 600 }}>
-                    {item.label} →
-                  </Link>
-                ) : (
-                  <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer"
-                    onClick={() => { setMobileMenuOpen(false); trackOutboundClick(`Mobile Systems: ${item.label}`, item.href); }}
-                    className="text-[0.56rem] tracking-[0.06em] uppercase py-2.5 px-2 text-muted-foreground/65 hover:text-foreground transition-colors"
-                    style={{ fontFamily: "'Orbitron', sans-serif", fontWeight: 600 }}>
-                    {item.label} ↗
-                  </a>
-                )
+                <Link key={item.href} href={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-[0.56rem] tracking-[0.06em] uppercase py-2.5 px-2 transition-colors"
+                  style={{ fontFamily: "'Orbitron', sans-serif", fontWeight: 600, color: item.accent || 'rgba(255,255,255,0.55)' }}>
+                  {item.label} →
+                </Link>
               ))}
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 pt-2 border-t border-border/20">
+          {/* Badge + social in mobile */}
+          <div className="border-t border-border/20 pt-2 flex flex-wrap items-center gap-3">
+            <span className="font-mono text-[0.5rem] tracking-widest" style={{ color: 'rgba(245,158,11,0.45)' }}>
+              ENG. PACIFIC
+            </span>
+            <span className="font-mono text-[0.5rem] text-muted-foreground/18">//</span>
+            <span className="font-mono text-[0.5rem] tracking-widest" style={{ color: 'rgba(239,68,68,0.4)' }}>
+              SEC. BLACK DOG
+            </span>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-4 pt-1 border-t border-border/20">
             <a href={X_URL} target="_blank" rel="noopener noreferrer"
               className="font-mono text-[0.6rem] text-accent hover:text-foreground transition-colors tracking-widest"
               onClick={() => setMobileMenuOpen(false)}>

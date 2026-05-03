@@ -1,0 +1,310 @@
+RSR MEDIA FINAL QA + ROUTING + SYSTEMS + TIPS INBOX + ARMORY + PACIFIC/SECURITY HEADER PASS
+
+SCOPE:
+Frontend/static only unless localStorage is needed.
+Do not add backend.
+Do not break admin login.
+Do not break reports.
+Do not break video embeds.
+Do not break ADMIN4451.
+This is final polish + bug fix + routing audit before EdgeOne deploy.
+
+OFFICIAL INFO:
+1. SITE_PHONE = "16315142480"
+2. SITE_EMAIL = "newsroom@rsrmedia.org"
+3. X_URL = "https://x.com/RSRINTEL"
+4. YOUTUBE_URL = "https://www.youtube.com/@RedStateRhetoricMedia"
+5. TIKTOK_URL = "https://www.tiktok.com/@redstaterhetoric"
+6. RSR_INTEL_URL = "https://www.rsrintel.com/#/"
+7. PACIFIC_SYSTEMS_URL = "https://rsrindexnet.edgeone.app/"
+8. BLACK_DOG_URL = "https://blackdogmain12.edgeone.app/"
+9. ARMORY_URL = "https://rsrarmory.store"
+
+HEADER BADGE:
+10. Add a small tactical header badge somewhere in the top command bar.
+11. Text:
+    ENGINEERED BY PACIFIC SYSTEMS // SECURED BY BLACK DOG
+12. If space is tight, use:
+    ENG. PACIFIC // SEC. BLACK DOG
+13. Badge should be subtle, not huge.
+14. It can sit between nav and social icons or inside the right-side status cluster.
+15. On mobile, move it into the hamburger menu/footer.
+16. Do not let it wrap the header.
+17. “Pacific Systems” links to /pacific.
+18. “Black Dog” links to /security.
+19. Use amber accent for Pacific.
+20. Use red/steel accent for Black Dog.
+21. Keep it accurate: this is ecosystem/branding language, not a fake live security claim.
+
+CRITICAL BUGS TO FIX:
+22. Clicking Broadcasts currently opens Channels or highlights both.
+23. Broadcasts and Channels must be separate routes.
+24. Systems dropdown says open but shows nothing.
+25. Systems dropdown must render visible items.
+26. Tips/Hotline need written tip submission.
+27. Tips must appear in admin console inbox using localStorage.
+28. Armory needs its own dedicated page.
+29. Header active states must be correct.
+30. No duplicate active nav items.
+31. All nav links must route exactly to the correct page.
+
+ROUTING AUDIT:
+32. Audit App.tsx routes.
+33. Ensure /broadcasts page exists.
+34. Ensure /channels page exists.
+35. Ensure /hotline page exists.
+36. Ensure /tips redirects/aliases to /hotline.
+37. Ensure /armory page exists.
+38. Ensure /rsr-intel page exists.
+39. Ensure /pacific or /pacific-systems exists.
+40. Ensure /security or /black-dog exists.
+41. Ensure /admin/tips exists.
+42. Ensure no route points to the wrong component.
+43. Broadcasts route must render Broadcasts/Videos page only.
+44. Channels route must render Public Channels page only.
+45. Nav active state must use exact pathname matching, not sloppy startsWith.
+46. /broadcasts must not mark /channels active.
+47. /channels must not mark /broadcasts active.
+48. /hotline may mark Hotline active.
+49. Systems active only when current path is /pacific, /pacific-systems, /security, /black-dog, or /armory.
+
+HEADER NAV FINAL:
+50. Header nav:
+    Home /
+    Broadcasts /broadcasts
+    Reports /reports
+    Mission /mission
+    Channels /channels
+    RSR Intel /rsr-intel
+    Hotline /hotline
+    Systems dropdown
+51. Systems dropdown contains:
+    Pacific Systems /pacific
+    Black Dog Security /security
+    RSR Armory /armory
+52. Contact can live in footer.
+53. Header active state must be exact and clean.
+54. Systems active only on system-related routes.
+55. Do not keep Systems visually open unless dropdown is actually visible.
+56. Dropdown must close after choosing an item.
+57. Dropdown must close on outside click.
+58. Dropdown must close on Escape if easy.
+59. Header must stay one line on desktop.
+60. Orbitron remains primary.
+
+SYSTEMS DROPDOWN FIX:
+61. Fix z-index.
+62. Use absolute positioning below Systems button.
+63. Ensure parent does not have overflow:hidden clipping it.
+64. Dropdown panel must be visible over content.
+65. Dark glass panel.
+66. Steel border + subtle green edge glow.
+67. Items:
+    Pacific Systems — Structured data infrastructure.
+    Black Dog Security — Security and cyber system.
+    RSR Armory — Official merch shop.
+68. Each item has arrow.
+69. On desktop, clicking Systems toggles dropdown.
+70. On mobile, Systems appears expanded as normal links.
+71. No empty dropdown.
+
+BROADCASTS PAGE:
+72. Create/repair /broadcasts page.
+73. Page title: BROADCASTS.
+74. Subtitle: Latest RSR video and live programming.
+75. Show embedded YouTube videos:
+    The Structure of Power — Episode 1
+    Welcome to Red State Rhetoric Media
+    Latest Live
+76. Use existing videos.ts.
+77. Do not duplicate full Channels page.
+78. Add “Open YouTube Channel” CTA.
+79. Add “Back to Channels” secondary link.
+80. Broadcasts page should focus only on video/live programming.
+81. Header Broadcasts active only here.
+
+CHANNELS PAGE:
+82. Channels page should focus on distribution channels:
+    X
+    YouTube
+    TikTok
+    Hotline
+    Newsroom Email
+83. Do not show full Broadcasts grid here unless as a tiny preview.
+84. Add link to Broadcasts page.
+85. Header Channels active only here.
+
+HOTLINE / TIPS:
+86. Hotline page must explain phone call-in and tips.
+87. Add written tip form to Hotline page.
+88. Form fields:
+    Name optional
+    Email optional
+    Phone optional
+    Topic
+    Location
+    Summary
+    Links/Evidence
+    Urgency
+    Can we contact you?
+89. Form submit must:
+    Save tip object to localStorage tip inbox.
+    Offer mailto fallback to newsroom@rsrmedia.org.
+90. Since no backend, label:
+    Stored locally in the operator console on this device until backend is connected.
+91. Do not pretend cloud inbox exists.
+92. Include button:
+    Email Tip Instead.
+93. Email uses newsroom@rsrmedia.org.
+94. Subject:
+    RSR TIP — [Topic]
+95. Body includes all fields.
+96. Add caution:
+    Do not submit classified, hacked, stolen, or illegally obtained material.
+97. Add call CTA:
+    Call Hotline +1 (631) 514-2480.
+98. /tips should redirect/alias to /hotline.
+
+LOCAL TIP INBOX:
+99. Create hook/useTips localStorage if not already.
+100. Store tips under key:
+    rsr_media_tips
+101. Tip fields:
+    id
+    createdAt
+    name
+    email
+    phone
+    topic
+    location
+    summary
+    links
+    urgency
+    contactAllowed
+    status
+102. Status defaults to New.
+103. Admin /admin/tips reads localStorage tips.
+104. Admin tips page displays actual submitted tips.
+105. Admin can mark:
+    New
+    Reviewed
+    Archived
+106. Admin can delete tip with confirmation.
+107. Admin can copy tip text.
+108. Admin can open mailto reply if email exists.
+109. If no tips, show clean empty state.
+110. Keep future endpoint note:
+    POST /api/tips later.
+111. Make clear localStorage is device-local.
+
+ARMORY PAGE:
+112. Create /armory dedicated page.
+113. Page title: RSR ARMORY.
+114. Subtitle: Official RSR merchandise and public shop.
+115. Copy:
+    RSR Armory is the official shop for Red State Rhetoric Media gear, merchandise, and public-facing brand items.
+116. CTA:
+    Open RSR Armory ↗
+117. Link:
+    https://rsrarmory.store
+118. Add section:
+    What You’ll Find
+    Apparel
+    Media gear
+    Community merch
+    Limited drops
+119. Do not fake products unless manually added.
+120. Add external shop note:
+    Opens official external shop.
+121. Armory route accessible from Systems dropdown.
+122. Header Systems active when on Armory page.
+
+RSR INTEL / PACIFIC COPY:
+123. Keep RSR Intel page.
+124. Keep Pacific page.
+125. Add footer phrase:
+    Powered by RSR Intelligence Network.
+126. Add footer phrase:
+    Engineered and supported by Pacific Systems.
+127. Add header badge phrase:
+    ENGINEERED BY PACIFIC SYSTEMS // SECURED BY BLACK DOG
+128. Do not overstate backend automation.
+
+VISUAL POLISH:
+129. Restore subtle green edge glow where missing.
+130. Systems dropdown gets glow.
+131. Tip form cards get glow.
+132. Armory page cards get glow.
+133. Broadcast video cards get glow.
+134. Keep black base.
+135. Do not over-green entire sections.
+136. Use blue accent for X/social links.
+137. Use amber for Pacific.
+138. Use red for Security.
+139. Header one-line brand remains RSR MEDIA.
+140. Orbitron remains primary.
+141. Header should feel sharp, not cramped.
+142. Weather/time chips stay small and tactical.
+
+ADMIN:
+143. Admin passcode remains ADMIN4451.
+144. Lock Terminal clears sessionStorage and returns to /admin login.
+145. Exit to Site routes to /.
+146. Admin Tips sidebar item opens /admin/tips.
+147. Admin Tips displays local tips.
+148. Admin Reports still works.
+149. Import X still works.
+150. Report writer still works.
+151. Do not expose admin in main nav.
+
+FOOTER:
+152. Add footer links:
+    Broadcasts
+    Reports
+    Channels
+    Hotline
+    RSR Intel
+    Pacific Systems
+    Black Dog
+    Armory
+    Operator Access
+153. Keep footer clean, not redundant.
+154. Hotline and email visible.
+155. Social icons visible.
+156. Include:
+    Powered by RSR Intelligence Network.
+    Engineered and supported by Pacific Systems.
+    Secured through Black Dog Security.
+
+EDGEONE DEPLOY:
+157. Static only.
+158. No backend needed.
+159. localStorage tips are device-local.
+160. SPA fallback remains:
+    /* /index.html 200
+161. npm run build passes.
+162. Output directory: dist.
+163. No env vars required.
+
+FINAL QA:
+164. Click Home → Home only.
+165. Click Broadcasts → Broadcasts page only.
+166. Click Reports → Reports page only.
+167. Click Mission → Mission page only.
+168. Click Channels → Channels page only.
+169. Click RSR Intel → RSR Intel page only.
+170. Click Hotline → Hotline page only.
+171. Click Systems → visible dropdown.
+172. Click Pacific → Pacific page.
+173. Click Black Dog/Security → Security page.
+174. Click Armory → Armory page.
+175. Submit written tip → appears in /admin/tips.
+176. Mark/archive/delete tip works.
+177. Email tip fallback works.
+178. YouTube embeds still work.
+179. Admin login works.
+180. Build passes.
+181. No broken dropdown.
+182. No duplicated active nav.
+183. No fake cloud inbox claims.
+184. Header badge appears without wrapping.
