@@ -65,14 +65,14 @@ export default function Home() {
 
               {/* Hero masthead — terminal/classified frame ─────────────────── */}
               <div
-                className="relative inline-block self-start mb-6"
+                className="hero-masthead relative inline-block self-start mb-6 overflow-hidden"
                 style={{ padding: '18px 26px 14px 26px' }}
               >
-                {/* Corner brackets — dim emerald */}
-                <span aria-hidden style={{ position: 'absolute', top: 0, left: 0, width: 16, height: 16, borderTop: '1.5px solid rgba(0,255,157,0.32)', borderLeft: '1.5px solid rgba(0,255,157,0.32)' }} />
-                <span aria-hidden style={{ position: 'absolute', top: 0, right: 0, width: 16, height: 16, borderTop: '1.5px solid rgba(0,255,157,0.32)', borderRight: '1.5px solid rgba(0,255,157,0.32)' }} />
-                <span aria-hidden style={{ position: 'absolute', bottom: 0, left: 0, width: 16, height: 16, borderBottom: '1.5px solid rgba(0,255,157,0.32)', borderLeft: '1.5px solid rgba(0,255,157,0.32)' }} />
-                <span aria-hidden style={{ position: 'absolute', bottom: 0, right: 0, width: 16, height: 16, borderBottom: '1.5px solid rgba(0,255,157,0.32)', borderRight: '1.5px solid rgba(0,255,157,0.32)' }} />
+                {/* Corner brackets — emerald, slightly stronger w/ faint glow */}
+                <span aria-hidden style={{ position: 'absolute', top: 0, left: 0, width: 18, height: 18, borderTop: '1.5px solid rgba(0,255,157,0.5)', borderLeft: '1.5px solid rgba(0,255,157,0.5)', filter: 'drop-shadow(0 0 3px rgba(0,255,157,0.35))' }} />
+                <span aria-hidden style={{ position: 'absolute', top: 0, right: 0, width: 18, height: 18, borderTop: '1.5px solid rgba(0,255,157,0.5)', borderRight: '1.5px solid rgba(0,255,157,0.5)', filter: 'drop-shadow(0 0 3px rgba(0,255,157,0.35))' }} />
+                <span aria-hidden style={{ position: 'absolute', bottom: 0, left: 0, width: 18, height: 18, borderBottom: '1.5px solid rgba(0,255,157,0.5)', borderLeft: '1.5px solid rgba(0,255,157,0.5)', filter: 'drop-shadow(0 0 3px rgba(0,255,157,0.35))' }} />
+                <span aria-hidden style={{ position: 'absolute', bottom: 0, right: 0, width: 18, height: 18, borderBottom: '1.5px solid rgba(0,255,157,0.5)', borderRight: '1.5px solid rgba(0,255,157,0.5)', filter: 'drop-shadow(0 0 3px rgba(0,255,157,0.35))' }} />
 
                 {/* Scanline overlay — faint horizontal lines, masked to title block */}
                 <span
@@ -81,8 +81,19 @@ export default function Home() {
                     position: 'absolute',
                     inset: 0,
                     pointerEvents: 'none',
-                    background: 'repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(255,255,255,0.025) 2px, rgba(255,255,255,0.025) 3px)',
+                    background: 'repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(255,255,255,0.04) 2px, rgba(255,255,255,0.04) 3px)',
                     mixBlendMode: 'screen',
+                  }}
+                />
+
+                {/* Soft inner vignette — felt, not seen */}
+                <span
+                  aria-hidden
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    pointerEvents: 'none',
+                    background: 'radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.22) 100%)',
                   }}
                 />
 

@@ -373,7 +373,32 @@ body::before {
   mix-blend-mode: screen;
 }
 
+/* Hero masthead — analog signal life ─────────────────────────────── */
+@keyframes signalLock {
+  0%   { opacity: 0.92; filter: brightness(0.9) contrast(1.04); }
+  45%  { opacity: 1;    filter: brightness(1.05) contrast(1.06); }
+  100% { opacity: 1;    filter: brightness(1) contrast(1.02); }
+}
+
+@keyframes terminalFlicker {
+  0%, 100% { filter: brightness(1) contrast(1.02); }
+  8%  { filter: brightness(0.985) contrast(1.03); }
+  9%  { filter: brightness(1.020) contrast(1.04); }
+  10% { filter: brightness(0.995) contrast(1.02); }
+  51% { filter: brightness(1.015) contrast(1.03); }
+  52% { filter: brightness(0.99)  contrast(1.02); }
+  53% { filter: brightness(1)     contrast(1.02); }
+}
+
+.hero-masthead {
+  animation:
+    signalLock 800ms ease-out 1 both,
+    terminalFlicker 8s ease-in-out 800ms infinite;
+  will-change: filter, opacity;
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .hero-masthead { animation: none !important; opacity: 1 !important; filter: none !important; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;

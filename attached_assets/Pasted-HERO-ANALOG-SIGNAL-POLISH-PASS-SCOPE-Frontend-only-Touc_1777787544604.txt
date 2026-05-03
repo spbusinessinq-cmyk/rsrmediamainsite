@@ -1,0 +1,79 @@
+HERO ANALOG SIGNAL POLISH PASS
+
+SCOPE:
+Frontend only.
+Touch ONLY the homepage hero masthead/title lockup.
+Do not touch header/nav/routes/admin/build logic.
+Do not redesign the whole page.
+
+GOAL:
+Push the hero title slightly toward a classified CRT/signal terminal feel without making it cheesy.
+
+CURRENT GOOD:
+The RSR MEDIA one-line masthead works.
+Corner brackets work.
+Scanline feel is present.
+
+CHANGE ONLY THIS:
+1. Add ultra-subtle analog signal life to the hero masthead.
+2. Keep it premium, tactical, and minimal.
+3. Do NOT add heavy glitch/VHS/chromatic distortion.
+
+HERO MASTHEAD EFFECTS:
+1. Add a very subtle title flicker animation:
+   - brightness fluctuates only 1–3%
+   - duration around 7–9 seconds
+   - infinite
+   - no aggressive blinking
+   - no fast glitch
+2. Apply flicker only to the hero masthead wrapper/title block, not the whole page.
+3. Add faint scanline overlay only inside the hero title frame:
+   - opacity 0.03–0.06
+   - thin horizontal lines
+   - pointer-events none
+4. Add a soft vignette/noise edge inside the title frame:
+   - very low opacity
+   - should be felt, not seen
+5. Slightly strengthen the corner brackets:
+   - increase opacity a little
+   - add very faint emerald glow
+   - extend brackets 2–4px if easy
+6. Add a subtle “signal lock” entry on page load:
+   - masthead starts at opacity 0.92 and filter brightness 0.9
+   - within 600–900ms settles to opacity 1 and brightness 1
+   - no jumpy animation
+7. Keep “RSR MEDIA” one line.
+8. Keep “POWERED BY PACIFIC SYSTEMS” under it.
+9. Keep subline soft gray/white, not yellow.
+10. Do not move the title block.
+
+CSS GUIDANCE:
+Use animations like:
+
+@keyframes signalLock {
+  0% { opacity: .88; filter: brightness(.88) contrast(1.05); }
+  45% { opacity: 1; filter: brightness(1.06) contrast(1.08); }
+  100% { opacity: 1; filter: brightness(1) contrast(1.02); }
+}
+
+@keyframes terminalFlicker {
+  0%, 100% { filter: brightness(1) contrast(1.02); }
+  8% { filter: brightness(.985) contrast(1.03); }
+  9% { filter: brightness(1.025) contrast(1.04); }
+  10% { filter: brightness(.995) contrast(1.02); }
+  51% { filter: brightness(1.015) contrast(1.03); }
+  52% { filter: brightness(.99) contrast(1.02); }
+  53% { filter: brightness(1) contrast(1.02); }
+}
+
+The final effect should feel like:
+“live classified signal terminal”
+NOT:
+“retro TV gimmick”
+
+QA:
+- Run build/typecheck.
+- Confirm no errors.
+- Confirm hero still reads clearly.
+- Confirm effects are subtle.
+- Confirm mobile is not broken.
