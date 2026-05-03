@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=IBM+Plex+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
@@ -88,11 +88,11 @@
   --crimson-glow: 0 0 22px rgba(220,38,38,0.25);
 
   /* ── Typography ───────────────────── */
-  /* Rajdhani: display headings / big labels */
-  --app-font-display: 'Rajdhani', sans-serif;
-  /* Inter: all body text, paragraphs, UI text */
+  /* Orbitron: primary RSR interface font — nav, headings, UI labels, hero, buttons */
+  --app-font-display: 'Orbitron', sans-serif;
+  /* Inter: long-form body copy only */
   --app-font-sans: 'Inter', sans-serif;
-  /* IBM Plex Mono: terminal labels, metadata, readouts */
+  /* IBM Plex Mono: terminal readouts, micro metadata, code labels */
   --app-font-mono: 'IBM Plex Mono', monospace;
 
   --radius: 0.25rem;
@@ -110,9 +110,9 @@
     line-height: 1.7;
   }
 
-  /* Display headings — Rajdhani */
+  /* Primary RSR interface font — Orbitron */
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Rajdhani', sans-serif;
+    font-family: 'Orbitron', sans-serif;
     font-weight: 700;
     letter-spacing: -0.01em;
     line-height: 1.15;
@@ -165,7 +165,6 @@
 }
 
 /* ── Corner Brackets ─────────────────── */
-/* Steel gray default, green on hover */
 .corner-bracket { position: relative; }
 .corner-bracket::before, .corner-bracket::after {
   content: '';

@@ -5,6 +5,8 @@ import { trackTipClick } from '@/lib/analytics';
 import { motion } from 'framer-motion';
 import { CheckCircle, XCircle } from 'lucide-react';
 
+const ORBITRON_BOLD: React.CSSProperties = { fontFamily: "'Orbitron', sans-serif", fontWeight: 700 };
+
 const OVER_PRINCIPLES = [
   { a: 'Truth', b: 'Speed', desc: 'We verify before we publish. A slow accurate story beats a fast wrong one every time.' },
   { a: 'People', b: 'Parties', desc: 'We report on people and communities, not party agendas. No faction gets editorial protection.' },
@@ -42,22 +44,26 @@ export default function Mission() {
 
       <div className="mx-auto px-4 sm:px-6 max-w-[1280px] relative z-10">
 
-        {/* Header */}
+        {/* ─── Header ────────────────────────────────────── */}
         <div className="mb-14">
-          <div className="font-mono text-[0.65rem] text-muted-foreground/45 tracking-widest uppercase flex items-center gap-2 mb-4">
-            <span className="w-8 h-px bg-primary/40" /> // COMMUNITY.PROMISE
+          <div className="font-mono text-[0.62rem] text-muted-foreground/40 tracking-widest uppercase flex items-center gap-2 mb-4">
+            <span className="w-8 h-px bg-primary/35" /> // COMMUNITY.PROMISE
           </div>
-          <h1 className="text-[3.5rem] sm:text-[5rem] md:text-[6rem] font-bold uppercase leading-[0.9] mb-6"
-            style={{ fontFamily: "'Rajdhani', sans-serif" }}>
+          <h1
+            className="text-[2.5rem] sm:text-[3.8rem] md:text-[5rem] font-bold uppercase leading-[0.9] mb-6"
+            style={ORBITRON_BOLD}
+          >
             OUR PROMISE<br />
-            <span className="text-primary/70">TO THE COMMUNITY</span>
+            <span className="text-foreground/40">TO THE COMMUNITY</span>
           </h1>
         </div>
 
-        {/* Lead Quote */}
-        <div className="glass-panel corner-bracket p-8 md:p-12 mb-16 border border-primary/12">
-          <blockquote className="text-2xl md:text-3xl font-bold text-foreground/88 leading-snug mb-5"
-            style={{ fontFamily: "'Rajdhani', sans-serif" }}>
+        {/* ─── Lead Quote ────────────────────────────────── */}
+        <div className="glass-panel corner-bracket p-8 md:p-12 mb-16 border border-border/20">
+          <blockquote
+            className="text-xl md:text-2xl font-bold text-foreground/88 leading-snug mb-5"
+            style={ORBITRON_BOLD}
+          >
             "RSR Media exists to serve the public, not political insiders, corporate gatekeepers, or algorithmic noise."
           </blockquote>
           <p className="font-sans text-base text-muted-foreground leading-relaxed max-w-3xl">
@@ -65,7 +71,7 @@ export default function Mission() {
           </p>
         </div>
 
-        {/* X over Y — Principle Pairs */}
+        {/* ─── X over Y Principles ───────────────────────── */}
         <div className="mb-16">
           <div className="font-mono text-xs text-primary tracking-widest uppercase flex items-center gap-2 mb-8">
             <span className="w-8 h-px bg-primary" /> // SIX.PRINCIPLES
@@ -74,13 +80,13 @@ export default function Mission() {
             {OVER_PRINCIPLES.map((p, i) => (
               <motion.div key={p.a}
                 initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07 }}
-                className="border border-border/28 bg-card/8 corner-bracket p-6 hover:border-primary/30 hover:bg-card/18 transition-all group">
+                className="border border-border/25 bg-card/8 corner-bracket p-6 hover:border-primary/28 hover:bg-card/16 transition-all group">
                 <div className="flex items-baseline gap-2 mb-3">
-                  <span className="text-2xl font-bold text-primary leading-none" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
+                  <span className="text-xl font-bold text-primary leading-none" style={ORBITRON_BOLD}>
                     {p.a}
                   </span>
-                  <span className="font-mono text-[0.6rem] text-muted-foreground/40 tracking-widest uppercase">over</span>
-                  <span className="text-xl font-bold text-muted-foreground/35 leading-none line-through decoration-muted-foreground/20" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
+                  <span className="font-mono text-[0.57rem] text-muted-foreground/35 tracking-widest uppercase">over</span>
+                  <span className="text-base font-bold text-muted-foreground/28 leading-none line-through decoration-muted-foreground/15" style={ORBITRON_BOLD}>
                     {p.b}
                   </span>
                 </div>
@@ -90,7 +96,7 @@ export default function Mission() {
           </div>
         </div>
 
-        {/* Will Do / Won't Do */}
+        {/* ─── Will / Won't ──────────────────────────────── */}
         <div className="grid md:grid-cols-2 gap-8 mb-14">
           <div>
             <div className="font-mono text-xs text-primary tracking-widest uppercase flex items-center gap-2 mb-5">
@@ -100,7 +106,7 @@ export default function Mission() {
               {WILL_DO.map((p, i) => (
                 <motion.div key={p.title}
                   initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}
-                  className="flex gap-3 p-4 border border-border/22 bg-card/8 hover:bg-card/20 transition-colors">
+                  className="flex gap-3 p-4 border border-border/20 bg-card/8 hover:bg-card/18 transition-colors">
                   <CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                   <div>
                     <div className="font-sans font-semibold text-sm text-foreground/88 mb-1">{p.title}</div>
@@ -119,7 +125,7 @@ export default function Mission() {
               {WONT_DO.map((p, i) => (
                 <motion.div key={p.title}
                   initial={{ opacity: 0, x: 10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}
-                  className="flex gap-3 p-4 border border-destructive/12 bg-destructive/[0.025] hover:bg-destructive/[0.06] transition-colors">
+                  className="flex gap-3 p-4 border border-destructive/10 bg-destructive/[0.02] hover:bg-destructive/[0.05] transition-colors">
                   <XCircle className="w-4 h-4 text-destructive shrink-0 mt-0.5" />
                   <div>
                     <div className="font-sans font-semibold text-sm text-foreground/88 mb-1">{p.title}</div>
@@ -131,37 +137,39 @@ export default function Mission() {
           </div>
         </div>
 
-        {/* CTAs */}
+        {/* ─── CTAs ──────────────────────────────────────── */}
         <div className="grid sm:grid-cols-2 gap-5 mb-12">
           <div className="border border-primary/15 bg-card/8 corner-bracket p-7">
-            <div className="font-mono text-[0.62rem] text-primary/55 tracking-widest uppercase mb-3">// HAVE INFORMATION?</div>
-            <h3 className="text-2xl mb-3 uppercase" style={{ fontFamily: "'Rajdhani', sans-serif", fontWeight: 700 }}>Call the Hotline</h3>
+            <div className="font-mono text-[0.6rem] text-primary/50 tracking-widest uppercase mb-3">// HAVE INFORMATION?</div>
+            <h3 className="text-lg mb-3 uppercase" style={ORBITRON_BOLD}>Call the Hotline</h3>
             <p className="font-sans text-base text-muted-foreground leading-relaxed mb-5">
               Source identity protected on request. Tips submitted by phone or email. No classified material.
             </p>
             <Link href="/hotline" onClick={trackTipClick}
-              className="inline-flex items-center h-11 px-6 font-mono text-[0.68rem] tracking-widest uppercase font-bold border border-primary/50 text-primary bg-primary/10 hover:bg-primary hover:text-white transition-all corner-bracket">
+              className="inline-flex items-center h-11 px-6 font-bold border border-primary/50 text-primary bg-primary/10 hover:bg-primary hover:text-white transition-all corner-bracket"
+              style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '0.62rem', letterSpacing: '0.08em' }}>
               OPEN HOTLINE
             </Link>
           </div>
 
-          <div className="border border-border/22 bg-card/8 corner-bracket p-7">
-            <div className="font-mono text-[0.62rem] text-primary/55 tracking-widest uppercase mb-3">// STAY INFORMED</div>
-            <h3 className="text-2xl mb-3 uppercase" style={{ fontFamily: "'Rajdhani', sans-serif", fontWeight: 700 }}>Read the Reports</h3>
+          <div className="border border-border/20 bg-card/8 corner-bracket p-7">
+            <div className="font-mono text-[0.6rem] text-muted-foreground/45 tracking-widest uppercase mb-3">// STAY INFORMED</div>
+            <h3 className="text-lg mb-3 uppercase" style={ORBITRON_BOLD}>Read the Reports</h3>
             <p className="font-sans text-base text-muted-foreground leading-relaxed mb-5">
               Published reports are verified, sourced, and reviewed. No speculation presented as fact.
             </p>
             <Link href="/reports"
-              className="inline-flex items-center h-11 px-6 font-mono text-[0.68rem] tracking-widest uppercase border border-border/40 bg-card/18 hover:border-primary/40 hover:bg-primary/5 transition-colors text-foreground/70 hover:text-primary">
+              className="inline-flex items-center h-11 px-6 border border-border/38 bg-card/18 hover:border-primary/35 hover:bg-primary/5 transition-colors text-foreground/65 hover:text-primary"
+              style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '0.62rem', letterSpacing: '0.08em' }}>
               VIEW ALL REPORTS
             </Link>
           </div>
         </div>
 
-        {/* Closing */}
-        <div className="glass-panel border border-border/28 p-8 text-center">
-          <p className="font-mono text-[0.6rem] text-muted-foreground/35 tracking-widest uppercase mb-3">// SIGNAL OVER NOISE</p>
-          <p className="font-sans text-lg text-foreground/75 max-w-2xl mx-auto leading-relaxed">
+        {/* ─── Closing ───────────────────────────────────── */}
+        <div className="glass-panel border border-border/22 p-8 text-center">
+          <p className="font-mono text-[0.58rem] text-muted-foreground/28 tracking-widest uppercase mb-3">// SIGNAL OVER NOISE</p>
+          <p className="font-sans text-lg text-foreground/70 max-w-2xl mx-auto leading-relaxed">
             Independent. Verification-first. Community-facing. This is RSR Media.
           </p>
         </div>

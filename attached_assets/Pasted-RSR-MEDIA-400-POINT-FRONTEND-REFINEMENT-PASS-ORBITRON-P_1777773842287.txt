@@ -1,0 +1,255 @@
+RSR MEDIA 400-POINT FRONTEND REFINEMENT PASS — ORBITRON PRIMARY, HEADER FIX, SYSTEMS DROPDOWN, PACIFIC FULL PAGE
+
+SCOPE:
+Frontend/UI only unless a tiny config change is needed.
+Do not break admin.
+Do not break report CRUD.
+Do not break Import X.
+Do not add backend.
+Do not add APIs.
+Do not remove existing routes.
+
+FONT RESET:
+1. Orbitron must be the primary RSR interface font.
+2. Use Orbitron for:
+   - nav
+   - headers
+   - hero title
+   - buttons
+   - cards
+   - labels
+   - admin shell headings
+3. Use IBM Plex Mono only for tiny system readouts and code-like labels.
+4. Use Inter only for long article/report body text if needed.
+5. Do not make the site look like a soft blog.
+6. Restore RSR ecosystem consistency with other sites.
+7. Hero title should use Orbitron or the current RSR block display font if it is already better.
+8. Body text can be slightly more readable but still needs RSR tactical styling.
+
+HEADER FIX:
+9. Current header logo/title has two-line RSR Media and looks cramped.
+10. Replace left brand with one-line lockup:
+    [logo] RSR MEDIA
+11. Remove “PUBLIC SIGNAL NETWORK” under the header logo.
+12. If subtitle is needed, put it in tooltip/title only, not visible.
+13. Header height should be cleaner, around 64px.
+14. Nav should be centered and not cramped.
+15. Nav order:
+    Home
+    Reports
+    Mission
+    Channels
+    Hotline
+    Network
+    Systems ▼
+16. Contact can move to footer unless there is room.
+17. Armory should live inside Systems dropdown, not main nav.
+18. Pacific should live inside Systems dropdown, not main nav.
+19. Security/Black Dog should live inside Systems dropdown, not main nav.
+20. Right side:
+    X icon
+    YouTube icon
+    TikTok icon
+    UTC
+    Nominal
+21. Header must not wrap.
+22. Header must look premium and intentional.
+23. Use Orbitron nav text.
+24. Increase nav text slightly.
+25. Reduce tiny unreadable labels.
+
+SYSTEMS DROPDOWN:
+26. Systems dropdown currently opens but shows nothing or is broken.
+27. Fix dropdown completely.
+28. On click or hover, show a dark glass dropdown panel.
+29. Dropdown items:
+    RSR Intel ↗
+    Pacific Systems ↗
+    Black Dog Security ↗
+    RSR Armory ↗
+30. Each item should show:
+    title
+    short description
+    external arrow
+31. Links:
+    RSR Intel: https://www.rsrintel.com/#/
+    Pacific Systems: https://rsrindexnet.edgeone.app/
+    Black Dog: https://blackdogmain12.edgeone.app/
+    Armory: https://rsrarmory.store
+32. Dropdown should appear above content.
+33. Proper z-index.
+34. Click outside closes.
+35. Escape closes if easy.
+36. Mobile menu should show Systems section expanded as simple links.
+37. No broken empty dropdown.
+
+HERO CLEANUP:
+38. Remove duplicate “Today’s Routing” panel because it repeats the hero buttons.
+39. Keep Signal Stack, but simplify it.
+40. Right side should only have:
+    Signal Stack
+    Contact mini strip
+41. Remove duplicate cards:
+    @RSRINTEL
+    YouTube
+    TikTok
+    Hotline
+   from the hero right side if they duplicate buttons.
+42. Keep those on Channels page instead.
+43. Left CTA buttons:
+    Read Reports
+    Hotline
+    Channels
+    RSR Intel
+44. Secondary tiny links:
+    Armory
+    Systems
+45. Hero should feel less cluttered.
+46. Main headline should not be two different typographic languages.
+47. Use Orbitron-based title:
+    RSR MEDIA
+48. Subtitle:
+    Independent media. Public reporting. Community signal.
+49. Support:
+    Reports, hotline calls, and public channels routed through the RSR ecosystem.
+50. Keep quote:
+    Signal over noise. Verification before amplification.
+51. Contact chips:
+    Hotline
+    Newsroom
+52. Make hero more compact vertically.
+53. Less dead black space.
+54. Better alignment left/right.
+55. More steel-gray panels.
+56. Less green overload.
+57. Blue accent may remain for “Reviewed Manually” and X.
+
+PUBLIC CHANNELS:
+58. Channels page owns X/YouTube/TikTok/Hotline.
+59. Home should only tease channels, not duplicate everything.
+60. Header social icons already link directly.
+61. Footer can repeat social links once.
+
+PACIFIC SYSTEMS FULL PAGE:
+62. Build/upgrade internal route /pacific or /pacific-systems.
+63. This is a full bridge page, not just a tiny card.
+64. It should feel like Pacific Systems but still inside RSR Media.
+65. Use amber accent heavily.
+66. Use Orbitron.
+67. Page hero:
+    PACIFIC SYSTEMS
+    Structured Data Infrastructure
+68. Kicker:
+    RSR ECOSYSTEM // DATA LAYER
+69. Copy:
+    Pacific Systems is the structured data infrastructure connected to the broader RSR ecosystem. It organizes signals, datasets, records, and methods that support analysis, public reporting, and long-form investigations.
+70. Add CTA:
+    Open Pacific Systems ↗
+71. Link to https://rsrindexnet.edgeone.app/
+72. Add secondary CTA:
+    View Method
+73. Add five module cards:
+    Signals
+    Datasets
+    Records
+    Method
+    Access
+74. Each module needs 2–3 sentence explanation.
+75. Add “How it supports RSR Media” section.
+76. Explain:
+    - organizes raw inputs
+    - supports report research
+    - keeps source discipline
+    - helps separate signal from noise
+77. Add “What it is not” section:
+    - not a fake live counter
+    - not a replacement for verification
+    - not public editorial content by itself
+78. Add “Data supports analysis. It does not replace verification.”
+79. Add system architecture block:
+    Input → Organize → Index → Review → Support Reporting
+80. Use amber lines, steel panels, black background.
+81. No fake synced metrics.
+82. No fake counters.
+83. No clipped circular graphics.
+84. Make this page look full and premium.
+85. Add external destination card at bottom.
+86. Add link back to Network page.
+87. Add responsive layout.
+
+NETWORK PAGE:
+88. Since Systems dropdown now handles external systems, Network page should explain relationships.
+89. Do not duplicate every link 10 times.
+90. Keep one strong ecosystem diagram.
+91. Include:
+    RSR Media
+    RSR Intel
+    Pacific Systems
+    Black Dog
+    Armory
+    Public Channels
+92. Use Orbitron headings.
+93. Add clear copy.
+
+MISSION PAGE:
+94. Keep the improved mission page, but make Orbitron primary.
+95. Reduce green saturation on “TO THE COMMUNITY” if too much.
+96. Add blue/steel highlight.
+97. Make principle cards more premium.
+98. Less repeated text.
+99. Keep one-page flow.
+
+REPORTS / ADMIN:
+100. Do not change report logic.
+101. Keep article writer.
+102. Keep header image support if added.
+103. Keep import X.
+104. Keep admin password ADMIN4451.
+105. Admin login/logout must still work.
+106. Admin should also use Orbitron for UI labels/headings.
+107. Long report body editor can use Inter/monospace for writing comfort.
+
+APIS DISCUSSION IN README ONLY:
+108. Add a README section called “Future APIs.”
+109. Mention optional future APIs:
+    - YouTube Data API for auto video sync
+    - X API for authenticated post import
+    - Analytics endpoint for real visit counts
+    - Tips endpoint for real tip inbox
+110. Do not implement these now.
+111. Do not require env vars now.
+112. Keep EdgeOne static deployment simple.
+
+GENERAL VISUAL TIGHTENING:
+113. Increase important text slightly.
+114. Make body copy readable.
+115. Keep micro labels readable.
+116. Use consistent max-width.
+117. Use no random duplicate cards.
+118. No dead empty hero panels.
+119. No clipped text.
+120. No broken dropdowns.
+121. No redundant links repeated in hero, channels, footer, and panels all at once.
+122. One purpose per section.
+123. Home = overview.
+124. Channels = socials/video/hotline.
+125. Network = ecosystem explanation.
+126. Systems dropdown = external destinations.
+127. Pacific page = data layer explainer.
+128. Reports = publications.
+129. Hotline = call/tip feature.
+
+FINAL CHECK:
+130. npm run build passes.
+131. Header works desktop.
+132. Header works mobile.
+133. Systems dropdown displays correctly.
+134. Systems links open correctly.
+135. Home no longer duplicates Today’s Routing.
+136. Pacific page looks full and premium.
+137. Admin still works.
+138. Reports still work.
+139. Import X still works.
+140. No backend added.
+141. No fake data.
+142. Orbitron is primary across interface.
