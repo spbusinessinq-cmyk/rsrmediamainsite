@@ -30,9 +30,9 @@ export function AdminGate({ children }: AdminGateProps) {
     <div className="min-h-[100dvh] bg-background flex flex-col items-center justify-center p-8">
       <div className="absolute inset-0 bg-grid opacity-5 pointer-events-none" />
       <div className="relative w-full max-w-sm">
-        <div className="glass-panel corner-bracket border border-primary/20 p-10">
+        <div className="glass-panel corner-bracket border border-border/30 p-10">
           <div className="text-center mb-8">
-            <div className="font-mono text-[0.65rem] text-primary/60 tracking-widest uppercase mb-4">
+            <div className="font-mono text-[0.65rem] text-muted-foreground tracking-widest uppercase mb-4">
               // RSR MEDIA — OPERATOR TERMINAL
             </div>
             <h1 className="font-serif font-bold text-2xl tracking-tight">ADMIN ACCESS</h1>
@@ -49,7 +49,8 @@ export function AdminGate({ children }: AdminGateProps) {
                 onChange={e => { setCode(e.target.value); setError(''); }}
                 autoFocus
                 autoComplete="off"
-                className="w-full bg-background border border-border p-3 font-mono text-sm focus:outline-none focus:border-primary transition-colors text-center tracking-[0.4em]"
+                onKeyDown={e => { if (e.key === 'Enter') handleSubmit(e as unknown as React.FormEvent); }}
+                className="w-full bg-background border border-border p-3 font-mono text-sm focus:outline-none focus:border-accent transition-colors text-center tracking-[0.4em]"
                 placeholder="••••••••"
               />
               {error && (
@@ -65,13 +66,22 @@ export function AdminGate({ children }: AdminGateProps) {
             </button>
           </form>
 
-          <div className="mt-8 pt-5 border-t border-border/20 space-y-1 text-center">
+          <div className="mt-8 pt-5 border-t border-border/20 space-y-3 text-center">
             <p className="font-mono text-[0.55rem] text-muted-foreground/40 tracking-widest uppercase">
               OWNER ACCESS ONLY — NO PUBLIC ACCOUNTS
             </p>
-            <p className="font-mono text-[0.55rem] text-amber-500/50 tracking-widest uppercase">
-              ⚠ DEFAULT CODE ACTIVE — CHANGE BEFORE DEPLOY
-            </p>
+            <div className="border border-amber-500/20 bg-amber-500/5 p-3 text-left">
+              <p className="font-mono text-[0.6rem] text-amber-500/80 tracking-wider uppercase mb-1">
+                ⚠ DEFAULT CODE ACTIVE — CHANGE BEFORE DEPLOY
+              </p>
+              <p className="font-mono text-[0.58rem] text-muted-foreground/60 tracking-wider leading-relaxed">
+                Recovery: default passcode is{' '}
+                <span className="text-amber-400/70 select-all font-bold">CHANGE_ME_BEFORE_DEPLOY</span>
+                {' '}— update in{' '}
+                <span className="text-foreground/50">src/config/site.ts</span>{' '}
+                before going live.
+              </p>
+            </div>
           </div>
         </div>
         <div className="mt-4 text-center">

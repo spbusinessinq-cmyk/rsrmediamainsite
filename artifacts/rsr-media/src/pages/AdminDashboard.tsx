@@ -8,8 +8,12 @@ import { ImportXTool } from '@/components/admin/ImportXTool';
 import { AdminAnalytics } from '@/components/admin/AdminAnalytics';
 import { useReports } from '@/hooks/useReports';
 import { useAdminAuth } from '@/hooks/useAdminAuth';
-import { SITE_EMAIL, ARMORY_URL, PACIFIC_SYSTEMS_URL, BLACK_DOG_URL, RSR_INTEL_URL, SITE_PHONE, X_URL, YOUTUBE_URL, isYouTubeConfigured } from '@/config/site';
-import { Plus, Star, Eye, EyeOff, Trash2, Edit } from 'lucide-react';
+import {
+  SITE_EMAIL, ARMORY_URL, PACIFIC_SYSTEMS_URL, BLACK_DOG_URL, RSR_INTEL_URL,
+  SITE_PHONE, X_URL, YOUTUBE_URL, TIKTOK_URL, TIKTOK_HANDLE,
+  isYouTubeConfigured, isTikTokConfigured,
+} from '@/config/site';
+import { Plus, Star, Eye, EyeOff, Trash2, Edit, Phone, Mail } from 'lucide-react';
 import { useLocation } from 'wouter';
 
 function Dashboard() {
@@ -35,7 +39,7 @@ function Dashboard() {
           { label: 'Featured', value: featured.length, color: 'text-accent border-accent/20' },
           { label: 'Archived', value: archived.length, color: 'text-muted-foreground border-border/40' },
         ].map(s => (
-          <div key={s.label} className={`p-5 border bg-card/20 corner-bracket ${s.color}`}>
+          <div key={s.label} className={`p-5 border bg-card/15 corner-bracket ${s.color}`}>
             <div className="font-mono text-[0.65rem] tracking-widest uppercase mb-2">{s.label}</div>
             <div className={`font-mono text-3xl font-bold ${s.color.split(' ')[0]}`}>{s.value}</div>
           </div>
@@ -45,10 +49,13 @@ function Dashboard() {
       {/* Quick Actions */}
       <div className="flex flex-wrap gap-3">
         <Link href="/admin/reports/new" className="inline-flex items-center gap-2 font-mono text-xs border border-primary/50 text-primary bg-primary/10 px-4 py-2 hover:bg-primary hover:text-primary-foreground transition-all tracking-widest uppercase">
-          <Plus className="w-3.5 h-3.5" /> NEW REPORT
+          <Plus className="w-3.5 h-3.5" /> CREATE NEW REPORT
         </Link>
-        <Link href="/admin/import-x" className="inline-flex items-center gap-2 font-mono text-xs border border-border text-muted-foreground px-4 py-2 hover:text-foreground hover:border-foreground/50 transition-all tracking-widest uppercase">
+        <Link href="/admin/import-x" className="inline-flex items-center gap-2 font-mono text-xs border border-accent/30 text-accent px-4 py-2 hover:border-accent/60 hover:bg-accent/5 transition-all tracking-widest uppercase">
           IMPORT FROM X
+        </Link>
+        <Link href="/admin/reports/new" className="inline-flex items-center gap-2 font-mono text-xs border border-border text-muted-foreground px-4 py-2 hover:text-foreground hover:border-foreground/30 transition-all tracking-widest uppercase">
+          QUICK DRAFT
         </Link>
       </div>
 
@@ -64,14 +71,14 @@ function Dashboard() {
         </div>
 
         {reports.length === 0 ? (
-          <div className="border border-border/40 border-dashed p-10 text-center">
+          <div className="border border-border/30 border-dashed p-10 text-center">
             <p className="font-mono text-sm text-muted-foreground mb-4">No reports yet.</p>
             <Link href="/admin/reports/new" className="font-mono text-xs text-primary hover:underline">Create your first report →</Link>
           </div>
         ) : (
-          <div className="divide-y divide-border/30 border border-border/40">
+          <div className="divide-y divide-border/20 border border-border/30">
             {reports.map(r => (
-              <div key={r.id} className="flex items-center gap-3 p-4 bg-card/10 hover:bg-card/30 transition-colors">
+              <div key={r.id} className="flex items-center gap-3 p-4 bg-card/8 hover:bg-card/20 transition-colors">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
                     <span className={`font-mono text-[0.6rem] tracking-widest uppercase px-1.5 py-0.5 border ${
@@ -126,7 +133,7 @@ function Dashboard() {
       </div>
 
       {reports.length > 0 && (
-        <p className="font-mono text-[0.6rem] text-muted-foreground/40 tracking-widest">
+        <p className="font-mono text-[0.6rem] text-muted-foreground/30 tracking-widest">
           Last modified: {lastUpdated.getTime() > 0 ? lastUpdated.toLocaleString() : 'Never'} · Stored in browser localStorage
         </p>
       )}
@@ -156,57 +163,108 @@ function ReportEditPage({ id }: { id: string }) {
 }
 
 function TipsPage() {
+  const PHONE_DISPLAY = "+1 (631) 514-2480";
   return (
     <div className="max-w-3xl space-y-6">
       <h2 className="font-mono font-bold tracking-widest text-primary uppercase text-sm">Tip Intake</h2>
-      <div className="border border-border/40 p-10 text-center corner-bracket bg-card/10">
+
+      <div className="border border-border/30 p-8 corner-bracket bg-card/10">
         <p className="font-mono text-sm text-muted-foreground mb-3">
-          Tip submissions arrive via email at <span className="text-foreground">{SITE_EMAIL}</span>.
+          Public tip submissions currently route via email to{' '}
+          <span className="text-foreground">{SITE_EMAIL}</span>.
         </p>
-        <p className="font-mono text-xs text-muted-foreground/60 tracking-widest">
+        <p className="font-mono text-xs text-muted-foreground/50 tracking-widest mb-5">
           A backend tip queue will populate here when POST /api/tips is connected.
         </p>
+        <div className="flex flex-wrap gap-3">
+          <a
+            href={`mailto:${SITE_EMAIL}?subject=Check Tips`}
+            className="inline-flex items-center gap-2 font-mono text-xs text-primary border border-primary/30 px-4 py-2 hover:bg-primary/10 transition-colors tracking-widest uppercase"
+          >
+            <Mail className="w-3.5 h-3.5" /> OPEN EMAIL
+          </a>
+          <Link
+            href="/hotline"
+            className="inline-flex items-center gap-2 font-mono text-xs text-muted-foreground border border-border/40 px-4 py-2 hover:text-foreground hover:border-foreground/30 transition-colors tracking-widest uppercase"
+          >
+            <Phone className="w-3.5 h-3.5" /> VIEW HOTLINE PAGE
+          </Link>
+        </div>
       </div>
-      <a
-        href={`mailto:${SITE_EMAIL}?subject=Check Tips`}
-        className="inline-block font-mono text-xs text-primary border border-primary/30 px-4 py-2 hover:bg-primary/10 transition-colors tracking-widest uppercase"
-      >
-        OPEN EMAIL
-      </a>
+
+      <div className="grid sm:grid-cols-2 gap-4">
+        <a href={`tel:${SITE_PHONE}`}
+          className="flex items-center gap-4 p-5 border border-border/25 bg-card/8 corner-bracket hover:border-primary/30 transition-colors group">
+          <Phone className="w-4 h-4 text-primary/60 group-hover:text-primary transition-colors" />
+          <div>
+            <div className="font-mono text-[0.6rem] text-muted-foreground/50 tracking-widest uppercase mb-1">HOTLINE</div>
+            <div className="font-mono text-sm font-bold">{PHONE_DISPLAY}</div>
+          </div>
+        </a>
+        <a href={`mailto:${SITE_EMAIL}`}
+          className="flex items-center gap-4 p-5 border border-border/25 bg-card/8 corner-bracket hover:border-primary/30 transition-colors group">
+          <Mail className="w-4 h-4 text-primary/60 group-hover:text-primary transition-colors" />
+          <div className="min-w-0">
+            <div className="font-mono text-[0.6rem] text-muted-foreground/50 tracking-widest uppercase mb-1">NEWSROOM EMAIL</div>
+            <div className="font-mono text-sm font-bold truncate">{SITE_EMAIL}</div>
+          </div>
+        </a>
+      </div>
+
+      <div className="border border-border/20 bg-card/5 p-5 corner-bracket">
+        <div className="font-mono text-[0.65rem] text-muted-foreground/50 tracking-widest uppercase mb-3">FUTURE ENDPOINT</div>
+        <code className="font-mono text-xs text-accent/60 block">POST /api/tips</code>
+        <p className="font-mono text-xs text-muted-foreground/40 mt-2 tracking-widest">
+          Connect a backend to populate this queue with form submissions, voicemails, and phone tips.
+        </p>
+      </div>
     </div>
   );
 }
 
 function SettingsPage() {
+  const ytPending = !isYouTubeConfigured();
+  const ttPending = !isTikTokConfigured();
+
+  const settings = [
+    { label: 'SITE_EMAIL', value: SITE_EMAIL },
+    { label: 'SITE_PHONE', value: SITE_PHONE },
+    { label: 'X_URL', value: X_URL },
+    { label: 'YOUTUBE_URL', value: YOUTUBE_URL, pending: ytPending },
+    { label: 'TIKTOK_URL', value: TIKTOK_URL, pending: ttPending },
+    { label: 'TIKTOK_HANDLE', value: TIKTOK_HANDLE },
+    { label: 'RSR_INTEL_URL', value: RSR_INTEL_URL },
+    { label: 'PACIFIC_SYSTEMS_URL', value: PACIFIC_SYSTEMS_URL },
+    { label: 'BLACK_DOG_URL', value: BLACK_DOG_URL },
+    { label: 'ARMORY_URL', value: ARMORY_URL },
+  ];
+
   return (
     <div className="max-w-2xl space-y-6">
       <h2 className="font-mono font-bold tracking-widest text-primary uppercase text-sm">Settings</h2>
-      <div className="p-4 bg-amber-500/10 border border-amber-500/30 text-amber-500 font-mono text-xs leading-relaxed corner-bracket">
-        These values are set in <code className="bg-black/50 px-1">src/config/site.ts</code>. Edit that file to update phone, email, and network URLs. Admin passcode is also configured there.
+      <div className="p-4 bg-amber-500/8 border border-amber-500/25 text-amber-500/80 font-mono text-xs leading-relaxed corner-bracket">
+        These values are set in <code className="bg-black/50 px-1">src/config/site.ts</code>. Edit that file to update phone, email, and network URLs. Settings here are read-only — they do not persist globally without a backend.
       </div>
-      <div className="border border-border/50 bg-card/20 p-6 corner-bracket space-y-4">
-        {[
-          { label: 'SITE_EMAIL', value: SITE_EMAIL },
-          { label: 'SITE_PHONE', value: SITE_PHONE },
-          { label: 'X_URL', value: X_URL },
-          { label: 'YOUTUBE_URL', value: YOUTUBE_URL, pending: !isYouTubeConfigured() },
-          { label: 'RSR_INTEL_URL', value: RSR_INTEL_URL },
-          { label: 'PACIFIC_SYSTEMS_URL', value: PACIFIC_SYSTEMS_URL },
-          { label: 'BLACK_DOG_URL', value: BLACK_DOG_URL },
-          { label: 'ARMORY_URL', value: ARMORY_URL },
-        ].map(({ label, value, pending }) => (
+      <div className="border border-border/30 bg-card/10 p-6 corner-bracket space-y-4">
+        {settings.map(({ label, value, pending }) => (
           <div key={label} className="space-y-1">
             <div className="flex items-center gap-2">
               <label className="font-mono text-[0.65rem] tracking-widest text-muted-foreground uppercase">{label}</label>
               {pending && <span className="font-mono text-[0.55rem] text-amber-500 tracking-widest uppercase border border-amber-500/30 px-1 bg-amber-500/5">PENDING</span>}
             </div>
-            <input disabled type="text" className={`w-full bg-background border p-2 font-mono text-xs cursor-default ${pending ? 'border-amber-500/30 opacity-50' : 'border-border opacity-60'}`} value={value} readOnly />
+            <input disabled type="text" className={`w-full bg-background border p-2 font-mono text-xs cursor-default ${pending ? 'border-amber-500/20 opacity-40' : 'border-border/40 opacity-60'}`} value={value} readOnly />
           </div>
         ))}
       </div>
       <div className="p-4 border border-destructive/20 bg-destructive/5 corner-bracket">
         <p className="font-mono text-xs text-destructive leading-relaxed tracking-wider">
-          ⚠ ADMIN_PASSCODE is set in site.ts. Change it to a strong secret before deploying to production. Default passcode is not secure.
+          ⚠ ADMIN_PASSCODE is set in site.ts. Change it to a strong secret before deploying. Default passcode: CHANGE_ME_BEFORE_DEPLOY
+        </p>
+      </div>
+      <div className="p-4 border border-border/20 bg-card/8 corner-bracket">
+        <div className="font-mono text-[0.65rem] text-muted-foreground/50 tracking-widest uppercase mb-2">SOCIAL METRICS NOTE</div>
+        <p className="font-mono text-xs text-muted-foreground/50 leading-relaxed tracking-wider">
+          Social counts (TIKTOK_FOLLOWERS_DISPLAY, TIKTOK_LIVE_VIEWERS_DISPLAY) are manually updated in site.ts. They are not fetched automatically. Leave blank to hide.
         </p>
       </div>
     </div>
@@ -243,7 +301,7 @@ export default function AdminDashboard() {
     );
     if (matchImportX) return (
       <div>
-        <h2 className="font-mono font-bold tracking-widest text-primary uppercase text-sm mb-6">Import from X</h2>
+        <h2 className="font-mono font-bold tracking-widest text-accent uppercase text-sm mb-6">Import from X</h2>
         <ImportXTool />
       </div>
     );

@@ -16,7 +16,7 @@ import Network from "@/pages/Network";
 import PacificSystems from "@/pages/PacificSystems";
 import BlackDog from "@/pages/BlackDog";
 import Armory from "@/pages/Armory";
-import TipLine from "@/pages/TipLine";
+import Hotline from "@/pages/Hotline";
 import Contact from "@/pages/Contact";
 import AdminDashboard from "@/pages/AdminDashboard";
 import Channels from "@/pages/Channels";
@@ -35,7 +35,8 @@ function Router() {
       <Route path="/pacific-systems" component={PacificSystems} />
       <Route path="/black-dog" component={BlackDog} />
       <Route path="/armory" component={Armory} />
-      <Route path="/tip-line" component={TipLine} />
+      <Route path="/hotline" component={Hotline} />
+      <Route path="/tip-line" component={Hotline} />
       <Route path="/contact" component={Contact} />
       <Route path="/channels" component={Channels} />
       {/* Admin routes — all handled by AdminDashboard via internal route matching */}

@@ -1,0 +1,361 @@
+RSR MEDIA 500-POINT FUNCTION + HOTLINE + ADMIN RECOVERY PASS
+
+CRITICAL:
+Do not destroy existing work.
+Preserve the current public design, reports localStorage system, Import X tool, admin report editor, and all routes that already work.
+This pass fixes admin access, adds a proper Hotline page, links YouTube, reduces green overload, adds electric-blue accents, slightly increases readability, and makes report creation feel fully usable from the Operator Terminal.
+
+OFFICIAL LINKS / INFO:
+1. SITE_PHONE = "16315142480"
+2. SITE_EMAIL = "newsroom@rsrmedia.org"
+3. X_URL = "https://x.com/RSRINTEL"
+4. YOUTUBE_URL = "https://www.youtube.com/@RedStateRhetoricMedia"
+5. TIKTOK_HANDLE = "@redstaterhetoric"
+6. RSR_INTEL_URL = "https://www.rsrintel.com/#/"
+7. PACIFIC_SYSTEMS_URL = "https://rsrindexnet.edgeone.app/"
+8. BLACK_DOG_URL = "https://blackdogmain12.edgeone.app/"
+9. ARMORY_URL = "https://rsrarmory.store"
+
+ADMIN ACCESS FIX:
+10. I lost access to the admin page. Fix this first.
+11. Confirm /admin route works.
+12. Confirm /admin login/passcode gate renders.
+13. Confirm ADMIN_PASSCODE = "CHANGE_ME_BEFORE_DEPLOY" is accepted.
+14. Add visible admin recovery note on login:
+    “Default development passcode: CHANGE_ME_BEFORE_DEPLOY. Change before deployment.”
+15. Do not hide /admin behind broken routing.
+16. Add footer Operator Access link to /admin.
+17. Add keyboard-safe passcode input.
+18. Add unlock button.
+19. Add sessionStorage auth.
+20. Add “Lock Terminal” button inside admin.
+21. Confirm after login user reaches dashboard.
+22. Confirm admin sidebar works.
+23. Confirm admin routes:
+    /admin
+    /admin/reports
+    /admin/reports/new
+    /admin/reports/:id
+    /admin/import-x
+    /admin/tips
+    /admin/analytics
+    /admin/settings
+24. If route refresh breaks, add SPA fallback notes and fix router.
+25. Do not require backend auth yet.
+
+REPORT GENERATION INSIDE INTERFACE:
+26. Reports must be creatable inside Operator Terminal.
+27. Keep localStorage CRUD.
+28. Make report creation obvious.
+29. On /admin/reports, add big button: CREATE NEW REPORT.
+30. Add second button: IMPORT FROM X.
+31. Add third button: QUICK DRAFT.
+32. New report editor must open cleanly.
+33. Editor must include:
+    title
+    slug auto-generated
+    excerpt
+    body
+    category
+    type
+    author
+    tags
+    source links
+    X URL
+    status
+    featured
+34. Add save draft.
+35. Add publish.
+36. Add unpublish.
+37. Add archive.
+38. Add delete confirmation.
+39. Add preview panel.
+40. Add “View public report” after save.
+41. Published reports appear on public Reports page immediately.
+42. Drafts do not appear publicly.
+43. Featured reports show in featured section.
+44. Import X creates a draft with xUrl attached.
+45. Import X does not fake scrape.
+46. Add optional fields to manually paste:
+    X title
+    X summary
+    body / article text
+47. After X import draft is created, automatically route to report editor.
+48. Add helper copy:
+    “Paste the X link, then add/edit the article body before publishing.”
+49. Add report generation template buttons:
+    Standard Report
+    Breaking Update
+    Field Note
+    Opinion / Commentary
+    Correction
+50. Template button pre-fills body structure.
+
+REPORT BODY TEMPLATES:
+51. Standard Report template:
+    SUMMARY
+    WHAT HAPPENED
+    WHY IT MATTERS
+    WHAT IS CONFIRMED
+    WHAT REMAINS UNKNOWN
+    SOURCES
+52. Breaking Update template:
+    CURRENT STATUS
+    KNOWN INFORMATION
+    DEVELOPING QUESTIONS
+    NEXT UPDATE
+53. Field Note template:
+    LOCATION
+    OBSERVATION
+    CONTEXT
+    MEDIA / LINKS
+    FOLLOW-UP NEEDED
+54. Commentary template:
+    POSITION
+    EVIDENCE
+    COUNTERPOINT
+    CLOSING QUESTION
+55. Correction template:
+    ORIGINAL CLAIM
+    CORRECTION
+    UPDATED CONTEXT
+    TIMESTAMP
+
+HOTLINE PAGE:
+56. Create a dedicated public page: /hotline
+57. Nav label should be HOTLINE, not Tips.
+58. Replace current TIPS nav with HOTLINE.
+59. Keep /tip-line route as redirect or alias to /hotline.
+60. Page title: RSR Hotline
+61. Main phone: +1 (631) 514-2480
+62. tel link uses tel:16315142480
+63. Explain what the hotline is:
+    “The RSR Hotline is the public call-in and tip line for RSR Media. Viewers can call during live shows, leave tips, submit story leads, ask questions, or raise community concerns.”
+64. Explain call-in during show:
+    “During live broadcasts, the hotline may be used for call-ins, viewer questions, and real-time audience participation.”
+65. Explain off-air use:
+    “Outside live shows, the hotline can be used for tips, corrections, and community concerns.”
+66. Add sections:
+    Call During the Show
+    Submit a Tip
+    Request a Correction
+    Community Concern
+    Interview / Guest Inquiry
+67. Add big CTA: CALL HOTLINE
+68. Add CTA: EMAIL NEWSROOM
+69. Add CTA: SUBMIT WRITTEN TIP
+70. Add mailto form similar to tip form.
+71. Add warning:
+    “Do not submit classified, hacked, stolen, or illegally obtained material.”
+72. Add respectful call rules:
+    Stay on topic
+    No threats
+    No doxxing
+    Be clear and concise
+    Evidence matters
+73. Add “We may not answer every call live” disclaimer.
+74. Add “Calling does not guarantee broadcast use” disclaimer.
+75. Add polished hotline console card.
+76. Add live-show style language but do not claim currently live.
+
+YOUTUBE LINK:
+77. Set YOUTUBE_URL = "https://www.youtube.com/@RedStateRhetoricMedia"
+78. Link YouTube everywhere YouTube appears.
+79. Header YouTube icon opens YOUTUBE_URL.
+80. Channels page YouTube card opens YOUTUBE_URL.
+81. Home channel card opens YOUTUBE_URL.
+82. Footer YouTube link opens YOUTUBE_URL.
+83. If current card says “pending,” replace with active link.
+84. Do not show fake subscriber count.
+85. Do not show fake video count.
+86. Add manual YouTube video cards optional from src/data/videos.ts.
+87. If no manual videos are configured, still show “Open YouTube Channel.”
+
+X / TIKTOK / SOCIAL:
+88. Keep X_URL = https://x.com/RSRINTEL
+89. Add TikTok config:
+    TIKTOK_URL = "https://www.tiktok.com/@redstaterhetoric"
+90. Add TikTok handle text: @redstaterhetoric
+91. Add TikTok card to Channels page.
+92. Add TikTok card to Home Public Channels section.
+93. TikTok card should not fake live count unless manually configured.
+94. Add optional manual metrics in config:
+    TIKTOK_FOLLOWERS_DISPLAY = ""
+    TIKTOK_LIVE_VIEWERS_DISPLAY = ""
+95. If blank, hide metrics.
+96. If set manually, show them as “manually updated.”
+97. Do not scrape TikTok.
+98. Do not fake live count.
+99. Add admin settings fields for manual social display values if easy.
+100. Add label:
+    “Social counts are manually updated unless analytics API is connected.”
+
+COLOR / VISUAL TUNING:
+101. More black.
+102. Less green.
+103. Green only for active states, borders, primary buttons.
+104. Add electric blue accent color.
+105. Use electric blue for:
+    manual review status
+    X/social accents
+    secondary links
+    focused input outlines
+106. Suggested blue: #29B6F6 or #38BDF8.
+107. Keep emerald: #10B981.
+108. Reduce green background glows by 30–50%.
+109. Make panels darker.
+110. Make borders more steel gray by default.
+111. Corners can glow green only on hover/active.
+112. Add subtle blue scanline highlights.
+113. Do not make it bright cyberpunk.
+114. Keep serious media/intel vibe.
+
+TEXT READABILITY:
+115. Increase body text size slightly.
+116. Increase small card text from tiny to readable.
+117. Micro labels can stay small.
+118. Main paragraph text should be around 1rem or 1.05rem.
+119. Card body text should be at least 0.9rem.
+120. Button text should remain sharp.
+121. Increase line-height.
+122. Make gray text brighter.
+123. Current text is too dim in places.
+124. Do not make headings smaller.
+125. Keep huge RSR MEDIA headline.
+
+HEADER:
+126. Header currently okay but needs slight readability.
+127. Increase nav text a fraction.
+128. Keep it one line.
+129. Add Channels route if already exists.
+130. Replace Tips with Hotline.
+131. Add icon links:
+    X
+    YouTube
+    TikTok if room
+132. If not room, put socials in Channels page/footer only.
+133. Ensure header never wraps.
+
+HOMEPAGE:
+134. Add Hotline as a primary public channel card.
+135. Replace “Tip Line” wording with “Hotline” where public-facing.
+136. Keep “Submit Tip” as button text where appropriate.
+137. Add TikTok card under Public Channels.
+138. Add YouTube active card.
+139. Add X card.
+140. Add Hotline card.
+141. Add “Social counts” block only if manually configured.
+142. Add “Live show call-in” block linking to /hotline.
+143. Make public channels section less green, more black/steel with blue highlights.
+
+CHANNELS PAGE:
+144. Route /channels.
+145. Page title: Public Channels.
+146. Cards:
+    X / @RSRINTEL
+    YouTube / @RedStateRhetoricMedia
+    TikTok / @redstaterhetoric
+    Hotline / +1 (631) 514-2480
+    Newsroom / newsroom@rsrmedia.org
+147. Add “Where reports are distributed” explanation.
+148. Add “Operator Terminal can attach X links to reports.”
+149. No fake feeds.
+150. Add optional manual video cards.
+
+REPORTS PUBLIC PAGE:
+151. Make Reports page feel like a publishing archive.
+152. Add clear button: Submit a Tip / Hotline.
+153. Add “Weekly reviewed reports” copy.
+154. Add filter/search.
+155. Add featured reports.
+156. Add empty state if no reports.
+157. Better report card spacing.
+158. Add status badge colors:
+    Published green
+    Updated blue
+    Draft admin only
+    Archived gray
+159. Public should never show draft.
+
+ADMIN SETTINGS:
+160. Settings page should show:
+    Site phone
+    Site email
+    X URL
+    YouTube URL
+    TikTok URL
+    RSR Intel URL
+    Pacific URL
+    Black Dog URL
+    Armory URL
+    Admin passcode warning
+161. Make clear settings are config-driven unless backend is connected.
+162. Do not pretend settings persist globally if only local.
+
+ADMIN ANALYTICS:
+163. Keep pending backend.
+164. Add documented endpoints:
+    GET /api/analytics/summary
+    POST /api/analytics/pageview
+    POST /api/analytics/outbound-click
+    POST /api/analytics/report-view
+165. Add explanation:
+    “Connect analytics backend or privacy-friendly analytics provider before showing real visit totals.”
+166. Do not show fake stats.
+
+ADMIN TIPS:
+167. Tips tab should explain that current public tip form routes by mailto.
+168. Future endpoint:
+    POST /api/tips
+169. Add link to open hotline page.
+170. Add link to email newsroom.
+
+ROUTING:
+171. Add /hotline route.
+172. Keep /tip-line redirecting to /hotline.
+173. Add /channels if not already present.
+174. Admin route fixed.
+175. Footer Operator Access fixed.
+176. No broken links.
+
+FOOTER:
+177. Update footer nav:
+    Reports
+    Hotline
+    Channels
+    Network
+    Mission
+    Contact
+178. Add X.
+179. Add YouTube.
+180. Add TikTok.
+181. Add hotline.
+182. Add email.
+183. Add Operator Access.
+184. Make footer text slightly larger/readable.
+185. More black, less green.
+
+QUALITY CHECK:
+186. Run npm build.
+187. Run typecheck if available.
+188. Confirm /admin works.
+189. Confirm passcode works.
+190. Confirm /admin/reports/new works.
+191. Confirm report save works.
+192. Confirm publish works.
+193. Confirm public report appears.
+194. Confirm Import X creates draft.
+195. Confirm /hotline works.
+196. Confirm YouTube link works.
+197. Confirm X link works.
+198. Confirm TikTok link works.
+199. Confirm no fake stats.
+200. Confirm no broken nav.
+201. Confirm no green overload.
+202. Confirm text is readable.
+203. Confirm mobile works.
+204. Confirm no horizontal scroll.
+205. Confirm build passes.
+
+FINAL STANDARD:
+This should feel like RSR Media has a real public command website with an owner-controlled Operator Terminal. Public users can read reports, call the hotline, find social channels, submit tips, and move into the broader RSR ecosystem. The owner can create reports, attach X links, publish/unpublish content, and prepare the site for future backend analytics.

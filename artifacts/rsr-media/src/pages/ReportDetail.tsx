@@ -10,8 +10,8 @@ function NotFoundInline() {
   return (
     <div className="w-full pt-12 pb-24">
       <div className="container mx-auto px-6 max-w-3xl">
-        <div className="glass-panel corner-bracket border border-border/40 p-12 text-center">
-          <div className="font-mono text-xs text-muted-foreground tracking-widest uppercase mb-4">// SIGNAL.NOT.FOUND</div>
+        <div className="glass-panel corner-bracket border border-border/30 p-12 text-center">
+          <div className="font-mono text-xs text-muted-foreground/40 tracking-widest uppercase mb-4">// SIGNAL.NOT.FOUND</div>
           <h1 className="font-serif font-bold text-3xl mb-4">Report Not Found</h1>
           <p className="font-sans text-muted-foreground mb-8">This report may have been removed, archived, or the URL may be incorrect.</p>
           <Link href="/reports" className="font-mono text-xs text-primary hover:underline tracking-widest uppercase">
@@ -46,6 +46,10 @@ export default function ReportDetail() {
     navigator.clipboard.writeText(window.location.href).catch(() => {});
   }
 
+  const statusColor = report.status === 'published' ? 'border-primary/40 text-primary'
+    : report.status === 'draft' ? 'border-amber-500/40 text-amber-500'
+    : 'border-border text-muted-foreground';
+
   return (
     <div className="w-full pt-12 pb-24">
       <div className="container mx-auto px-6 max-w-5xl">
@@ -57,7 +61,7 @@ export default function ReportDetail() {
         <div className="grid lg:grid-cols-3 gap-12">
           <article className="lg:col-span-2">
             <div className="flex flex-wrap items-center gap-3 mb-6 font-mono text-xs tracking-widest uppercase">
-              <span className="border border-primary/40 text-primary px-2 py-0.5 bg-primary/5">{report.type}</span>
+              <span className={`border px-2 py-0.5 bg-card/20 ${statusColor}`}>{report.type}</span>
               <span className="text-muted-foreground">{report.category}</span>
               {report.featured && (
                 <span className="flex items-center gap-1 text-amber-500">
@@ -69,7 +73,7 @@ export default function ReportDetail() {
                 {new Date(report.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
               </time>
               {report.updatedAt !== report.date && (
-                <span className="text-muted-foreground/60">
+                <span className="text-accent/60">
                   Updated {new Date(report.updatedAt).toLocaleDateString()}
                 </span>
               )}
@@ -78,8 +82,8 @@ export default function ReportDetail() {
             <h1 className="text-3xl md:text-4xl font-serif font-bold mb-4 leading-tight">{report.title}</h1>
             <p className="font-mono text-xs text-muted-foreground tracking-widest uppercase mb-8">By {report.author}</p>
 
-            <div className="glass-panel border border-border/40 p-8 md:p-10 mb-6">
-              <div className="font-sans text-base text-muted-foreground leading-relaxed whitespace-pre-line">
+            <div className="glass-panel border border-border/30 p-8 md:p-10 mb-6">
+              <div className="font-sans text-[0.9375rem] text-muted-foreground leading-[1.75] whitespace-pre-line">
                 {report.body}
               </div>
             </div>
@@ -87,7 +91,7 @@ export default function ReportDetail() {
             <div className="flex items-center gap-4 mb-8">
               <button
                 onClick={handleShare}
-                className="inline-flex items-center gap-2 font-mono text-xs text-muted-foreground hover:text-foreground transition-colors border border-border px-3 py-1.5 hover:border-foreground/50"
+                className="inline-flex items-center gap-2 font-mono text-xs text-muted-foreground hover:text-foreground transition-colors border border-border/40 px-3 py-1.5 hover:border-foreground/40"
               >
                 <Share2 className="w-3 h-3" /> COPY LINK
               </button>
@@ -96,7 +100,7 @@ export default function ReportDetail() {
                   href={report.xUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 font-mono text-xs text-muted-foreground hover:text-foreground transition-colors border border-border px-3 py-1.5 hover:border-foreground/50"
+                  className="inline-flex items-center gap-2 font-mono text-xs text-accent hover:text-accent/70 transition-colors border border-accent/30 px-3 py-1.5 hover:border-accent/60"
                 >
                   <ExternalLink className="w-3 h-3" /> READ ORIGINAL ON X
                 </a>
@@ -113,7 +117,7 @@ export default function ReportDetail() {
                     <Link
                       key={r.id}
                       href={`/reports/${r.slug}`}
-                      className="block p-4 border border-border/40 bg-card/20 hover:border-primary/40 hover:bg-card/40 transition-colors corner-bracket"
+                      className="block p-4 border border-border/30 bg-card/10 hover:border-border/50 hover:bg-card/25 transition-colors corner-bracket"
                     >
                       <div className="font-mono text-[0.65rem] text-muted-foreground tracking-widest uppercase mb-1">{r.type} · {r.category}</div>
                       <div className="font-serif font-bold text-sm">{r.title}</div>
@@ -126,8 +130,8 @@ export default function ReportDetail() {
 
           <aside className="space-y-5">
             {report.sourceLinks.length > 0 && (
-              <div className="border border-border/50 bg-card/20 p-5 corner-bracket">
-                <div className="font-mono text-[0.65rem] text-primary tracking-widest uppercase mb-4">// SOURCE LINKS</div>
+              <div className="border border-border/30 bg-card/10 p-5 corner-bracket">
+                <div className="font-mono text-[0.65rem] text-primary/60 tracking-widest uppercase mb-4">// SOURCE LINKS</div>
                 <ul className="space-y-3">
                   {report.sourceLinks.map((s, i) => (
                     <li key={i}>
@@ -141,24 +145,24 @@ export default function ReportDetail() {
             )}
 
             {report.tags.length > 0 && (
-              <div className="border border-border/50 bg-card/20 p-5 corner-bracket">
-                <div className="font-mono text-[0.65rem] text-primary tracking-widest uppercase mb-4 flex items-center gap-2">
+              <div className="border border-border/30 bg-card/10 p-5 corner-bracket">
+                <div className="font-mono text-[0.65rem] text-primary/60 tracking-widest uppercase mb-4 flex items-center gap-2">
                   <Tag className="w-3 h-3" /> TAGS
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {report.tags.map(t => (
-                    <span key={t} className="font-mono text-[0.65rem] tracking-wider border border-border px-2 py-0.5 text-muted-foreground uppercase">{t}</span>
+                    <span key={t} className="font-mono text-[0.65rem] tracking-wider border border-border/40 px-2 py-0.5 text-muted-foreground uppercase">{t}</span>
                   ))}
                 </div>
               </div>
             )}
 
-            <div className="border border-border/50 bg-card/20 p-5 corner-bracket">
+            <div className="border border-border/30 bg-card/10 p-5 corner-bracket">
               <div className="font-mono text-[0.65rem] text-muted-foreground tracking-widest uppercase mb-2">HAVE A TIP?</div>
-              <Link href="/tip-line" className="font-mono text-xs text-primary hover:underline tracking-widest uppercase">SUBMIT A TIP →</Link>
+              <Link href="/hotline" className="font-mono text-xs text-primary hover:underline tracking-widest uppercase">HOTLINE / SUBMIT A TIP →</Link>
             </div>
 
-            <div className="border border-border/50 bg-card/20 p-5 corner-bracket">
+            <div className="border border-border/30 bg-card/10 p-5 corner-bracket">
               <div className="font-mono text-[0.65rem] text-muted-foreground tracking-widest uppercase mb-2">CORRECTION?</div>
               <a
                 href={`mailto:newsroom@rsrmedia.org?subject=Correction — ${encodeURIComponent(report.title)}`}

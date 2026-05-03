@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Report } from '@/types/report';
 import { useReports, createBlankReport, makeSlug } from '@/hooks/useReports';
-import { Plus, Trash2, ExternalLink, Eye, EyeOff, Star } from 'lucide-react';
+import { Plus, Trash2, ExternalLink, Eye, EyeOff, Star, FileText } from 'lucide-react';
 
 interface ReportEditorProps {
   reportId?: string;
@@ -18,6 +18,116 @@ const CATEGORIES = [
 const TYPES = [
   'Investigation', 'Brief', 'Field Note', 'Special Report', 'Analysis',
 ] as const;
+
+const BODY_TEMPLATES: { label: string; short: string; body: string }[] = [
+  {
+    label: 'Standard Report',
+    short: 'STD',
+    body: `SUMMARY
+———
+[One paragraph summary of what this report covers.]
+
+WHAT HAPPENED
+———
+[Describe the event or situation.]
+
+WHY IT MATTERS
+———
+[Explain the significance and public impact.]
+
+WHAT IS CONFIRMED
+———
+[List verified facts.]
+
+WHAT REMAINS UNKNOWN
+———
+[Open questions or unconfirmed elements.]
+
+SOURCES
+———
+[List source references or note "Sources on file."]`,
+  },
+  {
+    label: 'Breaking Update',
+    short: 'BRK',
+    body: `CURRENT STATUS
+———
+[Describe the situation as it stands right now.]
+
+KNOWN INFORMATION
+———
+[What has been confirmed so far.]
+
+DEVELOPING QUESTIONS
+———
+[What is still unfolding or unclear.]
+
+NEXT UPDATE
+———
+[When to expect further reporting, or what to watch.]`,
+  },
+  {
+    label: 'Field Note',
+    short: 'FLD',
+    body: `LOCATION
+———
+[Where this observation was made.]
+
+OBSERVATION
+———
+[What was directly witnessed or recorded.]
+
+CONTEXT
+———
+[Background that makes this relevant.]
+
+MEDIA / LINKS
+———
+[Any attached media, social links, or documents.]
+
+FOLLOW-UP NEEDED
+———
+[What requires further investigation.]`,
+  },
+  {
+    label: 'Commentary',
+    short: 'CMT',
+    body: `POSITION
+———
+[State the editorial position or argument clearly.]
+
+EVIDENCE
+———
+[Facts and references supporting the position.]
+
+COUNTERPOINT
+———
+[Acknowledge the strongest opposing argument.]
+
+CLOSING QUESTION
+———
+[End with the key question for the reader.]`,
+  },
+  {
+    label: 'Correction',
+    short: 'COR',
+    body: `ORIGINAL CLAIM
+———
+[Quote or describe the original statement that was in error.]
+
+CORRECTION
+———
+[State what is accurate.]
+
+UPDATED CONTEXT
+———
+[Any additional context the correction requires.]
+
+TIMESTAMP
+———
+[Date and time of original publication and correction.]`,
+  },
+];
 
 export function ReportEditor({ reportId, onSave, onCancel, onDelete }: ReportEditorProps) {
   const { reports, upsert, remove } = useReports();
@@ -42,6 +152,10 @@ export function ReportEditor({ reportId, onSave, onCancel, onDelete }: ReportEdi
   function set(field: keyof Report, value: unknown) {
     setForm(f => ({ ...f, [field]: value }));
     setSaved(false);
+  }
+
+  function applyTemplate(body: string) {
+    set('body', body);
   }
 
   function handleSave(status?: Report['status']) {
@@ -151,6 +265,24 @@ export function ReportEditor({ reportId, onSave, onCancel, onDelete }: ReportEdi
               UNPUBLISH
             </button>
           )}
+          {form.status !== 'archived' && (
+            <button
+              onClick={() => handleSave('archived')}
+              className="font-mono text-xs border border-border/50 text-muted-foreground/60 px-3 py-1.5 hover:text-muted-foreground transition-colors"
+            >
+              ARCHIVE
+            </button>
+          )}
+          {form.status === 'published' && (
+            <a
+              href={`/reports/${form.slug}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 font-mono text-xs border border-accent/40 text-accent px-3 py-1.5 hover:bg-accent/10 transition-colors"
+            >
+              <ExternalLink className="w-3 h-3" /> VIEW PUBLIC
+            </a>
+          )}
           {onCancel && (
             <button
               onClick={onCancel}
@@ -172,7 +304,7 @@ export function ReportEditor({ reportId, onSave, onCancel, onDelete }: ReportEdi
               value={form.title}
               onChange={e => set('title', e.target.value)}
               placeholder="Report headline"
-              className="w-full bg-background border border-border p-3 font-serif text-lg focus:outline-none focus:border-primary transition-colors"
+              className="w-full bg-background border border-border p-3 font-serif text-lg focus:outline-none focus:border-accent transition-colors"
             />
           </div>
 
@@ -183,7 +315,7 @@ export function ReportEditor({ reportId, onSave, onCancel, onDelete }: ReportEdi
               value={form.slug}
               onChange={e => { set('slug', e.target.value); setSlugEdited(true); }}
               placeholder="url-slug"
-              className="w-full bg-background border border-border p-2.5 font-mono text-sm focus:outline-none focus:border-primary transition-colors"
+              className="w-full bg-background border border-border p-2.5 font-mono text-sm focus:outline-none focus:border-accent transition-colors"
             />
             <p className="font-mono text-[0.6rem] text-muted-foreground mt-1 tracking-wider">
               Public URL: /reports/{form.slug || 'slug'}
@@ -197,18 +329,40 @@ export function ReportEditor({ reportId, onSave, onCancel, onDelete }: ReportEdi
               onChange={e => set('excerpt', e.target.value)}
               rows={2}
               placeholder="One or two sentences that summarize the report for the public listing."
-              className="w-full bg-background border border-border p-2.5 font-sans text-sm focus:outline-none focus:border-primary transition-colors resize-y"
+              className="w-full bg-background border border-border p-2.5 font-sans text-sm focus:outline-none focus:border-accent transition-colors resize-y"
             />
           </div>
 
+          {/* Body with Template Buttons */}
           <div>
-            <label className="font-mono text-[0.65rem] tracking-widest text-muted-foreground uppercase block mb-1.5">BODY *</label>
+            <div className="flex items-center justify-between mb-1.5">
+              <label className="font-mono text-[0.65rem] tracking-widest text-muted-foreground uppercase">BODY *</label>
+              <span className="font-mono text-[0.58rem] text-muted-foreground/50 tracking-widest">TEMPLATES:</span>
+            </div>
+            {/* Template buttons */}
+            <div className="flex flex-wrap gap-1.5 mb-2">
+              {BODY_TEMPLATES.map(tpl => (
+                <button
+                  key={tpl.short}
+                  type="button"
+                  onClick={() => applyTemplate(tpl.body)}
+                  title={tpl.label}
+                  className="inline-flex items-center gap-1 font-mono text-[0.6rem] border border-border/50 text-muted-foreground/70 px-2 py-1 hover:border-primary/40 hover:text-primary hover:bg-primary/5 transition-colors tracking-widest uppercase"
+                >
+                  <FileText className="w-2.5 h-2.5" />
+                  {tpl.short}
+                </button>
+              ))}
+              <span className="font-mono text-[0.58rem] text-muted-foreground/30 self-center ml-1 tracking-widest">
+                STD=Standard · BRK=Breaking · FLD=Field · CMT=Commentary · COR=Correction
+              </span>
+            </div>
             <textarea
               value={form.body}
               onChange={e => set('body', e.target.value)}
-              rows={16}
-              placeholder="Full report body. Plain text or basic markdown formatting is displayed as-is."
-              className="w-full bg-background border border-border p-3 font-mono text-sm focus:outline-none focus:border-primary transition-colors resize-y leading-relaxed"
+              rows={18}
+              placeholder="Full report body. Click a template button above to pre-fill structure."
+              className="w-full bg-background border border-border p-3 font-mono text-sm focus:outline-none focus:border-accent transition-colors resize-y leading-relaxed"
             />
           </div>
 
@@ -219,10 +373,10 @@ export function ReportEditor({ reportId, onSave, onCancel, onDelete }: ReportEdi
               value={form.xUrl ?? ''}
               onChange={e => set('xUrl', e.target.value || undefined)}
               placeholder="https://x.com/..."
-              className="w-full bg-background border border-border p-2.5 font-mono text-sm focus:outline-none focus:border-primary transition-colors"
+              className="w-full bg-background border border-border p-2.5 font-mono text-sm focus:outline-none focus:border-accent transition-colors"
             />
             {form.xUrl && (
-              <a href={form.xUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 font-mono text-xs text-primary hover:underline mt-1.5">
+              <a href={form.xUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 font-mono text-xs text-accent hover:underline mt-1.5">
                 <ExternalLink className="w-3 h-3" /> Open X Source
               </a>
             )}
@@ -251,14 +405,14 @@ export function ReportEditor({ reportId, onSave, onCancel, onDelete }: ReportEdi
                     value={sl.label}
                     onChange={e => updateSourceLink(i, 'label', e.target.value)}
                     placeholder="Label"
-                    className="w-32 bg-background border border-border p-2 font-mono text-xs focus:outline-none focus:border-primary transition-colors"
+                    className="w-32 bg-background border border-border p-2 font-mono text-xs focus:outline-none focus:border-accent transition-colors"
                   />
                   <input
                     type="url"
                     value={sl.url}
                     onChange={e => updateSourceLink(i, 'url', e.target.value)}
                     placeholder="https://..."
-                    className="flex-1 bg-background border border-border p-2 font-mono text-xs focus:outline-none focus:border-primary transition-colors"
+                    className="flex-1 bg-background border border-border p-2 font-mono text-xs focus:outline-none focus:border-accent transition-colors"
                   />
                   <button
                     type="button"
@@ -275,14 +429,14 @@ export function ReportEditor({ reportId, onSave, onCancel, onDelete }: ReportEdi
 
         {/* Sidebar */}
         <div className="space-y-5">
-          <div className="border border-border/50 bg-card/20 p-5 corner-bracket space-y-4">
+          <div className="border border-border/40 bg-card/15 p-5 corner-bracket space-y-4">
 
             <div>
               <label className="font-mono text-[0.65rem] tracking-widest text-muted-foreground uppercase block mb-1.5">STATUS</label>
               <select
                 value={form.status}
                 onChange={e => set('status', e.target.value as Report['status'])}
-                className="w-full bg-background border border-border p-2 font-mono text-xs focus:outline-none focus:border-primary"
+                className="w-full bg-background border border-border p-2 font-mono text-xs focus:outline-none focus:border-accent"
               >
                 <option value="draft">Draft</option>
                 <option value="published">Published</option>
@@ -295,7 +449,7 @@ export function ReportEditor({ reportId, onSave, onCancel, onDelete }: ReportEdi
               <select
                 value={form.type}
                 onChange={e => set('type', e.target.value as Report['type'])}
-                className="w-full bg-background border border-border p-2 font-mono text-xs focus:outline-none focus:border-primary"
+                className="w-full bg-background border border-border p-2 font-mono text-xs focus:outline-none focus:border-accent"
               >
                 {TYPES.map(t => <option key={t} value={t}>{t}</option>)}
               </select>
@@ -306,7 +460,7 @@ export function ReportEditor({ reportId, onSave, onCancel, onDelete }: ReportEdi
               <select
                 value={form.category}
                 onChange={e => set('category', e.target.value as Report['category'])}
-                className="w-full bg-background border border-border p-2 font-mono text-xs focus:outline-none focus:border-primary"
+                className="w-full bg-background border border-border p-2 font-mono text-xs focus:outline-none focus:border-accent"
               >
                 {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
               </select>
@@ -318,7 +472,7 @@ export function ReportEditor({ reportId, onSave, onCancel, onDelete }: ReportEdi
                 type="text"
                 value={form.author}
                 onChange={e => set('author', e.target.value)}
-                className="w-full bg-background border border-border p-2 font-mono text-xs focus:outline-none focus:border-primary transition-colors"
+                className="w-full bg-background border border-border p-2 font-mono text-xs focus:outline-none focus:border-accent transition-colors"
               />
             </div>
 
@@ -329,7 +483,7 @@ export function ReportEditor({ reportId, onSave, onCancel, onDelete }: ReportEdi
                 value={tagsInput}
                 onChange={e => setTagsInput(e.target.value)}
                 placeholder="politics, local, accountability"
-                className="w-full bg-background border border-border p-2 font-mono text-xs focus:outline-none focus:border-primary transition-colors"
+                className="w-full bg-background border border-border p-2 font-mono text-xs focus:outline-none focus:border-accent transition-colors"
               />
               <p className="font-mono text-[0.6rem] text-muted-foreground mt-1 tracking-wider">Comma-separated</p>
             </div>
@@ -360,7 +514,7 @@ export function ReportEditor({ reportId, onSave, onCancel, onDelete }: ReportEdi
                 </button>
               ) : (
                 <div className="space-y-2">
-                  <p className="font-mono text-xs text-destructive text-center">Are you sure?</p>
+                  <p className="font-mono text-xs text-destructive text-center">Are you sure? This cannot be undone.</p>
                   <div className="flex gap-2">
                     <button
                       onClick={handleDelete}

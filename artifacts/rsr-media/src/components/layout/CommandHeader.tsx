@@ -3,7 +3,7 @@ import { Link, useLocation } from 'wouter';
 import { Menu, X, Youtube, Phone } from 'lucide-react';
 import { UTCClock } from './UTCClock';
 import { StatusPill } from '../ui-system/StatusPill';
-import { ARMORY_URL, X_URL, YOUTUBE_URL, isYouTubeConfigured } from '@/config/site';
+import { ARMORY_URL, X_URL, YOUTUBE_URL, TIKTOK_URL, isYouTubeConfigured, isTikTokConfigured } from '@/config/site';
 import { trackOutboundClick } from '@/lib/analytics';
 
 interface NavLink {
@@ -22,13 +22,23 @@ const links: NavLink[] = [
   { href: '/pacific-systems', label: 'Pacific' },
   { href: '/black-dog', label: 'Security' },
   { href: ARMORY_URL, label: 'Armory', external: true },
-  { href: '/tip-line', label: 'Tips' },
+  { href: '/hotline', label: 'Hotline' },
   { href: '/contact', label: 'Contact' },
 ];
+
+function TikTokIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.22 6.22 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.68a8.17 8.17 0 0 0 4.77 1.52V6.75a4.85 4.85 0 0 1-1-.06z"/>
+    </svg>
+  );
+}
 
 export function CommandHeader() {
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const ytConfigured = isYouTubeConfigured();
+  const ttConfigured = isTikTokConfigured();
 
   const linkClass = (active: boolean) =>
     `relative font-mono text-[0.62rem] tracking-wide uppercase px-1.5 py-1.5 transition-all whitespace-nowrap ${
@@ -36,7 +46,7 @@ export function CommandHeader() {
     }`;
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur-md border-b border-border/30">
+    <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur-md border-b border-border/25">
       <div className="mx-auto px-4 max-w-[1400px] h-16 flex items-center gap-1">
 
         {/* Logo */}
@@ -54,7 +64,7 @@ export function CommandHeader() {
         </Link>
 
         {/* Divider */}
-        <div className="hidden lg:block w-px h-5 bg-border/40 mx-1" />
+        <div className="hidden lg:block w-px h-5 bg-border/30 mx-1" />
 
         {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-0 flex-1 overflow-hidden">
@@ -84,31 +94,43 @@ export function CommandHeader() {
         </nav>
 
         {/* Right: Social + Clock + Status */}
-        <div className="hidden lg:flex items-center gap-2 ml-auto shrink-0">
+        <div className="hidden lg:flex items-center gap-1.5 ml-auto shrink-0">
           {/* Social icons */}
           <a
             href={X_URL}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => trackOutboundClick('Nav X Icon', X_URL)}
-            className="w-7 h-7 flex items-center justify-center border border-border/30 text-muted-foreground hover:text-foreground hover:border-primary/40 transition-colors text-[0.72rem] font-bold"
+            className="w-7 h-7 flex items-center justify-center border border-border/25 text-muted-foreground hover:text-accent hover:border-accent/40 transition-colors text-[0.72rem] font-bold"
             title="RSR Intel on X"
           >
             𝕏
           </a>
-          {isYouTubeConfigured() && (
+          {ytConfigured && (
             <a
               href={YOUTUBE_URL}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackOutboundClick('Nav YouTube Icon', YOUTUBE_URL)}
-              className="w-7 h-7 flex items-center justify-center border border-border/30 text-muted-foreground hover:text-destructive hover:border-destructive/40 transition-colors"
+              className="w-7 h-7 flex items-center justify-center border border-border/25 text-muted-foreground hover:text-destructive hover:border-destructive/40 transition-colors"
               title="RSR Media on YouTube"
             >
               <Youtube className="w-3.5 h-3.5" />
             </a>
           )}
-          <div className="w-px h-5 bg-border/40 mx-0.5" />
+          {ttConfigured && (
+            <a
+              href={TIKTOK_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackOutboundClick('Nav TikTok Icon', TIKTOK_URL)}
+              className="w-7 h-7 flex items-center justify-center border border-border/25 text-muted-foreground hover:text-foreground hover:border-border/60 transition-colors"
+              title="RSR on TikTok"
+            >
+              <TikTokIcon className="w-3.5 h-3.5" />
+            </a>
+          )}
+          <div className="w-px h-5 bg-border/30 mx-0.5" />
           <UTCClock />
           <StatusPill label="NOMINAL" status="nominal" />
         </div>
@@ -125,7 +147,7 @@ export function CommandHeader() {
 
       {/* Mobile Nav */}
       {mobileMenuOpen && (
-        <div className="lg:hidden absolute top-16 left-0 w-full bg-background/98 backdrop-blur-md border-b border-border/30 px-4 py-4 flex flex-col gap-2 shadow-2xl z-40">
+        <div className="lg:hidden absolute top-16 left-0 w-full bg-background/98 backdrop-blur-md border-b border-border/25 px-4 py-4 flex flex-col gap-2 shadow-2xl z-40">
           <div className="flex items-center justify-between mb-2 pb-2 border-b border-border/20">
             <UTCClock />
             <StatusPill label="NOMINAL" status="nominal" />
@@ -161,17 +183,17 @@ export function CommandHeader() {
               );
             })}
           </nav>
-          <div className="flex items-center gap-4 pt-2 border-t border-border/20">
+          <div className="flex flex-wrap items-center gap-4 pt-2 border-t border-border/20">
             <a
               href={X_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-mono text-[0.62rem] text-muted-foreground hover:text-foreground transition-colors tracking-widest"
+              className="font-mono text-[0.62rem] text-accent hover:text-foreground transition-colors tracking-widest"
               onClick={() => setMobileMenuOpen(false)}
             >
               𝕏 RSRINTEL ↗
             </a>
-            {isYouTubeConfigured() && (
+            {ytConfigured && (
               <a
                 href={YOUTUBE_URL}
                 target="_blank"
@@ -179,7 +201,18 @@ export function CommandHeader() {
                 className="font-mono text-[0.62rem] text-muted-foreground hover:text-foreground transition-colors tracking-widest"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                YT CHANNEL ↗
+                YOUTUBE ↗
+              </a>
+            )}
+            {ttConfigured && (
+              <a
+                href={TIKTOK_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-[0.62rem] text-muted-foreground hover:text-foreground transition-colors tracking-widest"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                TIKTOK ↗
               </a>
             )}
             <Link

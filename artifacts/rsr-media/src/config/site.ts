@@ -4,8 +4,13 @@ export const SITE_EMAIL = "newsroom@rsrmedia.org";
 export const SITE_PHONE = "16315142480";
 
 export const X_URL = "https://x.com/RSRINTEL";
-// Paste full YouTube channel URL below when available:
-export const YOUTUBE_URL: string = "PASTE_YOUTUBE_CHANNEL_URL_HERE";
+export const YOUTUBE_URL = "https://www.youtube.com/@RedStateRhetoricMedia";
+
+export const TIKTOK_URL = "https://www.tiktok.com/@redstaterhetoric";
+export const TIKTOK_HANDLE = "@redstaterhetoric";
+// Leave blank to hide. Set manually: e.g. "14.2K", "212 live"
+export const TIKTOK_FOLLOWERS_DISPLAY = "";
+export const TIKTOK_LIVE_VIEWERS_DISPLAY = "";
 
 export const RSR_INTEL_URL = "https://www.rsrintel.com/#/";
 export const PACIFIC_SYSTEMS_URL = "https://rsrindexnet.edgeone.app/";
@@ -15,7 +20,10 @@ export const ARMORY_URL = "https://rsrarmory.store";
 // ⚠️ Change before any public/shared deployment
 export const ADMIN_PASSCODE = "CHANGE_ME_BEFORE_DEPLOY";
 
-// Derived helpers
 export function isYouTubeConfigured(): boolean {
-  return YOUTUBE_URL !== "PASTE_YOUTUBE_CHANNEL_URL_HERE" && YOUTUBE_URL.trim().length > 0;
+  return (YOUTUBE_URL as string) !== "PASTE_YOUTUBE_CHANNEL_URL_HERE" && YOUTUBE_URL.trim().length > 0;
+}
+
+export function isTikTokConfigured(): boolean {
+  return TIKTOK_URL.trim().length > 0;
 }
