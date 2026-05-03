@@ -63,13 +63,35 @@ export default function Home() {
                 RSR ECOSYSTEM // INDEPENDENT MEDIA
               </div>
 
-              {/* Hero title — Orbitron */}
+              {/* Hero title — single line, never wraps */}
               <h1
-                className="text-[4rem] sm:text-[5.5rem] md:text-[7rem] lg:text-[8rem] xl:text-[9rem] font-black uppercase leading-[0.88] mb-6 select-none text-foreground"
-                style={{ fontFamily: "'Orbitron', sans-serif", fontWeight: 900, letterSpacing: '-0.04em' }}
+                className="hero-title uppercase mb-3 select-none text-foreground"
+                style={{
+                  fontFamily: "'Orbitron', sans-serif",
+                  fontWeight: 800,
+                  fontSize: 'clamp(48px, 6vw, 120px)',
+                  letterSpacing: '0.08em',
+                  whiteSpace: 'nowrap',
+                  display: 'block',
+                  lineHeight: 1,
+                }}
               >
-                RSR<br />MEDIA
+                RSR MEDIA
               </h1>
+              <p
+                className="hero-subtitle uppercase mb-6"
+                style={{
+                  fontFamily: "'Orbitron', sans-serif",
+                  fontWeight: 600,
+                  fontSize: '14px',
+                  letterSpacing: '0.3em',
+                  marginTop: '12px',
+                  color: 'rgba(255,179,71,0.85)',
+                  textShadow: '0 0 12px rgba(255,179,71,0.3)',
+                }}
+              >
+                POWERED BY PACIFIC SYSTEMS
+              </p>
 
               <p className="text-xl md:text-2xl font-sans text-foreground/85 max-w-xl mb-2 font-medium leading-snug">
                 Independent media. Public reporting. Community signal.
