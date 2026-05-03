@@ -1,0 +1,131 @@
+RSR MEDIA VISUAL OVERHAUL ONLY — DO NOT BREAK BACKEND OR ADMIN LOGIC
+
+IMPORTANT:
+Keep all current admin/report/localStorage/X-import logic exactly as-is.
+Do not rewrite useReports.
+Do not remove admin routes.
+Do not change report CRUD.
+Do not break localStorage reports.
+This pass is UI/layout only.
+
+PRIMARY PROBLEM:
+The current homepage layout is ugly and too split. The hero feels like a blank left block plus a dead right sidebar. Rebuild the public visual layout into a unified cinematic command-console landing page.
+
+GLOBAL HEADER FIX:
+1. Header must not wrap nav labels.
+2. Increase header width usage and spacing.
+3. Use smaller nav font if needed.
+4. Change “PACIFIC SYS” to “PACIFIC”.
+5. Change “BLACK DOG” to “SECURITY” or keep BLACK DOG only if it fits on one line.
+6. Change “TIP LINE” to “TIPS”.
+7. Keep nav one-line on desktop.
+8. On medium screens collapse to hamburger sooner.
+9. Logo left should be clean and not dominate.
+10. Header height should stay around 64px.
+11. Active nav should be subtle but sharp.
+
+HOMEPAGE HERO REBUILD:
+12. Replace current 50/50 split with one unified hero shell.
+13. Use max-width 1280px centered.
+14. Hero shell should be a large glass command panel with border, corner brackets, and internal grid.
+15. Left side still contains RSR MEDIA headline.
+16. Right side contains a compact floating Signal Console card, not a full-height sidebar.
+17. Contact hotline/email should be in a small bottom row inside hero, not isolated far below.
+18. Add a subtle background world/grid texture.
+19. Add a faint diagonal scan overlay.
+20. Add a small ticker strip at bottom of hero.
+21. Add depth: inner shadow, border glow, glass gradients.
+22. Remove excessive empty space.
+23. Make first viewport feel finished and powerful.
+
+HERO COPY:
+24. Kicker: // PUBLIC SIGNAL NETWORK // INDEPENDENT MEDIA
+25. Main: RSR MEDIA
+26. Subline: Independent media. Public reporting. Community signal.
+27. Small support copy:
+   “Reports, tips, and public analysis routed through the RSR ecosystem.”
+28. CTA buttons:
+   READ REPORTS
+   SUBMIT TIP
+   RSR INTEL ↗
+   ARMORY ↗
+29. Add small contact chips:
+   HOTLINE: +1 (631) 514-2480
+   NEWSROOM: newsroom@rsrmedia.org
+
+SIGNAL CONSOLE CARD:
+30. Make it compact, glassy, and sharp.
+31. Width around 360–420px.
+32. Do not stretch full height.
+33. Rows:
+   NEWSROOM — ACTIVE
+   TIP LINE — OPEN
+   REPORTS — MANUAL REVIEW
+   INTEL NETWORK — LINKED
+   COMMUNITY SIGNAL — MONITORED
+34. Use tiny status dots.
+35. Use no fake numbers.
+36. Add mini footer: RSRMEDIA.ORG // SIGNAL > NOISE.
+
+COLORS:
+37. Keep black base.
+38. Main accent emerald.
+39. Add more steel gray borders.
+40. Add subtle white/gray highlights.
+41. Green should be accent, not everything.
+42. Use amber only on Pacific page.
+43. Use red only on Black Dog page.
+44. Header logo can stay original color for now.
+45. Do not recolor logo in CSS.
+46. If logo clashes, shrink it and let text carry brand.
+
+BELOW HERO:
+47. Add “Command Links” as four glass cards immediately below hero.
+48. Reports
+49. Tip Line
+50. Mission
+51. Network
+52. Add “Latest Reports” section.
+53. If no reports, make empty state look premium.
+54. Add “Network Properties” section.
+55. External cards: RSR Intel, Pacific Systems, Black Dog, Armory.
+56. Make every section align to same 1280px container.
+57. No random full-width mismatched sections.
+
+PACIFIC PAGE:
+58. Keep current clean card rebuild.
+59. Improve spacing and alignment.
+60. Do not bring back clipped circle.
+61. Add stronger title block at top.
+62. CTA must be visible above fold.
+
+BLACK DOG PAGE:
+63. Improve spacing.
+64. Make the first panel less empty.
+65. Red/steel accents only here.
+
+ADMIN:
+66. Do not visually over-polish admin at expense of function.
+67. But remove public-style top nav from admin if it clutters.
+68. Admin should use its own shell.
+69. Keep passcode gate.
+70. Keep all tabs.
+71. No public backend warning bars.
+
+RESPONSIVE:
+72. Desktop hero: two-column inside one shell.
+73. Tablet hero: stack console below.
+74. Mobile hero: headline scales down.
+75. Buttons stack cleanly.
+76. Header collapses before wrapping.
+77. No horizontal scroll.
+78. No clipped content.
+
+FINAL CHECK:
+79. npm run build passes.
+80. Admin report CRUD still works.
+81. Import X still creates draft.
+82. Reports still read localStorage.
+83. Public pages still render.
+84. Header nav does not wrap.
+85. Hero looks like one epic command console, not two dead halves.

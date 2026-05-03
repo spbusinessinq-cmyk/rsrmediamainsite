@@ -17,10 +17,10 @@ const links: NavLink[] = [
   { href: '/reports', label: 'Reports' },
   { href: '/mission', label: 'Mission' },
   { href: '/network', label: 'Network' },
-  { href: '/pacific-systems', label: 'Pacific Sys' },
-  { href: '/black-dog', label: 'Black Dog' },
+  { href: '/pacific-systems', label: 'Pacific' },
+  { href: '/black-dog', label: 'Security' },
   { href: ARMORY_URL, label: 'Armory', external: true },
-  { href: '/tip-line', label: 'Tip Line' },
+  { href: '/tip-line', label: 'Tips' },
   { href: '/contact', label: 'Contact' },
 ];
 
@@ -29,32 +29,32 @@ export function CommandHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const linkClass = (active: boolean) =>
-    `font-serif text-xs tracking-wider uppercase px-2 py-1.5 transition-all relative ${
+    `relative font-mono text-[0.68rem] tracking-wider uppercase px-2.5 py-1.5 transition-all whitespace-nowrap ${
       active
-        ? 'text-primary bg-primary/5'
+        ? 'text-primary'
         : 'text-muted-foreground hover:text-foreground'
     }`;
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-background/90 backdrop-blur-md border-b border-border/30">
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between gap-4">
+    <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur-md border-b border-border/30">
+      <div className="mx-auto px-4 max-w-[1400px] h-16 flex items-center gap-2">
 
-        {/* Left: Logo */}
-        <Link href="/" className="flex items-center gap-3 shrink-0 group" data-testid="nav-home">
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-2.5 shrink-0 group mr-3" data-testid="nav-home">
           <img
             src="/rsr-logo.png"
             alt="RSR Media"
-            className="h-9 w-9 object-contain group-hover:opacity-90 transition-opacity"
+            className="h-8 w-8 object-contain group-hover:opacity-80 transition-opacity"
             onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
           />
           <div className="flex flex-col leading-none">
-            <span className="font-serif font-bold text-base leading-none tracking-tight">RSR MEDIA</span>
-            <span className="font-mono text-[0.6rem] text-muted-foreground tracking-widest leading-none mt-1">PUBLIC SIGNAL NETWORK</span>
+            <span className="font-serif font-bold text-sm leading-none tracking-tight">RSR MEDIA</span>
+            <span className="font-mono text-[0.55rem] text-muted-foreground/60 tracking-widest leading-none mt-0.5 hidden sm:block">PUBLIC SIGNAL</span>
           </div>
         </Link>
 
-        {/* Center: Desktop Nav */}
-        <nav className="hidden xl:flex items-center gap-0.5 flex-1 justify-center overflow-x-auto">
+        {/* Desktop Nav — collapse at lg */}
+        <nav className="hidden lg:flex items-center gap-0 flex-1 overflow-hidden">
           {links.map(link => {
             if (link.external) {
               return (
@@ -65,7 +65,7 @@ export function CommandHeader() {
                   rel="noopener noreferrer"
                   className={linkClass(false)}
                 >
-                  {link.label} ↗
+                  {link.label}&#8599;
                 </a>
               );
             }
@@ -77,21 +77,23 @@ export function CommandHeader() {
                 className={linkClass(isActive)}
               >
                 {link.label}
-                {isActive && <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary" />}
+                {isActive && (
+                  <span className="absolute bottom-0 left-2.5 right-2.5 h-px bg-primary" />
+                )}
               </Link>
             );
           })}
         </nav>
 
         {/* Right: Clock + Status */}
-        <div className="hidden xl:flex items-center gap-3 shrink-0">
+        <div className="hidden xl:flex items-center gap-3 ml-auto shrink-0">
           <UTCClock />
           <StatusPill label="NOMINAL" status="nominal" />
         </div>
 
         {/* Mobile Toggle */}
         <button
-          className="xl:hidden text-foreground p-2 ml-auto"
+          className="lg:hidden text-foreground p-2 ml-auto"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
         >
@@ -101,12 +103,12 @@ export function CommandHeader() {
 
       {/* Mobile Nav */}
       {mobileMenuOpen && (
-        <div className="xl:hidden absolute top-16 left-0 w-full bg-background/95 backdrop-blur-md border-b border-border/30 px-4 py-4 flex flex-col gap-3 shadow-2xl z-40">
-          <div className="flex items-center justify-between mb-2 pb-3 border-b border-border/20">
+        <div className="lg:hidden absolute top-16 left-0 w-full bg-background/98 backdrop-blur-md border-b border-border/30 px-4 py-4 flex flex-col gap-2 shadow-2xl z-40">
+          <div className="flex items-center justify-between mb-2 pb-2 border-b border-border/20">
             <UTCClock />
             <StatusPill label="NOMINAL" status="nominal" />
           </div>
-          <nav className="grid grid-cols-2 gap-1">
+          <nav className="grid grid-cols-3 gap-x-2 gap-y-0.5">
             {links.map(link => {
               if (link.external) {
                 return (
@@ -115,10 +117,10 @@ export function CommandHeader() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-serif tracking-widest uppercase text-sm py-2 px-2 text-muted-foreground hover:text-foreground transition-colors"
+                    className="font-mono tracking-wider uppercase text-[0.7rem] py-2.5 px-2 text-muted-foreground hover:text-foreground transition-colors"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    {link.label} ↗
+                    {link.label}&#8599;
                   </a>
                 );
               }
@@ -128,8 +130,8 @@ export function CommandHeader() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`font-serif tracking-widest uppercase text-sm py-2 px-2 transition-colors ${
-                    isActive ? 'text-primary border-l-2 border-primary pl-2' : 'text-foreground hover:text-primary'
+                  className={`font-mono tracking-wider uppercase text-[0.7rem] py-2.5 px-2 transition-colors ${
+                    isActive ? 'text-primary font-semibold' : 'text-foreground hover:text-primary'
                   }`}
                 >
                   {link.label}
@@ -141,7 +143,7 @@ export function CommandHeader() {
             <Link
               href="/admin"
               onClick={() => setMobileMenuOpen(false)}
-              className="font-mono text-xs text-muted-foreground/50 hover:text-muted-foreground transition-colors tracking-widest"
+              className="font-mono text-[0.6rem] text-muted-foreground/40 hover:text-muted-foreground transition-colors tracking-widest uppercase"
             >
               Operator Access
             </Link>
