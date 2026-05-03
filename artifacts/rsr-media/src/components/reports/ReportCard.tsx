@@ -21,37 +21,50 @@ export function ReportCard({ report, featured }: ReportCardProps) {
     <Link
       href={`/reports/${report.slug}`}
       data-testid={`card-report-${report.id}`}
-      className={`block border bg-card/20 p-6 corner-bracket hover:bg-card/40 transition-all group ${
+      className={`block border bg-card/20 corner-bracket hover:bg-card/40 transition-all group overflow-hidden ${
         featured
           ? 'border-amber-500/30 hover:border-amber-500/60'
           : 'border-border/50 hover:border-primary/50'
       }`}
     >
-      <div className="flex items-start justify-between gap-3 mb-4">
-        <span className={`font-mono text-[0.65rem] tracking-widest uppercase border px-2 py-0.5 shrink-0 ${typeColors[report.type] ?? typeColors.Analysis}`}>
-          {report.type}
-        </span>
-        <div className="flex items-center gap-2">
-          {(featured || report.featured) && <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500 shrink-0" />}
-          <span className="font-mono text-[0.65rem] text-muted-foreground tracking-widest uppercase shrink-0">
-            {report.category}
-          </span>
+      {/* Header image thumbnail */}
+      {report.headerImage && (
+        <div className="w-full h-36 overflow-hidden border-b border-border/20">
+          <img
+            src={report.headerImage}
+            alt=""
+            className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+          />
         </div>
-      </div>
+      )}
 
-      <h3 className="font-serif font-bold text-lg mb-3 group-hover:text-primary transition-colors leading-snug">
-        {report.title}
-      </h3>
+      <div className="p-6">
+        <div className="flex items-start justify-between gap-3 mb-4">
+          <span className={`font-mono text-[0.65rem] tracking-widest uppercase border px-2 py-0.5 shrink-0 ${typeColors[report.type] ?? typeColors.Analysis}`}>
+            {report.type}
+          </span>
+          <div className="flex items-center gap-2">
+            {(featured || report.featured) && <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500 shrink-0" />}
+            <span className="font-mono text-[0.65rem] text-muted-foreground tracking-widest uppercase shrink-0">
+              {report.category}
+            </span>
+          </div>
+        </div>
 
-      <p className="font-sans text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-3">
-        {report.excerpt}
-      </p>
+        <h3 className="font-serif font-bold text-lg mb-3 group-hover:text-primary transition-colors leading-snug">
+          {report.title}
+        </h3>
 
-      <div className="flex items-center justify-between border-t border-border/30 pt-4">
-        <span className="font-mono text-[0.65rem] text-muted-foreground tracking-widest">{report.author}</span>
-        <time className="font-mono text-[0.65rem] text-muted-foreground tracking-widest">
-          {new Date(report.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
-        </time>
+        <p className="font-sans text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-3">
+          {report.excerpt}
+        </p>
+
+        <div className="flex items-center justify-between border-t border-border/30 pt-4">
+          <span className="font-mono text-[0.65rem] text-muted-foreground tracking-widest">{report.author}</span>
+          <time className="font-mono text-[0.65rem] text-muted-foreground tracking-widest">
+            {new Date(report.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+          </time>
+        </div>
       </div>
     </Link>
   );

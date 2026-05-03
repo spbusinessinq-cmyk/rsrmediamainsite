@@ -1,0 +1,226 @@
+RSR MEDIA FRONTEND/ADMIN UX PASS — ADMIN4451, REPORT WRITER, HEADER FIX, MISSION POLISH
+
+SCOPE:
+Do not add backend.
+Do not add APIs.
+Do not break localStorage report CRUD.
+Do not break published reports.
+Do not break Import X.
+This is a frontend/admin UX pass for static EdgeOne deployment.
+
+OFFICIAL ADMIN:
+1. Change ADMIN_PASSCODE to "ADMIN4451".
+2. Remove visible placeholder wording from public/admin UI.
+3. Admin login should simply ask for Operator Passcode.
+4. Correct passcode: ADMIN4451.
+5. Add clear login route at /admin.
+6. Add footer link: Operator Access.
+7. Add admin logout button in admin header/sidebar.
+8. Logout clears sessionStorage.
+9. After logout route back to /admin login.
+10. Add small “Locked / Unlocked” status in admin shell.
+11. Do not expose passcode on public pages.
+12. README can mention change passcode before serious deployment, but UI should not show placeholder text.
+
+OPTIONAL BOOT SCREEN:
+13. Add a quick welcome/boot overlay only on first visit.
+14. It should last max 900–1200ms.
+15. Text:
+    RSR MEDIA
+    PUBLIC SIGNAL NETWORK
+    SIGNAL > NOISE
+16. Include “Enter Site” skip button.
+17. Store seen state in localStorage.
+18. Respect prefers-reduced-motion by skipping animation.
+19. Do not block repeat visitors.
+20. Keep it tasteful, not annoying.
+
+HEADER REDESIGN:
+21. Current header is still bad/cramped.
+22. Rebuild header into a cleaner premium media command bar.
+23. Height 68–76px desktop.
+24. Left: RSR Media logo + text.
+25. Center nav grouped:
+    Reports
+    Mission
+    Channels
+    Network
+    Hotline
+26. Move external systems into a dropdown/button called “Systems.”
+27. Systems dropdown:
+    RSR Intel
+    Pacific Systems
+    Black Dog Security
+    Armory
+28. This removes redundant crowded links.
+29. Right side:
+    X icon
+    YouTube icon
+    TikTok icon
+    UTC
+    Nominal
+30. Header should not look like tiny cramped terminal text.
+31. Use Inter/Rajdhani for nav, not only mono.
+32. Active nav should be clean underline or pill.
+33. Mobile hamburger must include all public links + Systems.
+34. No wrapping.
+35. No duplicate links.
+
+PUBLIC NAV FINAL:
+36. Home
+37. Reports
+38. Mission
+39. Channels
+40. Network
+41. Hotline
+42. Systems dropdown
+43. Contact can move to footer or stay if room.
+44. Avoid repeated links everywhere.
+
+REPORT WRITER LIKE X ARTICLES:
+45. Admin must support writing full reports, not just X links.
+46. Add /admin/reports/new as full report composer.
+47. Composer should visually feel closer to X Articles:
+    left report list/sidebar
+    main editor
+    top action bar
+    optional preview
+48. Add title field large.
+49. Add header/cover image field.
+50. Since static frontend only, support image by:
+    a) image URL input
+    b) local file preview using object URL/base64 saved to localStorage if reasonable
+51. Label: Header Image.
+52. Add helper: “Use a 5:2 or 16:9 image for best results.”
+53. Public report detail displays header image above title if provided.
+54. Report cards display thumbnail if header image exists.
+55. Add body editor textarea with bigger readable font.
+56. Add formatting helper buttons:
+    Heading
+    Subheading
+    Quote
+    Bullet
+    Source
+    Divider
+57. Buttons insert markdown-ish text into body.
+58. Add templates:
+    Standard Report
+    Breaking Update
+    Field Note
+    Commentary
+    Correction
+59. Save Draft button.
+60. Publish button.
+61. Update Published button.
+62. Preview button.
+63. View Public button.
+64. Delete button with confirm.
+65. Editor should not feel like a raw form.
+66. Make it a real writing interface.
+
+REPORT MODEL:
+67. Ensure report supports:
+    title
+    slug
+    excerpt
+    body
+    author
+    category
+    type
+    tags
+    sourceLinks
+    xUrl
+    headerImage
+    status
+    featured
+    publishedAt
+    updatedAt
+68. Preserve existing reports if fields missing.
+69. Add migration fallback for headerImage undefined.
+
+REPORT PUBLIC DISPLAY:
+70. Report pages should look like real articles.
+71. If headerImage exists, show cinematic image header.
+72. If no headerImage, show dark gradient header.
+73. Body typography should be Inter, readable, 1.08rem, line-height 1.75.
+74. Headline should be Rajdhani, not cheap terminal.
+75. Metadata should be mono.
+76. Source links side panel.
+77. X source button only if xUrl exists.
+78. No “body pending” if full report exists.
+79. Empty body should show private/admin hint only in admin preview, not ugly public.
+
+IMPORT X:
+80. Keep Import X tool.
+81. It should create draft with xUrl.
+82. After creating draft, route to full report composer so owner can write article around it.
+83. Import X is source attachment, not entire report.
+84. Public report should show X source card if xUrl exists.
+85. Do not scrape X.
+
+MISSION PAGE:
+86. “Our Promise” needs to look cooler and less basic.
+87. Make it one strong editorial manifesto page.
+88. Add cinematic top hero:
+    OUR PROMISE
+    TO THE COMMUNITY
+89. Use split text with white + subtle green/blue accent.
+90. Add large quote card:
+    “RSR Media exists to serve the public, not political insiders, corporate gatekeepers, or algorithmic noise.”
+91. Add six principle cards in a tighter premium grid.
+92. Add visual timeline/chain:
+    Listen → Verify → Report → Correct
+93. Add final pledge panel:
+    “The community comes first. The record matters. The signal wins.”
+94. Add CTA:
+    Call Hotline
+    Read Reports
+95. Make it feel like a pledge wall, not a blog page.
+96. Less repeated text.
+97. More visual hierarchy.
+
+HOMEPAGE:
+98. Do not add redundant channel/system cards everywhere.
+99. Keep homepage focused:
+    Hero
+    Latest Reports
+    Hotline / Call-in block
+    Mission preview
+    Systems bridge
+100. Remove duplicate channels if already in Channels page.
+101. Make hero still stronger but do not overhaul everything again unless needed.
+102. Add less repeated links.
+
+FOOTER:
+103. Reduce redundancy.
+104. Footer columns:
+    RSR Media
+    Reports
+    Channels
+    Systems
+    Contact
+105. Operator Access in tiny footer utility row.
+106. No giant duplicate nav stacks.
+107. Keep hotline/email visible.
+
+EDGEONE STATIC:
+108. Keep static compatible.
+109. No server dependency.
+110. localStorage admin/report system remains.
+111. Build output dist.
+112. SPA fallback remains.
+113. No API requirement.
+
+QUALITY CHECK:
+114. Build passes.
+115. /admin login works with ADMIN4451.
+116. Logout works.
+117. New Report works.
+118. Header image URL/local preview works.
+119. Publishing works.
+120. Public report page shows image/title/body.
+121. Import X still works and opens composer.
+122. Header does not wrap.
+123. Mission page looks significantly better.
+124. No redundant nav/link spam.
+125. No backend added.

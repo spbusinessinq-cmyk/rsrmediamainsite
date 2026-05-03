@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'wouter';
-import { LayoutDashboard, FileText, Send, Settings, LogOut, TerminalSquare, Import, BarChart2 } from 'lucide-react';
+import { LayoutDashboard, FileText, Send, Settings, LogOut, TerminalSquare, Import, BarChart2, Lock } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAdminAuth } from '@/hooks/useAdminAuth';
 
@@ -42,8 +42,12 @@ export function AdminShell({ children }: AdminShellProps) {
           </div>
         </div>
 
-        <div className="px-4 py-2 font-mono text-[0.6rem] text-primary/60 tracking-widest uppercase border-b border-border/20">
-          // ADMIN TERMINAL
+        <div className="px-4 py-2 flex items-center justify-between border-b border-border/20">
+          <span className="font-mono text-[0.6rem] text-primary/60 tracking-widest uppercase">// ADMIN TERMINAL</span>
+          <span className="flex items-center gap-1 font-mono text-[0.55rem] text-primary/50 tracking-widest uppercase">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+            UNLOCKED
+          </span>
         </div>
 
         <nav className="flex-1 py-3 flex flex-col gap-0.5 px-2 overflow-y-auto">
@@ -81,6 +85,7 @@ export function AdminShell({ children }: AdminShellProps) {
             onClick={logout}
             className="flex items-center justify-center gap-2 px-3 py-1.5 w-full text-muted-foreground/50 hover:text-destructive font-mono text-[0.6rem] transition-colors tracking-widest uppercase"
           >
+            <Lock className="w-3 h-3" />
             LOCK TERMINAL
           </button>
         </div>
@@ -88,9 +93,6 @@ export function AdminShell({ children }: AdminShellProps) {
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col min-w-0 overflow-hidden">
-        <div className="w-full bg-amber-500/10 border-b border-amber-500/30 text-amber-500 text-[0.65rem] font-mono py-1 px-4 text-center tracking-widest uppercase">
-          ADMIN TERMINAL — LOCAL STORAGE ACTIVE — CONNECT BACKEND TO PERSIST ON SERVER
-        </div>
         <div className="flex-1 overflow-auto p-4 md:p-8">
           {children}
         </div>

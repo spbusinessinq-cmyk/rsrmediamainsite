@@ -17,8 +17,7 @@ export const PACIFIC_SYSTEMS_URL = "https://rsrindexnet.edgeone.app/";
 export const BLACK_DOG_URL = "https://blackdogmain12.edgeone.app/";
 export const ARMORY_URL = "https://rsrarmory.store";
 
-// ⚠️ Change before any public/shared deployment
-export const ADMIN_PASSCODE = "CHANGE_ME_BEFORE_DEPLOY";
+export const ADMIN_PASSCODE = "ADMIN4451";
 
 export function isYouTubeConfigured(): boolean {
   return (YOUTUBE_URL as string) !== "PASTE_YOUTUBE_CHANNEL_URL_HERE" && YOUTUBE_URL.trim().length > 0;

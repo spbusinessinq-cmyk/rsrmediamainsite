@@ -66,22 +66,10 @@ export function AdminGate({ children }: AdminGateProps) {
             </button>
           </form>
 
-          <div className="mt-8 pt-5 border-t border-border/20 space-y-3 text-center">
+          <div className="mt-8 pt-5 border-t border-border/20 text-center">
             <p className="font-mono text-[0.55rem] text-muted-foreground/40 tracking-widest uppercase">
               OWNER ACCESS ONLY — NO PUBLIC ACCOUNTS
             </p>
-            <div className="border border-amber-500/20 bg-amber-500/5 p-3 text-left">
-              <p className="font-mono text-[0.6rem] text-amber-500/80 tracking-wider uppercase mb-1">
-                ⚠ DEFAULT CODE ACTIVE — CHANGE BEFORE DEPLOY
-              </p>
-              <p className="font-mono text-[0.58rem] text-muted-foreground/60 tracking-wider leading-relaxed">
-                Recovery: default passcode is{' '}
-                <span className="text-amber-400/70 select-all font-bold">CHANGE_ME_BEFORE_DEPLOY</span>
-                {' '}— update in{' '}
-                <span className="text-foreground/50">src/config/site.ts</span>{' '}
-                before going live.
-              </p>
-            </div>
           </div>
         </div>
         <div className="mt-4 text-center">

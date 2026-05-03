@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Report } from '@/types/report';
 import { useReports, createBlankReport, makeSlug } from '@/hooks/useReports';
-import { Plus, Trash2, ExternalLink, Eye, EyeOff, Star, FileText } from 'lucide-react';
+import { Plus, Trash2, ExternalLink, Eye, EyeOff, Star, FileText, Image, X } from 'lucide-react';
 
 interface ReportEditorProps {
   reportId?: string;
@@ -129,6 +129,15 @@ TIMESTAMP
   },
 ];
 
+const FORMAT_HELPERS = [
+  { label: 'Heading', insert: '\n\nSECTION HEADING\n———\n' },
+  { label: 'Subheading', insert: '\n\n— Sub-point —\n' },
+  { label: 'Quote', insert: '\n\n"[Quote text]"\n— Source\n' },
+  { label: '• Bullet', insert: '\n• ' },
+  { label: 'Source', insert: '\n\nSOURCE: [Name / URL]\n' },
+  { label: 'Divider', insert: '\n\n———\n\n' },
+];
+
 export function ReportEditor({ reportId, onSave, onCancel, onDelete }: ReportEditorProps) {
   const { reports, upsert, remove } = useReports();
   const existing = reportId ? reports.find(r => r.id === reportId) : null;
@@ -142,6 +151,14 @@ export function ReportEditor({ reportId, onSave, onCancel, onDelete }: ReportEdi
   const [slugEdited, setSlugEdited] = useState(!!existing);
   const [saved, setSaved] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [imageMode, setImageMode] = useState<'url' | 'file'>('url');
+  const [localImagePreview, setLocalImagePreview] = useState<string | null>(
+    existing?.headerImage?.startsWith('blob:') || existing?.headerImage?.startsWith('data:')
+      ? existing.headerImage
+      : null
+  );
+  const bodyRef = useRef<HTMLTextAreaElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (!slugEdited && form.title) {
@@ -156,6 +173,43 @@ export function ReportEditor({ reportId, onSave, onCancel, onDelete }: ReportEdi
 
   function applyTemplate(body: string) {
     set('body', body);
+  }
+
+  function insertFormat(text: string) {
+    const ta = bodyRef.current;
+    if (!ta) {
+      set('body', form.body + text);
+      return;
+    }
+    const start = ta.selectionStart ?? form.body.length;
+    const end = ta.selectionEnd ?? form.body.length;
+    const next = form.body.slice(0, start) + text + form.body.slice(end);
+    set('body', next);
+    requestAnimationFrame(() => {
+      ta.focus();
+      ta.setSelectionRange(start + text.length, start + text.length);
+    });
+  }
+
+  function handleLocalFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const objectUrl = URL.createObjectURL(file);
+    setLocalImagePreview(objectUrl);
+    // Convert to base64 for persistence
+    const reader = new FileReader();
+    reader.onload = () => {
+      const b64 = reader.result as string;
+      set('headerImage', b64);
+      setLocalImagePreview(b64);
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function clearHeaderImage() {
+    set('headerImage', undefined);
+    setLocalImagePreview(null);
+    if (fileInputRef.current) fileInputRef.current.value = '';
   }
 
   function handleSave(status?: Report['status']) {
@@ -192,6 +246,8 @@ export function ReportEditor({ reportId, onSave, onCancel, onDelete }: ReportEdi
     setSourceLinks(sl => sl.filter((_, i) => i !== idx));
   }
 
+  const currentImageSrc = localImagePreview || (form.headerImage && !form.headerImage.startsWith('blob:') ? form.headerImage : null);
+
   if (preview) {
     return (
       <div className="space-y-4">
@@ -206,21 +262,28 @@ export function ReportEditor({ reportId, onSave, onCancel, onDelete }: ReportEdi
             {form.status === 'published' ? '— LIVE' : '— DRAFT (not public)'}
           </span>
         </div>
-        <div className="glass-panel border border-border/40 p-8 max-w-3xl">
-          <div className="font-mono text-xs text-primary tracking-widest uppercase mb-4">
-            {form.type} · {form.category}
-          </div>
-          <h1 className="font-serif font-bold text-3xl mb-3">{form.title || 'Untitled'}</h1>
-          <p className="font-mono text-xs text-muted-foreground mb-6">By {form.author}</p>
-          <p className="font-sans text-base text-muted-foreground mb-6 italic border-l-2 border-primary/40 pl-4">{form.excerpt}</p>
-          <div className="font-sans text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{form.body}</div>
-          {form.xUrl && (
-            <div className="mt-8 pt-4 border-t border-border/30">
-              <a href={form.xUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-mono text-xs text-primary hover:underline">
-                <ExternalLink className="w-3 h-3" /> READ ORIGINAL ON X
-              </a>
+        <div className="glass-panel border border-border/40 overflow-hidden max-w-3xl">
+          {currentImageSrc && (
+            <div className="w-full h-48 overflow-hidden">
+              <img src={currentImageSrc} alt="" className="w-full h-full object-cover" />
             </div>
           )}
+          <div className="p-8">
+            <div className="font-mono text-xs text-primary tracking-widest uppercase mb-4">
+              {form.type} · {form.category}
+            </div>
+            <h1 className="font-serif font-bold text-3xl mb-3">{form.title || 'Untitled'}</h1>
+            <p className="font-mono text-xs text-muted-foreground mb-6">By {form.author}</p>
+            <p className="font-sans text-base text-muted-foreground mb-6 italic border-l-2 border-primary/40 pl-4">{form.excerpt}</p>
+            <div className="font-sans text-sm text-foreground/80 leading-relaxed whitespace-pre-line">{form.body}</div>
+            {form.xUrl && (
+              <div className="mt-8 pt-4 border-t border-border/30">
+                <a href={form.xUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-mono text-xs text-primary hover:underline">
+                  <ExternalLink className="w-3 h-3" /> READ ORIGINAL ON X
+                </a>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     );
@@ -333,14 +396,85 @@ export function ReportEditor({ reportId, onSave, onCancel, onDelete }: ReportEdi
             />
           </div>
 
-          {/* Body with Template Buttons */}
+          {/* Header Image */}
+          <div>
+            <div className="flex items-center justify-between mb-1.5">
+              <label className="font-mono text-[0.65rem] tracking-widest text-muted-foreground uppercase flex items-center gap-1.5">
+                <Image className="w-3 h-3" /> HEADER IMAGE
+              </label>
+              <div className="flex items-center gap-1">
+                <button
+                  type="button"
+                  onClick={() => setImageMode('url')}
+                  className={`font-mono text-[0.58rem] tracking-widest uppercase px-2 py-0.5 border transition-colors ${
+                    imageMode === 'url' ? 'border-accent/50 text-accent bg-accent/5' : 'border-border/40 text-muted-foreground/50 hover:text-muted-foreground'
+                  }`}
+                >
+                  URL
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setImageMode('file')}
+                  className={`font-mono text-[0.58rem] tracking-widest uppercase px-2 py-0.5 border transition-colors ${
+                    imageMode === 'file' ? 'border-accent/50 text-accent bg-accent/5' : 'border-border/40 text-muted-foreground/50 hover:text-muted-foreground'
+                  }`}
+                >
+                  FILE
+                </button>
+              </div>
+            </div>
+
+            {imageMode === 'url' ? (
+              <input
+                type="url"
+                value={(!form.headerImage || form.headerImage.startsWith('data:')) ? '' : form.headerImage}
+                onChange={e => { set('headerImage', e.target.value || undefined); setLocalImagePreview(null); }}
+                placeholder="https://example.com/image.jpg"
+                className="w-full bg-background border border-border p-2.5 font-mono text-sm focus:outline-none focus:border-accent transition-colors"
+              />
+            ) : (
+              <div className="flex items-center gap-2">
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleLocalFile}
+                  className="flex-1 bg-background border border-border p-2 font-mono text-xs text-muted-foreground focus:outline-none focus:border-accent file:mr-2 file:border-0 file:bg-primary/10 file:text-primary file:font-mono file:text-[0.65rem] file:px-2 file:py-1 file:cursor-pointer"
+                />
+              </div>
+            )}
+
+            {currentImageSrc && (
+              <div className="mt-2 relative group">
+                <img
+                  src={currentImageSrc}
+                  alt="Header preview"
+                  className="w-full h-28 object-cover border border-border/30"
+                />
+                <button
+                  type="button"
+                  onClick={clearHeaderImage}
+                  className="absolute top-1.5 right-1.5 w-6 h-6 bg-black/60 hover:bg-destructive text-white flex items-center justify-center transition-colors"
+                  title="Remove image"
+                >
+                  <X className="w-3 h-3" />
+                </button>
+                <div className="absolute bottom-0 left-0 right-0 bg-black/40 px-2 py-1 font-mono text-[0.55rem] text-white/50 tracking-widest">
+                  CINEMATIC HEADER — SHOWN ABOVE TITLE ON PUBLIC PAGE
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Body with templates + formatting helpers */}
           <div>
             <div className="flex items-center justify-between mb-1.5">
               <label className="font-mono text-[0.65rem] tracking-widest text-muted-foreground uppercase">BODY *</label>
-              <span className="font-mono text-[0.58rem] text-muted-foreground/50 tracking-widest">TEMPLATES:</span>
             </div>
-            {/* Template buttons */}
-            <div className="flex flex-wrap gap-1.5 mb-2">
+
+            {/* Templates */}
+            <div className="flex flex-wrap gap-1.5 mb-1.5">
+              <span className="font-mono text-[0.55rem] text-muted-foreground/35 tracking-widest self-center uppercase mr-0.5">TEMPLATES:</span>
               {BODY_TEMPLATES.map(tpl => (
                 <button
                   key={tpl.short}
@@ -353,16 +487,30 @@ export function ReportEditor({ reportId, onSave, onCancel, onDelete }: ReportEdi
                   {tpl.short}
                 </button>
               ))}
-              <span className="font-mono text-[0.58rem] text-muted-foreground/30 self-center ml-1 tracking-widest">
-                STD=Standard · BRK=Breaking · FLD=Field · CMT=Commentary · COR=Correction
-              </span>
             </div>
+
+            {/* Formatting helpers */}
+            <div className="flex flex-wrap gap-1 mb-2 pb-2 border-b border-border/15">
+              <span className="font-mono text-[0.55rem] text-muted-foreground/35 tracking-widest self-center uppercase mr-0.5">INSERT:</span>
+              {FORMAT_HELPERS.map(h => (
+                <button
+                  key={h.label}
+                  type="button"
+                  onClick={() => insertFormat(h.insert)}
+                  className="font-mono text-[0.6rem] border border-border/35 text-muted-foreground/60 px-2 py-1 hover:border-accent/40 hover:text-accent hover:bg-accent/5 transition-colors tracking-widest uppercase"
+                >
+                  {h.label}
+                </button>
+              ))}
+            </div>
+
             <textarea
+              ref={bodyRef}
               value={form.body}
               onChange={e => set('body', e.target.value)}
-              rows={18}
-              placeholder="Full report body. Click a template button above to pre-fill structure."
-              className="w-full bg-background border border-border p-3 font-mono text-sm focus:outline-none focus:border-accent transition-colors resize-y leading-relaxed"
+              rows={20}
+              placeholder="Full report body. Use template buttons to pre-fill structure or insert formatting helpers above."
+              className="w-full bg-background border border-border p-3 font-sans text-[0.9375rem] focus:outline-none focus:border-accent transition-colors resize-y leading-relaxed text-foreground/85"
             />
           </div>
 

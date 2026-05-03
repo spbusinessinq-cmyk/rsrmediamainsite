@@ -28,12 +28,10 @@ function NotFoundInline() {
 }
 
 function formatBody(body: string): React.ReactNode {
-  // Treat double-newlines as paragraph breaks, single newlines as <br/>
   const paras = body.split(/\n{2,}/);
   return paras.map((para, i) => {
     const trimmed = para.trim();
     if (!trimmed) return null;
-    // Section headers (ALL CAPS lines, 2-4 words, optionally ending with ---)
     if (/^[A-Z][A-Z\s\/\-]{2,}$/.test(trimmed) && trimmed.length < 50) {
       return (
         <div key={i} className="mt-8 mb-2 font-mono text-[0.68rem] tracking-widest text-primary/70 uppercase border-b border-border/20 pb-2">
@@ -41,7 +39,6 @@ function formatBody(body: string): React.ReactNode {
         </div>
       );
     }
-    // Separator lines (---, ———)
     if (/^[-—]{3,}$/.test(trimmed)) {
       return <hr key={i} className="border-border/20 my-5" />;
     }
@@ -81,7 +78,6 @@ export default function ReportDetail() {
   const hasBody = report.body && report.body.trim().length > 10;
   const isXDispatch = !hasBody && !!report.xUrl;
 
-  // Better display title — avoid raw "X Post — date" display
   const displayTitle = report.title.startsWith('X Post —') || report.title.startsWith('External X')
     ? (report.excerpt && report.excerpt !== 'Fill in the excerpt after reviewing the X post.'
         ? report.excerpt.slice(0, 80) + (report.excerpt.length > 80 ? '…' : '')
@@ -93,8 +89,32 @@ export default function ReportDetail() {
   }
 
   return (
-    <div className="w-full pt-10 pb-24">
-      <div className="container mx-auto px-4 sm:px-6 max-w-5xl">
+    <div className="w-full pb-24">
+
+      {/* Cinematic header image */}
+      {report.headerImage && (
+        <div className="relative w-full h-[42vh] min-h-[280px] max-h-[520px] overflow-hidden">
+          <img
+            src={report.headerImage}
+            alt=""
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0" style={{
+            background: 'linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.55) 70%, var(--color-background, #0a0a0a) 100%)',
+          }} />
+          {/* Type badge overlaid on image */}
+          <div className="absolute bottom-6 left-6 flex items-center gap-3">
+            <span className="font-mono text-[0.65rem] tracking-widest uppercase border border-white/20 bg-black/40 backdrop-blur-sm text-white/80 px-2.5 py-1">
+              {report.type}
+            </span>
+            <span className="font-mono text-[0.65rem] tracking-widest uppercase text-white/50">
+              {report.category}
+            </span>
+          </div>
+        </div>
+      )}
+
+      <div className={`container mx-auto px-4 sm:px-6 max-w-5xl ${report.headerImage ? 'pt-6' : 'pt-10'}`}>
 
         <Link href="/reports" className="inline-flex items-center gap-2 font-mono text-xs text-muted-foreground hover:text-foreground transition-colors tracking-widest uppercase mb-8">
           <ArrowLeft className="w-3 h-3" /> BACK TO REPORTS
@@ -104,16 +124,20 @@ export default function ReportDetail() {
 
           {/* ── Article ── */}
           <article>
-            {/* Metadata bar */}
+            {/* Metadata bar — hide type/category if we showed them on the image */}
             <div className="flex flex-wrap items-center gap-2.5 mb-6 font-mono text-xs tracking-widest uppercase text-muted-foreground">
-              <span className="border border-border/40 px-2 py-0.5 bg-card/15">{report.type}</span>
-              <span>{report.category}</span>
+              {!report.headerImage && (
+                <>
+                  <span className="border border-border/40 px-2 py-0.5 bg-card/15">{report.type}</span>
+                  <span>{report.category}</span>
+                </>
+              )}
               {report.featured && (
                 <span className="flex items-center gap-1 text-amber-500">
                   <Star className="w-3 h-3 fill-amber-500" /> FEATURED
                 </span>
               )}
-              <span>·</span>
+              {!report.headerImage && <span>·</span>}
               <time dateTime={report.date}>
                 {new Date(report.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
               </time>
@@ -138,7 +162,7 @@ export default function ReportDetail() {
               </div>
             )}
 
-            {/* X Source Card — prominent if xUrl and no real body */}
+            {/* X Source Card */}
             {report.xUrl && (
               <div className="border border-accent/30 bg-accent/[0.04] corner-bracket p-6 mb-8">
                 <div className="flex items-center gap-3 mb-3">
@@ -172,7 +196,7 @@ export default function ReportDetail() {
               </div>
             )}
 
-            {/* Source links (inline) */}
+            {/* Source links */}
             {report.sourceLinks.length > 0 && (
               <div className="border-t border-border/20 pt-6 mb-6">
                 <div className="font-mono text-xs text-primary/55 tracking-widest uppercase mb-4 flex items-center gap-2">

@@ -34,4 +34,5 @@ export interface Report {
   status: ReportStatus;
   featured: boolean;
   xUrl?: string;
+  headerImage?: string;
 }
