@@ -1,0 +1,460 @@
+RSR MEDIA FRONTEND-ONLY MEGA PASS — HERO, FONTS, HOTLINE, YOUTUBE EMBEDS, REPORT UI
+
+CRITICAL SCOPE:
+Frontend-only pass.
+Do not build backend.
+Do not add APIs.
+Do not rewrite admin logic.
+Do not break existing localStorage report CRUD.
+Do not break Import X draft tool.
+Do not break /admin routes.
+Do not fake X scraping.
+Do not fake YouTube stats.
+Only fix public-facing frontend, layout, styling, readability, pages, embeds, links, and report presentation.
+
+OFFICIAL CONFIG:
+1. SITE_PHONE = "16315142480"
+2. Formatted phone: "+1 (631) 514-2480"
+3. SITE_EMAIL = "newsroom@rsrmedia.org"
+4. X_URL = "https://x.com/RSRINTEL"
+5. YOUTUBE_URL = "https://www.youtube.com/@RedStateRhetoricMedia"
+6. TIKTOK_URL = "https://www.tiktok.com/@redstaterhetoric"
+7. RSR_INTEL_URL = "https://www.rsrintel.com/#/"
+8. PACIFIC_SYSTEMS_URL = "https://rsrindexnet.edgeone.app/"
+9. BLACK_DOG_URL = "https://blackdogmain12.edgeone.app/"
+10. ARMORY_URL = "https://rsrarmory.store"
+
+FONT SYSTEM:
+11. Stop using Orbitron everywhere.
+12. Use Rajdhani for big display headings.
+13. Use Inter for readable body text.
+14. Use IBM Plex Mono for terminal labels/readouts.
+15. Orbitron can remain only for tiny command labels if already installed.
+16. Body text must be slightly bigger.
+17. Paragraph text should be 1rem to 1.08rem.
+18. Card descriptions should be at least 0.95rem.
+19. Nav can stay compact but readable.
+20. Increase line-height globally.
+21. Make gray text brighter.
+22. Keep micro labels small but not unreadable.
+23. Report body must read like an article, not a terminal log.
+
+COLOR SYSTEM:
+24. More black.
+25. Less green.
+26. Green only for active, primary CTA, small status dots.
+27. Add electric blue accent.
+28. Blue used for:
+    - X/social accents
+    - manual review status
+    - secondary CTA hover
+    - report source links
+    - focus rings
+29. Suggested electric blue: #38BDF8.
+30. Steel gray border default.
+31. Panels darker.
+32. Reduce green glow opacity by 50%.
+33. No neon overload.
+34. Amber only on Pacific page.
+35. Red only on Security/Black Dog page.
+36. Keep serious command/newsroom aesthetic.
+
+HEADER:
+37. Header needs to feel cleaner and less tiny.
+38. Keep sticky header.
+39. Left: RSR Media mark + text.
+40. Center nav:
+    HOME
+    ABOUT
+    REPORTS
+    MISSION
+    NETWORK
+    CHANNELS
+    PACIFIC
+    SECURITY
+    ARMORY
+    HOTLINE
+    CONTACT
+41. Right: X icon, YouTube icon, TikTok icon, UTC, status.
+42. Icons link externally.
+43. Nav text no wrapping.
+44. Collapse to hamburger earlier.
+45. Mobile menu includes all links.
+46. Header background more glassy/black.
+47. Slightly increase nav font.
+48. Fix awkward spacing.
+49. Do not let logo dominate.
+50. Do not hide admin access completely; footer can keep Operator Access.
+
+HOMEPAGE HERO:
+51. Current hero is too lame and too empty.
+52. Rebuild hero into a cinematic media command landing.
+53. Keep one unified hero shell.
+54. Make hero feel like command room / public signal terminal.
+55. Use full-width ambient background.
+56. Main content max-width 1360px.
+57. Hero should fill first viewport better without feeling empty.
+58. Add subtle world/grid/signal background texture.
+59. Add side rail ambient details.
+60. Add faint electric-blue accent lines.
+61. Add steel/glass panels.
+62. Add less green glow.
+63. Left hero:
+    - kicker: PUBLIC SIGNAL NETWORK // INDEPENDENT MEDIA
+    - title: RSR MEDIA
+    - subtitle: Independent media. Public reporting. Community signal.
+    - support copy: Reports, hotline calls, public channels, and analysis routed through the RSR ecosystem.
+64. Add stronger mission sentence:
+    “Built to separate signal from noise and give the community a direct line into the newsroom.”
+65. CTA grid:
+    READ REPORTS
+    CALL HOTLINE
+    WATCH YOUTUBE
+    FOLLOW X
+66. Secondary CTA row:
+    RSR INTEL
+    ARMORY
+67. Right hero:
+    Replace tiny Signal Console with a bigger “Signal Stack” panel.
+68. Signal Stack should include:
+    - Reports: Manual Review
+    - Hotline: Open
+    - X Dispatches: @RSRINTEL
+    - YouTube: Channel Active
+    - TikTok: @redstaterhetoric
+69. Add “Today’s routing” style labels, not fake live metrics.
+70. Add contact chip row:
+    Hotline +1 (631) 514-2480
+    newsroom@rsrmedia.org
+71. Make hero look finished and premium.
+72. No huge dead black empty zones.
+73. No clipped ticker.
+74. Ticker should be subtle and contained.
+
+HOME SECTIONS:
+75. Command Links section.
+76. Public Channels section.
+77. Latest Reports section.
+78. Network Properties section.
+79. Community Promise section.
+80. Hotline call-in section.
+81. Use consistent max-width.
+82. Use glass cards.
+83. More body copy explaining purpose.
+84. Sections should not feel like empty wireframes.
+
+HOTLINE PAGE:
+85. Create/upgrade /hotline as dedicated feature page.
+86. Keep /tip-line alias/redirect if existing.
+87. Page title: RSR Hotline.
+88. Hero copy:
+    “Call in during the show. Submit tips. Raise community concerns. Send story leads directly to RSR Media.”
+89. Display big phone: +1 (631) 514-2480.
+90. tel link uses tel:16315142480.
+91. CTA: CALL HOTLINE.
+92. CTA: EMAIL NEWSROOM.
+93. CTA: SUBMIT WRITTEN TIP.
+94. Explain:
+    - During live shows, viewers can call in for questions, reactions, debate, and topic suggestions.
+    - Outside live shows, the hotline can be used for tips, corrections, community concerns, or story leads.
+95. Add “What to call about” cards:
+    Live show call-ins
+    Story tips
+    Corrections
+    Community concerns
+    Guest/topic suggestions
+    Field reports
+96. Add “Call rules” cards:
+    Stay on topic
+    No threats
+    No doxxing
+    No illegal material
+    Evidence matters
+    Be clear and concise
+97. Add disclaimer:
+    “Calling does not guarantee your call will be answered live or used on-air.”
+98. Add disclaimer:
+    “Do not submit classified, stolen, hacked, or illegally obtained material.”
+99. Add mailto written tip form or button.
+100. Make this page fun, bold, but still serious and on-brand.
+101. Add hotline console visual.
+102. Add “Live show line” styling.
+103. Add TikTok/X/YouTube channel links at bottom.
+
+CHANNELS PAGE:
+104. Upgrade /channels.
+105. Page title: Public Channels.
+106. Cards:
+    X / @RSRINTEL
+    YouTube / @RedStateRhetoricMedia
+    TikTok / @redstaterhetoric
+    Hotline / +1 (631) 514-2480
+    Newsroom / newsroom@rsrmedia.org
+107. X card links to X_URL.
+108. YouTube card links to YOUTUBE_URL.
+109. TikTok card links to TIKTOK_URL.
+110. Do not fake follower counts.
+111. Add optional manual social notes only if already configured.
+112. Add “Where reports move after publication” explanation.
+113. Add “Follow, watch, call, or submit tips” CTA row.
+114. Make channels page visually rich, not just cards.
+
+YOUTUBE EMBEDS:
+115. Add Videos section/page if no page exists.
+116. Either add /videos route or include videos inside /channels.
+117. Frontend only.
+118. Use manual video list file: src/data/videos.ts.
+119. Add first known channel link:
+    https://www.youtube.com/@RedStateRhetoricMedia
+120. Add manual video objects.
+121. Fields:
+    id
+    title
+    description
+    youtubeUrl
+    embedUrl
+    publishedAt optional
+122. Embed YouTube videos with iframe only for configured videos.
+123. Do not fake video count.
+124. Do not fake subscriber count.
+125. If no videos configured, show button to open channel.
+126. If videos configured, display responsive 16:9 embeds.
+127. Add “Watch on YouTube” button below each embed.
+128. Lazy load iframes.
+129. Make embeds look good in dark glass frames.
+130. Add YouTube card to homepage.
+
+REPORTS FRONTEND:
+131. Improve public Reports page.
+132. Reports should feel like a real publication archive.
+133. Increase text readability.
+134. Add hero:
+    REPORTS
+    Reviewed public reporting, updates, notes, and analysis from RSR Media.
+135. Add tabs or filters:
+    All
+    Briefs
+    Field Notes
+    Investigations
+    Corrections
+    Commentary
+136. Search should look polished.
+137. Report cards should show:
+    title
+    excerpt
+    category
+    type
+    date
+    tags
+    xUrl indicator if attached
+138. Public report cards should not show draft/admin junk.
+139. Featured reports section if featured exists.
+140. Empty state should look premium and instruct operator to publish from Admin.
+141. Add “Submit a Tip” and “Call Hotline” CTA in Reports page.
+
+REPORT DETAIL FRONTEND:
+142. Current detail page looks too empty.
+143. Make detail page read like a real article page.
+144. Bigger article container.
+145. Better heading typography.
+146. Better body typography.
+147. If report body is pending, do not make it look broken.
+148. If body empty:
+    show “This report is linked to an external source. Read the original post below.”
+149. If xUrl exists:
+    show prominent card:
+    ORIGINAL X SOURCE
+    Open original on X
+150. Do not try to scrape X.
+151. Add external X embed option only if using safe blockquote/link.
+152. Add “Source Links” section.
+153. Add “Corrections” box.
+154. Add “Have a tip?” box.
+155. Add “Share / Copy Link.”
+156. Add “Back to Reports.”
+157. Report body should support line breaks and basic markdown-ish formatting.
+158. Use Inter for article body.
+159. Use Rajdhani for title.
+160. Use mono only for metadata.
+
+X LINK DISPLAY:
+161. Since no backend scraping, make X links look intentional.
+162. On imported X report drafts, public page should say:
+    “This entry references an external X post from RSRINTEL. Open the source to read the original post.”
+163. Button:
+    READ ORIGINAL ON X
+164. Add X icon.
+165. Do not title auto-imported posts “X Post — date” if possible.
+166. In admin Import X, create title:
+    “External X Source”
+    or let user set title immediately.
+167. Better fallback title:
+    “RSRINTEL Dispatch”
+168. Better fallback excerpt:
+    “External X source attached. Add summary before publishing.”
+169. For already-created X-post titles, do not break them; just improve display.
+
+ABOUT PAGE:
+170. Make About page less generic.
+171. Use readable body font.
+172. Add sections:
+    What RSR Media Is
+    How We Work
+    What We Cover
+    How We Connect to RSR Intel
+173. Mention:
+    public reporting
+    community signal
+    independent media
+    verification-first
+174. Add links to Channels, Reports, Hotline.
+
+MISSION PAGE:
+175. Rebuild with principle cards.
+176. Title: Our Promise to the Community.
+177. Use:
+    Truth over speed.
+    People over parties.
+    Evidence over rumor.
+    Community over clout.
+    Corrections over ego.
+    Open debate without mob rule.
+178. Make it look emotional but professional.
+179. Add CTA to Hotline.
+180. Add CTA to Reports.
+
+NETWORK PAGE:
+181. Upgrade network page.
+182. Explain ecosystem:
+    RSR Media = public-facing media home
+    RSR Intel = deeper analysis/intelligence side
+    Pacific Systems = data infrastructure
+    Black Dog = security/cyber app
+    Armory = merch
+    X/YouTube/TikTok = public distribution channels
+183. Add external cards.
+184. Make this page visually rich.
+185. More black/steel.
+186. Blue accents for social channels.
+
+PACIFIC PAGE:
+187. Keep bridge page.
+188. More amber, less green.
+189. Better text size.
+190. Strong CTA to Pacific Systems.
+191. No fake counters.
+192. No clipped graphics.
+
+SECURITY PAGE:
+193. Keep Black Dog bridge.
+194. Red accents.
+195. Better spacing.
+196. Strong CTA to Black Dog.
+197. No fake access claims.
+
+ARMORY PAGE:
+198. Make Armory page sharper.
+199. Link to rsrarmory.store.
+200. No fake products unless manually configured.
+201. Add CTA to shop.
+202. Add note official merch shop.
+
+CONTACT PAGE:
+203. Show only newsroom@rsrmedia.org.
+204. Show hotline.
+205. Cards:
+    Newsroom
+    Corrections
+    Story Tips
+    Community Concerns
+    Partnerships
+206. All email cards use newsroom@rsrmedia.org.
+207. Phone card uses hotline.
+208. Add social links.
+
+FOOTER:
+209. Increase footer readability.
+210. Add columns:
+    Reports
+    Hotline
+    Channels
+    Network
+    Contact
+211. Include X, YouTube, TikTok.
+212. Include Operator Access.
+213. More black, less green.
+214. Less tiny text.
+
+ADMIN FRONTEND ONLY:
+215. Do not change admin logic.
+216. Fix any admin access link if broken.
+217. Make sure footer Operator Access points to /admin.
+218. Admin editor body textarea should have larger font.
+219. Report preview button should be obvious.
+220. Import X copy should clearly say it links to X, not scrape it.
+221. No backend changes.
+
+LAYOUT:
+222. Fix excessive vertical spacing where pages feel empty.
+223. Fix side dead space with ambient background.
+224. Do not overfill with noise.
+225. Keep max-width consistent.
+226. Use responsive grid.
+227. Hero content should not be too small.
+228. Header should not be too tiny.
+229. Body text should not be tiny.
+230. Mobile: stack hero and cards.
+231. Tablet: stack where needed.
+232. No horizontal scroll.
+
+MICROCOPY:
+233. Replace “Tip Line” public label with “Hotline.”
+234. Replace “Comm Signal” with “Community Signal.”
+235. Replace “Manual Review” with “Reviewed Manually” where space allows.
+236. Keep accurate:
+    no fake live
+    no fake scraping
+    no fake stats
+237. Use “linked,” “available,” “reviewed,” “open.”
+
+BUTTONS:
+238. Make buttons feel stronger.
+239. Hover with steel + blue accent.
+240. Primary hover green.
+241. Secondary hover blue.
+242. External links show ↗.
+243. Call links show phone icon if available.
+244. Email links show mail icon if available.
+
+ACCESSIBILITY:
+245. Improve contrast.
+246. Focus states visible.
+247. Buttons have accessible labels.
+248. Links are not only color-based.
+249. Iframes have titles.
+250. Reduced motion support remains.
+
+FINAL TEST:
+251. Build passes.
+252. No TypeScript errors.
+253. No broken imports.
+254. Header works desktop.
+255. Header works mobile.
+256. /hotline works.
+257. /channels works.
+258. YouTube link works.
+259. X link works.
+260. TikTok link works.
+261. Reports list works.
+262. Report detail works.
+263. Empty report body looks intentional.
+264. Admin still works.
+265. Import X still works.
+266. No backend added.
+267. No fake data.
+268. No fake stats.
+269. No fake scraping.
+270. Site looks more premium.
+
+FINAL STANDARD:
+This must feel like a finished RSR Media public website, not an admin demo. The homepage must hit harder, the hotline must feel like a real show/community call-in feature, reports must look publishable, channels must connect X/YouTube/TikTok properly, and the typography must stop looking like a cheap terminal clone.

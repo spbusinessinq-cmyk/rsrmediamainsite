@@ -1,49 +1,89 @@
 import React from 'react';
 import { Link } from 'wouter';
 import { useSEO } from '@/lib/seo';
-import { SectionHeader } from '@/components/ui-system/SectionHeader';
-import { CommandButton } from '@/components/ui-system/CommandButton';
-import { CORE_PRINCIPLES, WILL_DO, WONT_DO } from '@/data/missionPrinciples';
 import { trackTipClick } from '@/lib/analytics';
 import { motion } from 'framer-motion';
+import { CheckCircle, XCircle } from 'lucide-react';
+
+const OVER_PRINCIPLES = [
+  { a: 'Truth', b: 'Speed', desc: 'We verify before we publish. A slow accurate story beats a fast wrong one every time.' },
+  { a: 'People', b: 'Parties', desc: 'We report on people and communities, not party agendas. No faction gets editorial protection.' },
+  { a: 'Evidence', b: 'Rumor', desc: 'Claims require sources. Speculation is labeled as speculation — never published as fact.' },
+  { a: 'Community', b: 'Clout', desc: 'RSR Media exists for its audience, not for follower counts, ad revenue, or platform games.' },
+  { a: 'Corrections', b: 'Ego', desc: 'When we are wrong, we say so — publicly, promptly, and without spin.' },
+  { a: 'Open Debate', b: 'Mob Rule', desc: 'We publish analysis, not consensus management. Disagreement is welcomed; threats are not.' },
+];
+
+const WILL_DO = [
+  { title: 'Verify before publishing', desc: 'All claims require documented, multi-source corroboration.' },
+  { title: 'Protect sources', desc: 'Good-faith sources are protected to the extent legally possible.' },
+  { title: 'Publish corrections openly', desc: 'Errors are corrected publicly and appended to the original record.' },
+  { title: 'Disclose conflicts', desc: 'Any potential conflict of interest is disclosed in the relevant report.' },
+  { title: 'Give context', desc: 'Events are not reported in isolation — systems and precedent are included.' },
+];
+
+const WONT_DO = [
+  { title: 'Publish speculation as fact', desc: 'No claim is elevated beyond its verified status.' },
+  { title: 'Suppress inconvenient findings', desc: 'Verified information is published regardless of who it implicates.' },
+  { title: 'Accept paid placements', desc: 'No sponsored content, no pay-to-play coverage, no advertorial news.' },
+  { title: 'Amplify rumors', desc: 'Unverified viral claims are noted as unverified — not amplified.' },
+  { title: 'Trade accuracy for speed', desc: 'Publishing second and right is better than first and wrong.' },
+];
 
 export default function Mission() {
-  useSEO({ title: "Our Promise", description: "RSR Media's promise to the community — independent, verification-first reporting." });
+  useSEO({
+    title: "Our Promise",
+    description: "RSR Media's promise to the community — independent, verification-first reporting. Truth over speed. People over parties.",
+  });
 
   return (
     <div className="w-full pt-12 pb-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-grid opacity-[0.04] pointer-events-none" />
+      <div className="absolute inset-0 bg-grid opacity-[0.035] pointer-events-none" />
 
       <div className="mx-auto px-4 sm:px-6 max-w-[1280px] relative z-10">
 
-        <SectionHeader
-          tag="// COMMUNITY.PROMISE"
-          title="OUR PROMISE TO THE COMMUNITY"
-        />
+        {/* Header */}
+        <div className="mb-14">
+          <div className="font-mono text-[0.65rem] text-muted-foreground/45 tracking-widest uppercase flex items-center gap-2 mb-4">
+            <span className="w-8 h-px bg-primary/40" /> // COMMUNITY.PROMISE
+          </div>
+          <h1 className="text-[3.5rem] sm:text-[5rem] md:text-[6rem] font-bold uppercase leading-[0.9] mb-6"
+            style={{ fontFamily: "'Rajdhani', sans-serif" }}>
+            OUR PROMISE<br />
+            <span className="text-primary/70">TO THE COMMUNITY</span>
+          </h1>
+        </div>
 
         {/* Lead Quote */}
-        <div className="glass-panel corner-bracket p-8 md:p-12 mb-14 border border-primary/15">
-          <blockquote className="text-xl md:text-2xl font-serif font-bold text-foreground/90 leading-relaxed mb-5">
+        <div className="glass-panel corner-bracket p-8 md:p-12 mb-16 border border-primary/12">
+          <blockquote className="text-2xl md:text-3xl font-bold text-foreground/88 leading-snug mb-5"
+            style={{ fontFamily: "'Rajdhani', sans-serif" }}>
             "RSR Media exists to serve the public, not political insiders, corporate gatekeepers, or algorithmic noise."
           </blockquote>
           <p className="font-sans text-base text-muted-foreground leading-relaxed max-w-3xl">
-            Our promise is simple: serve the community before the algorithm. We will not trade accuracy for speed, context for outrage, or people for parties.
+            Our promise is simple: serve the community before the algorithm. We will not trade accuracy for speed, context for outrage, or people for parties. This is what we are built on.
           </p>
         </div>
 
-        {/* Core Principles */}
+        {/* X over Y — Principle Pairs */}
         <div className="mb-16">
-          <h2 className="font-mono text-xs text-primary tracking-widest uppercase flex items-center gap-2 mb-7">
-            <span className="w-8 h-px bg-primary" />
-            // CORE.PRINCIPLES
-          </h2>
+          <div className="font-mono text-xs text-primary tracking-widest uppercase flex items-center gap-2 mb-8">
+            <span className="w-8 h-px bg-primary" /> // SIX.PRINCIPLES
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {CORE_PRINCIPLES.map((p, i) => (
-              <motion.div key={p.title}
-                initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}
-                className="border border-border/40 bg-card/15 p-6 corner-bracket hover:border-primary/35 transition-colors group">
-                <div className="font-mono text-primary text-xs mb-3 tracking-widest">0{i + 1}</div>
-                <h3 className="font-serif font-bold text-base mb-2 group-hover:text-primary/90 transition-colors">{p.title}</h3>
+            {OVER_PRINCIPLES.map((p, i) => (
+              <motion.div key={p.a}
+                initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07 }}
+                className="border border-border/28 bg-card/8 corner-bracket p-6 hover:border-primary/30 hover:bg-card/18 transition-all group">
+                <div className="flex items-baseline gap-2 mb-3">
+                  <span className="text-2xl font-bold text-primary leading-none" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
+                    {p.a}
+                  </span>
+                  <span className="font-mono text-[0.6rem] text-muted-foreground/40 tracking-widest uppercase">over</span>
+                  <span className="text-xl font-bold text-muted-foreground/35 leading-none line-through decoration-muted-foreground/20" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
+                    {p.b}
+                  </span>
+                </div>
                 <p className="font-sans text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
               </motion.div>
             ))}
@@ -53,19 +93,18 @@ export default function Mission() {
         {/* Will Do / Won't Do */}
         <div className="grid md:grid-cols-2 gap-8 mb-14">
           <div>
-            <h2 className="font-mono text-xs text-primary tracking-widest uppercase flex items-center gap-2 mb-5">
-              <span className="w-8 h-px bg-primary" />
-              // WHAT WE WILL DO
-            </h2>
-            <div className="space-y-3">
+            <div className="font-mono text-xs text-primary tracking-widest uppercase flex items-center gap-2 mb-5">
+              <span className="w-8 h-px bg-primary" /> // WHAT WE WILL DO
+            </div>
+            <div className="space-y-2.5">
               {WILL_DO.map((p, i) => (
                 <motion.div key={p.title}
                   initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}
-                  className="flex gap-4 p-4 border border-border/30 bg-card/10 hover:bg-card/25 transition-colors">
-                  <span className="font-mono text-primary text-sm shrink-0 mt-0.5">✓</span>
+                  className="flex gap-3 p-4 border border-border/22 bg-card/8 hover:bg-card/20 transition-colors">
+                  <CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                   <div>
-                    <div className="font-mono font-bold text-xs tracking-widest text-foreground/90 mb-1 uppercase">{p.title}</div>
-                    <p className="font-sans text-xs text-muted-foreground leading-relaxed">{p.desc}</p>
+                    <div className="font-sans font-semibold text-sm text-foreground/88 mb-1">{p.title}</div>
+                    <p className="font-sans text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
                   </div>
                 </motion.div>
               ))}
@@ -73,19 +112,18 @@ export default function Mission() {
           </div>
 
           <div>
-            <h2 className="font-mono text-xs text-destructive tracking-widest uppercase flex items-center gap-2 mb-5">
-              <span className="w-8 h-px bg-destructive" />
-              // WHAT WE WILL NOT DO
-            </h2>
-            <div className="space-y-3">
+            <div className="font-mono text-xs text-destructive tracking-widest uppercase flex items-center gap-2 mb-5">
+              <span className="w-8 h-px bg-destructive" /> // WHAT WE WILL NOT DO
+            </div>
+            <div className="space-y-2.5">
               {WONT_DO.map((p, i) => (
                 <motion.div key={p.title}
                   initial={{ opacity: 0, x: 10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}
-                  className="flex gap-4 p-4 border border-destructive/15 bg-destructive/[0.03] hover:bg-destructive/[0.07] transition-colors">
-                  <span className="font-mono text-destructive text-sm shrink-0 mt-0.5">✗</span>
+                  className="flex gap-3 p-4 border border-destructive/12 bg-destructive/[0.025] hover:bg-destructive/[0.06] transition-colors">
+                  <XCircle className="w-4 h-4 text-destructive shrink-0 mt-0.5" />
                   <div>
-                    <div className="font-mono font-bold text-xs tracking-widest text-foreground/90 mb-1 uppercase">{p.title}</div>
-                    <p className="font-sans text-xs text-muted-foreground leading-relaxed">{p.desc}</p>
+                    <div className="font-sans font-semibold text-sm text-foreground/88 mb-1">{p.title}</div>
+                    <p className="font-sans text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
                   </div>
                 </motion.div>
               ))}
@@ -95,34 +133,35 @@ export default function Mission() {
 
         {/* CTAs */}
         <div className="grid sm:grid-cols-2 gap-5 mb-12">
-          <div className="border border-primary/15 bg-card/12 corner-bracket p-7">
-            <div className="font-mono text-[0.62rem] text-primary/60 tracking-widest uppercase mb-3">// HAVE INFORMATION?</div>
-            <h3 className="font-serif font-bold text-xl mb-3 uppercase">Submit a Tip</h3>
-            <p className="font-sans text-sm text-muted-foreground leading-relaxed mb-5">
+          <div className="border border-primary/15 bg-card/8 corner-bracket p-7">
+            <div className="font-mono text-[0.62rem] text-primary/55 tracking-widest uppercase mb-3">// HAVE INFORMATION?</div>
+            <h3 className="text-2xl mb-3 uppercase" style={{ fontFamily: "'Rajdhani', sans-serif", fontWeight: 700 }}>Call the Hotline</h3>
+            <p className="font-sans text-base text-muted-foreground leading-relaxed mb-5">
               Source identity protected on request. Tips submitted by phone or email. No classified material.
             </p>
-            <CommandButton href="/tip-line" variant="primary" onClick={trackTipClick} className="text-[0.68rem] h-10">
-              OPEN TIP LINE
-            </CommandButton>
+            <Link href="/hotline" onClick={trackTipClick}
+              className="inline-flex items-center h-11 px-6 font-mono text-[0.68rem] tracking-widest uppercase font-bold border border-primary/50 text-primary bg-primary/10 hover:bg-primary hover:text-white transition-all corner-bracket">
+              OPEN HOTLINE
+            </Link>
           </div>
 
-          <div className="border border-border/25 bg-card/12 corner-bracket p-7">
-            <div className="font-mono text-[0.62rem] text-primary/60 tracking-widest uppercase mb-3">// STAY INFORMED</div>
-            <h3 className="font-serif font-bold text-xl mb-3 uppercase">Read the Reports</h3>
-            <p className="font-sans text-sm text-muted-foreground leading-relaxed mb-5">
+          <div className="border border-border/22 bg-card/8 corner-bracket p-7">
+            <div className="font-mono text-[0.62rem] text-primary/55 tracking-widest uppercase mb-3">// STAY INFORMED</div>
+            <h3 className="text-2xl mb-3 uppercase" style={{ fontFamily: "'Rajdhani', sans-serif", fontWeight: 700 }}>Read the Reports</h3>
+            <p className="font-sans text-base text-muted-foreground leading-relaxed mb-5">
               Published reports are verified, sourced, and reviewed. No speculation presented as fact.
             </p>
             <Link href="/reports"
-              className="inline-flex items-center font-mono text-[0.68rem] h-10 px-5 border border-border/40 bg-card/20 hover:border-primary/40 hover:bg-primary/[0.05] transition-colors tracking-widest uppercase text-foreground/80 hover:text-primary">
+              className="inline-flex items-center h-11 px-6 font-mono text-[0.68rem] tracking-widest uppercase border border-border/40 bg-card/18 hover:border-primary/40 hover:bg-primary/5 transition-colors text-foreground/70 hover:text-primary">
               VIEW ALL REPORTS
             </Link>
           </div>
         </div>
 
-        {/* Closing Statement */}
-        <div className="glass-panel border border-border/35 p-8 text-center">
-          <p className="font-mono text-[0.6rem] text-muted-foreground/40 tracking-widest uppercase mb-3">// SIGNAL OVER NOISE</p>
-          <p className="font-sans text-lg text-foreground/80 max-w-2xl mx-auto leading-relaxed">
+        {/* Closing */}
+        <div className="glass-panel border border-border/28 p-8 text-center">
+          <p className="font-mono text-[0.6rem] text-muted-foreground/35 tracking-widest uppercase mb-3">// SIGNAL OVER NOISE</p>
+          <p className="font-sans text-lg text-foreground/75 max-w-2xl mx-auto leading-relaxed">
             Independent. Verification-first. Community-facing. This is RSR Media.
           </p>
         </div>
