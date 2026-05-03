@@ -86,11 +86,12 @@ export default function Home() {
                   fontSize: '14px',
                   letterSpacing: '0.3em',
                   marginTop: '12px',
-                  color: 'rgba(255,179,71,0.85)',
-                  textShadow: '0 0 12px rgba(255,179,71,0.3)',
+                  color: 'rgba(225, 230, 235, 0.72)',
+                  textShadow: '0 0 10px rgba(255,255,255,0.08)',
                 }}
               >
-                POWERED BY PACIFIC SYSTEMS
+                POWERED BY{' '}
+                <span style={{ color: 'rgba(255,255,255,0.88)' }}>PACIFIC SYSTEMS</span>
               </p>
 
               <p className="text-xl md:text-2xl font-sans text-foreground/85 max-w-xl mb-2 font-medium leading-snug">

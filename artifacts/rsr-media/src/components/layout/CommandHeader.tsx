@@ -164,34 +164,19 @@ export function CommandHeader() {
             className="h-7 w-7 object-contain group-hover:opacity-80 transition-opacity"
             onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
           />
-          <div className="flex items-baseline gap-2 whitespace-nowrap">
-            <span
-              style={{
-                fontFamily: "'Orbitron', sans-serif",
-                fontWeight: 900,
-                fontSize: '0.85rem',
-                letterSpacing: '0.08em',
-                color: '#f4f6f8',
-                textShadow: '0 0 14px rgba(255,255,255,0.35), 0 0 6px rgba(0,224,164,0.18)',
-              }}
-            >
-              RSR MEDIA
-            </span>
-            <span
-              className="hidden xl:inline"
-              style={{
-                fontFamily: "'Orbitron', sans-serif",
-                fontWeight: 600,
-                fontSize: '0.52rem',
-                letterSpacing: '0.18em',
-                textTransform: 'uppercase',
-                color: 'rgba(255,179,71,0.78)',
-                textShadow: '0 0 10px rgba(255,179,71,0.28)',
-              }}
-            >
-              // POWERED BY PACIFIC SYSTEMS
-            </span>
-          </div>
+          <span
+            className="whitespace-nowrap"
+            style={{
+              fontFamily: "'Orbitron', sans-serif",
+              fontWeight: 900,
+              fontSize: '0.85rem',
+              letterSpacing: '0.08em',
+              color: '#f4f6f8',
+              textShadow: '0 0 14px rgba(255,255,255,0.35), 0 0 6px rgba(0,224,164,0.18)',
+            }}
+          >
+            RSR MEDIA
+          </span>
         </Link>
 
         <div className="hidden lg:block w-px h-5 bg-border/25 mr-1 shrink-0" />
