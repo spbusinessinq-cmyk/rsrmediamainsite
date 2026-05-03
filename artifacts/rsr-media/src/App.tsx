@@ -19,6 +19,7 @@ import Armory from "@/pages/Armory";
 import TipLine from "@/pages/TipLine";
 import Contact from "@/pages/Contact";
 import AdminDashboard from "@/pages/AdminDashboard";
+import Channels from "@/pages/Channels";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +37,7 @@ function Router() {
       <Route path="/armory" component={Armory} />
       <Route path="/tip-line" component={TipLine} />
       <Route path="/contact" component={Contact} />
+      <Route path="/channels" component={Channels} />
       {/* Admin routes — all handled by AdminDashboard via internal route matching */}
       <Route path="/admin" component={AdminDashboard} />
       <Route path="/admin/reports" component={AdminDashboard} />

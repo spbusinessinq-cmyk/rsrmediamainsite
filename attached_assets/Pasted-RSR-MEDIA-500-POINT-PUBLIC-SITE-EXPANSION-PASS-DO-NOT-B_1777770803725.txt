@@ -1,0 +1,306 @@
+RSR MEDIA 500-POINT PUBLIC SITE EXPANSION PASS
+DO NOT BREAK ADMIN/BACKEND/REPORT CRUD
+
+MISSION:
+Keep all existing admin, reports, localStorage CRUD, X import draft tool, passcode gate, and routes working exactly as-is. This pass is focused on making the public site feel complete, full-screen, sharp, and connected to RSR’s real public channels.
+
+OFFICIAL INFO:
+1. Hotline: 16315142480
+2. Email: newsroom@rsrmedia.org
+3. X account: https://x.com/RSRINTEL
+4. RSR Intel site: https://www.rsrintel.com/#/
+5. Pacific Systems: https://rsrindexnet.edgeone.app/
+6. Black Dog: https://blackdogmain12.edgeone.app/
+7. Armory: https://rsrarmory.store
+8. YouTube channel: add configurable constant YOUTUBE_URL = "PASTE_YOUTUBE_CHANNEL_URL_HERE"
+
+CRITICAL:
+9. Do not delete admin.
+10. Do not break /admin.
+11. Do not break /admin/reports.
+12. Do not break Import X.
+13. Do not break reports appearing publicly after publish.
+14. Do not fake analytics.
+15. Do not fake YouTube stats.
+16. Do not fake X stats.
+17. Use external links and manual embeds only.
+
+HEADER FIX:
+18. Header still feels cramped and too tiny.
+19. Rebuild header as a cleaner command bar.
+20. Left: RSR MEDIA logo/text.
+21. Center: nav links.
+22. Right: UTC, status, compact social icons.
+23. Add X icon/link to https://x.com/RSRINTEL.
+24. Add YouTube icon/link from YOUTUBE_URL.
+25. Keep nav one-line on desktop.
+26. Collapse to hamburger earlier.
+27. Increase vertical polish.
+28. Add subtle glass blur.
+29. Do not make nav text wrap.
+30. Remove awkward huge spacing between nav items.
+31. Use consistent nav labels:
+    HOME
+    ABOUT
+    REPORTS
+    MISSION
+    NETWORK
+    PACIFIC
+    SECURITY
+    ARMORY
+    TIPS
+    CONTACT
+32. Social links should be icon-only on desktop right side.
+33. Mobile menu includes full labels and external links.
+
+FULL-SCREEN EMPTY SIDE FIX:
+34. The site has dead empty side space on wide screens.
+35. Add full-viewport background system behind content.
+36. Use dark radial gradients left/right.
+37. Add faint vertical grid columns across whole viewport.
+38. Add subtle side rails on far left and far right.
+39. Add floating micro-labels on side rails:
+    SIGNAL
+    PUBLIC
+    REPORTS
+    RSR
+40. Add subtle noise texture.
+41. Keep main content max-width 1280 or 1360.
+42. But background must fill full screen so sides do not feel empty.
+43. Do not stretch content too wide.
+44. Add visual depth on sides, not random clutter.
+45. Hero should feel centered in a full command environment.
+
+HOME HERO IMPROVEMENT:
+46. Current hero is better but still too boxy/empty.
+47. Add stronger cinematic top section.
+48. Add small right-side system card stack below Signal Console:
+    X Dispatches
+    YouTube Channel
+    Tip Line
+49. These are real external cards, not fake stats.
+50. Add “Follow on X” CTA.
+51. Add “Watch on YouTube” CTA.
+52. Add “Call Hotline” CTA.
+53. Add “Email Newsroom” CTA.
+54. Add a subtle RSR seal/watermark ONLY as monochrome abstract if available.
+55. If logo looks bad, do not use it.
+56. Keep the colored logo small in header only.
+57. Make hero bottom ticker cleaner and less cut off.
+58. Ticker should not extend beyond container.
+59. Ticker should not be unreadably tiny.
+60. Add subtle pause on hover.
+
+HOME BELOW HERO:
+61. Add a “Public Channels” section.
+62. Cards:
+    X / RSRINTEL
+    YouTube / Red State Rhetoric Media
+    Hotline
+    Newsroom Email
+63. X card links to https://x.com/RSRINTEL.
+64. YouTube card uses YOUTUBE_URL.
+65. Hotline card uses tel:16315142480.
+66. Email card uses mailto:newsroom@rsrmedia.org.
+67. Add “Latest Reports” section.
+68. Add “Network Properties” section.
+69. Add “Community Promise” section.
+70. Make each section visually distinct with glass panels.
+
+NEW X PAGE/TAB:
+71. Add public route /x.
+72. Nav label can be “X” or put under Channels page if nav too crowded.
+73. Better option: create /channels and include X + YouTube together.
+74. If adding nav item makes header cramped, call it CHANNELS.
+75. Page title: Public Channels.
+76. X section:
+    RSRINTEL
+    Link: https://x.com/RSRINTEL
+    Copy: “Real-time intelligence analysis, public signal tracking, and report distribution.”
+77. Add CTA: Open X.
+78. Add instruction panel:
+    “Reports can be linked from X through the Operator Terminal.”
+79. Add no embedded timeline unless safe and clean.
+80. Do not fake X feed.
+81. Optional manual featured X links can be added from admin later.
+
+YOUTUBE:
+82. Add YouTube channel section to /channels.
+83. Use configurable YOUTUBE_URL.
+84. If URL is blank, show “YouTube link pending.”
+85. Do not show fake subscriber count.
+86. Do not embed fake videos.
+87. Add manual video cards data file:
+    src/data/videos.ts
+88. Fields:
+    id
+    title
+    description
+    youtubeUrl
+    thumbnail optional
+    publishedAt optional
+89. Public channels page displays manual video cards.
+90. If no videos, show polished empty state.
+91. Add “Watch on YouTube” button.
+92. Add YouTube CTA on homepage.
+
+REPORTS + X CONNECTION:
+93. Keep ImportXTool.
+94. Add public report detail field:
+    “Original X Source”
+95. If xUrl exists, show button:
+    READ ORIGINAL ON X
+96. Add “Published from RSR Operator Terminal” metadata line.
+97. Add “Source links” panel.
+98. Add “Related public channel” panel linking X and YouTube.
+99. Reports list should have better spacing and stronger cards.
+100. Featured reports should look premium.
+
+ADMIN CHANNELS:
+101. Add admin section “Channels” if simple.
+102. Admin settings should show X_URL and YOUTUBE_URL.
+103. If settings only local display for now, label as local preview.
+104. Add manual video manager only if easy.
+105. If too much, just create videos.ts and README instructions.
+106. Do not overbuild and break report CRUD.
+
+VISUAL POLISH:
+107. Add more glass depth.
+108. Add thicker hero outer shell.
+109. Add subtle top highlight.
+110. Add bottom glow.
+111. Add diagonal dark gradients.
+112. Add corner bracket details.
+113. Add stronger CTA hover states.
+114. Add better paragraph contrast.
+115. Some text is too dim right now.
+116. Raise body text opacity slightly.
+117. Keep micro labels dim.
+118. Make important copy readable.
+119. Make buttons feel clickable.
+120. Add consistent section spacing.
+
+LAYOUT:
+121. Header fixed/sticky.
+122. Main content starts below header cleanly.
+123. Hero should not be too low.
+124. Hero should not require awkward scroll to see top.
+125. On 1440/1600 screens, content should feel balanced.
+126. On full-screen browser, sides should have ambient interface detail.
+127. On laptop, no clipping.
+128. On mobile, hero stacks cleanly.
+129. Right console should go below title on mobile.
+130. Contact chips stack.
+
+PACIFIC PAGE:
+131. The Pacific page now needs more polish.
+132. Add top hero block with amber title.
+133. Add external CTA above fold.
+134. Cards should align cleanly.
+135. No huge dead space.
+136. No clipped circles.
+137. Add link to Pacific Systems external site.
+138. Add “Bridge page only” language.
+139. Make it visually tied to Pacific but not pretending to be the full app.
+
+SECURITY / BLACK DOG:
+140. Page should be called Security in nav, Black Dog on page.
+141. Add external system badge.
+142. Add CTA above fold.
+143. Add clear copy that RSR Media does not host restricted access.
+144. Make spacing tighter.
+145. Red accents only here.
+
+NETWORK PAGE:
+146. Add channel relationships:
+    RSR Media
+    RSR Intel
+    Pacific Systems
+    Black Dog
+    Armory
+    X / RSRINTEL
+    YouTube
+147. Make network diagram feel stronger.
+148. External property cards should be beautiful.
+149. Add “Public Distribution Channels” row.
+150. X and YouTube cards go here too.
+
+ABOUT PAGE:
+151. Add “Where to find us” block.
+152. X: RSRINTEL
+153. YouTube: configurable.
+154. Hotline.
+155. Newsroom email.
+
+MISSION PAGE:
+156. Add stronger community promise card.
+157. Make the page less text-wall.
+158. Use principle cards.
+159. Add CTA to submit tips.
+160. Add CTA to read reports.
+
+TIP PAGE:
+161. Add X and YouTube cards subtly at bottom.
+162. Do not distract from tip form.
+163. Hotline remains prominent.
+164. Email remains prominent.
+
+FOOTER:
+165. Footer should be upgraded.
+166. Columns:
+    RSR Media
+    Reports
+    Channels
+    Network
+    Contact
+167. Include X link.
+168. Include YouTube link.
+169. Include RSR Intel.
+170. Include Pacific.
+171. Include Security.
+172. Include Armory.
+173. Include hotline.
+174. Include newsroom email.
+175. Include Operator Access.
+176. Footer should feel like command terminal footer, not generic.
+
+DATA CONFIG:
+177. Update src/config/site.ts:
+    SITE_PHONE = "16315142480"
+    SITE_EMAIL = "newsroom@rsrmedia.org"
+    X_URL = "https://x.com/RSRINTEL"
+    YOUTUBE_URL = "PASTE_YOUTUBE_CHANNEL_URL_HERE"
+    RSR_INTEL_URL = "https://www.rsrintel.com/#/"
+    PACIFIC_SYSTEMS_URL = "https://rsrindexnet.edgeone.app/"
+    BLACK_DOG_URL = "https://blackdogmain12.edgeone.app/"
+    ARMORY_URL = "https://rsrarmory.store"
+178. Do not hardcode duplicates.
+179. All links pull from config.
+
+NEW COMPONENTS:
+180. PublicChannelsSection
+181. ChannelCard
+182. AmbientSideRails
+183. FullViewportBackground
+184. SocialIconLinks
+185. FooterCommandGrid
+186. FeaturedVideoCard
+187. ExternalLinkBadge
+188. HeroContactChips
+
+QUALITY:
+189. Run build.
+190. Fix TypeScript errors.
+191. Confirm admin still works.
+192. Confirm reports still work.
+193. Confirm Import X still creates draft.
+194. Confirm public reports show X URL.
+195. Confirm no fake X feed.
+196. Confirm no fake YouTube stats.
+197. Confirm no fake analytics.
+198. Confirm nav does not wrap.
+199. Confirm no horizontal overflow.
+200. Confirm side empty space feels designed.
+
+FINAL DESIGN STANDARD:
+Make the site feel like the official public command center of RSR Media. It should feel full-screen, cinematic, glassy, sharp, and connected to RSR’s public distribution channels. Preserve the backend. Upgrade the public presentation.

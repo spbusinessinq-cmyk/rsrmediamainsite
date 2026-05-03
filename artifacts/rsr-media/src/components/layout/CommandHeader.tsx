@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'wouter';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Youtube, Phone } from 'lucide-react';
 import { UTCClock } from './UTCClock';
 import { StatusPill } from '../ui-system/StatusPill';
-import { ARMORY_URL } from '@/config/site';
+import { ARMORY_URL, X_URL, YOUTUBE_URL, isYouTubeConfigured } from '@/config/site';
+import { trackOutboundClick } from '@/lib/analytics';
 
 interface NavLink {
   href: string;
@@ -17,6 +18,7 @@ const links: NavLink[] = [
   { href: '/reports', label: 'Reports' },
   { href: '/mission', label: 'Mission' },
   { href: '/network', label: 'Network' },
+  { href: '/channels', label: 'Channels' },
   { href: '/pacific-systems', label: 'Pacific' },
   { href: '/black-dog', label: 'Security' },
   { href: ARMORY_URL, label: 'Armory', external: true },
@@ -29,31 +31,32 @@ export function CommandHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const linkClass = (active: boolean) =>
-    `relative font-mono text-[0.68rem] tracking-wider uppercase px-2.5 py-1.5 transition-all whitespace-nowrap ${
-      active
-        ? 'text-primary'
-        : 'text-muted-foreground hover:text-foreground'
+    `relative font-mono text-[0.62rem] tracking-wide uppercase px-1.5 py-1.5 transition-all whitespace-nowrap ${
+      active ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
     }`;
 
   return (
     <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur-md border-b border-border/30">
-      <div className="mx-auto px-4 max-w-[1400px] h-16 flex items-center gap-2">
+      <div className="mx-auto px-4 max-w-[1400px] h-16 flex items-center gap-1">
 
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2.5 shrink-0 group mr-3" data-testid="nav-home">
+        <Link href="/" className="flex items-center gap-2 shrink-0 group mr-2" data-testid="nav-home">
           <img
             src="/rsr-logo.png"
             alt="RSR Media"
-            className="h-8 w-8 object-contain group-hover:opacity-80 transition-opacity"
+            className="h-7 w-7 object-contain group-hover:opacity-80 transition-opacity"
             onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
           />
           <div className="flex flex-col leading-none">
-            <span className="font-serif font-bold text-sm leading-none tracking-tight">RSR MEDIA</span>
-            <span className="font-mono text-[0.55rem] text-muted-foreground/60 tracking-widest leading-none mt-0.5 hidden sm:block">PUBLIC SIGNAL</span>
+            <span className="font-serif font-bold text-[0.82rem] leading-none tracking-tight">RSR MEDIA</span>
+            <span className="font-mono text-[0.5rem] text-muted-foreground/50 tracking-widest leading-none mt-0.5 hidden sm:block">SIGNAL NETWORK</span>
           </div>
         </Link>
 
-        {/* Desktop Nav — collapse at lg */}
+        {/* Divider */}
+        <div className="hidden lg:block w-px h-5 bg-border/40 mx-1" />
+
+        {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-0 flex-1 overflow-hidden">
           {links.map(link => {
             if (link.external) {
@@ -64,6 +67,7 @@ export function CommandHeader() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={linkClass(false)}
+                  onClick={() => trackOutboundClick(`Nav: ${link.label}`, link.href)}
                 >
                   {link.label}&#8599;
                 </a>
@@ -71,22 +75,40 @@ export function CommandHeader() {
             }
             const isActive = link.href === '/' ? location === '/' : location.startsWith(link.href);
             return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={linkClass(isActive)}
-              >
+              <Link key={link.href} href={link.href} className={linkClass(isActive)}>
                 {link.label}
-                {isActive && (
-                  <span className="absolute bottom-0 left-2.5 right-2.5 h-px bg-primary" />
-                )}
+                {isActive && <span className="absolute bottom-0 left-1.5 right-1.5 h-px bg-primary" />}
               </Link>
             );
           })}
         </nav>
 
-        {/* Right: Clock + Status */}
-        <div className="hidden xl:flex items-center gap-3 ml-auto shrink-0">
+        {/* Right: Social + Clock + Status */}
+        <div className="hidden lg:flex items-center gap-2 ml-auto shrink-0">
+          {/* Social icons */}
+          <a
+            href={X_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => trackOutboundClick('Nav X Icon', X_URL)}
+            className="w-7 h-7 flex items-center justify-center border border-border/30 text-muted-foreground hover:text-foreground hover:border-primary/40 transition-colors text-[0.72rem] font-bold"
+            title="RSR Intel on X"
+          >
+            𝕏
+          </a>
+          {isYouTubeConfigured() && (
+            <a
+              href={YOUTUBE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackOutboundClick('Nav YouTube Icon', YOUTUBE_URL)}
+              className="w-7 h-7 flex items-center justify-center border border-border/30 text-muted-foreground hover:text-destructive hover:border-destructive/40 transition-colors"
+              title="RSR Media on YouTube"
+            >
+              <Youtube className="w-3.5 h-3.5" />
+            </a>
+          )}
+          <div className="w-px h-5 bg-border/40 mx-0.5" />
           <UTCClock />
           <StatusPill label="NOMINAL" status="nominal" />
         </div>
@@ -117,7 +139,7 @@ export function CommandHeader() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-mono tracking-wider uppercase text-[0.7rem] py-2.5 px-2 text-muted-foreground hover:text-foreground transition-colors"
+                    className="font-mono tracking-wider uppercase text-[0.68rem] py-2.5 px-2 text-muted-foreground hover:text-foreground transition-colors"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {link.label}&#8599;
@@ -130,7 +152,7 @@ export function CommandHeader() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`font-mono tracking-wider uppercase text-[0.7rem] py-2.5 px-2 transition-colors ${
+                  className={`font-mono tracking-wider uppercase text-[0.68rem] py-2.5 px-2 transition-colors ${
                     isActive ? 'text-primary font-semibold' : 'text-foreground hover:text-primary'
                   }`}
                 >
@@ -139,13 +161,33 @@ export function CommandHeader() {
               );
             })}
           </nav>
-          <div className="pt-2 border-t border-border/20">
+          <div className="flex items-center gap-4 pt-2 border-t border-border/20">
+            <a
+              href={X_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-[0.62rem] text-muted-foreground hover:text-foreground transition-colors tracking-widest"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              𝕏 RSRINTEL ↗
+            </a>
+            {isYouTubeConfigured() && (
+              <a
+                href={YOUTUBE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-[0.62rem] text-muted-foreground hover:text-foreground transition-colors tracking-widest"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                YT CHANNEL ↗
+              </a>
+            )}
             <Link
               href="/admin"
               onClick={() => setMobileMenuOpen(false)}
-              className="font-mono text-[0.6rem] text-muted-foreground/40 hover:text-muted-foreground transition-colors tracking-widest uppercase"
+              className="font-mono text-[0.58rem] text-muted-foreground/30 hover:text-muted-foreground transition-colors tracking-widest ml-auto"
             >
-              Operator Access
+              Operator
             </Link>
           </div>
         </div>

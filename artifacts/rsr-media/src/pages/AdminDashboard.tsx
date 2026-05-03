@@ -8,7 +8,7 @@ import { ImportXTool } from '@/components/admin/ImportXTool';
 import { AdminAnalytics } from '@/components/admin/AdminAnalytics';
 import { useReports } from '@/hooks/useReports';
 import { useAdminAuth } from '@/hooks/useAdminAuth';
-import { SITE_EMAIL, ARMORY_URL, PACIFIC_SYSTEMS_URL, BLACK_DOG_URL, RSR_INTEL_URL, SITE_PHONE } from '@/config/site';
+import { SITE_EMAIL, ARMORY_URL, PACIFIC_SYSTEMS_URL, BLACK_DOG_URL, RSR_INTEL_URL, SITE_PHONE, X_URL, YOUTUBE_URL, isYouTubeConfigured } from '@/config/site';
 import { Plus, Star, Eye, EyeOff, Trash2, Edit } from 'lucide-react';
 import { useLocation } from 'wouter';
 
@@ -188,14 +188,19 @@ function SettingsPage() {
         {[
           { label: 'SITE_EMAIL', value: SITE_EMAIL },
           { label: 'SITE_PHONE', value: SITE_PHONE },
-          { label: 'ARMORY_URL', value: ARMORY_URL },
+          { label: 'X_URL', value: X_URL },
+          { label: 'YOUTUBE_URL', value: YOUTUBE_URL, pending: !isYouTubeConfigured() },
           { label: 'RSR_INTEL_URL', value: RSR_INTEL_URL },
           { label: 'PACIFIC_SYSTEMS_URL', value: PACIFIC_SYSTEMS_URL },
           { label: 'BLACK_DOG_URL', value: BLACK_DOG_URL },
-        ].map(({ label, value }) => (
+          { label: 'ARMORY_URL', value: ARMORY_URL },
+        ].map(({ label, value, pending }) => (
           <div key={label} className="space-y-1">
-            <label className="font-mono text-[0.65rem] tracking-widest text-muted-foreground uppercase">{label}</label>
-            <input disabled type="text" className="w-full bg-background border border-border p-2 font-mono text-xs opacity-60 cursor-default" value={value} readOnly />
+            <div className="flex items-center gap-2">
+              <label className="font-mono text-[0.65rem] tracking-widest text-muted-foreground uppercase">{label}</label>
+              {pending && <span className="font-mono text-[0.55rem] text-amber-500 tracking-widest uppercase border border-amber-500/30 px-1 bg-amber-500/5">PENDING</span>}
+            </div>
+            <input disabled type="text" className={`w-full bg-background border p-2 font-mono text-xs cursor-default ${pending ? 'border-amber-500/30 opacity-50' : 'border-border opacity-60'}`} value={value} readOnly />
           </div>
         ))}
       </div>
