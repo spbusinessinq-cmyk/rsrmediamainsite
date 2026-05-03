@@ -63,36 +63,77 @@ export default function Home() {
                 RSR ECOSYSTEM // INDEPENDENT MEDIA
               </div>
 
-              {/* Hero title — single line, never wraps */}
-              <h1
-                className="hero-title uppercase mb-3 select-none text-foreground"
-                style={{
-                  fontFamily: "'Orbitron', sans-serif",
-                  fontWeight: 800,
-                  fontSize: 'clamp(48px, 6vw, 120px)',
-                  letterSpacing: '0.08em',
-                  whiteSpace: 'nowrap',
-                  display: 'block',
-                  lineHeight: 1,
-                }}
+              {/* Hero masthead — terminal/classified frame ─────────────────── */}
+              <div
+                className="relative inline-block self-start mb-6"
+                style={{ padding: '18px 26px 14px 26px' }}
               >
-                RSR MEDIA
-              </h1>
-              <p
-                className="hero-subtitle uppercase mb-6"
-                style={{
-                  fontFamily: "'Orbitron', sans-serif",
-                  fontWeight: 600,
-                  fontSize: '14px',
-                  letterSpacing: '0.3em',
-                  marginTop: '12px',
-                  color: 'rgba(225, 230, 235, 0.72)',
-                  textShadow: '0 0 10px rgba(255,255,255,0.08)',
-                }}
-              >
-                POWERED BY{' '}
-                <span style={{ color: 'rgba(255,255,255,0.88)' }}>PACIFIC SYSTEMS</span>
-              </p>
+                {/* Corner brackets — dim emerald */}
+                <span aria-hidden style={{ position: 'absolute', top: 0, left: 0, width: 16, height: 16, borderTop: '1.5px solid rgba(0,255,157,0.32)', borderLeft: '1.5px solid rgba(0,255,157,0.32)' }} />
+                <span aria-hidden style={{ position: 'absolute', top: 0, right: 0, width: 16, height: 16, borderTop: '1.5px solid rgba(0,255,157,0.32)', borderRight: '1.5px solid rgba(0,255,157,0.32)' }} />
+                <span aria-hidden style={{ position: 'absolute', bottom: 0, left: 0, width: 16, height: 16, borderBottom: '1.5px solid rgba(0,255,157,0.32)', borderLeft: '1.5px solid rgba(0,255,157,0.32)' }} />
+                <span aria-hidden style={{ position: 'absolute', bottom: 0, right: 0, width: 16, height: 16, borderBottom: '1.5px solid rgba(0,255,157,0.32)', borderRight: '1.5px solid rgba(0,255,157,0.32)' }} />
+
+                {/* Scanline overlay — faint horizontal lines, masked to title block */}
+                <span
+                  aria-hidden
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    pointerEvents: 'none',
+                    background: 'repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(255,255,255,0.025) 2px, rgba(255,255,255,0.025) 3px)',
+                    mixBlendMode: 'screen',
+                  }}
+                />
+
+                {/* Title — single line, tightened, stronger glow */}
+                <h1
+                  className="hero-title uppercase select-none text-foreground relative"
+                  style={{
+                    fontFamily: "'Orbitron', sans-serif",
+                    fontWeight: 900,
+                    fontSize: 'clamp(48px, 6vw, 120px)',
+                    letterSpacing: '0.04em',
+                    whiteSpace: 'nowrap',
+                    display: 'block',
+                    lineHeight: 1,
+                    color: '#f4f6f8',
+                    textShadow: '0 0 18px rgba(255,255,255,0.18), 0 0 6px rgba(255,255,255,0.10), 0 1px 0 rgba(0,0,0,0.5)',
+                  }}
+                >
+                  RSR MEDIA
+                </h1>
+
+                {/* Underline — gradient transparent → emerald → transparent */}
+                <div
+                  aria-hidden
+                  style={{
+                    marginTop: '10px',
+                    height: '1px',
+                    width: '100%',
+                    background: 'linear-gradient(90deg, transparent 0%, rgba(0,255,157,0.55) 50%, transparent 100%)',
+                    boxShadow: '0 0 10px rgba(0,255,157,0.25)',
+                  }}
+                />
+
+                {/* Subline — steel gray, tight under underline */}
+                <p
+                  className="hero-subtitle uppercase relative"
+                  style={{
+                    fontFamily: "'Orbitron', sans-serif",
+                    fontWeight: 600,
+                    fontSize: '13px',
+                    letterSpacing: '0.32em',
+                    marginTop: '10px',
+                    color: '#9ca3af',
+                    textAlign: 'center',
+                    textShadow: '0 0 8px rgba(255,255,255,0.05)',
+                  }}
+                >
+                  POWERED BY{' '}
+                  <span style={{ color: 'rgba(243,244,246,0.95)', fontWeight: 700 }}>PACIFIC SYSTEMS</span>
+                </p>
+              </div>
 
               <p className="text-xl md:text-2xl font-sans text-foreground/85 max-w-xl mb-2 font-medium leading-snug">
                 Independent media. Public reporting. Community signal.
