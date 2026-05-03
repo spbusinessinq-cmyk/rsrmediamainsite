@@ -1,0 +1,378 @@
+FULL 300-POINT RSR MEDIA MAIN WEBSITE MEGA PASS
+
+MISSION:
+Rebuild rsrmedia.org into the official RSR Media command-console website. This is not a basic company site. This is the main public media hub for RSR Media, connected to RSR Intelligence Network, Pacific Systems, Press Corps, articles, shows, X publishing, merch, tip intake, and backend operator stats.
+
+STYLE TARGET:
+Use the attached references as visual direction:
+- RSR Intelligence Network dark satellite/world-map banner
+- Pacific Systems high-end black/orange data infrastructure UI
+- BlackVolt green terminal command console
+- Orbitron headline/nav typography
+- IBM Plex Mono or similar monospace for system readouts
+- Console interface
+- Tactical media network
+- Intelligence newsroom
+- Dark, cinematic, hard-hitting
+
+CURRENT DESIGN PROBLEM:
+The current site is too plain, too empty, too centered, too generic, and not aggressive enough. It does not feel like a full RSR command system. Redesign harder.
+
+CORE INFO:
+1. Main domain: rsrmedia.org
+2. Merch: https://rsrarmory.store
+3. Email: newsroom@rsrmedia.org
+4. Phone number: add as editable global constant SITE_PHONE = "ADD_RSR_PHONE_HERE"
+5. Replace all phone displays from that one constant.
+6. Site must be EdgeOne-ready.
+7. Built in React + Vite.
+8. TypeScript preferred.
+9. Static frontend must work even before backend is attached.
+10. Backend/admin architecture must be scaffolded cleanly.
+
+VISUAL SYSTEM:
+11. Use Orbitron for nav, headings, labels, buttons.
+12. Use IBM Plex Mono or JetBrains Mono for data text.
+13. Dark black base.
+14. Steel gray borders.
+15. Emerald green for active command states.
+16. Ice-blue for intelligence links.
+17. Amber/orange only for Pacific Systems/data accents.
+18. Crimson only for urgent media alerts.
+19. No purple.
+20. No soft SaaS dashboard look.
+21. No generic cards.
+22. No basic centered Wix replacement.
+23. No bland hero.
+24. No huge empty dead zones.
+25. Build layered console depth.
+26. Add scanline overlay.
+27. Add animated grid background.
+28. Add subtle satellite/world-map texture section.
+29. Add terminal-style status rails.
+30. Add live UTC clock.
+31. Add command ticker.
+32. Add footer terminal strip.
+33. Add section labels like “// NETWORK NODE”
+34. Add interface borders/corner brackets.
+35. Add animated hover outlines.
+36. Add glowing command cursor details.
+37. Add boot sequence intro, skippable or short.
+38. Add reduced-motion support.
+39. Make it mobile usable.
+40. Make desktop hit hard.
+
+GLOBAL LAYOUT:
+41. Header must feel like command nav, not normal website nav.
+42. Left logo lockup: RSR MEDIA.
+43. Sub-label: PUBLIC SIGNAL TERMINAL.
+44. Nav: Home, Live Desk, Articles, Reports, Broadcasts, Network, Pacific Systems, Press Corps, Armory, Submit Tip, Contact.
+45. Header right: UTC clock, status pill, operator/admin button.
+46. Mobile menu must work.
+47. Active nav state must be obvious.
+48. Site must not horizontally overflow.
+49. Every page must have strong page header.
+50. Every page must feel like a different console panel, not repeated boring sections.
+
+HOME PAGE:
+51. Replace plain hero with command-console hero.
+52. Hero title: RSR MEDIA.
+53. Hero kicker: PUBLIC SIGNAL TERMINAL // FIELD REPORTING // INTELLIGENCE-DRIVEN MEDIA.
+54. Hero subtitle: Independent media, field reporting, and intelligence-driven analysis built for signal over noise.
+55. Add right-side visual console panel.
+56. Right panel should include fake interface labels but no fake numbers unless static labels.
+57. Add “LIVE DESK READY” status, not fake live stats.
+58. Add CTA: Enter Live Desk.
+59. Add CTA: Submit a Tip.
+60. Add CTA: Visit RSR Armory.
+61. Add CTA: Contact Newsroom.
+62. Add network node cards: Media, Intelligence, Pacific Systems, Press Corps.
+63. Cards must look like command modules.
+64. Add animated system rail under hero.
+65. Add “What We Cover” section with strong topic cards.
+66. Add topics: Power, Institutions, Corruption, Infrastructure, Technology, Conflict, Civil Society, Media, Surveillance, Economy.
+67. Add “How We Operate”: Observe → Verify → Analyze → Publish.
+68. Add “Latest Articles” section connected to article data source.
+69. Add “Broadcast Desk” preview.
+70. Add “Tip Line” CTA with email and phone constant.
+71. Add “Armory” merch block linking rsrarmory.store.
+72. Add footer command strip.
+
+LIVE DESK PAGE:
+73. Create Live Desk page.
+74. This is public-facing newsroom command hub.
+75. Include article feed.
+76. Include latest posts.
+77. Include live update style panel.
+78. No fake breaking news.
+79. Empty state says “No live desk items published yet.”
+80. Add editor-ready architecture for future backend.
+81. Include categories.
+82. Include search.
+83. Include filters.
+84. Include X article import/link section.
+85. Include featured report panel.
+86. Include broadcast status panel.
+87. Include tip CTA.
+
+ARTICLES SYSTEM:
+88. Create article database/data model scaffold.
+89. Static JSON or local data file for now.
+90. Fields: id, title, slug, excerpt, body, author, category, tags, status, createdAt, updatedAt, sourceLinks, xPostUrl, viewCount, featuredImage, confidenceLabel.
+91. Article list page.
+92. Article detail page.
+93. Markdown-ready body rendering or simple rich text structure.
+94. Article cards must feel like intel dispatches.
+95. Add confidence labels: Confirmed, Developing, Analysis, Opinion, Field Note.
+96. Add category badges.
+97. Add view count display.
+98. For now view count can be static/local placeholder with clear code comments.
+99. Do not claim live analytics until backend added.
+100. Add “Share to X” link behavior.
+101. Add “Source Links” section.
+102. Add author line.
+103. Add related articles by tag.
+104. Add SEO meta per article if possible.
+105. Add Open Graph-ready structure.
+
+REPORTS PAGE:
+106. Create reports/publications hub.
+107. Sections: Investigations, Briefs, Field Notes, Special Reports.
+108. Empty state allowed if no reports.
+109. Add report detail route scaffold.
+110. Add downloadable PDF slot structure.
+111. Add “RSR Verified” label design.
+112. Add source discipline block.
+113. Add report cards with status.
+
+BROADCASTS PAGE:
+114. Create show hub.
+115. Include The Transmission.
+116. The Briefing Room.
+117. The Citadel Files.
+118. Ground Zero.
+119. Doctrine Sessions.
+120. Eyes of the Republic.
+121. The Command Directive.
+122. Add “Nothing Personal” slot if relevant.
+123. Each show gets card, format, schedule/status, description.
+124. Add “Pitch a segment” mailto.
+125. Add future embed slots for YouTube/X/TikTok.
+126. Do not embed broken iframes.
+127. Add “Coming soon” where needed.
+
+NETWORK PAGE:
+128. Explain RSR Media’s place in RSR ecosystem.
+129. RSR Media = public publishing arm.
+130. RSR Intelligence Network = intelligence architecture.
+131. Pacific Systems = data infrastructure.
+132. Press Corps = field reporting.
+133. RSR Armory = merch/public gear shop.
+134. Add command-map visual.
+135. Add node cards with routes.
+136. Add copy: “Media is the front-end. Intelligence is the architecture.”
+137. Add ecosystem diagram.
+138. Make this page feel like entering a classified network map.
+
+PACIFIC SYSTEMS PAGE:
+139. Use stronger Pacific Systems visual style from screenshots.
+140. Black base.
+141. Amber/orange accents.
+142. Big blocky title: PACIFIC SYSTEMS.
+143. Subtitle: Structured Data Infrastructure.
+144. Explain it as data infrastructure division of RSR Intelligence Network.
+145. Modules: Signals, Datasets, Records, Method, Access.
+146. Add honest badge: No mock data.
+147. Add status: Infrastructure layer expanding.
+148. No fake counters.
+149. Add architecture cards.
+150. Add method section.
+151. Add CTA to data infrastructure.
+152. Add visual circular system diagram.
+
+PRESS CORPS PAGE:
+153. Create field operations page.
+154. Explain RSR Press Corps.
+155. Field reporting.
+156. Event coverage.
+157. Public interviews.
+158. Tip intake.
+159. Contributor network.
+160. Add contributor CTA.
+161. Add field report CTA.
+162. Add standards panel.
+163. Standards: document, verify, stay lawful, avoid confrontation, preserve source context.
+164. Avoid fake credential claims.
+165. Use “press operations and contributor coordination.”
+166. Add field kit style visual.
+
+SUBMIT TIP PAGE:
+167. Create serious tip intake page.
+168. Show newsroom email.
+169. Show phone constant.
+170. Add form UI.
+171. Fields: name optional, email optional, phone optional, topic, location, summary, supporting links, urgency, source sensitivity.
+172. Submit opens mailto:newsroom@rsrmedia.org with prefilled subject/body.
+173. Add “Do not submit classified, stolen, or illegally obtained material” caution.
+174. Add source protection note.
+175. Add correction/tip routing language.
+176. Add “Call/Text” block using phone constant.
+
+CONTACT PAGE:
+177. Add cards: Newsroom, Tips, Press, Partnerships, Corrections, Armory.
+178. All newsroom/contact buttons use newsroom@rsrmedia.org.
+179. Armory goes to rsrarmory.store.
+180. Add phone display from constant.
+181. Add correction policy.
+182. Add response expectation copy without promising exact timing.
+
+ARMORY PAGE:
+183. Create merch page.
+184. Title: RSR ARMORY.
+185. Subtitle: Official merch and field gear shop.
+186. CTA to https://rsrarmory.store.
+187. Explain this is external official shop.
+188. Add tactical shop visual block.
+189. Add no iframe unless explicitly needed.
+190. Link opens safely.
+
+ADMIN / BACKEND SCAFFOLD:
+191. Create hidden/admin route: /operator or /admin.
+192. Protect visually with “backend not connected yet” if no auth.
+193. Build admin dashboard UI scaffold.
+194. Dashboard sections: Site Stats, Articles, X Links, Reports, Tips, Broadcasts, Settings.
+195. Add stats cards: Total Visits, Today, Article Views, Tip Submissions, Top Article.
+196. Clearly label stats as “Pending backend connection” until real analytics added.
+197. Do not fake real numbers.
+198. Build interfaces/types for analytics.
+199. Add service file for future analytics API.
+200. Add service file for future article CRUD API.
+201. Add service file for future X import API.
+202. Add environment variable placeholders.
+203. Add README notes for backend wiring.
+204. Add local admin UI components.
+205. Add article editor UI scaffold.
+206. Article editor fields: title, slug, excerpt, body, category, tags, source links, X URL, status, publish date.
+207. Add “Save Draft” disabled/pending backend if no backend.
+208. Add “Preview Article” local preview.
+209. Add import X article/link field.
+210. Add view count UI field.
+211. Add tips inbox UI scaffold.
+212. Add settings page for phone/email/social links.
+213. Make it clear backend is scaffolded, not falsely live.
+
+ANALYTICS PLAN IN CODE:
+214. Prepare for Plausible, Umami, or custom backend.
+215. Add analytics abstraction.
+216. Functions: trackPageView, trackArticleView, getDashboardStats.
+217. Do not call paid API.
+218. Add comments where EdgeOne/serverless function can be attached.
+219. Add optional localStorage dev counter only if clearly marked development-only.
+220. Admin stats must not lie.
+
+X / ARTICLES INTEGRATION:
+221. Add support for manually linking X articles/posts.
+222. Article detail can display “View on X.”
+223. Admin article editor includes X URL.
+224. Create “X Dispatches” section.
+225. No scraping.
+226. No API key requirement yet.
+227. Future-ready for X API/import.
+228. Add README describing manual workflow.
+
+SEO:
+229. Add page titles.
+230. Add meta descriptions.
+231. Add Open Graph basics.
+232. Add favicon placeholder support.
+233. Add robots.txt.
+234. Add sitemap structure if simple.
+235. Make rsrmedia.org production-ready.
+
+PERFORMANCE:
+236. No huge unoptimized assets.
+237. Use CSS animations carefully.
+238. Lazy load heavy sections if needed.
+239. No animation causing scroll lag.
+240. Respect prefers-reduced-motion.
+241. Build must be clean.
+
+RESPONSIVE:
+242. Desktop must look elite.
+243. 1440 width must be balanced.
+244. No left-squished layout.
+245. No giant right blank gap.
+246. Tablet must stack elegantly.
+247. Mobile nav must work.
+248. Mobile hero must still feel like console.
+249. Article pages must read well on phone.
+250. Admin scaffold must be usable on desktop at minimum.
+
+COPY TONE:
+251. Hard.
+252. Serious.
+253. Media-grade.
+254. Intelligence-grade.
+255. Calm.
+256. Evidence-first.
+257. No hype slogans everywhere.
+258. No cringe.
+259. No “revolutionary platform” nonsense.
+260. No fake authority.
+261. No conspiracy phrasing.
+262. Use “signals,” “records,” “field reporting,” “source discipline,” “public analysis,” “verification.”
+
+INTERACTIONS:
+263. All buttons route correctly.
+264. Cards have hover states.
+265. Nav links work.
+266. Mailto links work.
+267. External Armory link works.
+268. Submit tip mailto builds useful subject/body.
+269. Article cards click to article pages.
+270. Admin link reachable but not exposed loudly in main nav unless placed in footer/operator button.
+271. 404 page routes back home.
+
+COMPONENTS TO BUILD:
+272. CommandHeader
+273. MobileNav
+274. UTCClock
+275. StatusPill
+276. ConsoleHero
+277. SystemCard
+278. SectionHeader
+279. CommandButton
+280. ArticleCard
+281. ArticleDetail
+282. ReportCard
+283. ShowCard
+284. TipFormMailto
+285. Footer
+286. AdminShell
+287. StatsPanel
+288. ArticleEditorMock
+289. XLinkManager
+290. EmptyState
+291. TerminalTicker
+292. ScanlineOverlay
+293. GridBackground
+294. NetworkDiagram
+
+EDGEONE / DEPLOYMENT:
+295. Build command must pass.
+296. Output directory must be dist.
+297. Add SPA fallback file if needed: /* /index.html 200.
+298. Ensure routes work after refresh on EdgeOne.
+299. Add README deployment instructions.
+300. Final result must feel like entering the RSR Media command console, not visiting a Wix replacement.
+
+FINAL CHECK:
+- Run build.
+- Fix errors.
+- Check every route.
+- Confirm mobile.
+- Confirm no fake data.
+- Confirm newsroom@rsrmedia.org appears correctly.
+- Confirm rsrarmory.store appears correctly.
+- Confirm SITE_PHONE constant exists.
+- Confirm design is dramatically stronger than current screenshots.

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /operator
+Sitemap: https://rsrmedia.org/sitemap.xml
