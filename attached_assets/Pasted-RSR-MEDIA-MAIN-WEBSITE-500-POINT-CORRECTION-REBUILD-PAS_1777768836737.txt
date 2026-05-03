@@ -1,0 +1,710 @@
+RSR MEDIA MAIN WEBSITE — 500 POINT CORRECTION + REBUILD PASS
+
+MISSION:
+Rebuild the RSR Media site into the official public-facing RSR Media main website. This must be accurate, sharp, glassy, command-console styled, and connected properly to the rest of the RSR ecosystem.
+
+THIS IS NOT A PRESS CORPS SITE.
+THIS IS NOT A LIVE DESK APP.
+THIS IS NOT A FAKE NEWS DASHBOARD.
+THIS IS THE MAIN RSR MEDIA WEBSITE.
+
+OFFICIAL FACTS:
+1. Main domain: rsrmedia.org
+2. Official newsroom email: newsroom@rsrmedia.org
+3. This is the ONLY email shown anywhere.
+4. RSR hotline phone number must be stored in one global constant:
+   SITE_PHONE = "PASTE_REAL_RSR_HOTLINE_NUMBER_HERE"
+5. The phone number appears as RSR HOTLINE / TIP LINE / CALL-IN LINE depending page context.
+6. Official RSR Intelligence Network link: https://www.rsrintel.com/#/
+7. Official Pacific Systems link: https://rsrindexnet.edgeone.app/
+8. Official Black Dog Security link: https://blackdogmain12.edgeone.app/
+9. Official merch shop: https://rsrarmory.store
+10. No Press Corps page on this site.
+11. No fake “Press Corps” system unless only mentioned as part of RSR Intel’s broader ecosystem.
+12. RSR Intel explains deeper intelligence/press/network operations.
+13. RSR Media is the public newsroom/media/community-facing site.
+14. Pacific Systems is the data infrastructure site.
+15. Black Dog is the security/cyber-facing app.
+16. RSR Armory is the merch shop.
+17. Only the site owner/admin can log in.
+18. Public users do not get accounts.
+19. Admin is only for owner stats/content management.
+20. Remove “Live Desk” unless it is renamed into something that makes sense.
+
+CORE RESTRUCTURE:
+21. Remove Live Desk from public nav.
+22. Replace Live Desk with “Reports.”
+23. Reports should be the public article/report archive.
+24. Reports must use real/manual content only.
+25. Do not show fake 2024 articles.
+26. Do not show fake live stories.
+27. Empty state is okay if no real reports.
+28. Weekly updates will be added manually and redeployed.
+29. Site should be easy to update weekly by editing one data file.
+30. Admin can be scaffolded but must not pretend real backend is active if it is not.
+
+NAVIGATION:
+31. Home
+32. About
+33. Reports
+34. Mission
+35. Network
+36. Pacific Systems
+37. Black Dog
+38. Armory
+39. Tip Line
+40. Contact
+41. Admin button should be hidden/subtle, not public-focused.
+42. Admin route: /admin
+43. Admin route must not be in main nav.
+44. Footer can include small “Operator Access.”
+45. Public users should never see login prompts unless clicking admin.
+
+DESIGN OVERHAUL:
+46. Current site is too flat.
+47. Add glass panels.
+48. Add more boxed sections.
+49. Add more interface depth.
+50. Add layered backgrounds.
+51. Add stronger RSR identity.
+52. Add the uploaded RSR logo properly.
+53. Use logo as header mark.
+54. Use logo as faint watermark in hero.
+55. Use logo as footer seal.
+56. Do not stretch logo.
+57. Do not make logo blurry.
+58. Use object-fit contain.
+59. Use transparent placement if possible.
+60. Add fallback text if logo missing.
+
+TYPOGRAPHY:
+61. Orbitron for headings.
+62. Orbitron for nav.
+63. Orbitron for buttons.
+64. Orbitron for system labels.
+65. IBM Plex Mono or JetBrains Mono for readouts.
+66. Use normal readable sans-serif for body if needed.
+67. No serif newspaper font on the new command UI.
+68. Old Wix serif layout must be replaced.
+69. Use large aggressive headings.
+70. Keep paragraph text readable.
+
+VISUAL VIBE:
+71. Black base.
+72. Charcoal glass panels.
+73. Steel borders.
+74. Emerald active states.
+75. Ice-blue links.
+76. Amber only for Pacific Systems.
+77. Deep red only for mission/urgent accents.
+78. No purple.
+79. No bright childish colors.
+80. No generic SaaS look.
+81. No empty centered hero only.
+82. Think RSR Intel + Pacific Systems + BlackVolt.
+83. Console website.
+84. Tactical media hub.
+85. Intelligence newsroom.
+86. Glassy but still dark.
+87. More depth.
+88. More boxes.
+89. More section systems.
+90. More visual rhythm.
+
+SCROLL FIX:
+91. Current scroll feels too fast/jumpy.
+92. Remove aggressive scroll snapping.
+93. Remove forced wheel acceleration if any.
+94. Use normal browser scroll.
+95. Smooth scroll should be subtle only.
+96. Do not make sections auto-jump.
+97. Avoid scroll-jacking.
+98. Keep page stable.
+99. Fix horizontal overflow.
+100. Fix any right-side gap.
+
+HOME PAGE:
+101. Hero must hit hard.
+102. Title: RSR MEDIA
+103. Subtitle: Independent media. Public reporting. Community signal.
+104. Kicker: PUBLIC SIGNAL NETWORK // LOS ANGELES // INDEPENDENT MEDIA
+105. Show RSR logo watermark right side.
+106. Add glass status panel right side.
+107. Status panel items:
+    - NEWSROOM: ACTIVE
+    - TIP LINE: OPEN
+    - COMMUNITY REPORTS: REVIEWED
+    - INTEL NETWORK: LINKED
+108. Do not use fake numbers.
+109. Add CTA: Read Reports
+110. Add CTA: Submit Tip
+111. Add CTA: Visit RSR Intel
+112. Add CTA: Shop Armory
+113. Add phone number block using SITE_PHONE.
+114. Add newsroom email block using newsroom@rsrmedia.org.
+115. Add “What RSR Media Is” section.
+116. Add “Community Promise” preview.
+117. Add “Network Connections” section.
+118. Include RSR Intel, Pacific Systems, Black Dog, Armory.
+119. Make external destination cards look like command modules.
+120. External cards open in new tab.
+
+ABOUT PAGE:
+121. About should explain RSR Media accurately.
+122. Use current “Who We Are” content but modernize it.
+123. Avoid saying “leading” unless proven.
+124. Avoid “100% factual” because corrections happen in real journalism.
+125. Say “fact-driven,” “source-conscious,” “independent,” “community-facing.”
+126. Mention LA-based only if accurate.
+127. Explain RSR Media as public media/community reporting front.
+128. Explain that RSR Intelligence Network is separate/deeper analysis side.
+129. Explain that Pacific Systems supports data infrastructure.
+130. Explain that Black Dog is separate security/cyber system.
+131. Add “What We Cover.”
+132. Politics.
+133. Culture.
+134. Power.
+135. Institutions.
+136. Local community concerns.
+137. Infrastructure.
+138. Public accountability.
+139. Media narratives.
+140. Technology and surveillance.
+
+MISSION PAGE:
+141. Replace old mission page with stronger “Promise to the Community.”
+142. Do not make it too partisan.
+143. Make it bold but credible.
+144. Title: Our Promise to the Community
+145. Include statement:
+    “RSR Media exists to serve the public, not political insiders, corporate gatekeepers, or algorithmic noise.”
+146. Principles:
+    - Truth over speed
+    - People over parties
+    - Evidence over rumor
+    - Community over clout
+    - Corrections over ego
+    - Open debate without mob rule
+147. Add “What we will do.”
+148. Verify before amplifying.
+149. Separate facts from opinion.
+150. Give the audience source context.
+151. Cover ignored community concerns.
+152. Correct errors transparently.
+153. Protect good-faith sources.
+154. Add “What we will not do.”
+155. No fake stories.
+156. No anonymous claims without context.
+157. No paid political talking points.
+158. No rage bait for clicks.
+159. No pretending speculation is fact.
+160. Make this page emotional, serious, and professional.
+
+REPORTS PAGE:
+161. Rename all “Live Desk” references to Reports or Report Archive.
+162. Page title: Reports
+163. Kicker: PUBLIC REPORT ARCHIVE
+164. Reports are manually updated weekly.
+165. Add clear copy:
+    “Reports are published when reviewed. RSR Media prioritizes accuracy over speed.”
+166. Use data file: src/data/reports.ts
+167. Report model:
+    id
+    slug
+    title
+    excerpt
+    body
+    category
+    type
+    author
+    date
+    updatedAt
+    tags
+    sourceLinks
+    status
+    viewCountPlaceholder
+    xUrl
+168. Use real reports only.
+169. If no real reports, show empty state:
+    “No public reports loaded yet. Weekly reports will appear here after review.”
+170. No fake article titles.
+171. No fake dates.
+172. No fake view counts.
+173. Add report detail route.
+174. Add source links section.
+175. Add X article link field.
+176. Add share link.
+177. Add category filters.
+178. Add search.
+179. Add “Submit a tip for future reporting” CTA.
+180. Add “Corrections” mailto.
+
+ARTICLE/REPORT VIEWS:
+181. Display title.
+182. Display date.
+183. Display status.
+184. Display author.
+185. Display category.
+186. Display tags.
+187. Display source links.
+188. Display X link if provided.
+189. Display view count only if real backend attached.
+190. If not attached, hide count or label “views unavailable.”
+191. Do not show eye icon with 0 everywhere unless intentional.
+192. Make report pages readable and sharp.
+193. Use glass article body panel.
+194. Use side metadata panel.
+195. Add related reports based on tags.
+
+NETWORK PAGE:
+196. This page correlates the ecosystem.
+197. Title: RSR Network
+198. Explain:
+    - RSR Media = public media home
+    - RSR Intelligence Network = intelligence analysis side
+    - Pacific Systems = structured data infrastructure
+    - Black Dog = cyber/security system
+    - RSR Armory = official merch/shop
+199. No Press Corps page.
+200. If mentioning Press Corps, say it belongs under the RSR Intel side, not this main site.
+201. Add external destination boxes.
+202. RSR Intel card links to https://www.rsrintel.com/#/
+203. Pacific Systems card links to https://rsrindexnet.edgeone.app/
+204. Black Dog card links to https://blackdogmain12.edgeone.app/
+205. Armory card links to https://rsrarmory.store
+206. Open external links in new tab.
+207. Add “Public Properties” section.
+208. Add “How the network fits together” diagram.
+209. Make it glassy and high-end.
+
+PACIFIC SYSTEMS PAGE:
+210. Do not pretend Pacific Systems lives inside RSR Media.
+211. This page should be an overview/bridge page only.
+212. Title: Pacific Systems
+213. Subtitle: Structured Data Infrastructure
+214. Explain accurately:
+    “Pacific Systems is the data infrastructure layer connected to the broader RSR ecosystem. It organizes signals, datasets, records, and methods that support structured analysis.”
+215. Add big amber accent.
+216. Add “Open Pacific Systems” CTA.
+217. Link to https://rsrindexnet.edgeone.app/
+218. Add modules:
+    - Signals
+    - Datasets
+    - Records
+    - Method
+    - Access
+219. Do not show fake counters.
+220. Do not show synced just now unless real.
+221. No fake live metrics.
+222. Add static explanatory boxes only.
+223. Use Pacific Systems style more aggressively:
+    black grid, amber accents, glass panels, circular diagram.
+224. Add “Data supports analysis. It does not replace verification.”
+225. Add “No mock data” badge only if true.
+
+BLACK DOG PAGE:
+226. Add Black Dog bridge page.
+227. Title: Black Dog Security
+228. Subtitle: Security, cyber, and defensive infrastructure.
+229. Explain it as separate public-facing security/cyber app connected to RSR ecosystem.
+230. Link to https://blackdogmain12.edgeone.app/
+231. Use dark/crimson/steel styling.
+232. Do not imply users can access restricted areas from RSR Media.
+233. CTA: Open Black Dog.
+234. Add “external system” label.
+
+ARMORY PAGE:
+235. Title: RSR Armory
+236. Subtitle: Official RSR merch shop.
+237. Link to https://rsrarmory.store
+238. Make it clear it opens the official shop.
+239. Add merch preview area but no fake product feed unless manually added.
+240. Add CTA: Visit Armory.
+241. Add external destination badge.
+
+TIP LINE PAGE:
+242. Title: RSR Tip Line
+243. Show phone number from SITE_PHONE.
+244. Show newsroom@rsrmedia.org.
+245. Explain tips can be sent by email or hotline.
+246. Add form UI that creates mailto.
+247. Fields:
+    - Name optional
+    - Email optional
+    - Phone optional
+    - Topic
+    - Location
+    - Summary
+    - Links/evidence
+    - Urgency
+    - Can we contact you?
+248. Submit opens mailto to newsroom@rsrmedia.org.
+249. Subject: RSR TIP LINE SUBMISSION — [Topic]
+250. Body includes all fields.
+251. Add warning:
+    “Do not submit classified, stolen, hacked, or illegally obtained material.”
+252. Add source protection note.
+253. Add community reporting note.
+254. Add hotline callout box.
+
+CONTACT PAGE:
+255. Only email: newsroom@rsrmedia.org.
+256. Only phone: SITE_PHONE.
+257. Contact cards:
+    - Newsroom
+    - Tips
+    - Corrections
+    - Partnerships
+    - Community Concerns
+258. Every card uses newsroom@rsrmedia.org with different subject.
+259. No other emails.
+260. No fake departments.
+261. Add Armory external link separately.
+262. Add RSR Intel external link separately.
+
+ADMIN:
+263. Admin route: /admin
+264. Not in main nav.
+265. Footer small link: Operator Access.
+266. Admin login only for owner.
+267. No public account creation.
+268. Remove sign up.
+269. Remove user registration.
+270. Add placeholder auth screen.
+271. Auth screen says “Owner access only.”
+272. Backend may be scaffolded.
+273. If no backend exists, admin should clearly say “Admin backend pending connection.”
+274. Do not show fake stats.
+275. Admin dashboard sections:
+    - Site Visits
+    - Report Views
+    - Top Pages
+    - Referrers
+    - Tip Mailto Clicks
+    - Armory Clicks
+    - RSR Intel Clicks
+    - Pacific Systems Clicks
+    - Black Dog Clicks
+276. Stats must be real only when connected.
+277. Until connected, show “Pending analytics connection.”
+278. Add analytics abstraction file.
+279. Suggested future backend:
+    /api/analytics/summary
+    /api/analytics/pageview
+    /api/reports
+    /api/admin/login
+280. Add notes for Umami/Plausible/custom analytics.
+281. Add local dev mock only if clearly labeled dev-only and not used publicly.
+282. Admin report editor scaffold:
+    title
+    slug
+    excerpt
+    body
+    tags
+    source links
+    xUrl
+    status
+    date
+283. Save buttons disabled until backend connected.
+284. Preview works locally.
+285. Admin can later manage weekly reports.
+
+ANALYTICS:
+286. Public site should track pageviews once backend is connected.
+287. Add analytics client wrapper:
+    trackPageView(path)
+    trackOutboundClick(label,url)
+    trackTipClick()
+    trackReportView(slug)
+288. No paid APIs required.
+289. Do not break if analytics endpoint missing.
+290. Fail silently in production.
+291. Admin stats page reads from analytics service.
+292. Add clear TODO comments.
+293. Do not hardcode fake visit totals.
+
+CONTENT ACCURACY:
+294. Remove any fake “Press Corps is live” wording.
+295. Remove fake “Broadcast standby” if not needed.
+296. Remove fake encryption claims unless actual.
+297. Remove “Protected by Black Dog Security” unless this is a real implemented connection.
+298. Remove “connected 2ms” unless real.
+299. Remove “synced just now” unless real.
+300. Keep labels honest:
+    - NETWORK LINK: AVAILABLE
+    - TIP LINE: OPEN
+    - REPORTS: MANUAL REVIEW
+    - ADMIN: OWNER ONLY
+301. Do not use fake claims.
+
+HEADER:
+302. Make header glassy.
+303. Slight blur.
+304. Thin border bottom.
+305. Logo left.
+306. RSR MEDIA text.
+307. PUBLIC SIGNAL NETWORK sublabel.
+308. Nav center.
+309. UTC clock right.
+310. Status pill right.
+311. Mobile hamburger.
+312. No overcrowding.
+313. Hide less important nav on smaller widths.
+314. No wrapping ugly nav.
+
+FOOTER:
+315. Footer should be a command footer.
+316. Include:
+    - RSR Media
+    - newsroom@rsrmedia.org
+    - SITE_PHONE
+    - RSR Intel link
+    - Pacific Systems link
+    - Black Dog link
+    - Armory link
+317. Add “Signal > Noise”
+318. Add “Public reporting. Community signal. Independent analysis.”
+319. Add small operator access link.
+320. Add no fake copyright details beyond current year.
+
+VISUAL COMPONENTS:
+321. Build CommandHeader.
+322. Build GlassPanel.
+323. Build CommandButton.
+324. Build SectionHeader.
+325. Build ExternalSystemCard.
+326. Build ReportCard.
+327. Build TipMailtoForm.
+328. Build NetworkDiagram.
+329. Build LogoWatermark.
+330. Build AdminShell.
+331. Build AnalyticsPendingPanel.
+332. Build StatusRail.
+333. Build ScanlineOverlay.
+334. Build GridBackground.
+335. Build FooterCommand.
+336. Build PageHero.
+337. Build MissionPrincipleCard.
+
+ANIMATIONS:
+338. Subtle boot fade on initial load.
+339. No long annoying intro.
+340. Hover border sweep.
+341. Glass panels fade upward.
+342. Cursor blink on labels.
+343. Status dots pulse subtly.
+344. Grid moves slowly.
+345. Scroll must not snap.
+346. Disable heavy animation on mobile if laggy.
+347. Respect prefers-reduced-motion.
+
+GLASS DESIGN:
+348. Panels use rgba black.
+349. Backdrop blur.
+350. Steel border.
+351. Inner glow.
+352. Corner bracket accents.
+353. Layered shadows.
+354. Subtle gradient overlays.
+355. Avoid plain rectangles only.
+356. Add depth but keep readability.
+
+HOME DESIGN SPECIFIC:
+357. Above fold should feel like entering RSR Media console.
+358. Left: big RSR MEDIA headline.
+359. Right: glass status console with logo watermark.
+360. Bottom: ticker strip.
+361. Add external network cards below.
+362. Add mission promise block.
+363. Add reports preview block.
+364. Add tip line block.
+365. Add armory block.
+366. Add proper spacing.
+
+OLD WIX CONTENT MIGRATION:
+367. Keep the spirit of “Who We Are.”
+368. Modernize grammar.
+369. Replace “Non-Bias” with “independent, fact-driven.”
+370. Replace “100% factual” with “verification-first.”
+371. Keep community/debate identity.
+372. Keep open debate idea.
+373. Keep accountability idea.
+374. Keep mission statement but rewrite professionally.
+375. Remove dated/ugly old page layout.
+
+COPY BLOCK — ABOUT:
+376. Use this or similar:
+“RSR Media is an independent, community-facing media operation built to document public concerns, analyze power, and publish reporting with discipline. We focus on signal over noise: what happened, why it matters, who is affected, and what evidence supports the claim.”
+
+COPY BLOCK — PROMISE:
+377. Use this or similar:
+“Our promise is simple: serve the community before the algorithm. We will not trade accuracy for speed, context for outrage, or people for parties.”
+
+COPY BLOCK — NETWORK:
+378. Use this or similar:
+“RSR Media is the public front door. RSR Intelligence Network carries the deeper analysis layer. Pacific Systems supports structured data infrastructure. Black Dog connects security and cyber operations. RSR Armory carries the public shop.”
+
+COPY BLOCK — REPORTS:
+379. Use this or similar:
+“Reports are reviewed before publication and updated as new information becomes available. Weekly updates can be added manually by the operator.”
+
+SEO:
+380. Set site title: RSR Media
+381. Meta description: Independent media, public reporting, and intelligence-driven analysis.
+382. Add OpenGraph title.
+383. Add OpenGraph description.
+384. Add favicon support.
+385. Add logo image support.
+386. Add robots.txt.
+387. Add sitemap if easy.
+388. Page titles per route.
+
+ROUTING:
+389. / home
+390. /about
+391. /mission
+392. /reports
+393. /reports/:slug
+394. /network
+395. /pacific-systems
+396. /black-dog
+397. /armory
+398. /tip-line
+399. /contact
+400. /admin
+401. /admin/stats
+402. /admin/reports
+403. /admin/settings
+404. /404 fallback
+
+DATA FILES:
+405. src/config/site.ts
+406. site.ts includes:
+    SITE_NAME
+    SITE_DOMAIN
+    SITE_EMAIL
+    SITE_PHONE
+    RSR_INTEL_URL
+    PACIFIC_SYSTEMS_URL
+    BLACK_DOG_URL
+    ARMORY_URL
+407. src/data/reports.ts
+408. src/data/networkLinks.ts
+409. src/data/missionPrinciples.ts
+410. src/services/analytics.ts
+411. src/services/admin.ts
+412. src/types/report.ts
+
+PHONE NUMBER:
+413. Every phone use pulls from SITE_PHONE.
+414. No hardcoded duplicate phone.
+415. If SITE_PHONE is placeholder, show “Hotline pending publication” not fake number.
+416. Replit will be given real logo and real phone later.
+417. Make replacement easy.
+
+LOGO:
+418. Add /public/rsr-logo.png or similar.
+419. Use uploaded logo.
+420. Do not use random icons as primary logo.
+421. Header logo small.
+422. Hero watermark large.
+423. Footer seal medium.
+424. Armory/Network pages can use logo tastefully.
+425. Add CSS for transparent/dark logo integration.
+
+QUALITY:
+426. No broken pages.
+427. No duplicate nav.
+428. No fake content.
+429. No lorem ipsum.
+430. No old email typo.
+431. Ensure newsroom@rsrmedia.org everywhere.
+432. Ensure external links correct.
+433. Ensure no rsrmedia.orrg typo.
+434. Ensure no Press Corp nav.
+435. Ensure no Press Core typo.
+436. Ensure no fake login for public.
+437. Ensure no live desk unless renamed.
+
+MOBILE:
+438. Mobile hero must not overflow.
+439. Nav hamburger works.
+440. Panels stack.
+441. Phone/email easy to tap.
+442. Report cards readable.
+443. Tip form usable.
+444. External links tappable.
+445. Admin usable enough on desktop, graceful on mobile.
+
+DEPLOYMENT:
+446. Build command works.
+447. Output directory dist.
+448. Add SPA fallback for EdgeOne.
+449. Add _redirects if supported:
+    /* /index.html 200
+450. README includes:
+    - install
+    - dev
+    - build
+    - EdgeOne deploy
+    - how to update reports weekly
+    - where to change phone/email/logo
+451. No environment variable required for static public build.
+452. Future backend envs documented only.
+
+REPORT UPDATE WORKFLOW:
+453. Add README section:
+    “Weekly Report Update”
+454. Edit src/data/reports.ts
+455. Add new report object.
+456. Run build.
+457. Git commit.
+458. Redeploy EdgeOne.
+459. No database required yet.
+460. Future backend can replace data file.
+
+ADMIN FUTURE WORKFLOW:
+461. Admin scaffold exists.
+462. Auth not public.
+463. Owner-only access.
+464. Later connect to backend/database.
+465. Later connect analytics.
+466. Later enable report publishing.
+467. For now do not pretend it works fully.
+
+FINAL DESIGN CHECK:
+468. Does it feel like RSR Media command console?
+469. Does it look better than current screenshots?
+470. Does it use Orbitron properly?
+471. Is it glassy?
+472. Are there enough boxes/panels?
+473. Are external systems clear?
+474. Is copy accurate?
+475. Are phone/email correct?
+476. Is Press Corps removed from main site?
+477. Is Live Desk removed/renamed?
+478. Are reports honest?
+479. Is Pacific Systems accurate?
+480. Is RSR Intel linked correctly?
+
+FINAL BUILD CHECK:
+481. npm run build or pnpm build passes.
+482. No TypeScript errors.
+483. No missing imports.
+484. No console crashes.
+485. All routes render.
+486. Refreshing nested routes works.
+487. External links open.
+488. Mailto links work.
+489. Tip form generates email.
+490. Logo loads.
+491. Mobile nav works.
+492. Scroll normal speed.
+493. No horizontal scroll.
+494. Header not broken.
+495. Footer complete.
+496. Admin route accessible but owner-only framed.
+497. No fake stats.
+498. No fake live content.
+499. Ready for GitHub.
+500. Ready for EdgeOne deployment and rsrmedia.org DNS cutover.

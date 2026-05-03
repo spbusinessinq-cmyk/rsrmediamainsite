@@ -8,16 +8,15 @@ import { BootSequence } from "@/components/BootSequence";
 import NotFound from "@/pages/not-found";
 
 import Home from "@/pages/Home";
-import LiveDesk from "@/pages/LiveDesk";
-import ArticleList from "@/pages/ArticleList";
-import ArticleDetailPage from "@/pages/ArticleDetailPage";
+import About from "@/pages/About";
+import Mission from "@/pages/Mission";
 import Reports from "@/pages/Reports";
-import Broadcasts from "@/pages/Broadcasts";
+import ReportDetail from "@/pages/ReportDetail";
 import Network from "@/pages/Network";
 import PacificSystems from "@/pages/PacificSystems";
-import PressCorps from "@/pages/PressCorps";
+import BlackDog from "@/pages/BlackDog";
 import Armory from "@/pages/Armory";
-import SubmitTip from "@/pages/SubmitTip";
+import TipLine from "@/pages/TipLine";
 import Contact from "@/pages/Contact";
 import AdminDashboard from "@/pages/AdminDashboard";
 
@@ -27,22 +26,20 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
-      <Route path="/live-desk" component={LiveDesk} />
-      <Route path="/articles" component={ArticleList} />
-      <Route path="/articles/:slug" component={ArticleDetailPage} />
+      <Route path="/about" component={About} />
+      <Route path="/mission" component={Mission} />
       <Route path="/reports" component={Reports} />
-      <Route path="/broadcasts" component={Broadcasts} />
+      <Route path="/reports/:slug" component={ReportDetail} />
       <Route path="/network" component={Network} />
       <Route path="/pacific-systems" component={PacificSystems} />
-      <Route path="/press-corps" component={PressCorps} />
+      <Route path="/black-dog" component={BlackDog} />
       <Route path="/armory" component={Armory} />
-      <Route path="/submit-tip" component={SubmitTip} />
+      <Route path="/tip-line" component={TipLine} />
       <Route path="/contact" component={Contact} />
-      <Route path="/operator" component={AdminDashboard} />
-      <Route path="/operator/articles" component={AdminDashboard} />
-      <Route path="/operator/tips" component={AdminDashboard} />
-      <Route path="/operator/broadcasts" component={AdminDashboard} />
-      <Route path="/operator/settings" component={AdminDashboard} />
+      <Route path="/admin" component={AdminDashboard} />
+      <Route path="/admin/reports" component={AdminDashboard} />
+      <Route path="/admin/tips" component={AdminDashboard} />
+      <Route path="/admin/settings" component={AdminDashboard} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -1,93 +1,106 @@
 import React from 'react';
 import { useSEO } from '@/lib/seo';
 import { SectionHeader } from '@/components/ui-system/SectionHeader';
-import { Link } from 'wouter';
-import { Network as NetworkIcon, Server, Radio, MonitorSmartphone } from 'lucide-react';
-import { CommandButton } from '@/components/ui-system/CommandButton';
-import { ARMORY_URL } from '@/lib/constants';
+import { ExternalSystemCard } from '@/components/ui-system/ExternalSystemCard';
+import { NETWORK_LINKS } from '@/data/networkLinks';
 
 export default function Network() {
-  useSEO({ title: "Intelligence Network", description: "The architecture of RSR Media." });
+  useSEO({ title: "RSR Network", description: "The RSR ecosystem — RSR Media, RSR Intelligence Network, Pacific Systems, Black Dog, and RSR Armory." });
 
   return (
     <div className="w-full pt-12 pb-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-grid opacity-10 pointer-events-none" />
-      
-      <div className="container mx-auto px-4 max-w-5xl relative z-10">
-        <div className="text-center mb-24">
-          <SectionHeader 
-            tag="// SYSTEM.ARCHITECTURE" 
-            title="THE NETWORK" 
-            centered
-          />
-          <h2 className="text-3xl md:text-5xl font-serif font-bold mb-6">
-            Media is the front-end.<br />Intelligence is the architecture.
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-sans leading-relaxed">
-            RSR Media does not exist in isolation. It is the publishing interface for a comprehensive information gathering and analysis ecosystem designed for the modern operational environment.
+
+      <div className="container mx-auto px-6 max-w-5xl relative z-10">
+
+        <SectionHeader
+          tag="// NETWORK.ARCHITECTURE"
+          title="RSR NETWORK"
+        />
+
+        {/* Lead copy */}
+        <div className="glass-panel corner-bracket border border-border/40 p-8 mb-16">
+          <p className="text-lg text-muted-foreground font-sans leading-relaxed">
+            RSR Media is the public front door. RSR Intelligence Network carries the deeper analysis layer. Pacific Systems supports structured data infrastructure. Black Dog connects security and cyber operations. RSR Armory carries the public shop.
           </p>
         </div>
 
-        <div className="relative">
-          {/* Connecting Lines (Desktop only) */}
-          <div className="hidden lg:block absolute top-1/2 left-0 w-full h-px bg-border/50 -translate-y-1/2" />
-          <div className="hidden lg:block absolute left-1/2 top-0 w-px h-full bg-border/50 -translate-x-1/2" />
+        {/* "You Are Here" + External Properties */}
+        <div className="mb-16">
+          <div className="font-mono text-xs text-primary tracking-widest uppercase flex items-center gap-2 mb-8">
+            <span className="w-8 h-px bg-primary" />
+            // PUBLIC.PROPERTIES
+          </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 relative z-10">
-            {/* Core Node */}
-            <div className="border border-border bg-background p-8 corner-bracket hover:border-primary/50 transition-colors">
-              <NetworkIcon className="w-8 h-8 text-muted-foreground mb-6" />
-              <h3 className="font-serif font-bold text-2xl mb-4">RSR Intelligence Network</h3>
-              <p className="font-sans text-sm text-muted-foreground leading-relaxed mb-6">
-                The parent ecosystem. A distributed network of analysts, subject matter experts, and strategic operators evaluating global data flows.
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+            {/* RSR Media — You Are Here */}
+            <div className="corner-bracket border border-primary/50 bg-primary/5 p-6 flex flex-col gap-4 shadow-[0_0_20px_rgba(16,185,129,0.08)]">
+              <div className="font-mono text-[0.65rem] tracking-widest uppercase text-primary">// PUBLIC.MEDIA.HOME</div>
+              <h3 className="font-serif font-bold text-xl text-foreground">RSR Media</h3>
+              <p className="font-sans text-sm text-muted-foreground leading-relaxed flex-1">
+                The public media home. Independent reporting, community signal, and public accountability journalism.
               </p>
-              <CommandButton href="#" variant="outline" className="w-full text-xs pointer-events-none">CORE.NODE</CommandButton>
+              <span className="inline-block font-mono text-xs tracking-widest border border-primary/50 text-primary px-3 py-1.5 bg-primary/10 self-start">
+                YOU ARE HERE
+              </span>
             </div>
 
-            {/* Pacific Systems */}
-            <div className="border border-[#f59e0b]/50 bg-background p-8 corner-bracket shadow-[0_0_20px_rgba(245,158,11,0.05)] hover:border-[#f59e0b] transition-colors group">
-              <Server className="w-8 h-8 text-[#f59e0b] mb-6 group-hover:animate-pulse" />
-              <h3 className="font-serif font-bold text-2xl mb-4 text-[#f59e0b]">Pacific Systems</h3>
-              <p className="font-sans text-sm text-muted-foreground leading-relaxed mb-6">
-                The quantitative and archival backbone. Ingests, verifies, and indexes massive datasets to support investigative operations.
-              </p>
-              <CommandButton href="/pacific-systems" variant="outline" className="w-full text-xs border-[#f59e0b]/50 text-[#f59e0b] hover:bg-[#f59e0b]/10 hover:border-[#f59e0b]">ACCESS TERMINAL</CommandButton>
-            </div>
-
-            {/* Press Corps */}
-            <div className="border border-border bg-background p-8 corner-bracket hover:border-primary/50 transition-colors">
-              <Radio className="w-8 h-8 text-primary mb-6" />
-              <h3 className="font-serif font-bold text-2xl mb-4">Press Corps</h3>
-              <p className="font-sans text-sm text-muted-foreground leading-relaxed mb-6">
-                The field collection layer. On-the-ground operatives gathering primary source material, conducting interviews, and verifying local conditions.
-              </p>
-              <CommandButton href="/press-corps" variant="outline" className="w-full text-xs">FIELD OPERATIONS</CommandButton>
-            </div>
-
-            {/* Media & Armory */}
-            <div className="flex flex-col gap-8">
-              <div className="border border-border bg-background p-8 corner-bracket hover:border-primary/50 transition-colors flex-1">
-                <MonitorSmartphone className="w-8 h-8 text-muted-foreground mb-6" />
-                <h3 className="font-serif font-bold text-2xl mb-4">RSR Media</h3>
-                <p className="font-sans text-sm text-muted-foreground leading-relaxed mb-6">
-                  The public terminal. Translating intelligence products, field reports, and data analysis into accessible journalistic formats.
-                </p>
-                <CommandButton href="/" variant="primary" className="w-full text-xs">YOU ARE HERE</CommandButton>
-              </div>
-
-              <div className="border border-border bg-card/50 p-6 flex items-center justify-between corner-bracket">
-                <div>
-                  <h4 className="font-serif font-bold mb-1">RSR Armory</h4>
-                  <p className="font-mono text-[0.65rem] text-muted-foreground tracking-widest uppercase">FIELD GEAR & LOGISTICS</p>
-                </div>
-                <Link href={ARMORY_URL} target="_blank" rel="noopener noreferrer" className="font-mono text-xs text-primary hover:underline tracking-widest uppercase">
-                  ENTER SHOP [↗]
-                </Link>
-              </div>
-            </div>
-
+            {NETWORK_LINKS.map(link => (
+              <ExternalSystemCard
+                key={link.label}
+                tag={link.tag}
+                title={link.label}
+                desc={link.desc}
+                url={link.url}
+                accent={link.accent}
+              />
+            ))}
           </div>
         </div>
+
+        {/* Network Diagram */}
+        <div className="mb-16">
+          <div className="font-mono text-xs text-primary tracking-widest uppercase flex items-center gap-2 mb-8">
+            <span className="w-8 h-px bg-primary" />
+            // HOW.THE.NETWORK.FITS.TOGETHER
+          </div>
+
+          <div className="glass-panel corner-bracket border border-border/40 p-8 md:p-12">
+            <div className="relative flex flex-col items-center gap-6">
+
+              {/* Center node */}
+              <div className="border-2 border-primary bg-primary/10 px-6 py-3 font-mono text-sm font-bold text-primary tracking-widest text-center shadow-[0_0_20px_rgba(16,185,129,0.2)] w-48">
+                RSR MEDIA<br />
+                <span className="text-[0.6rem] text-primary/60 font-normal">PUBLIC FRONT DOOR</span>
+              </div>
+
+              {/* Connector lines + satellite nodes */}
+              <div className="w-full max-w-2xl">
+                <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+                  {[
+                    { label: "RSR INTEL", sub: "Analysis Layer", accent: "border-primary/50 text-primary" },
+                    { label: "PACIFIC SYS", sub: "Data Infra", accent: "border-[#f59e0b]/50 text-[#f59e0b]" },
+                    { label: "BLACK DOG", sub: "Security", accent: "border-destructive/50 text-destructive" },
+                    { label: "ARMORY", sub: "Official Shop", accent: "border-accent/50 text-accent" },
+                  ].map(node => (
+                    <div key={node.label} className={`border p-3 text-center font-mono corner-bracket bg-card/20 ${node.accent}`}>
+                      <div className="text-xs font-bold tracking-widest">{node.label}</div>
+                      <div className="text-[0.6rem] text-muted-foreground mt-1">{node.sub}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        {/* Press Corps note */}
+        <div className="font-mono text-xs text-muted-foreground/50 tracking-wider border-t border-border/20 pt-6">
+          // NOTE: Press Corps operations are part of the RSR Intelligence Network infrastructure, not this main site. Refer to rsrintel.com for intelligence-side operations.
+        </div>
+
       </div>
     </div>
   );

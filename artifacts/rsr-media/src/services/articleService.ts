@@ -1,28 +1,32 @@
-// PENDING BACKEND — DO NOT USE IN PRODUCTION
-import { Article, ARTICLES } from '../lib/articles';
+// Report service stubs — PENDING BACKEND CONNECTION
+// When the API server is connected, replace these with real fetch() calls.
+// Development workflow: edit src/data/reports.ts directly and redeploy.
 
-export async function fetchArticles(): Promise<Article[]> {
-  // TODO: Replace with real API call
-  return Promise.resolve(ARTICLES);
+import { Report } from '../types/report';
+import { REPORTS } from '../data/reports';
+
+export async function fetchReports(): Promise<Report[]> {
+  // TODO: GET /api/reports
+  return Promise.resolve(REPORTS.filter(r => r.status === 'published'));
 }
 
-export async function fetchArticleBySlug(slug: string): Promise<Article | null> {
-  // TODO: Replace with real API call
-  const article = ARTICLES.find(a => a.slug === slug);
-  return Promise.resolve(article || null);
+export async function fetchReportBySlug(slug: string): Promise<Report | null> {
+  // TODO: GET /api/reports/:slug
+  const report = REPORTS.find(r => r.slug === slug && r.status === 'published');
+  return Promise.resolve(report ?? null);
 }
 
-export async function createArticle(data: Partial<Article>): Promise<Article> {
-  // TODO: Replace with real API call
-  throw new Error("Not implemented");
+export async function createReport(_data: Partial<Report>): Promise<Report> {
+  // TODO: POST /api/reports
+  throw new Error('Not implemented — backend pending');
 }
 
-export async function updateArticle(id: string, data: Partial<Article>): Promise<Article> {
-  // TODO: Replace with real API call
-  throw new Error("Not implemented");
+export async function updateReport(_id: string, _data: Partial<Report>): Promise<Report> {
+  // TODO: PATCH /api/reports/:id
+  throw new Error('Not implemented — backend pending');
 }
 
-export async function deleteArticle(id: string): Promise<boolean> {
-  // TODO: Replace with real API call
-  throw new Error("Not implemented");
+export async function deleteReport(_id: string): Promise<boolean> {
+  // TODO: DELETE /api/reports/:id
+  throw new Error('Not implemented — backend pending');
 }

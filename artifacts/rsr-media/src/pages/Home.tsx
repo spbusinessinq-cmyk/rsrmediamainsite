@@ -1,204 +1,259 @@
 import React from "react";
 import { Link } from "wouter";
+import { motion } from "framer-motion";
 import { useSEO } from "@/lib/seo";
 import { CommandButton } from "@/components/ui-system/CommandButton";
 import { TerminalTicker } from "@/components/ui-system/TerminalTicker";
-import { StatusPill } from "@/components/ui-system/StatusPill";
-import { ArticleCard } from "@/components/articles/ArticleCard";
-import { ARTICLES } from "@/lib/articles";
-import { ARMORY_URL } from "@/lib/constants";
+import { ExternalSystemCard } from "@/components/ui-system/ExternalSystemCard";
+import { LogoWatermark } from "@/components/ui-system/LogoWatermark";
+import { ReportCard } from "@/components/reports/ReportCard";
+import { REPORTS } from "@/data/reports";
+import { NETWORK_LINKS } from "@/data/networkLinks";
+import { RSR_INTEL_URL, ARMORY_URL, SITE_EMAIL } from "@/config/site";
+import { getDisplayPhone, getPhoneHref } from "@/lib/formatPhone";
+import { trackTipClick, trackOutboundClick } from "@/lib/analytics";
 
 export default function Home() {
-  useSEO({ title: "Public Signal Terminal", description: "Independent media, field reporting, and intelligence-driven analysis built for signal over noise." });
+  useSEO({
+    title: "RSR Media",
+    description: "Independent media, public reporting, and community signal.",
+  });
+
+  const displayPhone = getDisplayPhone();
+  const phoneHref = getPhoneHref();
+  const featuredReports = REPORTS.filter(r => r.status === "published").slice(0, 3);
 
   return (
-    <div className="w-full">
-      {/* Hero Section */}
+    <div className="w-full overflow-x-hidden">
+
+      {/* ── Hero ── */}
       <section className="relative min-h-[85vh] flex flex-col lg:flex-row border-b border-border/40 bg-background overflow-hidden">
-        {/* Left: Text Panel */}
-        <div className="flex-1 flex flex-col justify-center px-4 md:px-12 py-20 lg:py-0 relative z-10">
-          <div className="mb-6 font-mono text-[0.65rem] text-primary tracking-widest uppercase flex items-center gap-2">
+        <div className="absolute inset-0 bg-grid opacity-10 pointer-events-none" />
+
+        {/* Left: Headline */}
+        <div className="flex-1 flex flex-col justify-center px-6 md:px-12 py-20 lg:py-0 relative z-10">
+          <div className="mb-5 font-mono text-[0.65rem] text-primary tracking-widest uppercase flex items-center gap-2">
             <span className="w-8 h-px bg-primary" />
-            // PUBLIC SIGNAL TERMINAL
+            // PUBLIC SIGNAL NETWORK // LOS ANGELES // INDEPENDENT MEDIA
           </div>
-          
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-black tracking-tight text-foreground mb-4 uppercase leading-none">
-            RSR MEDIA
+
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif font-black tracking-tight text-foreground mb-4 uppercase leading-none">
+            RSR<br />MEDIA
           </h1>
-          
-          <h2 className="text-sm md:text-base font-mono text-primary mb-8 tracking-widest uppercase leading-relaxed max-w-xl">
-            FIELD REPORTING // INTELLIGENCE-DRIVEN ANALYSIS // SIGNAL OVER NOISE
-          </h2>
-          
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-12 font-sans leading-relaxed">
-            Independent media, field reporting, and intelligence-driven analysis built for professionals, analysts, and the informed public.
+
+          <p className="text-base md:text-lg text-muted-foreground max-w-xl mb-10 font-sans leading-relaxed">
+            Independent media. Public reporting. Community signal.
           </p>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl">
-            <CommandButton href="/live-desk" variant="primary">ENTER LIVE DESK</CommandButton>
-            <CommandButton href="/submit-tip" variant="outline">SUBMIT A TIP</CommandButton>
-            <CommandButton href={ARMORY_URL} variant="outline" external>VISIT RSR ARMORY</CommandButton>
-            <CommandButton href="/contact" variant="outline">CONTACT NEWSROOM</CommandButton>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg">
+            <CommandButton href="/reports" variant="primary" data-testid="cta-reports">
+              READ REPORTS
+            </CommandButton>
+            <CommandButton
+              href="/tip-line"
+              variant="outline"
+              data-testid="cta-tip"
+              onClick={trackTipClick}
+            >
+              SUBMIT TIP
+            </CommandButton>
+            <CommandButton
+              href={RSR_INTEL_URL}
+              variant="outline"
+              external
+              onClick={() => trackOutboundClick('RSR Intel Hero', RSR_INTEL_URL)}
+            >
+              VISIT RSR INTEL ↗
+            </CommandButton>
+            <CommandButton
+              href={ARMORY_URL}
+              variant="outline"
+              external
+              onClick={() => trackOutboundClick('Armory Hero', ARMORY_URL)}
+            >
+              SHOP ARMORY ↗
+            </CommandButton>
           </div>
         </div>
 
-        {/* Right: Console Panel */}
-        <div className="lg:w-[400px] xl:w-[500px] border-l border-border/40 bg-card/20 p-8 flex flex-col justify-between relative hidden lg:flex">
+        {/* Right: Status Console */}
+        <div className="lg:w-[400px] xl:w-[480px] border-l border-border/40 bg-card/10 p-8 flex-col justify-between relative hidden lg:flex">
           <div className="absolute inset-0 bg-grid opacity-10 pointer-events-none" />
-          
-          <div className="relative z-10 space-y-6 flex-1">
-            <div className="font-mono text-xs text-muted-foreground tracking-widest mb-8">
-              // FIELD NETWORK STATUS
+          <LogoWatermark className="absolute inset-0 m-auto w-64 h-64 opacity-5" />
+
+          <div className="relative z-10 space-y-1">
+            <div className="font-mono text-xs text-muted-foreground tracking-widest mb-6">
+              // NETWORK STATUS
             </div>
-            
-            <div className="space-y-4 font-mono text-xs">
-              <div className="flex justify-between items-center border-b border-border/30 pb-2">
-                <span className="text-muted-foreground">PRESS CORPS</span>
-                <span className="text-accent">ACTIVE</span>
+            {[
+              { label: "NEWSROOM", value: "ACTIVE", color: "text-primary" },
+              { label: "TIP LINE", value: "OPEN", color: "text-primary" },
+              { label: "COMMUNITY REPORTS", value: "REVIEWED", color: "text-accent" },
+              { label: "INTEL NETWORK", value: "LINKED", color: "text-primary" },
+              { label: "NETWORK LINK", value: "AVAILABLE", color: "text-accent" },
+            ].map(row => (
+              <div key={row.label} className="flex justify-between items-center border-b border-border/20 py-3 font-mono text-xs">
+                <span className="text-muted-foreground tracking-widest">{row.label}</span>
+                <span className={`${row.color} flex items-center gap-2`}>
+                  <span className="status-dot" />
+                  {row.value}
+                </span>
               </div>
-              <div className="flex justify-between items-center border-b border-border/30 pb-2">
-                <span className="text-muted-foreground">PACIFIC SYSTEMS</span>
-                <span className="text-[#f59e0b]">ONLINE</span>
-              </div>
-              <div className="flex justify-between items-center border-b border-border/30 pb-2">
-                <span className="text-muted-foreground">BROADCAST DESK</span>
-                <span className="text-muted-foreground">STANDBY</span>
-              </div>
-              <div className="flex justify-between items-center border-b border-border/30 pb-2">
-                <span className="text-muted-foreground">TIP INTAKE</span>
-                <span className="text-primary">OPEN</span>
-              </div>
-              <div className="flex justify-between items-center border-b border-border/30 pb-2">
-                <span className="text-muted-foreground">NETWORK ENCRYPTION</span>
-                <span className="text-primary">VERIFIED</span>
-              </div>
-            </div>
+            ))}
           </div>
 
-          <div className="relative z-10 mt-12 flex items-center justify-between border-t border-border/40 pt-6">
-            <StatusPill label="LIVE DESK READY" status="nominal" />
-            <div className="font-mono text-[0.65rem] text-muted-foreground text-right leading-tight">
-              INITIALIZED<br/>CONNECTION SECURE
-            </div>
+          <div className="relative z-10 mt-8 pt-6 border-t border-border/30 font-mono text-[0.6rem] text-muted-foreground/60 tracking-widest text-right">
+            RSRMEDIA.ORG<br />SIGNAL &gt; NOISE
           </div>
         </div>
       </section>
 
       <TerminalTicker />
 
-      {/* Network Modules */}
-      <section className="py-24 bg-background border-b border-border/30">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="border border-border p-6 bg-card corner-bracket hover:border-primary/50 transition-colors group">
-              <h3 className="font-serif font-bold text-xl mb-2 group-hover:text-primary transition-colors">Media</h3>
-              <p className="font-sans text-sm text-muted-foreground leading-relaxed">Public-facing intelligence and investigative journalism.</p>
-            </div>
-            <div className="border border-border p-6 bg-card corner-bracket hover:border-accent/50 transition-colors group">
-              <h3 className="font-serif font-bold text-xl mb-2 group-hover:text-accent transition-colors">Intelligence</h3>
-              <p className="font-sans text-sm text-muted-foreground leading-relaxed">Core analytical engine and strategic assessment.</p>
-            </div>
-            <div className="border border-border p-6 bg-card corner-bracket hover:border-[#f59e0b]/50 transition-colors group">
-              <h3 className="font-serif font-bold text-xl mb-2 group-hover:text-[#f59e0b] transition-colors">Pacific Systems</h3>
-              <p className="font-sans text-sm text-muted-foreground leading-relaxed">Infrastructure and structured data archives.</p>
-            </div>
-            <div className="border border-border p-6 bg-card corner-bracket hover:border-primary/50 transition-colors group">
-              <h3 className="font-serif font-bold text-xl mb-2 group-hover:text-primary transition-colors">Press Corps</h3>
-              <p className="font-sans text-sm text-muted-foreground leading-relaxed">Field operations and source network management.</p>
-            </div>
+      {/* ── What RSR Media Is ── */}
+      <section className="py-20 bg-card/10 border-b border-border/30">
+        <div className="container mx-auto px-6 max-w-4xl">
+          <div className="font-mono text-xs text-primary tracking-widest uppercase mb-6 flex items-center gap-2">
+            <span className="w-8 h-px bg-primary" />
+            // ABOUT.RSR.MEDIA
           </div>
+          <p className="text-xl md:text-2xl text-foreground leading-relaxed font-sans max-w-3xl">
+            RSR Media is an independent, community-facing media operation built to document public concerns, analyze power, and publish reporting with discipline. We focus on signal over noise: what happened, why it matters, who is affected, and what evidence supports the claim.
+          </p>
         </div>
       </section>
 
-      {/* What We Cover */}
-      <section className="py-24 bg-card/20">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-serif font-bold">What We Cover</h2>
-            <p className="font-mono text-sm text-primary tracking-widest uppercase mt-4">// INTELLIGENCE.VECTORS</p>
+      {/* ── Network Connections ── */}
+      <section className="py-20 bg-background border-b border-border/30">
+        <div className="container mx-auto px-6">
+          <div className="mb-10">
+            <div className="font-mono text-xs text-primary tracking-widest uppercase flex items-center gap-2 mb-3">
+              <span className="w-8 h-px bg-primary" />
+              // NETWORK.CONNECTIONS
+            </div>
+            <h2 className="text-3xl md:text-4xl font-serif font-bold">RSR NETWORK</h2>
           </div>
-          <div className="flex flex-wrap justify-center gap-3">
-            {['Power', 'Institutions', 'Corruption', 'Infrastructure', 'Technology', 'Conflict', 'Civil Society', 'Media', 'Surveillance', 'Economy'].map(topic => (
-              <span key={topic} className="px-4 py-2 bg-background border border-border font-mono text-xs tracking-wider uppercase text-foreground hover:border-primary hover:text-primary transition-colors cursor-default">
-                {topic}
-              </span>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {NETWORK_LINKS.map(link => (
+              <motion.div
+                key={link.label}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.05 }}
+              >
+                <ExternalSystemCard
+                  tag={link.tag}
+                  title={link.label}
+                  desc={link.desc}
+                  url={link.url}
+                  accent={link.accent}
+                  className="h-full"
+                />
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Pipeline */}
-      <section className="py-24 border-y border-border/30 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-serif font-bold">How We Operate</h2>
-          </div>
-          
-          <div className="flex flex-col md:flex-row items-center justify-center gap-8 lg:gap-16">
-            {[
-              { num: '01', title: 'OBSERVE', desc: 'Field collection & monitoring' },
-              { num: '02', title: 'VERIFY', desc: 'Data cross-referencing' },
-              { num: '03', title: 'ANALYZE', desc: 'Strategic assessment' },
-              { num: '04', title: 'PUBLISH', desc: 'Structured intelligence' }
-            ].map((step, i) => (
-              <React.Fragment key={step.title}>
-                <div className="flex flex-col items-center text-center max-w-[150px]">
-                  <div className="w-16 h-16 rounded-full border border-primary/30 flex items-center justify-center font-mono text-primary bg-primary/5 mb-4 corner-bracket">
-                    {step.num}
-                  </div>
-                  <h4 className="font-serif font-bold tracking-wider mb-2">{step.title}</h4>
-                  <p className="font-sans text-xs text-muted-foreground">{step.desc}</p>
-                </div>
-                {i < 3 && (
-                  <div className="hidden md:block w-12 h-px bg-border relative">
-                    <div className="absolute right-0 top-1/2 -translate-y-1/2 border-r border-t border-border w-2 h-2 rotate-45" />
-                  </div>
-                )}
-              </React.Fragment>
-            ))}
-          </div>
+      {/* ── Community Promise Preview ── */}
+      <section className="py-16 bg-card/10 border-b border-border/30">
+        <div className="container mx-auto px-6 max-w-3xl text-center">
+          <div className="font-mono text-xs text-primary tracking-widest uppercase mb-4">// COMMUNITY.PROMISE</div>
+          <blockquote className="text-lg md:text-xl font-serif font-bold text-foreground mb-6 leading-relaxed">
+            "RSR Media exists to serve the public, not political insiders, corporate gatekeepers, or algorithmic noise."
+          </blockquote>
+          <Link href="/mission" className="font-mono text-xs text-primary hover:underline tracking-widest uppercase">
+            Read Our Full Promise →
+          </Link>
         </div>
       </section>
 
-      {/* Latest Articles */}
-      <section className="py-24 bg-card/10">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-12">
-            <h2 className="text-3xl font-serif font-bold">Latest Signals</h2>
-            <Link href="/articles" className="font-mono text-xs text-primary hover:underline tracking-widest uppercase">View All [→]</Link>
+      {/* ── Reports Preview ── */}
+      <section className="py-20 bg-background border-b border-border/30">
+        <div className="container mx-auto px-6">
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <div className="font-mono text-xs text-primary tracking-widest uppercase flex items-center gap-2 mb-2">
+                <span className="w-8 h-px bg-primary" />
+                // LATEST.REPORTS
+              </div>
+              <h2 className="text-3xl font-serif font-bold">REPORTS</h2>
+            </div>
+            <Link href="/reports" className="font-mono text-xs text-primary hover:underline tracking-widest uppercase hidden sm:block">
+              View All →
+            </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {ARTICLES.slice(0, 3).map(article => (
-              <ArticleCard key={article.id} article={article} />
-            ))}
-          </div>
-        </div>
-      </section>
-      
-      {/* Broadcast Preview & Armory split */}
-      <section className="py-24 border-t border-border/30 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {/* Tip Line */}
-            <div className="border border-border/50 p-8 corner-bracket bg-card/30 flex flex-col justify-center items-start">
-              <h3 className="text-2xl font-serif font-bold mb-4">Secure Tip Line</h3>
-              <p className="text-sm text-muted-foreground mb-8 max-w-md">
-                We accept encrypted communications, verifiable documents, and confidential field reports.
+
+          {featuredReports.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {featuredReports.map(r => <ReportCard key={r.id} report={r} />)}
+            </div>
+          ) : (
+            <div className="glass-panel corner-bracket border border-border/40 p-12 text-center">
+              <div className="font-mono text-xs text-muted-foreground tracking-widest uppercase mb-3">// ARCHIVE.PENDING</div>
+              <p className="font-sans text-muted-foreground mb-4">
+                Weekly reports appear here after review. No reports are published yet.
               </p>
-              <CommandButton href="/submit-tip" variant="primary">SUBMIT A TIP</CommandButton>
+              <Link href="/tip-line" className="font-mono text-xs text-primary hover:underline tracking-widest uppercase">
+                Submit a tip for future reporting →
+              </Link>
             </div>
-            
+          )}
+        </div>
+      </section>
+
+      {/* ── Tip Line + Armory ── */}
+      <section className="py-20 bg-card/10 border-b border-border/30">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            {/* Tip Line */}
+            <div className="glass-panel corner-bracket border border-primary/20 p-8 flex flex-col justify-between">
+              <div>
+                <div className="font-mono text-xs text-primary tracking-widest uppercase mb-3">// TIP.LINE</div>
+                <h3 className="text-2xl font-serif font-bold mb-4">RSR TIP LINE</h3>
+                <p className="font-sans text-sm text-muted-foreground mb-4 leading-relaxed">
+                  Submit tips by email or hotline. Source identity can be protected. Community reports welcome.
+                </p>
+                <div className="space-y-2 font-mono text-xs text-muted-foreground mb-6">
+                  <div>
+                    {phoneHref ? (
+                      <a href={phoneHref} className="text-primary hover:underline">{displayPhone}</a>
+                    ) : (
+                      <span className="italic">{displayPhone}</span>
+                    )}
+                  </div>
+                  <div>
+                    <a href={`mailto:${SITE_EMAIL}`} className="text-primary hover:underline">{SITE_EMAIL}</a>
+                  </div>
+                </div>
+              </div>
+              <CommandButton href="/tip-line" variant="primary" onClick={trackTipClick}>
+                OPEN TIP LINE
+              </CommandButton>
+            </div>
+
             {/* Armory */}
-            <div className="border border-border/50 p-8 corner-bracket bg-card/30 flex flex-col justify-center items-start relative overflow-hidden">
+            <div className="glass-panel corner-bracket border border-accent/20 p-8 flex flex-col justify-between relative overflow-hidden">
               <div className="absolute inset-0 bg-grid opacity-10 pointer-events-none" />
               <div className="relative z-10">
-                <h3 className="text-2xl font-serif font-bold mb-4 text-foreground">RSR Armory</h3>
-                <p className="text-sm text-muted-foreground mb-8 max-w-md">
+                <div className="font-mono text-xs text-accent tracking-widest uppercase mb-3">// OFFICIAL.SHOP</div>
+                <h3 className="text-2xl font-serif font-bold mb-4">RSR ARMORY</h3>
+                <p className="font-sans text-sm text-muted-foreground mb-6 leading-relaxed">
                   Official merchandise and field gear. All proceeds support independent media operations.
                 </p>
-                <CommandButton href={ARMORY_URL} external variant="outline">ENTER ARMORY</CommandButton>
+                <CommandButton
+                  href={ARMORY_URL}
+                  external
+                  variant="outline"
+                  onClick={() => trackOutboundClick('Armory Section', ARMORY_URL)}
+                >
+                  VISIT ARMORY ↗
+                </CommandButton>
               </div>
             </div>
+
           </div>
         </div>
       </section>
