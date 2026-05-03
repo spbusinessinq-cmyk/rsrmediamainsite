@@ -241,8 +241,8 @@ export function CommandFooter() {
           </p>
           <div className="flex items-center gap-4 flex-wrap justify-center">
             <span className="font-mono text-[0.58rem] text-primary/28 tracking-widest">SIGNAL &gt; NOISE</span>
-            <span className="font-mono text-[0.55rem] text-muted-foreground/22 tracking-widest">
-              Powered by RSR Intelligence Network · Engineered by Pacific Systems
+            <span className="font-mono text-[0.55rem] text-muted-foreground/22 tracking-widest text-center">
+              Powered by RSR Intelligence Network · Engineered by Pacific Systems · Secured through Black Dog Security
             </span>
           </div>
         </div>

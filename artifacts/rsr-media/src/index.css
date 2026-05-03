@@ -132,13 +132,26 @@
   }
 }
 
-/* ── Glass Panel ─────────────────────── */
+/* ── Glass Panel — tactical command panel, visible by default, glow on hover ── */
 .glass-panel {
-  background: rgba(255,255,255,0.025);
+  background: rgba(8, 12, 14, 0.55);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.07);
-  box-shadow: 0 4px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04);
+  border: 1px solid rgba(0, 224, 164, 0.18);
+  box-shadow:
+    0 4px 32px rgba(0, 0, 0, 0.5),
+    0 0 22px rgba(0, 224, 164, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    inset 0 0 18px rgba(255, 255, 255, 0.022);
+  transition: border-color 0.28s ease, box-shadow 0.28s ease;
+}
+.glass-panel:hover {
+  border-color: rgba(0, 224, 164, 0.45);
+  box-shadow:
+    0 4px 32px rgba(0, 0, 0, 0.55),
+    0 0 34px rgba(0, 224, 164, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 0 22px rgba(255, 255, 255, 0.035);
 }
 
 /* ── Scanline Overlay ────────────────── */
@@ -169,18 +182,20 @@
 .corner-bracket::before, .corner-bracket::after {
   content: '';
   position: absolute;
-  width: 10px;
-  height: 10px;
-  border-color: hsl(0 0% 24%);
+  width: 12px;
+  height: 12px;
+  border-color: rgba(0, 224, 164, 0.55);
   border-style: solid;
-  opacity: 0.5;
-  transition: border-color 0.2s, opacity 0.2s;
+  opacity: 0.7;
+  transition: border-color 0.2s, opacity 0.2s, width 0.2s, height 0.2s;
 }
 .corner-bracket::before { top: -1px; left: -1px; border-width: 1.5px 0 0 1.5px; }
 .corner-bracket::after { bottom: -1px; right: -1px; border-width: 0 1.5px 1.5px 0; }
 .corner-bracket:hover::before, .corner-bracket:hover::after {
-  border-color: hsl(var(--primary));
-  opacity: 0.45;
+  border-color: rgba(0, 224, 164, 0.95);
+  opacity: 1;
+  width: 14px;
+  height: 14px;
 }
 
 /* ── Glow utilities ──────────────────── */
@@ -227,6 +242,76 @@
 }
 .hover-glow-emerald:hover {
   box-shadow: 0 0 24px rgba(0, 224, 164, 0.10), inset 0 0 18px rgba(0, 224, 164, 0.035);
+}
+
+/* ── Tactical Scrollbar (WebKit + Firefox) ─────────────── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,224,164,0.35) #050607;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: #050607;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(0,224,164,0.35);
+  border: 1px solid rgba(0,0,0,0.4);
+  transition: background 0.2s;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(0,224,164,0.65);
+}
+*::-webkit-scrollbar-corner {
+  background: #050607;
+}
+
+/* ── Tactical Panel — visible by default, glow on hover ── */
+.tactical-panel {
+  background: rgba(8, 12, 14, 0.6);
+  border: 1px solid rgba(0, 224, 164, 0.18);
+  box-shadow:
+    0 0 22px rgba(0, 224, 164, 0.08),
+    inset 0 0 18px rgba(255, 255, 255, 0.025);
+  transition: border-color 0.28s ease, box-shadow 0.28s ease;
+  position: relative;
+}
+.tactical-panel:hover {
+  border-color: rgba(0, 224, 164, 0.45);
+  box-shadow:
+    0 0 34px rgba(0, 224, 164, 0.18),
+    inset 0 0 18px rgba(255, 255, 255, 0.04);
+}
+.tactical-panel-blue {
+  border-color: rgba(41, 182, 246, 0.18);
+  box-shadow:
+    0 0 22px rgba(41, 182, 246, 0.08),
+    inset 0 0 18px rgba(255, 255, 255, 0.025);
+}
+.tactical-panel-blue:hover {
+  border-color: rgba(41, 182, 246, 0.45);
+  box-shadow:
+    0 0 34px rgba(41, 182, 246, 0.18),
+    inset 0 0 18px rgba(255, 255, 255, 0.04);
+}
+
+/* ── Faint scanline overlay applied at body level ─────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 3px,
+    rgba(0, 224, 164, 0.012) 3px,
+    rgba(0, 224, 164, 0.012) 4px
+  );
+  mix-blend-mode: screen;
 }
 
 @media (prefers-reduced-motion: reduce) {

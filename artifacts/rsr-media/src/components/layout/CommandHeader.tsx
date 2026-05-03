@@ -146,12 +146,17 @@ export function CommandHeader() {
 
   return (
     <header
-      className="sticky top-0 z-50 w-full bg-[hsl(0_0%_3%)] border-b border-border/25 backdrop-blur-md"
-      style={{ boxShadow: '0 1px 0 rgba(16,185,129,0.10), 0 4px 24px rgba(16,185,129,0.04), 0 2px 8px rgba(0,0,0,0.4)' }}
+      className="sticky top-0 z-50 w-full bg-[hsl(0_0%_3%)] border-b border-primary/15 backdrop-blur-md relative"
+      style={{ boxShadow: '0 1px 0 rgba(0,224,164,0.18), 0 0 24px rgba(0,224,164,0.06), 0 2px 8px rgba(0,0,0,0.5)' }}
     >
+      {/* Thin tactical glow line under header */}
+      <div className="absolute bottom-0 left-0 right-0 h-px pointer-events-none" style={{
+        background: 'linear-gradient(90deg, transparent 0%, rgba(0,224,164,0.45) 25%, rgba(41,182,246,0.35) 65%, transparent 100%)',
+      }} />
+
       <div className="mx-auto px-4 max-w-[1440px] h-16 flex items-center gap-0">
 
-        {/* Logo lockup */}
+        {/* Logo lockup — single-line brand */}
         <Link href="/" className="flex items-center gap-2.5 shrink-0 group mr-3" data-testid="nav-home">
           <img
             src="/rsr-logo.png"
@@ -159,12 +164,23 @@ export function CommandHeader() {
             className="h-7 w-7 object-contain group-hover:opacity-80 transition-opacity"
             onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
           />
-          <span
-            className="text-foreground whitespace-nowrap"
-            style={{ fontFamily: "'Orbitron', sans-serif", fontWeight: 900, fontSize: '0.78rem', letterSpacing: '0.06em' }}
-          >
-            RSR MEDIA
-          </span>
+          <div className="flex items-baseline gap-2 whitespace-nowrap">
+            <span
+              className="text-foreground"
+              style={{
+                fontFamily: "'Orbitron', sans-serif",
+                fontWeight: 900,
+                fontSize: '0.85rem',
+                letterSpacing: '0.08em',
+                textShadow: '0 0 12px rgba(0,224,164,0.25)',
+              }}
+            >
+              RSR MEDIA
+            </span>
+            <span className="hidden md:inline font-mono text-[0.5rem] tracking-[0.18em] text-muted-foreground/35 uppercase">
+              // POWERED BY PACIFIC SYSTEMS
+            </span>
+          </div>
         </Link>
 
         <div className="hidden lg:block w-px h-5 bg-border/25 mr-1 shrink-0" />
@@ -185,21 +201,6 @@ export function CommandHeader() {
           })}
           <SystemsDropdown isActive={isSystemsActive} />
         </nav>
-
-        {/* Header badge — ecosystem branding, xl+ only */}
-        <div className="hidden xl:flex items-center gap-1 border border-border/15 bg-card/6 px-2 py-1 mx-2 shrink-0">
-          <Link href="/pacific"
-            className="font-mono text-[0.5rem] tracking-widest transition-colors hover:opacity-80 whitespace-nowrap"
-            style={{ color: 'rgba(245,158,11,0.5)' }}>
-            ENG.PACIFIC
-          </Link>
-          <span className="text-muted-foreground/18 text-[0.5rem] mx-0.5">//</span>
-          <Link href="/security"
-            className="font-mono text-[0.5rem] tracking-widest transition-colors hover:opacity-80 whitespace-nowrap"
-            style={{ color: 'rgba(239,68,68,0.45)' }}>
-            SEC.BLACK DOG
-          </Link>
-        </div>
 
         {/* Right: social + clock + weather + status */}
         <div className="hidden lg:flex items-center gap-1.5 ml-auto shrink-0">

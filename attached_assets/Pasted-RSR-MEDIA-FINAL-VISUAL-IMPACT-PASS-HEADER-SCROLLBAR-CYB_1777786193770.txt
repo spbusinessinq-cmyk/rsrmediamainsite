@@ -1,0 +1,150 @@
+RSR MEDIA FINAL VISUAL IMPACT PASS — HEADER, SCROLLBAR, CYBERPUNK/SPLINTER-CELL POLISH
+
+SCOPE:
+Frontend only.
+Do not break routes.
+Do not break admin.
+Do not break reports.
+Do not break videos.
+Do not break EdgeOne deployment.
+This is a fast final visual pass.
+
+MAIN GOAL:
+Make the live site feel sharper, more premium, more cyberpunk/Splinter Cell, with stronger boxes, better header, cleaner scrollbar, and no awkward two-line RSR MEDIA brand.
+
+HEADER FINAL FIX:
+1. Replace header brand with one-line lockup:
+   RSR MEDIA
+2. Under/next to it in tiny inline text, not second line:
+   POWERED BY PACIFIC SYSTEMS
+3. Do not stack “RSR MEDIA” and “Signal Network.”
+4. Header left should read visually:
+   [logo] RSR MEDIA  // POWERED BY PACIFIC SYSTEMS
+5. Keep it compact.
+6. Use Orbitron.
+7. Make the brand sharper and brighter.
+8. Add a thin green/blue glow line under header.
+9. Header must not wrap.
+10. Keep nav readable.
+11. Keep Systems dropdown working.
+12. Fix the crowded badge text near Systems:
+    move “ENG.PACIFIC // SEC.BLACK DOG” into the right status cluster or remove if it crowds.
+13. Right status cluster:
+    X icon
+    YouTube icon
+    TikTok icon
+    LOCAL TIME
+    WTHR
+    NOMINAL
+14. Make right cluster cleaner.
+15. Make header feel like a command bar, not a cramped menu.
+
+SCROLLBAR FIX:
+16. Style global scrollbar.
+17. Make it dark, thin, tactical.
+18. Track: #050607.
+19. Thumb: rgba(0,224,164,0.35).
+20. Thumb hover: rgba(0,224,164,0.65).
+21. Width around 8px.
+22. Remove ugly bright/default scrollbar.
+23. Firefox scrollbar-color too.
+24. Do not hide scrollbar completely.
+
+BOX / PANEL UMPH:
+25. Current boxes are too hard to see.
+26. Increase panel border opacity.
+27. Add subtle emerald outer glow.
+28. Add inner glass highlight.
+29. Add corner bracket accents.
+30. Add hover glow to all major cards.
+31. Apply to:
+    video cards
+    signal stack
+    contact card
+    report cards
+    mission cards
+    RSR Intel cards
+    Pacific cards
+    Armory cards
+    admin panels
+32. Default panels should be visible without hover.
+33. Use:
+    border: 1px solid rgba(0,224,164,0.18)
+    box-shadow: 0 0 22px rgba(0,224,164,0.08), inset 0 0 18px rgba(255,255,255,0.025)
+34. Hover:
+    border-color rgba(0,224,164,0.45)
+    box-shadow 0 0 34px rgba(0,224,164,0.18)
+35. Add blue accent only in small streaks.
+36. Make the left side boxes visibly boxed but not cheesy.
+
+CYBERPUNK / SPLINTER CELL FEEL:
+37. Add faint green scanline overlay.
+38. Add subtle grid background.
+39. Add deep black gradients.
+40. Add side rail glow.
+41. Add tiny animated pulse dots on live/status items.
+42. Add subtle blue glints on social/external links.
+43. Keep it serious, not cartoon neon.
+44. More “tactical command system,” less “plain black page.”
+
+HERO:
+45. Keep layout.
+46. Make hero shell more visible.
+47. Add stronger border around hero section.
+48. Add corner brackets.
+49. Add slight green glow around hero shell.
+50. Make RSR MEDIA title sharper.
+51. Ensure headline remains one strong block.
+52. Do not overgrow text.
+53. Make CTA buttons more tactile.
+54. Buttons should look clickable.
+55. Add stronger border/hover to Armory and Systems buttons.
+
+BROADCASTS PAGE:
+56. Video cards need stronger panel styling.
+57. Add visible card border + glow.
+58. Add title/readability.
+59. Video iframes should sit inside framed panels.
+60. Add subtle red YouTube accent only on button.
+61. Do not make page too red.
+62. Broadcast cards should feel premium.
+
+RSR INTEL PAGE:
+63. The page looks good but needs more box presence.
+64. Make main content card more visible.
+65. Add blue/green edge glow.
+66. Add more panel definition.
+67. Keep big blue INTELLIGENCE title.
+
+SYSTEMS DROPDOWN:
+68. Ensure dropdown is visible.
+69. Add stronger border and glow.
+70. Higher z-index.
+71. Dropdown items should be readable.
+72. No clipping.
+
+FOOTER:
+73. Make footer panels more visible.
+74. Keep footer clean.
+75. Include:
+    Powered by RSR Intelligence Network
+    Engineered by Pacific Systems
+    Secured through Black Dog Security
+
+MOBILE:
+76. Do not break mobile.
+77. Header collapses properly.
+78. Scrollbar styling does not break mobile.
+
+FINAL QA:
+79. npm run build passes.
+80. No TypeScript errors.
+81. Header no longer shows RSR MEDIA as two stacked lines.
+82. Header says Powered by Pacific Systems.
+83. Scrollbar is dark/tactical.
+84. Panels are easier to see.
+85. Broadcasts page still works.
+86. Videos still embed.
+87. Admin still works.
+88. Systems dropdown still works.
+89. EdgeOne build output remains dist.
