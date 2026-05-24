@@ -7,23 +7,33 @@ interface AdminGateProps {
 }
 
 export function AdminGate({ children }: AdminGateProps) {
-  const { authed, login } = useAdminAuth();
+  const { authed, isLoading, login } = useAdminAuth();
   const [code, setCode] = useState('');
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-[100dvh] bg-background flex items-center justify-center">
+        <div className="font-mono text-xs text-muted-foreground/50 tracking-widest uppercase">
+          // VERIFYING SESSION...
+        </div>
+      </div>
+    );
+  }
 
   if (authed) return <>{children}</>;
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setLoading(true);
-    setTimeout(() => {
-      if (!login(code)) {
-        setError('Invalid passcode. Try again.');
-        setCode('');
-      }
-      setLoading(false);
-    }, 400);
+    setSubmitting(true);
+    setError('');
+    const ok = await login(code);
+    if (!ok) {
+      setError('Invalid passcode. Try again.');
+      setCode('');
+    }
+    setSubmitting(false);
   }
 
   return (
@@ -46,12 +56,11 @@ export function AdminGate({ children }: AdminGateProps) {
               <input
                 type="password"
                 value={code}
-                onChange={e => { setCode(e.target.value); setError(''); }}
+                onChange={(e) => { setCode(e.target.value); setError(''); }}
                 autoFocus
                 autoComplete="off"
-                onKeyDown={e => { if (e.key === 'Enter') handleSubmit(e as unknown as React.FormEvent); }}
                 className="w-full bg-background border border-border p-3 font-mono text-sm focus:outline-none focus:border-accent transition-colors text-center tracking-[0.4em]"
-                placeholder="••••••••"
+                placeholder="••••"
               />
               {error && (
                 <p className="font-mono text-xs text-destructive mt-2 text-center">{error}</p>
@@ -59,10 +68,10 @@ export function AdminGate({ children }: AdminGateProps) {
             </div>
             <button
               type="submit"
-              disabled={loading || !code}
+              disabled={submitting || !code}
               className="w-full font-serif font-bold tracking-widest uppercase h-12 border border-primary/50 text-primary bg-primary/10 hover:bg-primary hover:text-primary-foreground disabled:opacity-40 disabled:cursor-not-allowed transition-all corner-bracket"
             >
-              {loading ? 'VERIFYING...' : 'ACCESS TERMINAL'}
+              {submitting ? 'VERIFYING...' : 'ACCESS TERMINAL'}
             </button>
           </form>
 

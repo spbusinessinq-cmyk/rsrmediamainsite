@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useSEO } from "@/lib/seo";
 import { ExternalSystemCard } from "@/components/ui-system/ExternalSystemCard";
 import { ReportCard } from "@/components/reports/ReportCard";
-import { getPublishedReports } from "@/hooks/useReports";
+import { usePublishedReports } from "@/hooks/useReports";
 import { NETWORK_LINKS } from "@/data/networkLinks";
 import { VIDEOS } from "@/data/videos";
 import { YOUTUBE_URL } from "@/config/site";
@@ -35,7 +35,8 @@ export default function Home() {
     description: "Independent media. Public reporting. Community signal. Built to separate signal from noise.",
   });
 
-  const latestReports = getPublishedReports().slice(0, 3);
+  const { data: reportsData } = usePublishedReports();
+  const latestReports = (reportsData ?? []).slice(0, 3);
 
   return (
     <div className="w-full overflow-x-hidden">

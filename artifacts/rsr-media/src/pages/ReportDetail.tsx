@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { useParams, Link } from 'wouter';
 import { useSEO } from '@/lib/seo';
-import { getPublishedReports } from '@/hooks/useReports';
+import { useReportBySlug } from '@/hooks/useReports';
+import { resolveAssetUrl } from '@/types/report';
 import { trackReportView } from '@/lib/analytics';
-import { ArrowLeft, ExternalLink, Share2, Tag, Star } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Share2, Tag, Star, FileText, Download, ShoppingBag } from 'lucide-react';
 
 function NotFoundInline() {
-  useSEO({ title: "Report Not Found", description: "This report could not be found." });
+  useSEO({ title: 'Report Not Found', description: 'This report could not be found.' });
   return (
     <div className="w-full pt-12 pb-24">
       <div className="container mx-auto px-6 max-w-3xl">
@@ -58,31 +59,29 @@ function formatBody(body: string): React.ReactNode {
 
 export default function ReportDetail() {
   const { slug } = useParams<{ slug: string }>();
-  const report = getPublishedReports().find(r => r.slug === slug);
+  const { data: report, isLoading, isError } = useReportBySlug(slug);
 
   useSEO({
-    title: report ? report.title : "Report Not Found",
-    description: report ? report.excerpt : "Report not found.",
+    title: report ? report.title : 'Report',
+    description: report?.description ?? 'RSR Media Report',
   });
 
   useEffect(() => {
     if (report) trackReportView(report.slug);
   }, [report?.slug]);
 
-  if (!report) return <NotFoundInline />;
+  if (isLoading) {
+    return (
+      <div className="w-full pt-24 pb-24 text-center font-mono text-xs text-muted-foreground/40 tracking-widest uppercase">
+        // LOADING REPORT...
+      </div>
+    );
+  }
 
-  const related = getPublishedReports()
-    .filter(r => r.id !== report.id && r.tags.some(t => report.tags.includes(t)))
-    .slice(0, 3);
+  if (isError || !report) return <NotFoundInline />;
 
-  const hasBody = report.body && report.body.trim().length > 10;
-  const isXDispatch = !hasBody && !!report.xUrl;
-
-  const displayTitle = report.title.startsWith('X Post —') || report.title.startsWith('External X')
-    ? (report.excerpt && report.excerpt !== 'Fill in the excerpt after reviewing the X post.'
-        ? report.excerpt.slice(0, 80) + (report.excerpt.length > 80 ? '…' : '')
-        : 'RSRINTEL Dispatch')
-    : report.title;
+  const hero = resolveAssetUrl(report.heroImageUrl, report.heroImageStorageKey);
+  const pdfUrl = resolveAssetUrl(report.pdfUrl, report.pdfStorageKey);
 
   function handleShare() {
     navigator.clipboard.writeText(window.location.href).catch(() => {});
@@ -90,46 +89,42 @@ export default function ReportDetail() {
 
   return (
     <div className="w-full pb-24">
-
-      {/* Cinematic header image */}
-      {report.headerImage && (
+      {hero && (
         <div className="relative w-full h-[42vh] min-h-[280px] max-h-[520px] overflow-hidden">
-          <img
-            src={report.headerImage}
-            alt=""
-            className="w-full h-full object-cover"
+          <img src={hero} alt="" className="w-full h-full object-cover" />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                'linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.55) 70%, var(--color-background, #0a0a0a) 100%)',
+            }}
           />
-          <div className="absolute inset-0" style={{
-            background: 'linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.55) 70%, var(--color-background, #0a0a0a) 100%)',
-          }} />
-          {/* Type badge overlaid on image */}
           <div className="absolute bottom-6 left-6 flex items-center gap-3">
             <span className="font-mono text-[0.65rem] tracking-widest uppercase border border-white/20 bg-black/40 backdrop-blur-sm text-white/80 px-2.5 py-1">
-              {report.type}
+              {report.category}
             </span>
             <span className="font-mono text-[0.65rem] tracking-widest uppercase text-white/50">
-              {report.category}
+              {report.reportNumber}
             </span>
           </div>
         </div>
       )}
 
-      <div className={`container mx-auto px-4 sm:px-6 max-w-5xl ${report.headerImage ? 'pt-6' : 'pt-10'}`}>
-
-        <Link href="/reports" className="inline-flex items-center gap-2 font-mono text-xs text-muted-foreground hover:text-foreground transition-colors tracking-widest uppercase mb-8">
+      <div className={`container mx-auto px-4 sm:px-6 max-w-5xl ${hero ? 'pt-6' : 'pt-10'}`}>
+        <Link
+          href="/reports"
+          className="inline-flex items-center gap-2 font-mono text-xs text-muted-foreground hover:text-foreground transition-colors tracking-widest uppercase mb-8"
+        >
           <ArrowLeft className="w-3 h-3" /> BACK TO REPORTS
         </Link>
 
         <div className="grid lg:grid-cols-[1fr_280px] gap-10">
-
-          {/* ── Article ── */}
           <article>
-            {/* Metadata bar — hide type/category if we showed them on the image */}
             <div className="flex flex-wrap items-center gap-2.5 mb-6 font-mono text-xs tracking-widest uppercase text-muted-foreground">
-              {!report.headerImage && (
+              {!hero && (
                 <>
-                  <span className="border border-border/40 px-2 py-0.5 bg-card/15">{report.type}</span>
-                  <span>{report.category}</span>
+                  <span className="border border-border/40 px-2 py-0.5 bg-card/15">{report.category}</span>
+                  <span>{report.reportNumber}</span>
                 </>
               )}
               {report.featured && (
@@ -137,118 +132,126 @@ export default function ReportDetail() {
                   <Star className="w-3 h-3 fill-amber-500" /> FEATURED
                 </span>
               )}
-              {!report.headerImage && <span>·</span>}
+              {!hero && <span>·</span>}
               <time dateTime={report.date}>
                 {new Date(report.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
               </time>
-              {report.updatedAt !== report.date && (
-                <span className="text-accent/55">
-                  Updated {new Date(report.updatedAt).toLocaleDateString()}
-                </span>
-              )}
             </div>
 
-            {/* Title */}
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight"
-              style={{ fontFamily: "'Rajdhani', sans-serif", lineHeight: 1.1 }}>
-              {displayTitle}
+            <h1
+              className="text-4xl md:text-5xl font-bold mb-4 leading-tight"
+              style={{ fontFamily: "'Rajdhani', sans-serif", lineHeight: 1.1 }}
+            >
+              {report.title}
             </h1>
-            <p className="font-mono text-xs text-muted-foreground tracking-widest uppercase mb-8">By {report.author}</p>
+            {report.subtitle && (
+              <p className="font-sans text-lg text-muted-foreground/90 italic mb-6 leading-relaxed">
+                {report.subtitle}
+              </p>
+            )}
+            <p className="font-mono text-xs text-muted-foreground tracking-widest uppercase mb-8">By RSR Media</p>
 
-            {/* Excerpt */}
-            {report.excerpt && !report.excerpt.startsWith('Fill in') && (
+            {report.description && (
               <div className="glass-panel border border-border/25 p-6 mb-8">
-                <p className="font-sans text-[1.05rem] text-foreground/75 leading-relaxed italic">{report.excerpt}</p>
-              </div>
-            )}
-
-            {/* X Source Card */}
-            {report.xUrl && (
-              <div className="border border-accent/30 bg-accent/[0.04] corner-bracket p-6 mb-8">
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="font-bold text-accent text-lg">𝕏</span>
-                  <span className="font-mono text-xs text-accent/70 tracking-widest uppercase">ORIGINAL X SOURCE</span>
-                </div>
-                {isXDispatch && (
-                  <p className="font-sans text-base text-muted-foreground leading-relaxed mb-4">
-                    This entry references an external X post from RSRINTEL. Open the source to read the original post.
-                  </p>
-                )}
-                <a href={report.xUrl} target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 font-mono text-sm font-bold border border-accent/40 text-accent px-4 py-2.5 hover:bg-accent hover:text-white transition-all tracking-widest uppercase">
-                  <ExternalLink className="w-3.5 h-3.5" /> READ ORIGINAL ON X
-                </a>
-              </div>
-            )}
-
-            {/* Body */}
-            {hasBody ? (
-              <div className="mb-8">
-                {formatBody(report.body)}
-              </div>
-            ) : !isXDispatch && (
-              <div className="border border-border/25 bg-card/8 corner-bracket p-8 mb-8 text-center">
-                <div className="font-mono text-xs text-muted-foreground/40 tracking-widest uppercase mb-3">// BODY PENDING</div>
-                <p className="font-sans text-base text-muted-foreground">
-                  Report body has not been added yet. Check back or{' '}
-                  {report.xUrl ? 'read the original source above.' : 'contact the newsroom for details.'}
+                <p className="font-sans text-[1.05rem] text-foreground/75 leading-relaxed">
+                  {report.description}
                 </p>
               </div>
             )}
 
-            {/* Source links */}
-            {report.sourceLinks.length > 0 && (
+            {pdfUrl && (
+              <div className="border border-primary/30 bg-primary/[0.04] corner-bracket p-6 mb-8">
+                <div className="flex items-center justify-between gap-3 mb-4 flex-wrap">
+                  <div className="flex items-center gap-3">
+                    <FileText className="w-5 h-5 text-primary" />
+                    <span className="font-mono text-xs text-primary tracking-widest uppercase">FULL REPORT PDF</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <a
+                      href={pdfUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      download
+                      className="inline-flex items-center gap-2 font-mono text-xs font-bold border border-primary/50 text-primary px-3 py-2 hover:bg-primary hover:text-primary-foreground transition-all tracking-widest uppercase"
+                    >
+                      <Download className="w-3 h-3" /> DOWNLOAD
+                    </a>
+                    <a
+                      href={pdfUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 font-mono text-xs border border-border/50 text-muted-foreground px-3 py-2 hover:text-foreground hover:border-border transition-all tracking-widest uppercase"
+                    >
+                      <ExternalLink className="w-3 h-3" /> OPEN
+                    </a>
+                  </div>
+                </div>
+                <object
+                  data={pdfUrl}
+                  type="application/pdf"
+                  className="w-full h-[70vh] bg-black/40 border border-border/30"
+                >
+                  <p className="font-mono text-xs text-muted-foreground p-4">
+                    Your browser cannot display this PDF inline.{' '}
+                    <a href={pdfUrl} className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
+                      Download the PDF
+                    </a>{' '}
+                    to view it.
+                  </p>
+                </object>
+              </div>
+            )}
+
+            {report.fullDescription && (
+              <div className="mb-8">{formatBody(report.fullDescription)}</div>
+            )}
+
+            {report.shopifyUrl && (
+              <a
+                href={report.shopifyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 font-mono text-sm font-bold border border-amber-500/50 text-amber-500 px-4 py-3 hover:bg-amber-500 hover:text-black transition-all tracking-widest uppercase corner-bracket mb-8"
+              >
+                <ShoppingBag className="w-4 h-4" /> ORDER PRINT EDITION
+              </a>
+            )}
+
+            {(report.sourceDocument || report.sourceUrl) && (
               <div className="border-t border-border/20 pt-6 mb-6">
                 <div className="font-mono text-xs text-primary/55 tracking-widest uppercase mb-4 flex items-center gap-2">
-                  <span className="w-6 h-px bg-primary/30" /> SOURCE LINKS
+                  <span className="w-6 h-px bg-primary/30" /> SOURCE
                 </div>
                 <ul className="space-y-2">
-                  {report.sourceLinks.map((s, i) => (
-                    <li key={i}>
-                      <a href={s.url} target="_blank" rel="noopener noreferrer"
-                        className="inline-flex items-start gap-2 font-sans text-sm text-accent/70 hover:text-accent transition-colors">
-                        <ExternalLink className="w-3.5 h-3.5 shrink-0 mt-0.5" /> {s.label || s.url}
+                  {report.sourceDocument && (
+                    <li className="font-sans text-sm text-muted-foreground">{report.sourceDocument}</li>
+                  )}
+                  {report.sourceUrl && (
+                    <li>
+                      <a
+                        href={report.sourceUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-start gap-2 font-sans text-sm text-accent/70 hover:text-accent transition-colors"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5 shrink-0 mt-0.5" /> {report.sourceUrl}
                       </a>
                     </li>
-                  ))}
+                  )}
                 </ul>
               </div>
             )}
 
-            {/* Actions */}
             <div className="flex items-center gap-3 flex-wrap pt-4 border-t border-border/15">
-              <button onClick={handleShare}
-                className="inline-flex items-center gap-2 font-mono text-xs text-muted-foreground hover:text-foreground transition-colors border border-border/35 px-3 py-1.5 hover:border-foreground/35">
+              <button
+                onClick={handleShare}
+                className="inline-flex items-center gap-2 font-mono text-xs text-muted-foreground hover:text-foreground transition-colors border border-border/35 px-3 py-1.5 hover:border-foreground/35"
+              >
                 <Share2 className="w-3 h-3" /> COPY LINK
               </button>
-              {report.xUrl && (
-                <a href={report.xUrl} target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 font-mono text-xs text-accent hover:text-accent/75 transition-colors border border-accent/28 px-3 py-1.5 hover:border-accent/55">
-                  <ExternalLink className="w-3 h-3" /> VIEW ON X
-                </a>
-              )}
             </div>
-
-            {/* Related reports */}
-            {related.length > 0 && (
-              <div className="mt-12">
-                <div className="font-mono text-xs text-primary tracking-widest uppercase mb-5 flex items-center gap-2">
-                  <span className="w-6 h-px bg-primary" /> RELATED REPORTS
-                </div>
-                <div className="space-y-2.5">
-                  {related.map(r => (
-                    <Link key={r.id} href={`/reports/${r.slug}`}
-                      className="block p-4 border border-border/22 bg-card/8 hover:border-border/45 hover:bg-card/20 transition-colors corner-bracket">
-                      <div className="font-mono text-[0.62rem] text-muted-foreground tracking-widest uppercase mb-1">{r.type} · {r.category}</div>
-                      <div className="font-sans font-semibold text-sm">{r.title}</div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            )}
           </article>
 
-          {/* ── Sidebar ── */}
           <aside className="space-y-4">
             {report.tags.length > 0 && (
               <div className="border border-border/25 bg-card/8 p-5 corner-bracket">
@@ -256,8 +259,13 @@ export default function ReportDetail() {
                   <Tag className="w-3 h-3" /> TAGS
                 </div>
                 <div className="flex flex-wrap gap-1.5">
-                  {report.tags.map(t => (
-                    <span key={t} className="font-mono text-[0.62rem] tracking-wider border border-border/35 px-2 py-0.5 text-muted-foreground uppercase">{t}</span>
+                  {report.tags.map((t) => (
+                    <span
+                      key={t}
+                      className="font-mono text-[0.62rem] tracking-wider border border-border/35 px-2 py-0.5 text-muted-foreground uppercase"
+                    >
+                      {t}
+                    </span>
                   ))}
                 </div>
               </div>
@@ -273,8 +281,10 @@ export default function ReportDetail() {
             <div className="border border-border/25 bg-card/8 p-5 corner-bracket">
               <div className="font-mono text-[0.65rem] text-muted-foreground tracking-widest uppercase mb-3">CORRECTION?</div>
               <p className="font-sans text-sm text-muted-foreground mb-3">If something in this report is inaccurate, let us know.</p>
-              <a href={`mailto:newsroom@rsrmedia.org?subject=Correction — ${encodeURIComponent(report.title)}`}
-                className="font-mono text-xs text-muted-foreground hover:text-foreground transition-colors tracking-widest uppercase">
+              <a
+                href={`mailto:newsroom@rsrmedia.org?subject=Correction — ${encodeURIComponent(report.title)}`}
+                className="font-mono text-xs text-muted-foreground hover:text-foreground transition-colors tracking-widest uppercase"
+              >
                 EMAIL CORRECTIONS →
               </a>
             </div>

@@ -1,26 +1,49 @@
-import { useState, useCallback } from 'react';
-import { ADMIN_PASSCODE } from '@/config/site';
-
-const SESSION_KEY = 'rsr_admin_auth';
+import { useCallback } from 'react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  adminLogin,
+  adminLogout,
+  getAdminSession,
+  getGetAdminSessionQueryKey,
+} from '@workspace/api-client-react';
 
 export function useAdminAuth() {
-  const [authed, setAuthed] = useState<boolean>(() => {
-    try { return sessionStorage.getItem(SESSION_KEY) === 'true'; } catch { return false; }
+  const qc = useQueryClient();
+  const sessionKey = getGetAdminSessionQueryKey();
+
+  const { data, isLoading } = useQuery({
+    queryKey: sessionKey,
+    queryFn: () => getAdminSession(),
+    staleTime: 60_000,
   });
 
-  const login = useCallback((code: string): boolean => {
-    if (code === ADMIN_PASSCODE) {
-      try { sessionStorage.setItem(SESSION_KEY, 'true'); } catch {}
-      setAuthed(true);
-      return true;
+  const authed = !!data?.authenticated;
+
+  const login = useCallback(
+    async (passcode: string): Promise<boolean> => {
+      try {
+        const res = await adminLogin({ passcode });
+        if (res.authenticated) {
+          qc.setQueryData(sessionKey, res);
+          return true;
+        }
+      } catch {
+        // fall through
+      }
+      return false;
+    },
+    [qc, sessionKey],
+  );
+
+  const logout = useCallback(async () => {
+    try {
+      await adminLogout();
+    } catch {
+      // ignore
     }
-    return false;
-  }, []);
+    qc.setQueryData(sessionKey, { authenticated: false });
+    qc.invalidateQueries();
+  }, [qc, sessionKey]);
 
-  const logout = useCallback(() => {
-    try { sessionStorage.removeItem(SESSION_KEY); } catch {}
-    setAuthed(false);
-  }, []);
-
-  return { authed, login, logout };
+  return { authed, isLoading, login, logout };
 }

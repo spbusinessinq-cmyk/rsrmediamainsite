@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'wouter';
-import { LayoutDashboard, FileText, Send, Settings, LogOut, TerminalSquare, Import, BarChart2, Lock } from 'lucide-react';
+import { LayoutDashboard, FileText, LogOut, TerminalSquare, Lock } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAdminAuth } from '@/hooks/useAdminAuth';
 
@@ -16,10 +16,6 @@ export function AdminShell({ children }: AdminShellProps) {
   const navItems = [
     { href: '/admin', label: 'DASHBOARD', icon: LayoutDashboard, exact: true },
     { href: '/admin/reports', label: 'REPORTS', icon: FileText },
-    { href: '/admin/import-x', label: 'IMPORT X', icon: Import },
-    { href: '/admin/tips', label: 'TIPS', icon: Send },
-    { href: '/admin/analytics', label: 'ANALYTICS', icon: BarChart2 },
-    { href: '/admin/settings', label: 'SETTINGS', icon: Settings },
   ];
 
   function handleLock() {

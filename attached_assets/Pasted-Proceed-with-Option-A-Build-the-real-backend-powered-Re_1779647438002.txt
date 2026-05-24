@@ -1,0 +1,322 @@
+Proceed with Option A.
+
+Build the real backend-powered Reports / Doctrine Library publishing system for the RSR Media site.
+
+IMPORTANT:
+Do not redesign the site.
+Do not break the existing frontend.
+Do not remove the current RSR dark terminal style.
+Do not deploy over the live domain yet.
+Build and test in Replit first.
+
+CURRENT AUDIT SUMMARY:
+- Frontend is currently static and uses src/data/reports.ts.
+- Existing reports array is empty.
+- Admin screen exists but is frontend-only.
+- Admin auth is currently in-memory React state.
+- api-server artifact exists with Express 5 + Pino + Drizzle ORM.
+- api-server currently only has /api/healthz.
+- No upload handling exists yet.
+- No reports CRUD exists yet.
+- No frontend API calls exist yet.
+
+GOAL:
+Create a real publishing terminal where I can log into /admin with passcode 4451, upload PDF reports, enter metadata, publish/draft them, and have published reports appear on the public Reports page and Doctrine Library page.
+
+ADMIN AUTH:
+- Route: /admin
+- Passcode only: 4451
+- No usernames.
+- No public accounts.
+- Use ADMIN_PASSCODE env var if available, default to 4451 for now.
+- On correct passcode, create a signed httpOnly session cookie from the backend.
+- Frontend should also know admin is unlocked for UI state.
+- Add logout button that clears admin session.
+- Wrong passcode fails cleanly.
+
+BACKEND:
+Use existing @workspace/api-server.
+Add routes under /api.
+
+Required endpoints:
+- GET /api/healthz existing
+- POST /api/admin/login
+- POST /api/admin/logout
+- GET /api/admin/session
+- GET /api/reports
+- GET /api/reports/:slug
+- POST /api/reports
+- PATCH /api/reports/:id
+- DELETE /api/reports/:id
+- POST /api/admin/uploads
+
+Reports public GET should only return published reports unless admin session is active.
+Admin should see drafts and published.
+
+DATABASE:
+Use existing @workspace/db / Drizzle ORM pattern if present.
+
+Create reports table with fields:
+- id
+- reportNumber
+- title
+- subtitle
+- slug
+- category
+- date
+- description
+- fullDescription
+- tags as string array or JSON
+- sourceDocument
+- sourceUrl
+- pdfUrl
+- pdfStorageKey
+- heroImageUrl
+- heroImageStorageKey
+- shopifyUrl
+- status: draft | published
+- featured boolean
+- createdAt
+- updatedAt
+
+Prevent duplicate slugs.
+
+UPLOAD STORAGE:
+Use Replit Object Storage if available for persistent PDF and image storage.
+Do not rely on local filesystem for production persistence.
+
+Upload requirements:
+- PDF upload only for report PDFs
+- Optional PNG/JPG/WebP upload for hero image
+- Store uploaded files in logical keys like:
+  reports/pdfs/{slug}-{timestamp}.pdf
+  reports/images/{slug}-{timestamp}.png
+- Return public or signed usable URL that frontend can use to display/download.
+- If public URLs require a backend proxy, implement a stable GET route for downloading PDFs.
+
+ADMIN UI:
+Wire the existing admin area to the backend.
+
+Admin sections:
+1. Reports Manager
+2. Upload New Report
+3. Existing Reports List
+
+Upload/edit form fields:
+- Report Number
+- Title
+- Subtitle
+- Slug, auto-generated but editable
+- Category dropdown:
+  Policy File
+  Doctrine
+  Civic Report
+  Investigation
+  Brief
+  Sovereignty Brief
+- Publish Date
+- Short Description
+- Full Description
+- Tags
+- Source Document
+- Source URL
+- Shopify/Product URL
+- Status: Draft or Published
+- Featured toggle
+- PDF upload
+- Optional hero image upload
+
+Validation:
+- reportNumber required
+- title required
+- slug required
+- category required
+- status required
+- PDF required only when status is Published
+- duplicate slugs blocked
+
+Admin reports list:
+Each report card/row must show:
+- Report Number
+- Title
+- Category
+- Status
+- Date
+- Featured status
+- Edit
+- Delete
+- View public page if published
+- Download PDF if uploaded
+
+PUBLIC REPORTS PAGE:
+Route:
+/reports
+
+Show:
+- Page title: Reports
+- Subheading:
+  Policy files, doctrine papers, civic reports, and public intelligence documents from RSR Media.
+- Featured report card if one exists
+- Archive grid/list
+- Search input
+- Category filter
+- Latest reports first
+
+Each card:
+- Report number
+- Title
+- Subtitle
+- Category
+- Publish date
+- Short description
+- Tags
+- Buttons:
+  Read Report
+  Download PDF
+
+REPORT DETAIL PAGE:
+Route:
+/reports/:slug
+
+Show:
+- Report number
+- Title
+- Subtitle
+- Category
+- Date
+- Description
+- Tags
+- Source document line if present
+- Embedded PDF viewer using iframe/object/embed if pdfUrl exists
+- Download PDF button
+- Back to Reports button
+- Footer line:
+  Published by Red State Rhetoric. Produced through Pacific Systems.
+
+HOMEPAGE REPORTS SECTION:
+Replace current “archive empty” state with latest 3 published reports from backend.
+If no reports exist, keep the empty state.
+
+DOCTRINE LIBRARY PAGE:
+Route:
+/doctrine-library
+
+Add page with:
+Title:
+RSR Doctrine Library
+
+Intro:
+The Doctrine Library collects the books, policy files, civic reports, and public intelligence documents that define the Sovereignty Doctrine: free citizens, not managed populations; human command, not machine rule.
+
+Sections:
+1. Featured Book
+   Free Citizens, Not Managed Populations
+   The Sovereignty Doctrine for the Age of Artificial Intelligence
+   Buttons:
+   View Book
+   Buy Paperback
+   Digital Edition
+
+2. Policy Files
+   Pull published reports where category = Policy File
+
+3. Sovereignty Brief
+   Coming soon weekly reports
+
+4. Civic Reports / Doctrine Documents
+   Pull matching categories when present
+
+NAVIGATION:
+Add Doctrine Library to navigation if possible.
+If nav is crowded, use:
+Home
+Reports
+Doctrine
+Store
+Hotline
+About
+
+SEED DATA:
+Create initial report entries as Draft or Published with PDF pending if no PDF uploaded yet.
+
+Report #001:
+Report Number: RSR Policy File #001
+Title: People First Is Not Enough
+Subtitle: A Sovereignty Doctrine Response to OpenAI’s Industrial Policy for the Intelligence Age
+Slug: people-first-is-not-enough
+Category: Policy File
+Status: Published
+Featured: true
+Description:
+OpenAI’s industrial policy paper recognizes that artificial intelligence will reshape work, wealth, government, infrastructure, and human opportunity. RSR’s response argues that people-first language is not enough unless citizens retain the power to see, challenge, audit, and limit the systems that govern their lives.
+
+Report #002:
+Report Number: RSR Policy File #002
+Title: The Human Mandate
+Subtitle: Why Humans Must Govern the Machine
+Slug: the-human-mandate
+Category: Policy File
+Status: Published
+Featured: false
+Description:
+The Human Mandate explains why intelligence is not legitimacy, capability is not authority, and optimization is not wisdom. AI may assist civilization, but it must never inherit civilization.
+
+Report #003:
+Report Number: RSR Policy File #003
+Title: The Right Not To Be Managed
+Subtitle: Citizenship in the Age of Algorithmic Power
+Slug: the-right-not-to-be-managed
+Category: Policy File
+Status: Published
+Featured: false
+Description:
+This report defines the civic right not to be silently scored, profiled, automated, censored, denied, or governed by systems citizens cannot see, challenge, or appeal.
+
+Report #004:
+Report Number: RSR Policy File #004
+Title: Local Power in the Intelligence Age
+Subtitle: Why Communities Must Control the Infrastructure Built Around Them
+Slug: local-power-in-the-intelligence-age
+Category: Policy File
+Status: Published
+Featured: false
+Description:
+This report argues that AI is not only software. It is energy, land, water, public contracts, local infrastructure, and institutional power. Communities must have the right to see, question, audit, and benefit from the systems built around them.
+
+IMPORTANT:
+Do not attach fake PDFs.
+If seeded reports have no PDF yet, show “PDF pending” in admin, and hide Download PDF publicly until uploaded.
+
+STYLE:
+Keep the RSR dark terminal/civic-intelligence visual language:
+- black / near-black background
+- green accents
+- thin borders
+- uppercase micro labels
+- serious report archive feel
+- no bright SaaS redesign
+
+PACIFIC SYSTEMS:
+Add this footer line on report detail pages and Doctrine Library:
+Published by Red State Rhetoric. Produced through Pacific Systems.
+
+TESTING:
+After implementation, test:
+1. npm install / pnpm install if needed
+2. Backend starts
+3. Frontend starts
+4. Admin passcode 4451 works
+5. Wrong passcode fails
+6. Admin session survives refresh
+7. Logout works
+8. Can create draft report
+9. Can upload PDF
+10. Can publish report
+11. Published report appears on /reports
+12. Draft report does not appear publicly
+13. Report detail page embeds/downloads PDF
+14. Homepage shows latest reports
+15. Doctrine Library shows Policy Files
+16. Build passes
+
+Give me exact shell commands to run at the end.

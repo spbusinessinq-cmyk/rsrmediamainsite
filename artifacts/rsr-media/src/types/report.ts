@@ -1,38 +1,54 @@
+export type ReportStatus = 'draft' | 'published';
+
 export type ReportCategory =
-  | 'Politics'
-  | 'Culture'
-  | 'Power'
-  | 'Institutions'
-  | 'Infrastructure'
-  | 'Community'
-  | 'Accountability'
-  | 'Technology'
-  | 'Media';
-
-export type ReportStatus = 'published' | 'draft' | 'archived';
-
-export type ReportType =
+  | 'Policy File'
+  | 'Doctrine'
+  | 'Civic Report'
   | 'Investigation'
   | 'Brief'
-  | 'Field Note'
-  | 'Special Report'
-  | 'Analysis';
+  | 'Sovereignty Brief';
+
+export const REPORT_CATEGORIES: ReportCategory[] = [
+  'Policy File',
+  'Doctrine',
+  'Civic Report',
+  'Investigation',
+  'Brief',
+  'Sovereignty Brief',
+];
 
 export interface Report {
   id: string;
-  slug: string;
+  reportNumber: string;
   title: string;
-  excerpt: string;
-  body: string;
-  category: ReportCategory;
-  type: ReportType;
-  author: string;
+  subtitle: string | null;
+  slug: string;
+  category: string;
   date: string;
-  updatedAt: string;
+  description: string;
+  fullDescription: string;
   tags: string[];
-  sourceLinks: { label: string; url: string }[];
+  sourceDocument: string | null;
+  sourceUrl: string | null;
+  pdfUrl: string | null;
+  pdfStorageKey: string | null;
+  heroImageUrl: string | null;
+  heroImageStorageKey: string | null;
+  shopifyUrl: string | null;
   status: ReportStatus;
   featured: boolean;
-  xUrl?: string;
-  headerImage?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export function resolveAssetUrl(
+  directUrl: string | null | undefined,
+  storageKey: string | null | undefined,
+): string | null {
+  if (directUrl && directUrl.trim()) return directUrl;
+  if (storageKey && storageKey.trim()) {
+    const key = storageKey.startsWith('/') ? storageKey : `/${storageKey}`;
+    return `/api/storage${key}`;
+  }
+  return null;
 }
