@@ -28,27 +28,12 @@ export interface Report {
   description: string;
   fullDescription: string;
   tags: string[];
-  sourceDocument: string | null;
-  sourceUrl: string | null;
-  pdfUrl: string | null;
-  pdfStorageKey: string | null;
-  heroImageUrl: string | null;
-  heroImageStorageKey: string | null;
-  shopifyUrl: string | null;
-  status: ReportStatus;
+  author: string;
   featured: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export function resolveAssetUrl(
-  directUrl: string | null | undefined,
-  storageKey: string | null | undefined,
-): string | null {
-  if (directUrl && directUrl.trim()) return directUrl;
-  if (storageKey && storageKey.trim()) {
-    const key = storageKey.startsWith('/') ? storageKey : `/${storageKey}`;
-    return `/api/storage${key}`;
-  }
-  return null;
+  status: ReportStatus;
+  pdfUrl: string | null;
+  heroImageUrl?: string | null;
+  shopifyUrl?: string | null;
+  sourceDocument?: string | null;
+  sourceUrl?: string | null;
 }

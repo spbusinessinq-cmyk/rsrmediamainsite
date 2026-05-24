@@ -1,0 +1,375 @@
+IMPORTANT: We are hosting RSR Media on EdgeOne as a static site.
+
+Do NOT switch deployment to Replit Deployments.
+Do NOT require Replit Object Storage.
+Do NOT require Postgres for public report rendering.
+Do NOT require a live backend for the public Reports page.
+Do NOT make the site depend on /api to show reports.
+Do NOT change the EdgeOne deployment target.
+
+We are keeping the RSR Media site EdgeOne-compatible.
+
+The goal is:
+1. Keep the existing RSR Media frontend/static deployment working on EdgeOne.
+2. Add the real RSR Policy Files into the public Reports section.
+3. Add /doctrine-library.
+4. Keep /admin passcode as 4451.
+5. Use static files and static report metadata for EdgeOne deployment.
+
+CURRENT REALITY:
+The previous backend/API publishing system is useful for later, but we are NOT deploying that version right now.
+For EdgeOne, the live public site must work as a static SPA.
+
+EDGEONE STATIC RULE:
+PDF reports must live inside the project before build/deploy.
+
+Use this folder:
+
+public/reports/
+
+The public PDF URLs should be:
+
+/reports/RSR_Policy_File_001_People_First_Is_Not_Enough.pdf
+/reports/RSR_Policy_File_002_The_Human_Mandate.pdf
+/reports/RSR_Policy_File_003_The_Right_Not_To_Be_Managed.pdf
+/reports/RSR_Policy_File_004_Local_Power_In_The_Intelligence_Age.pdf
+
+REPORT DATA:
+Use a static report registry file.
+
+Use:
+src/data/reports.ts
+
+If it already exists, replace the mock/placeholder report array with the real RSR reports below.
+
+Do not use the old seeded mock reports:
+- Doctrine of Verification
+- Source Protection Protocol
+- Conflict of Interest Disclosure
+- Sovereignty Brief — First Edition
+
+Those are not the real reports for this launch. Remove them or move them to draft/hidden if needed.
+
+Create/update the Report type so it supports:
+
+id
+reportNumber
+title
+subtitle
+slug
+category
+date
+description
+fullDescription
+tags
+author
+featured
+status
+pdfUrl
+heroImageUrl optional
+shopifyUrl optional
+sourceDocument optional
+sourceUrl optional
+
+Only reports with status: "published" should show publicly.
+
+ADD THESE REPORTS:
+
+REPORT 1:
+id: rsr-policy-file-001
+reportNumber: RSR Policy File #001
+title: People First Is Not Enough
+subtitle: A Sovereignty Doctrine Response to OpenAI’s Industrial Policy for the Intelligence Age
+slug: people-first-is-not-enough
+category: Policy File
+date: 2026-05-24
+author: RSR Media
+featured: true
+status: published
+pdfUrl: /reports/RSR_Policy_File_001_People_First_Is_Not_Enough.pdf
+tags: AI, Sovereignty Doctrine, Human Command, Managed Society, OpenAI, Policy
+description:
+OpenAI’s industrial policy paper recognizes that artificial intelligence will reshape work, wealth, government, infrastructure, and human opportunity. RSR’s response argues that people-first language is not enough unless citizens retain the power to see, challenge, audit, and limit the systems that govern their lives.
+fullDescription:
+People First Is Not Enough is RSR Policy File #001 and the opening response in the Sovereignty Doctrine policy series. It examines OpenAI’s Industrial Policy for the Intelligence Age and argues that the Intelligence Age cannot be governed by management language alone. RSR’s standard is human command: citizens must retain the right to see, challenge, audit, appeal, and limit the systems that affect their lives.
+
+REPORT 2:
+id: rsr-policy-file-002
+reportNumber: RSR Policy File #002
+title: The Human Mandate
+subtitle: Why Humans Must Govern the Machine
+slug: the-human-mandate
+category: Policy File
+date: 2026-05-24
+author: RSR Media
+featured: false
+status: published
+pdfUrl: /reports/RSR_Policy_File_002_The_Human_Mandate.pdf
+tags: AI, Human Command, Sovereignty Doctrine, Machine Rule, Civic Philosophy
+description:
+The Human Mandate explains why intelligence is not legitimacy, capability is not authority, and optimization is not wisdom. AI may assist civilization, but it must never inherit civilization.
+fullDescription:
+The Human Mandate is RSR Policy File #002 and establishes the core philosophical standard of the Sovereignty Doctrine. It argues that artificial intelligence may assist human civilization, but it must never become the final authority over human beings, civic rights, public judgment, or moral responsibility.
+
+REPORT 3:
+id: rsr-policy-file-003
+reportNumber: RSR Policy File #003
+title: The Right Not To Be Managed
+subtitle: Citizenship in the Age of Algorithmic Power
+slug: the-right-not-to-be-managed
+category: Policy File
+date: 2026-05-24
+author: RSR Media
+featured: false
+status: published
+pdfUrl: /reports/RSR_Policy_File_003_The_Right_Not_To_Be_Managed.pdf
+tags: Algorithmic Power, Managed Society, Civic Rights, AI Governance, Digital Control
+description:
+This report defines the civic right not to be silently scored, profiled, automated, censored, denied, or governed by systems citizens cannot see, challenge, or appeal.
+fullDescription:
+The Right Not To Be Managed is RSR Policy File #003. It argues that access to AI is not enough. Citizens also need protection from being silently managed by algorithmic systems inside government, employment, finance, education, platforms, and public life.
+
+REPORT 4:
+id: rsr-policy-file-004
+reportNumber: RSR Policy File #004
+title: Local Power in the Intelligence Age
+subtitle: Why Communities Must Control the Infrastructure Built Around Them
+slug: local-power-in-the-intelligence-age
+category: Policy File
+date: 2026-05-24
+author: RSR Media
+featured: false
+status: published
+pdfUrl: /reports/RSR_Policy_File_004_Local_Power_In_The_Intelligence_Age.pdf
+tags: Local Power, Data Centers, Infrastructure, AI, Civic Sovereignty, Public Records
+description:
+This report argues that AI is not only software. It is energy, land, water, public contracts, local infrastructure, and institutional power. Communities must have the right to see, question, audit, and benefit from the systems built around them.
+fullDescription:
+Local Power in the Intelligence Age is RSR Policy File #004. It brings the Sovereignty Doctrine down to the local level and argues that communities must have visibility, consent, records access, and public accountability when AI infrastructure is built around them.
+
+PDF FILE HANDLING:
+I will drag the four PDFs into Replit.
+Move or copy them into:
+
+public/reports/
+
+Use these exact filenames:
+
+RSR_Policy_File_001_People_First_Is_Not_Enough.pdf
+RSR_Policy_File_002_The_Human_Mandate.pdf
+RSR_Policy_File_003_The_Right_Not_To_Be_Managed.pdf
+RSR_Policy_File_004_Local_Power_In_The_Intelligence_Age.pdf
+
+If uploaded files have different names, rename them to the exact filenames above.
+
+PUBLIC ROUTES:
+Make sure these routes work statically:
+
+/reports
+/reports/:slug
+/doctrine-library
+
+REPORTS PAGE:
+Route:
+/reports
+
+This page should show:
+- title: REPORTS
+- subtitle/copy:
+  Policy files, doctrine papers, civic reports, and investigations from RSR Media.
+  Verification-first — published when confirmed.
+- search input
+- category filters:
+  All
+  Policy File
+  Doctrine
+  Civic Report
+  Investigation
+  Brief
+  Sovereignty Brief
+- featured section
+- report archive grid/list
+
+Show the real four reports from src/data/reports.ts.
+Policy File #001 should be featured.
+Remove the old mock featured cards unless they are replaced with the real reports.
+
+Each report card must show:
+- category
+- report number
+- title
+- subtitle
+- short description
+- tags if space allows
+- date
+- author
+- featured star if featured
+- buttons or clickable area:
+  Read Report
+  Download PDF
+
+REPORT DETAIL PAGE:
+Route:
+/reports/:slug
+
+Each report detail page should show:
+- Back to Reports
+- category
+- report number
+- date
+- featured marker if featured
+- title
+- subtitle
+- author
+- description/fullDescription
+- tags
+- PDF embed using iframe/object/embed pointed at pdfUrl
+- Download PDF button
+- Copy Link button
+- Back to Archive button
+- footer line:
+  Published by Red State Rhetoric. Produced through Pacific Systems.
+
+If the PDF exists, embed it.
+If it does not exist, show “PDF pending” instead of a broken embed.
+
+HOME LATEST REPORTS:
+Update the homepage Reports / Latest Reports section so it pulls the latest published reports from src/data/reports.ts.
+Show latest 3.
+If no reports exist, keep the empty archive message.
+But with the four real reports, it should no longer show archive empty.
+
+DOCTRINE LIBRARY:
+Add route:
+/doctrine-library
+
+Page title:
+RSR Doctrine Library
+
+Intro copy:
+The Doctrine Library collects the books, policy files, civic reports, and public intelligence documents that define the Sovereignty Doctrine: free citizens, not managed populations; human command, not machine rule.
+
+Sections:
+
+1. Featured Book
+Title:
+Free Citizens, Not Managed Populations
+Subtitle:
+The Sovereignty Doctrine for the Age of Artificial Intelligence
+Description:
+The founding manifesto of the Sovereignty Doctrine. A civic text for the age of artificial intelligence, invisible power, digital systems, and managed society.
+Buttons:
+View Book
+Buy Paperback
+Digital Edition
+
+For now, if exact URLs are not known, use placeholder hrefs:
+Book overview: /books/free-citizens-not-managed-populations
+Buy Paperback: https://rsrarmory.store
+Digital Edition: https://rsrarmory.store
+
+2. Policy Files
+Show reports where category = Policy File.
+This should show Policy Files #001-#004.
+
+3. The Sovereignty Brief
+Coming soon section:
+Weekly analysis on AI, technology, institutional power, digital infrastructure, and the future of human sovereignty.
+
+4. Produced Through Pacific Systems
+Add line:
+Published by Red State Rhetoric. Produced through Pacific Systems.
+
+NAVIGATION:
+Add “Doctrine” or “Doctrine Library” to the top navigation.
+Do not overcrowd the nav.
+Preferred nav:
+Home
+Broadcasts
+Reports
+Doctrine
+Mission
+Channels
+RSR Intel
+Hotline
+Systems
+
+If “Doctrine” is added, link it to /doctrine-library.
+
+ADMIN:
+Keep /admin.
+Admin passcode must be:
+
+4451
+
+Since we are keeping EdgeOne static hosting, do NOT promise live uploads from the deployed admin.
+Do NOT build runtime upload storage.
+
+Instead, make admin an EdgeOne-compatible publishing console.
+
+Admin behavior:
+- passcode gate with 4451
+- use sessionStorage so refresh keeps admin unlocked during that browser session
+- logout clears sessionStorage
+- wrong passcode fails
+- Admin can show the static reports from src/data/reports.ts
+- Admin can show instructions:
+  “For EdgeOne static deployment, add PDFs to public/reports and update src/data/reports.ts, then rebuild and redeploy.”
+- If there is any old backend admin upload UI, either hide it for EdgeOne mode or label it “backend mode disabled for EdgeOne static deployment.”
+
+Do not leave any UI that suggests users can live-upload PDFs directly to EdgeOne at runtime.
+
+STYLE:
+Keep the current RSR look:
+- black / near-black background
+- green accents
+- thin borders
+- uppercase micro labels
+- terminal/civic-intelligence tone
+- do not redesign whole site
+- do not change header/footer branding beyond adding Doctrine link
+- no bright SaaS look
+
+EDGEONE BUILD:
+Make sure the site still builds as a static SPA.
+
+Confirm:
+- public/_redirects remains for SPA fallback if already present
+- artifact.toml remains static/EdgeOne compatible
+- no required runtime API calls for public pages
+- no required Postgres/Object Storage for public pages
+- /reports works after static build
+- PDF links resolve from /reports/*.pdf
+
+REMOVE OR DISABLE API DEPENDENCY:
+If recent changes made /reports depend on /api/reports, change public pages back to static src/data/reports.ts for EdgeOne deployment.
+If API/server code remains in the repo, it is fine, but public site must not need it.
+
+TEST:
+After changes, run:
+
+pnpm build
+
+If this repo uses npm instead, run:
+
+npm run build
+
+Then confirm:
+1. /reports shows the four real RSR Policy Files.
+2. /reports/people-first-is-not-enough opens.
+3. PDF embed works for Policy File #001.
+4. Download PDF works.
+5. /doctrine-library shows the book and Policy Files #001-#004.
+6. Home latest reports shows the real reports.
+7. /admin accepts passcode 4451.
+8. /admin rejects wrong passcode.
+9. No live backend/API is required for the static EdgeOne site.
+10. Build output remains compatible with EdgeOne.
+
+FINAL OUTPUT:
+Tell me:
+- exactly where the PDFs were placed
+- exactly what file contains the report registry
+- the exact build command used
+- whether the four PDF URLs work
+- whether the site remains EdgeOne static compatible

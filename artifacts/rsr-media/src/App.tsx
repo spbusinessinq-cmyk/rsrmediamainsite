@@ -52,14 +52,9 @@ function Router() {
       <Route path="/pacific" component={PacificSystems} />
       <Route path="/security" component={BlackDog} />
       <Route path="/contact" component={Contact} />
-      {/* Admin routes — all handled by AdminDashboard via internal route matching */}
+      {/* Admin — single page in static mode */}
       <Route path="/admin" component={AdminDashboard} />
       <Route path="/admin/reports" component={AdminDashboard} />
-      <Route path="/admin/reports/:id" component={AdminDashboard} />
-      <Route path="/admin/import-x" component={AdminDashboard} />
-      <Route path="/admin/tips" component={AdminDashboard} />
-      <Route path="/admin/analytics" component={AdminDashboard} />
-      <Route path="/admin/settings" component={AdminDashboard} />
       <Route component={NotFound} />
     </Switch>
   );

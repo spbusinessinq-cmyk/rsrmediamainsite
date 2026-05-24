@@ -15,13 +15,13 @@ export function Navbar() {
 
   const navLinks = [
     { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/network", label: "Network" },
-    { href: "/pacific-systems", label: "Pacific Systems" },
-    { href: "/press-corps", label: "Press Corps" },
     { href: "/broadcasts", label: "Broadcasts" },
     { href: "/reports", label: "Reports" },
-    { href: "/submit-tip", label: "Submit Tip" },
+    { href: "/doctrine-library", label: "Doctrine" },
+    { href: "/mission", label: "Mission" },
+    { href: "/channels", label: "Channels" },
+    { href: "/network", label: "Systems" },
+    { href: "/hotline", label: "Hotline" },
     { href: "/contact", label: "Contact" },
   ];
 

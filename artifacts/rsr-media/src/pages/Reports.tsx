@@ -17,11 +17,10 @@ export default function Reports() {
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
-  const { data: reports, isLoading, isError } = usePublishedReports();
+  const { data: reports } = usePublishedReports();
 
   const filtered = useMemo(() => {
-    const list = reports ?? [];
-    let r = list;
+    let r = reports;
     if (activeCategory) r = r.filter((x) => x.category === activeCategory);
     if (search.trim()) {
       const q = search.toLowerCase();
@@ -37,7 +36,7 @@ export default function Reports() {
     return r;
   }, [reports, activeCategory, search]);
 
-  const featured = (reports ?? []).filter((r) => r.featured);
+  const featured = reports.filter((r) => r.featured);
 
   return (
     <div className="w-full pt-12 pb-24 overflow-x-hidden">
@@ -69,16 +68,7 @@ export default function Reports() {
           </Link>
         </div>
 
-        {isLoading ? (
-          <div className="glass-panel border border-border/25 p-16 text-center font-mono text-xs text-muted-foreground/40 tracking-widest uppercase">
-            // LOADING ARCHIVE...
-          </div>
-        ) : isError ? (
-          <div className="glass-panel border border-destructive/30 p-16 text-center">
-            <div className="font-mono text-xs text-destructive tracking-widest uppercase mb-4">// SIGNAL ERROR</div>
-            <p className="font-sans text-sm text-muted-foreground">Unable to load reports. Refresh to retry.</p>
-          </div>
-        ) : (reports ?? []).length === 0 ? (
+        {reports.length === 0 ? (
           <div className="glass-panel corner-bracket border border-border/25 p-16 text-center">
             <div className="font-mono text-xs text-muted-foreground/30 tracking-widest uppercase mb-4">// ARCHIVE PENDING</div>
             <p className="font-sans text-lg text-muted-foreground mb-2">No published reports yet.</p>

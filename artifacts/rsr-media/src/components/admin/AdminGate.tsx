@@ -7,20 +7,10 @@ interface AdminGateProps {
 }
 
 export function AdminGate({ children }: AdminGateProps) {
-  const { authed, isLoading, login } = useAdminAuth();
+  const { authed, login } = useAdminAuth();
   const [code, setCode] = useState('');
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
-
-  if (isLoading) {
-    return (
-      <div className="min-h-[100dvh] bg-background flex items-center justify-center">
-        <div className="font-mono text-xs text-muted-foreground/50 tracking-widest uppercase">
-          // VERIFYING SESSION...
-        </div>
-      </div>
-    );
-  }
 
   if (authed) return <>{children}</>;
 

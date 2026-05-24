@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'wouter';
-import { Report, resolveAssetUrl } from '@/types/report';
+import type { Report } from '@/types/report';
 import { Star, FileText } from 'lucide-react';
 
 const categoryColors: Record<string, string> = {
@@ -18,9 +18,10 @@ interface ReportCardProps {
 }
 
 export function ReportCard({ report, featured }: ReportCardProps) {
-  const hero = resolveAssetUrl(report.heroImageUrl, report.heroImageStorageKey);
-  const hasPdf = !!resolveAssetUrl(report.pdfUrl, report.pdfStorageKey);
-  const colorClass = categoryColors[report.category] ?? 'border-border text-muted-foreground bg-card/20';
+  const hero = report.heroImageUrl ?? null;
+  const hasPdf = !!report.pdfUrl;
+  const colorClass =
+    categoryColors[report.category] ?? 'border-border text-muted-foreground bg-card/20';
 
   return (
     <Link
@@ -32,7 +33,11 @@ export function ReportCard({ report, featured }: ReportCardProps) {
     >
       {hero && (
         <div className="w-full h-36 overflow-hidden border-b border-border/20">
-          <img src={hero} alt="" className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500" />
+          <img
+            src={hero}
+            alt=""
+            className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+          />
         </div>
       )}
 
@@ -43,7 +48,9 @@ export function ReportCard({ report, featured }: ReportCardProps) {
           </span>
           <div className="flex items-center gap-2">
             {hasPdf && <FileText className="w-3.5 h-3.5 text-primary/60 shrink-0" />}
-            {(featured || report.featured) && <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500 shrink-0" />}
+            {(featured || report.featured) && (
+              <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500 shrink-0" />
+            )}
           </div>
         </div>
 
@@ -54,17 +61,38 @@ export function ReportCard({ report, featured }: ReportCardProps) {
           {report.title}
         </h3>
         {report.subtitle && (
-          <p className="font-sans text-xs text-muted-foreground/80 italic mb-3 leading-snug">{report.subtitle}</p>
+          <p className="font-sans text-xs text-muted-foreground/80 italic mb-3 leading-snug">
+            {report.subtitle}
+          </p>
         )}
 
         <p className="font-sans text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-3">
           {report.description}
         </p>
 
+        {report.tags.length > 0 && (
+          <div className="flex flex-wrap gap-1 mb-3">
+            {report.tags.slice(0, 3).map((t) => (
+              <span
+                key={t}
+                className="font-mono text-[0.55rem] tracking-wider border border-border/35 px-1.5 py-0.5 text-muted-foreground/80 uppercase"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+        )}
+
         <div className="flex items-center justify-between border-t border-border/30 pt-3">
-          <span className="font-mono text-[0.6rem] text-muted-foreground tracking-widest uppercase">RSR MEDIA</span>
+          <span className="font-mono text-[0.6rem] text-muted-foreground tracking-widest uppercase">
+            {report.author}
+          </span>
           <time className="font-mono text-[0.6rem] text-muted-foreground tracking-widest">
-            {new Date(report.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+            {new Date(report.date).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+            })}
           </time>
         </div>
       </div>

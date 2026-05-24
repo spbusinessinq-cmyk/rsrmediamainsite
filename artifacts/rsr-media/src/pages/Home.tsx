@@ -36,7 +36,7 @@ export default function Home() {
   });
 
   const { data: reportsData } = usePublishedReports();
-  const latestReports = (reportsData ?? []).slice(0, 3);
+  const latestReports = reportsData.slice(0, 3);
 
   return (
     <div className="w-full overflow-x-hidden">

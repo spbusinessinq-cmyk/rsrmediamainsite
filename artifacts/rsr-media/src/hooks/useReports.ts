@@ -1,40 +1,32 @@
-import { useQuery } from '@tanstack/react-query';
-import {
-  listReports,
-  getListReportsQueryKey,
-  getReportBySlug,
-  getGetReportBySlugQueryKey,
-} from '@workspace/api-client-react';
+import { useMemo } from 'react';
+import { REPORTS } from '@/data/reports';
 import type { Report } from '@/types/report';
 
-export function usePublishedReports() {
-  const key = getListReportsQueryKey({ includeDrafts: false });
-  return useQuery({
-    queryKey: key,
-    queryFn: () => listReports({ includeDrafts: false }),
-    select: (data) => data as unknown as Report[],
-  });
+function sortByDateDesc(list: Report[]): Report[] {
+  return [...list].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+  );
 }
 
-export function useAllReports(enabled = true) {
-  const key = getListReportsQueryKey({ includeDrafts: true });
-  return useQuery({
-    queryKey: key,
-    queryFn: () => listReports({ includeDrafts: true }),
-    enabled,
-    select: (data) => data as unknown as Report[],
-  });
+export function usePublishedReports() {
+  const data = useMemo(
+    () => sortByDateDesc(REPORTS.filter((r) => r.status === 'published')),
+    [],
+  );
+  return { data, isLoading: false, isError: false };
+}
+
+export function useAllReports(_enabled = true) {
+  const data = useMemo(() => sortByDateDesc(REPORTS), []);
+  return { data, isLoading: false, isError: false };
 }
 
 export function useReportBySlug(slug: string | undefined) {
-  const key = slug ? getGetReportBySlugQueryKey(slug) : ['report', 'none'];
-  return useQuery({
-    queryKey: key,
-    queryFn: () => getReportBySlug(slug!),
-    enabled: !!slug,
-    select: (data) => data as unknown as Report,
-    retry: false,
-  });
+  const data = useMemo(
+    () => (slug ? REPORTS.find((r) => r.slug === slug && r.status === 'published') : undefined),
+    [slug],
+  );
+  return { data, isLoading: false, isError: !slug ? false : !data };
 }
 
 export function makeSlug(title: string): string {

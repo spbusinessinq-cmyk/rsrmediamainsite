@@ -2,9 +2,17 @@ import React, { useEffect } from 'react';
 import { useParams, Link } from 'wouter';
 import { useSEO } from '@/lib/seo';
 import { useReportBySlug } from '@/hooks/useReports';
-import { resolveAssetUrl } from '@/types/report';
 import { trackReportView } from '@/lib/analytics';
-import { ArrowLeft, ExternalLink, Share2, Tag, Star, FileText, Download, ShoppingBag } from 'lucide-react';
+import {
+  ArrowLeft,
+  ExternalLink,
+  Share2,
+  Tag,
+  Star,
+  FileText,
+  Download,
+  ShoppingBag,
+} from 'lucide-react';
 
 function NotFoundInline() {
   useSEO({ title: 'Report Not Found', description: 'This report could not be found.' });
@@ -12,14 +20,22 @@ function NotFoundInline() {
     <div className="w-full pt-12 pb-24">
       <div className="container mx-auto px-6 max-w-3xl">
         <div className="glass-panel corner-bracket border border-border/30 p-12 text-center">
-          <div className="font-mono text-xs text-muted-foreground/35 tracking-widest uppercase mb-4">// SIGNAL.NOT.FOUND</div>
-          <h1 className="text-4xl mb-4 uppercase" style={{ fontFamily: "'Rajdhani', sans-serif", fontWeight: 700 }}>
+          <div className="font-mono text-xs text-muted-foreground/35 tracking-widest uppercase mb-4">
+            // SIGNAL.NOT.FOUND
+          </div>
+          <h1
+            className="text-4xl mb-4 uppercase"
+            style={{ fontFamily: "'Rajdhani', sans-serif", fontWeight: 700 }}
+          >
             Report Not Found
           </h1>
           <p className="font-sans text-base text-muted-foreground mb-8">
             This report may have been removed, archived, or the URL may be incorrect.
           </p>
-          <Link href="/reports" className="font-mono text-xs text-primary hover:underline tracking-widest uppercase">
+          <Link
+            href="/reports"
+            className="font-mono text-xs text-primary hover:underline tracking-widest uppercase"
+          >
             ← BACK TO REPORTS
           </Link>
         </div>
@@ -35,7 +51,10 @@ function formatBody(body: string): React.ReactNode {
     if (!trimmed) return null;
     if (/^[A-Z][A-Z\s\/\-]{2,}$/.test(trimmed) && trimmed.length < 50) {
       return (
-        <div key={i} className="mt-8 mb-2 font-mono text-[0.68rem] tracking-widest text-primary/70 uppercase border-b border-border/20 pb-2">
+        <div
+          key={i}
+          className="mt-8 mb-2 font-mono text-[0.68rem] tracking-widest text-primary/70 uppercase border-b border-border/20 pb-2"
+        >
           {trimmed}
         </div>
       );
@@ -45,7 +64,10 @@ function formatBody(body: string): React.ReactNode {
     }
     const lines = trimmed.split('\n');
     return (
-      <p key={i} className="font-sans text-[1rem] text-foreground/82 leading-[1.85] mb-4">
+      <p
+        key={i}
+        className="font-sans text-[1rem] text-foreground/82 leading-[1.85] mb-4"
+      >
         {lines.map((line, j) => (
           <React.Fragment key={j}>
             {line}
@@ -59,7 +81,7 @@ function formatBody(body: string): React.ReactNode {
 
 export default function ReportDetail() {
   const { slug } = useParams<{ slug: string }>();
-  const { data: report, isLoading, isError } = useReportBySlug(slug);
+  const { data: report } = useReportBySlug(slug);
 
   useSEO({
     title: report ? report.title : 'Report',
@@ -70,18 +92,10 @@ export default function ReportDetail() {
     if (report) trackReportView(report.slug);
   }, [report?.slug]);
 
-  if (isLoading) {
-    return (
-      <div className="w-full pt-24 pb-24 text-center font-mono text-xs text-muted-foreground/40 tracking-widest uppercase">
-        // LOADING REPORT...
-      </div>
-    );
-  }
+  if (!report) return <NotFoundInline />;
 
-  if (isError || !report) return <NotFoundInline />;
-
-  const hero = resolveAssetUrl(report.heroImageUrl, report.heroImageStorageKey);
-  const pdfUrl = resolveAssetUrl(report.pdfUrl, report.pdfStorageKey);
+  const hero = report.heroImageUrl ?? null;
+  const pdfUrl = report.pdfUrl ?? null;
 
   function handleShare() {
     navigator.clipboard.writeText(window.location.href).catch(() => {});
@@ -123,7 +137,9 @@ export default function ReportDetail() {
             <div className="flex flex-wrap items-center gap-2.5 mb-6 font-mono text-xs tracking-widest uppercase text-muted-foreground">
               {!hero && (
                 <>
-                  <span className="border border-border/40 px-2 py-0.5 bg-card/15">{report.category}</span>
+                  <span className="border border-border/40 px-2 py-0.5 bg-card/15">
+                    {report.category}
+                  </span>
                   <span>{report.reportNumber}</span>
                 </>
               )}
@@ -134,7 +150,11 @@ export default function ReportDetail() {
               )}
               {!hero && <span>·</span>}
               <time dateTime={report.date}>
-                {new Date(report.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                {new Date(report.date).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
               </time>
             </div>
 
@@ -149,7 +169,9 @@ export default function ReportDetail() {
                 {report.subtitle}
               </p>
             )}
-            <p className="font-mono text-xs text-muted-foreground tracking-widest uppercase mb-8">By RSR Media</p>
+            <p className="font-mono text-xs text-muted-foreground tracking-widest uppercase mb-8">
+              By {report.author}
+            </p>
 
             {report.description && (
               <div className="glass-panel border border-border/25 p-6 mb-8">
@@ -159,12 +181,14 @@ export default function ReportDetail() {
               </div>
             )}
 
-            {pdfUrl && (
+            {pdfUrl ? (
               <div className="border border-primary/30 bg-primary/[0.04] corner-bracket p-6 mb-8">
                 <div className="flex items-center justify-between gap-3 mb-4 flex-wrap">
                   <div className="flex items-center gap-3">
                     <FileText className="w-5 h-5 text-primary" />
-                    <span className="font-mono text-xs text-primary tracking-widest uppercase">FULL REPORT PDF</span>
+                    <span className="font-mono text-xs text-primary tracking-widest uppercase">
+                      FULL REPORT PDF
+                    </span>
                   </div>
                   <div className="flex items-center gap-2">
                     <a
@@ -174,7 +198,7 @@ export default function ReportDetail() {
                       download
                       className="inline-flex items-center gap-2 font-mono text-xs font-bold border border-primary/50 text-primary px-3 py-2 hover:bg-primary hover:text-primary-foreground transition-all tracking-widest uppercase"
                     >
-                      <Download className="w-3 h-3" /> DOWNLOAD
+                      <Download className="w-3 h-3" /> DOWNLOAD PDF
                     </a>
                     <a
                       href={pdfUrl}
@@ -193,12 +217,27 @@ export default function ReportDetail() {
                 >
                   <p className="font-mono text-xs text-muted-foreground p-4">
                     Your browser cannot display this PDF inline.{' '}
-                    <a href={pdfUrl} className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
+                    <a
+                      href={pdfUrl}
+                      className="text-primary hover:underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       Download the PDF
                     </a>{' '}
                     to view it.
                   </p>
                 </object>
+              </div>
+            ) : (
+              <div className="border border-dashed border-border/40 bg-card/10 corner-bracket p-8 mb-8 text-center">
+                <FileText className="w-6 h-6 text-muted-foreground/40 mx-auto mb-3" />
+                <div className="font-mono text-xs text-muted-foreground/70 tracking-widest uppercase mb-1">
+                  // PDF PENDING
+                </div>
+                <p className="font-sans text-sm text-muted-foreground">
+                  The full PDF for this report has not been published yet.
+                </p>
               </div>
             )}
 
@@ -224,7 +263,9 @@ export default function ReportDetail() {
                 </div>
                 <ul className="space-y-2">
                   {report.sourceDocument && (
-                    <li className="font-sans text-sm text-muted-foreground">{report.sourceDocument}</li>
+                    <li className="font-sans text-sm text-muted-foreground">
+                      {report.sourceDocument}
+                    </li>
                   )}
                   {report.sourceUrl && (
                     <li>
@@ -249,6 +290,16 @@ export default function ReportDetail() {
               >
                 <Share2 className="w-3 h-3" /> COPY LINK
               </button>
+              <Link
+                href="/reports"
+                className="inline-flex items-center gap-2 font-mono text-xs text-muted-foreground hover:text-foreground transition-colors border border-border/35 px-3 py-1.5 hover:border-foreground/35"
+              >
+                <ArrowLeft className="w-3 h-3" /> BACK TO ARCHIVE
+              </Link>
+            </div>
+
+            <div className="mt-10 pt-6 border-t border-border/15 font-mono text-[0.62rem] text-muted-foreground/50 tracking-widest uppercase">
+              Published by Red State Rhetoric. Produced through Pacific Systems.
             </div>
           </article>
 
@@ -272,27 +323,38 @@ export default function ReportDetail() {
             )}
 
             <div className="border border-border/25 bg-card/8 p-5 corner-bracket">
-              <div className="font-mono text-[0.65rem] text-muted-foreground tracking-widest uppercase mb-3">HAVE A TIP?</div>
-              <Link href="/hotline" className="font-mono text-xs text-primary hover:underline tracking-widest uppercase">
+              <div className="font-mono text-[0.65rem] text-muted-foreground tracking-widest uppercase mb-3">
+                HAVE A TIP?
+              </div>
+              <Link
+                href="/hotline"
+                className="font-mono text-xs text-primary hover:underline tracking-widest uppercase"
+              >
                 HOTLINE / SUBMIT A TIP →
               </Link>
             </div>
 
             <div className="border border-border/25 bg-card/8 p-5 corner-bracket">
-              <div className="font-mono text-[0.65rem] text-muted-foreground tracking-widest uppercase mb-3">CORRECTION?</div>
-              <p className="font-sans text-sm text-muted-foreground mb-3">If something in this report is inaccurate, let us know.</p>
-              <a
-                href={`mailto:newsroom@rsrmedia.org?subject=Correction — ${encodeURIComponent(report.title)}`}
-                className="font-mono text-xs text-muted-foreground hover:text-foreground transition-colors tracking-widest uppercase"
+              <div className="font-mono text-[0.65rem] text-muted-foreground tracking-widest uppercase mb-3">
+                ALL REPORTS
+              </div>
+              <Link
+                href="/reports"
+                className="font-mono text-xs text-primary hover:underline tracking-widest uppercase"
               >
-                EMAIL CORRECTIONS →
-              </a>
+                BACK TO ARCHIVE →
+              </Link>
             </div>
 
             <div className="border border-border/25 bg-card/8 p-5 corner-bracket">
-              <div className="font-mono text-[0.65rem] text-muted-foreground tracking-widest uppercase mb-3">ALL REPORTS</div>
-              <Link href="/reports" className="font-mono text-xs text-primary hover:underline tracking-widest uppercase">
-                BACK TO ARCHIVE →
+              <div className="font-mono text-[0.65rem] text-muted-foreground tracking-widest uppercase mb-3">
+                DOCTRINE LIBRARY
+              </div>
+              <Link
+                href="/doctrine-library"
+                className="font-mono text-xs text-primary hover:underline tracking-widest uppercase"
+              >
+                VIEW LIBRARY →
               </Link>
             </div>
           </aside>

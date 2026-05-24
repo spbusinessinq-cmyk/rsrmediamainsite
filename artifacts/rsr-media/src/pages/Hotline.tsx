@@ -185,7 +185,7 @@ export default function Hotline() {
                 </p>
                 <p className="font-mono text-[0.62rem] text-muted-foreground/50 tracking-widest leading-relaxed mb-6">
                   // Stored locally in the operator console on this device until a backend is connected.
-                  This is device-local storage — visible to whoever operates this terminal via /admin/tips.
+                  This is device-local storage — visible only in this browser.
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <button
@@ -200,11 +200,6 @@ export default function Hotline() {
                   >
                     SUBMIT ANOTHER TIP
                   </button>
-                </div>
-                <div className="mt-5 pt-4 border-t border-border/20">
-                  <Link href="/admin/tips" className="font-mono text-[0.58rem] text-muted-foreground/28 hover:text-muted-foreground/55 tracking-widest uppercase">
-                    View in Operator Console →
-                  </Link>
                 </div>
               </div>
             ) : (
@@ -327,9 +322,7 @@ export default function Hotline() {
                 <span className="font-mono font-bold text-xs text-muted-foreground tracking-widest uppercase">STORAGE NOTE</span>
               </div>
               <p className="font-sans text-sm text-muted-foreground leading-relaxed">
-                Written tips are stored locally in this browser. They appear in the operator console at{' '}
-                <Link href="/admin/tips" className="text-primary/70 hover:text-primary transition-colors">/admin/tips</Link>.
-                No cloud storage until a backend is connected.
+                Written tips are stored locally in this browser only. No cloud storage until a backend is connected.
               </p>
             </div>
 

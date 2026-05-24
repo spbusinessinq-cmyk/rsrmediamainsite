@@ -1,49 +1,49 @@
-import { useCallback } from 'react';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import {
-  adminLogin,
-  adminLogout,
-  getAdminSession,
-  getGetAdminSessionQueryKey,
-} from '@workspace/api-client-react';
+import { useCallback, useEffect, useState } from 'react';
+
+const STORAGE_KEY = 'rsr_admin_session';
+const ADMIN_PASSCODE = '4451';
+
+function readSession(): boolean {
+  if (typeof window === 'undefined') return false;
+  try {
+    return window.sessionStorage.getItem(STORAGE_KEY) === 'unlocked';
+  } catch {
+    return false;
+  }
+}
 
 export function useAdminAuth() {
-  const qc = useQueryClient();
-  const sessionKey = getGetAdminSessionQueryKey();
+  const [authed, setAuthed] = useState<boolean>(() => readSession());
 
-  const { data, isLoading } = useQuery({
-    queryKey: sessionKey,
-    queryFn: () => getAdminSession(),
-    staleTime: 60_000,
-  });
+  useEffect(() => {
+    function onStorage(e: StorageEvent) {
+      if (e.key === STORAGE_KEY) setAuthed(readSession());
+    }
+    window.addEventListener('storage', onStorage);
+    return () => window.removeEventListener('storage', onStorage);
+  }, []);
 
-  const authed = !!data?.authenticated;
-
-  const login = useCallback(
-    async (passcode: string): Promise<boolean> => {
+  const login = useCallback(async (passcode: string): Promise<boolean> => {
+    if (passcode === ADMIN_PASSCODE) {
       try {
-        const res = await adminLogin({ passcode });
-        if (res.authenticated) {
-          qc.setQueryData(sessionKey, res);
-          return true;
-        }
+        window.sessionStorage.setItem(STORAGE_KEY, 'unlocked');
       } catch {
-        // fall through
+        // ignore
       }
-      return false;
-    },
-    [qc, sessionKey],
-  );
+      setAuthed(true);
+      return true;
+    }
+    return false;
+  }, []);
 
   const logout = useCallback(async () => {
     try {
-      await adminLogout();
+      window.sessionStorage.removeItem(STORAGE_KEY);
     } catch {
       // ignore
     }
-    qc.setQueryData(sessionKey, { authenticated: false });
-    qc.invalidateQueries();
-  }, [qc, sessionKey]);
+    setAuthed(false);
+  }, []);
 
-  return { authed, isLoading, login, logout };
+  return { authed, isLoading: false, login, logout };
 }
