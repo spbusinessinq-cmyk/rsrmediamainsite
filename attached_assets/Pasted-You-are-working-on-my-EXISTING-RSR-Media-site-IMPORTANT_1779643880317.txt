@@ -1,0 +1,346 @@
+You are working on my EXISTING RSR Media site.
+
+IMPORTANT:
+Do NOT redesign the site.
+Do NOT replace layouts.
+Do NOT convert this into a SaaS dashboard.
+Do NOT change the current RSR aesthetic.
+
+The current visual direction is CORRECT:
+- black / near-black interface
+- subtle green terminal glow
+- thin emerald borders
+- low contrast tactical UI
+- Splinter Cell / intelligence terminal atmosphere
+- civic-intelligence newsroom aesthetic
+- tactical command-terminal feeling
+- premium intelligence-system polish
+
+ONLY make targeted refinements and feature expansions.
+
+==================================================
+PRIORITY ORDER
+==================================================
+
+1. Build the Admin Access publishing/upload system FIRST
+2. Build the Reports archive system SECOND
+3. Refine the hero/header visuals THIRD
+4. Add atmospheric polish LAST
+
+DO NOT waste time redesigning pages.
+
+==================================================
+ADMIN ACCESS EXPANSION
+==================================================
+
+Transform the existing Admin Access panel into a protected RSR Operator Console.
+
+DO NOT make it look like:
+- WordPress
+- Notion
+- a SaaS dashboard
+- a generic CMS
+
+It should feel like:
+- an intelligence archive terminal
+- a newsroom publishing node
+- a secure operations console
+
+KEEP the current visual identity.
+
+==================================================
+ADMIN AUTH
+==================================================
+
+Use:
+
+VITE_ADMIN_PASSCODE=4451
+
+If no env file exists:
+- create .env.example
+- isolate the passcode logic in one config file
+
+Maintain:
+- current passcode screen
+- current styling
+- current access flow
+
+Refine it slightly:
+- subtle CRT scanlines
+- faint phosphor glow
+- subtle active pulse
+- blinking operator status dot
+- slightly stronger tactical borders
+
+Micro text under ADMIN ACCESS:
+RSR OPERATOR NODE // RESTRICTED
+
+==================================================
+UPLOAD / PUBLISHING SYSTEM
+==================================================
+
+Inside Admin Access create a lightweight publishing system where I can:
+
+- Upload PDFs
+- Upload report cover images
+- Create reports
+- Save drafts
+- Publish publicly
+- Edit reports later
+- Delete reports
+- Manage archives
+
+Support drag-and-drop upload zones.
+
+==================================================
+SUPPORTED CONTENT TYPES
+==================================================
+
+Support these report categories:
+
+- REPORT
+- POLICY
+- DOSSIER
+- FILE
+- DOCTRINE
+- INVESTIGATION
+- BRIEFING
+
+Each report should support:
+
+- title
+- subtitle
+- excerpt
+- body text
+- PDF attachment
+- thumbnail/cover image
+- publish date
+- tags
+- status
+- category
+
+Statuses:
+- DRAFT
+- INTERNAL
+- PUBLIC
+
+==================================================
+REPORT CLASSIFICATION SYSTEM
+==================================================
+
+Add optional classification labels:
+
+- PUBLIC
+- VERIFIED
+- INTERNAL
+- RESTRICTED
+
+Tiny metadata row example:
+
+FILE ID
+PUBLISHED
+AUTHOR
+STATUS
+
+==================================================
+PDF SYSTEM
+==================================================
+
+Uploaded PDFs should:
+
+- store correctly
+- generate working public URLs
+- appear automatically in Reports
+- open in-browser
+- support download
+
+Buttons:
+- OPEN FILE →
+- DOWNLOAD PDF →
+
+==================================================
+REPORTS PAGE
+==================================================
+
+The Reports section should feel like:
+- intelligence dossiers
+- government archive entries
+- declassified files
+- newsroom evidence terminals
+
+NOT:
+- blog cards
+- SaaS tiles
+- marketing cards
+
+KEEP:
+- current layout
+- current spacing
+- current colors
+
+REFINE:
+- reduce dead empty space
+- subtle scanline texture
+- faint green internal glow
+- sharper tactical corners
+- blinking cursor beside:
+  CHECK REPORT ARCHIVE →
+- subtle hover glow on:
+  VIEW ALL →
+
+Micro label:
+ARCHIVE NODE // PUBLIC REPORTS
+
+If no reports:
+keep:
+ARCHIVE EMPTY
+
+==================================================
+HERO SECTION REFINEMENT
+==================================================
+
+KEEP current homepage structure.
+
+DO NOT redesign the hero.
+
+ONLY refine the RSR MEDIA lockup.
+
+Current issue:
+The hero still feels slightly flat.
+
+Refine it into:
+a premium intelligence broadcast mark.
+
+==================================================
+RSR MEDIA HERO LOCKUP
+==================================================
+
+Main title:
+RSR MEDIA
+
+Single line only.
+NEVER stacked again.
+
+Under it:
+POWERED BY PACIFIC SYSTEMS
+
+Use:
+- muted silver/white
+- NOT yellow
+- NOT orange
+
+Add:
+- subtle CRT scanlines
+- faint bloom on white letters
+- very subtle old-monitor phosphor effect
+- tactical frame corners
+- faint glow behind lettering
+
+Keep restrained and cinematic.
+
+Think:
+- CIA terminal
+- Splinter Cell OPS room
+- military newsroom monitor
+NOT:
+- RGB cyberpunk
+- gaming neon
+- cheesy hacker UI
+
+==================================================
+HEADER REFINEMENTS
+==================================================
+
+Refine the top navigation/header ONLY slightly.
+
+KEEP current layout.
+
+Add:
+- subtle active glow on current nav item
+- slightly thicker HOME underline
+- subtle hover borders on social icons
+- faint green top/bottom bezel line
+- pulsing NOMINAL status pill
+- WTMO // READY formatting
+
+Tiny micro label beneath logo:
+RSR ECOSYSTEM // PUBLIC SIGNAL TERMINAL
+
+==================================================
+SOCIAL BRANDING COLORS
+==================================================
+
+Apply subtle platform accent logic:
+
+- YouTube = faint red glow
+- X/Twitter = faint blue glow
+- TikTok = faint green/cyan glow
+
+VERY subtle.
+Do NOT overdo it.
+
+==================================================
+ATMOSPHERIC POLISH
+==================================================
+
+Add globally:
+- subtle scanlines
+- faint monitor noise
+- phosphor bloom
+- subtle hover glow
+- tactical micro-animations
+- tiny pulse effects
+- faint intelligence-grid texture
+
+DO NOT:
+- add glassmorphism
+- add gradients everywhere
+- add bright neon
+- add rounded bubble UI
+- add excessive animations
+
+==================================================
+PERFORMANCE RULES
+==================================================
+
+DO NOT:
+- add heavy JS libraries
+- tank performance
+- break responsiveness
+- break routing
+- alter existing architecture
+
+Use lightweight CSS wherever possible.
+
+==================================================
+FINAL DESIGN GOAL
+==================================================
+
+The site should feel like:
+
+a real intelligence-backed media operation.
+
+Like:
+- a classified newsroom terminal
+- a tactical broadcast network
+- a real operator console
+- a public intelligence infrastructure
+
+It must feel:
+- premium
+- cinematic
+- operational
+- believable
+- disciplined
+- alive
+
+WITHOUT becoming:
+- cheesy
+- overdesigned
+- cyberpunk spam
+- gamer RGB
+- fake hacker UI
+
+FINAL RULE:
+Refine.
+Do not reinvent.
