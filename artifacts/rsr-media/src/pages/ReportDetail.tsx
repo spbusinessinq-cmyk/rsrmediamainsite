@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'wouter';
 import { useSEO } from '@/lib/seo';
 import { useReportBySlug } from '@/hooks/useReports';
@@ -12,6 +12,10 @@ import {
   FileText,
   Download,
   ShoppingBag,
+  Copy,
+  Check,
+  Eye,
+  EyeOff,
 } from 'lucide-react';
 
 function NotFoundInline() {
@@ -82,6 +86,8 @@ function formatBody(body: string): React.ReactNode {
 export default function ReportDetail() {
   const { slug } = useParams<{ slug: string }>();
   const { data: report } = useReportBySlug(slug);
+  const [linkCopied, setLinkCopied] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
 
   useSEO({
     title: report ? report.title : 'Report',
@@ -99,6 +105,18 @@ export default function ReportDetail() {
 
   function handleShare() {
     navigator.clipboard.writeText(window.location.href).catch(() => {});
+  }
+
+  function handleCopyPdfLink() {
+    if (!pdfUrl) return;
+    const absolute = new URL(pdfUrl, window.location.origin).toString();
+    navigator.clipboard
+      .writeText(absolute)
+      .then(() => {
+        setLinkCopied(true);
+        window.setTimeout(() => setLinkCopied(false), 1800);
+      })
+      .catch(() => {});
   }
 
   return (
@@ -182,61 +200,134 @@ export default function ReportDetail() {
             )}
 
             {pdfUrl ? (
-              <div className="border border-primary/30 bg-primary/[0.04] corner-bracket p-6 mb-8">
-                <div className="flex items-center justify-between gap-3 mb-4 flex-wrap">
-                  <div className="flex items-center gap-3">
-                    <FileText className="w-5 h-5 text-primary" />
-                    <span className="font-mono text-xs text-primary tracking-widest uppercase">
-                      FULL REPORT PDF
-                    </span>
+              <div className="mb-8">
+                <div
+                  className="border border-primary/30 corner-bracket p-6"
+                  style={{ background: '#050807' }}
+                >
+                  <div className="font-mono text-[0.62rem] text-primary/70 tracking-widest uppercase mb-3 flex items-center gap-2">
+                    <FileText className="w-3 h-3" /> // FULL REPORT PDF
                   </div>
-                  <div className="flex items-center gap-2">
+                  <h2
+                    className="text-2xl md:text-3xl font-bold uppercase mb-3"
+                    style={{ fontFamily: "'Rajdhani', sans-serif", lineHeight: 1.1 }}
+                  >
+                    Official Archive Copy
+                  </h2>
+                  <p className="font-sans text-sm text-foreground/75 leading-relaxed mb-5 max-w-2xl">
+                    This report is archived as a PDF document. Open it in a new tab for full-screen
+                    reading or download a copy for offline use.
+                  </p>
+
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6 border-y border-primary/15 py-4">
+                    {[
+                      { label: 'REPORT #', value: report.reportNumber },
+                      { label: 'CATEGORY', value: report.category },
+                      {
+                        label: 'PUBLISHED',
+                        value: new Date(report.date).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'short',
+                          day: 'numeric',
+                        }),
+                      },
+                      { label: 'FILE TYPE', value: 'PDF' },
+                    ].map((m) => (
+                      <div key={m.label}>
+                        <div className="font-mono text-[0.55rem] text-muted-foreground/60 tracking-widest uppercase mb-1">
+                          {m.label}
+                        </div>
+                        <div className="font-mono text-[0.72rem] text-foreground/85 tracking-wide truncate">
+                          {m.value}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-2">
                     <a
                       href={pdfUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      download
                       className="inline-flex items-center gap-2 font-mono text-xs font-bold border border-primary/50 text-primary px-3 py-2 hover:bg-primary hover:text-primary-foreground transition-all tracking-widest uppercase"
+                      data-testid="button-open-pdf"
+                    >
+                      <ExternalLink className="w-3 h-3" /> OPEN PDF
+                    </a>
+                    <a
+                      href={pdfUrl}
+                      download
+                      className="inline-flex items-center gap-2 font-mono text-xs border border-border/50 text-muted-foreground px-3 py-2 hover:text-foreground hover:border-border transition-all tracking-widest uppercase"
+                      data-testid="button-download-pdf"
                     >
                       <Download className="w-3 h-3" /> DOWNLOAD PDF
                     </a>
-                    <a
-                      href={pdfUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <button
+                      type="button"
+                      onClick={handleCopyPdfLink}
                       className="inline-flex items-center gap-2 font-mono text-xs border border-border/50 text-muted-foreground px-3 py-2 hover:text-foreground hover:border-border transition-all tracking-widest uppercase"
+                      data-testid="button-copy-pdf-link"
                     >
-                      <ExternalLink className="w-3 h-3" /> OPEN
-                    </a>
+                      {linkCopied ? (
+                        <>
+                          <Check className="w-3 h-3 text-primary" /> COPIED
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-3 h-3" /> COPY PDF LINK
+                        </>
+                      )}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setShowPreview((v) => !v)}
+                      aria-expanded={showPreview}
+                      className="inline-flex items-center gap-2 font-mono text-xs border border-border/50 text-muted-foreground px-3 py-2 hover:text-foreground hover:border-border transition-all tracking-widest uppercase"
+                      data-testid="button-preview-inline"
+                    >
+                      {showPreview ? (
+                        <>
+                          <EyeOff className="w-3 h-3" /> HIDE PREVIEW
+                        </>
+                      ) : (
+                        <>
+                          <Eye className="w-3 h-3" /> PREVIEW INLINE
+                        </>
+                      )}
+                    </button>
                   </div>
                 </div>
-                <object
-                  data={pdfUrl}
-                  type="application/pdf"
-                  className="w-full h-[70vh] bg-black/40 border border-border/30"
-                >
-                  <p className="font-mono text-xs text-muted-foreground p-4">
-                    Your browser cannot display this PDF inline.{' '}
-                    <a
-                      href={pdfUrl}
-                      className="text-primary hover:underline"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Download the PDF
-                    </a>{' '}
-                    to view it.
-                  </p>
-                </object>
+
+                {showPreview && (
+                  <iframe
+                    src={pdfUrl}
+                    title={report.title}
+                    className="w-full block min-h-[480px] md:min-h-[680px]"
+                    style={{
+                      marginTop: 16,
+                      border: '1px solid rgba(0,255,170,0.25)',
+                      background: '#050807',
+                    }}
+                  />
+                )}
               </div>
             ) : (
-              <div className="border border-dashed border-border/40 bg-card/10 corner-bracket p-8 mb-8 text-center">
-                <FileText className="w-6 h-6 text-muted-foreground/40 mx-auto mb-3" />
-                <div className="font-mono text-xs text-muted-foreground/70 tracking-widest uppercase mb-1">
-                  // PDF PENDING
+              <div
+                className="border border-dashed border-border/40 corner-bracket p-6 mb-8"
+                style={{ background: '#050807' }}
+              >
+                <div className="font-mono text-[0.62rem] text-muted-foreground/70 tracking-widest uppercase mb-3 flex items-center gap-2">
+                  <FileText className="w-3 h-3" /> // FULL REPORT PDF
                 </div>
-                <p className="font-sans text-sm text-muted-foreground">
-                  The full PDF for this report has not been published yet.
+                <h2
+                  className="text-2xl md:text-3xl font-bold uppercase mb-3"
+                  style={{ fontFamily: "'Rajdhani', sans-serif", lineHeight: 1.1 }}
+                >
+                  PDF Pending
+                </h2>
+                <p className="font-sans text-sm text-muted-foreground leading-relaxed max-w-2xl">
+                  This report has been added to the archive, but the PDF file has not been attached
+                  yet.
                 </p>
               </div>
             )}

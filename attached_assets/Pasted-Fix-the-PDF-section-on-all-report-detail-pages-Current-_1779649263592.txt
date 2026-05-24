@@ -1,0 +1,108 @@
+Fix the PDF section on all report detail pages.
+
+Current issue:
+Every /reports/:slug page shows a giant blank inline PDF box with:
+“Your browser cannot display this PDF inline. Download the PDF to view it.”
+
+The PDF links work, but the box looks broken and unprofessional.
+
+Goal:
+Remove the giant default PDF viewer box from all report pages and replace it with a clean RSR-style document access card.
+
+Keep:
+- EdgeOne static compatibility
+- static PDF files from public/reports/
+- current /reports/:slug routes
+- current RSR dark terminal style
+- no backend upload system
+- no deployment target changes
+
+On every report detail page, replace the current FULL REPORT PDF section with this layout:
+
+1. A compact document access card.
+
+Card design:
+- dark / near-black panel
+- thin green border
+- subtle terminal styling
+- no giant iframe by default
+- no blank dead space
+- no browser fallback message shown by default
+
+Card content:
+Micro label:
+FULL REPORT PDF
+
+Heading:
+Official Archive Copy
+
+Body copy:
+This report is archived as a PDF document. Open it in a new tab for full-screen reading or download a copy for offline use.
+
+Metadata row:
+- Report number
+- Category
+- Published date
+- File type: PDF
+
+Buttons:
+- OPEN PDF
+- DOWNLOAD PDF
+- COPY PDF LINK
+- PREVIEW INLINE
+
+Button behavior:
+- OPEN PDF opens report.pdfUrl in a new tab using target="_blank" rel="noopener noreferrer"
+- DOWNLOAD PDF links to report.pdfUrl and uses the download attribute
+- COPY PDF LINK copies the full PDF URL to clipboard and shows a small “Copied” confirmation
+- PREVIEW INLINE is collapsed by default. When clicked, it reveals the iframe below the card.
+
+Important:
+Do NOT show the iframe by default.
+Do NOT show the giant blank PDF box by default.
+Do NOT show “Your browser cannot display this PDF inline” unless the user opens Preview Inline and their browser fails.
+
+Inline preview after toggle:
+If user clicks PREVIEW INLINE, show iframe below card:
+- src={report.pdfUrl}
+- title={report.title}
+- width: 100%
+- min-height: 680px desktop
+- min-height: 480px mobile
+- border: 1px solid rgba(0,255,170,0.25)
+- background: #050807
+- margin-top: 16px
+
+If report.pdfUrl is missing:
+Show a clean card:
+PDF pending.
+This report has been added to the archive, but the PDF file has not been attached yet.
+
+Page order should be:
+1. report header
+2. report summary box
+3. clean PDF access card
+4. full description
+5. sidebar/footer elements
+
+Apply this to all report detail pages, including:
+- /reports/people-first-is-not-enough
+- /reports/the-human-mandate
+- /reports/the-right-not-to-be-managed
+- /reports/local-power-in-the-intelligence-age
+
+After changing, test:
+1. No report page shows the giant blank PDF box by default.
+2. OPEN PDF opens the PDF in a new tab.
+3. DOWNLOAD PDF downloads the PDF.
+4. COPY PDF LINK works.
+5. PREVIEW INLINE reveals the iframe only after clicking.
+6. The page still looks like RSR dark terminal/civic-intelligence style.
+7. The site remains static and EdgeOne-compatible.
+8. Build passes.
+
+Run the build after:
+pnpm build
+
+If this repo uses npm:
+npm run build
