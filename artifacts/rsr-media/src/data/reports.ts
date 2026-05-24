@@ -38,7 +38,7 @@ export const REPORTS: Report[] = [
     author: 'RSR Media',
     featured: false,
     status: 'published',
-    pdfUrl: null,
+    pdfUrl: '/reports/RSR_Policy_File_002_The_Human_Mandate.pdf',
     tags: [
       'AI',
       'Human Command',
@@ -62,7 +62,7 @@ export const REPORTS: Report[] = [
     author: 'RSR Media',
     featured: false,
     status: 'published',
-    pdfUrl: null,
+    pdfUrl: '/reports/RSR_Policy_File_003_The_Right_Not_To_Be_Managed.pdf',
     tags: [
       'Algorithmic Power',
       'Managed Society',
@@ -86,7 +86,7 @@ export const REPORTS: Report[] = [
     author: 'RSR Media',
     featured: false,
     status: 'published',
-    pdfUrl: null,
+    pdfUrl: '/reports/RSR_Policy_File_004_Local_Power_In_The_Intelligence_Age.pdf',
     tags: [
       'Local Power',
       'Data Centers',
