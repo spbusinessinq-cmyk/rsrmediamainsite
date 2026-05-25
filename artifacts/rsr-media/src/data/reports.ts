@@ -203,7 +203,7 @@ export const REPORTS: Report[] = [
     author: 'RSR Policy Institute',
     featured: false,
     status: 'published',
-    pdfUrl: null,
+    pdfUrl: '/reports/RSR_Civic_Policy_006_Digital_Rights_and_Free_Speech.pdf',
     tags: ['Digital Rights', 'Free Speech', 'Platforms', 'Algorithmic Power', 'Censorship'],
     description:
       'A digital-rights framework protecting expression, association, anonymity, and citizen voice from platform throttling, opaque moderation, and algorithmic suppression.',
