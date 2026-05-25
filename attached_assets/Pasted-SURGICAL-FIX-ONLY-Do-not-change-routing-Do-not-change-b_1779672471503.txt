@@ -1,0 +1,90 @@
+SURGICAL FIX ONLY.
+
+Do not change routing.
+Do not change book data.
+Do not change buttons except where specifically stated.
+Do not change deployment settings.
+Do not change admin.
+Do not redesign the site.
+
+Problem:
+On both book pages, there is an INLINE PREVIEW section with a giant blank PDF viewer box that says the browser cannot display the inline preview. It looks bad and is unnecessary.
+
+Goal:
+Remove the inline preview section entirely from both book pages.
+
+Apply to:
+/books/free-citizens
+/books/human-command
+
+Remove or hide this entire section:
+- “PREVIEW EXCERPT”
+- “INLINE PREVIEW”
+- the giant PDF iframe/object/embed box
+- fallback text like “Your browser cannot display the inline preview”
+- “Open the preview PDF” text inside the blank box
+
+Keep these buttons at the top of the page:
+For Free Citizens:
+- READ PREVIEW
+- DOWNLOAD PREVIEW PDF
+- STORE COMING SOON
+
+For Human Command:
+- READ PREVIEW
+- DOWNLOAD PREVIEW PDF
+- COMING SOON
+
+Button behavior:
+- READ PREVIEW should open the preview PDF in a new tab.
+- DOWNLOAD PREVIEW PDF should download the preview PDF.
+- STORE COMING SOON should remain disabled or non-checkout.
+- COMING SOON should remain disabled or non-checkout.
+
+Do not show any embedded PDF viewer by default anywhere on the book pages.
+
+Instead, after the main book description/status card, add a clean small document access card only if needed:
+
+Card label:
+PREVIEW FILE
+
+Copy:
+Preview excerpt available as a PDF. Open it in a new tab or download a copy.
+
+Buttons:
+OPEN PREVIEW
+DOWNLOAD PDF
+
+No iframe.
+No giant empty box.
+No inline PDF viewer.
+
+Keep the page clean:
+- cover
+- title
+- subtitle
+- status
+- description
+- action buttons
+- release status box
+- no dead-end blank viewer
+
+Test:
+/books/free-citizens
+/books/human-command
+
+Confirm:
+1. No INLINE PREVIEW heading appears.
+2. No giant blank PDF viewer appears.
+3. READ PREVIEW opens the PDF in a new tab.
+4. DOWNLOAD PREVIEW PDF downloads the PDF.
+5. Book 1 still says Coming June 8, 2026.
+6. Human Command still says Final Proof Preview.
+7. No buy/checkout links appear.
+8. EdgeOne static compatibility remains intact.
+
+Run:
+pnpm build
+
+If needed:
+npm run build

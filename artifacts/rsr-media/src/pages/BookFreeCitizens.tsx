@@ -107,37 +107,32 @@ export default function BookFreeCitizens() {
           </div>
         </div>
 
-        {/* Preview Inline */}
-        <section className="mt-16">
-          <div className="font-mono text-[0.62rem] text-amber-500/85 tracking-widest uppercase mb-3 flex items-center gap-2">
-            <span className="w-6 h-px bg-amber-500" /> // PREVIEW EXCERPT
-          </div>
-          <h2
-            className="text-2xl md:text-3xl font-bold uppercase mb-4"
-            style={{ fontFamily: "'Rajdhani', sans-serif" }}
-          >
-            Inline Preview
-          </h2>
-          <div className="border border-border/40 bg-black/30 overflow-hidden corner-bracket">
-            <object
-              data={PREVIEW_PDF}
-              type="application/pdf"
-              className="w-full h-[78vh] min-h-[600px]"
-              aria-label="Free Citizens — Preview Excerpt"
-            >
-              <div className="p-8 text-center font-sans text-sm text-muted-foreground">
-                Your browser cannot display the inline preview.{' '}
-                <a
-                  href={PREVIEW_PDF}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-amber-500 underline"
-                >
-                  Open the preview PDF
-                </a>
-                .
-              </div>
-            </object>
+        {/* Preview file access (no inline viewer) */}
+        <section className="mt-12">
+          <div className="border border-border/40 bg-card/25 corner-bracket p-5 max-w-xl">
+            <div className="font-mono text-[0.6rem] text-amber-500/85 tracking-widest uppercase mb-2">
+              // PREVIEW FILE
+            </div>
+            <p className="font-sans text-sm text-foreground/80 leading-relaxed mb-4">
+              Preview excerpt available as a PDF. Open it in a new tab or download a copy.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <a
+                href={PREVIEW_PDF}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 font-mono text-[0.65rem] font-bold border border-amber-500/50 text-amber-500 px-3 py-2 hover:bg-amber-500 hover:text-black transition-all tracking-widest uppercase"
+              >
+                <Eye className="w-3 h-3" /> Open Preview
+              </a>
+              <a
+                href={PREVIEW_PDF}
+                download
+                className="inline-flex items-center gap-2 font-mono text-[0.65rem] border border-border/50 text-muted-foreground px-3 py-2 hover:text-foreground hover:border-border transition-all tracking-widest uppercase"
+              >
+                <Download className="w-3 h-3" /> Download PDF
+              </a>
+            </div>
           </div>
         </section>
 
