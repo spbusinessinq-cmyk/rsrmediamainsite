@@ -153,13 +153,17 @@ export default function PolicyInstitute() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
             {/* Book 1 — Free Citizens (coming soon) */}
             <div className="border border-amber-500/30 bg-card/35 corner-bracket overflow-hidden flex flex-col">
-              <div className="grid grid-cols-[140px_1fr] gap-0">
-                <div className="relative bg-black/40 flex items-center justify-center border-r border-amber-500/15 overflow-hidden">
+              <div className="grid grid-cols-[clamp(120px,13vw,160px)_1fr] gap-0">
+                <div
+                  className="relative flex items-center justify-center border-r border-amber-500/25 overflow-hidden flex-shrink-0"
+                  style={{ aspectRatio: '2 / 3', background: '#030506' }}
+                >
                   {book1CoverAvailable ? (
                     <img
                       src={BOOK_ONE.coverUrl}
                       alt={`${BOOK_ONE.title} cover`}
-                      className="w-full h-full object-cover"
+                      className="block w-full h-full"
+                      style={{ objectFit: 'contain', objectPosition: 'center center' }}
                     />
                   ) : (
                     <BookOpen className="w-10 h-10 text-amber-500/55" aria-hidden />
@@ -204,13 +208,17 @@ export default function PolicyInstitute() {
 
             {/* Book 2 — Human Command (final proof preview) */}
             <div className="border border-primary/30 bg-card/35 corner-bracket overflow-hidden flex flex-col">
-              <div className="grid grid-cols-[140px_1fr] gap-0">
-                <div className="relative bg-black/40 flex items-center justify-center border-r border-primary/15 overflow-hidden">
+              <div className="grid grid-cols-[clamp(120px,13vw,160px)_1fr] gap-0">
+                <div
+                  className="relative flex items-center justify-center border-r border-primary/25 overflow-hidden flex-shrink-0"
+                  style={{ aspectRatio: '2 / 3', background: '#030506' }}
+                >
                   {book2CoverAvailable ? (
                     <img
                       src={BOOK_TWO.coverUrl}
                       alt={`${BOOK_TWO.title} cover`}
-                      className="w-full h-full object-cover"
+                      className="block w-full h-full"
+                      style={{ objectFit: 'contain', objectPosition: 'center center' }}
                     />
                   ) : (
                     <BookOpen className="w-10 h-10 text-primary/55" aria-hidden />

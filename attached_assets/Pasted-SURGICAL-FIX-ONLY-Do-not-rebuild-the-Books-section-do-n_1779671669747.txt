@@ -1,0 +1,53 @@
+SURGICAL FIX ONLY. Do not rebuild the Books section, do not change routing, do not change buttons, do not change data logic, do not change the admin system, and do not touch deployment settings.
+
+The Books section is visually working, but the book cover images are being displayed with the wrong perspective/cropping/stretching. Fix ONLY the book cover presentation.
+
+Goal:
+Make all book covers render as clean, flat, front-facing 2D book covers with a consistent vertical book-cover ratio.
+
+Required changes:
+1. Remove any CSS transforms, perspective effects, rotate/skew, 3D tilt, or mockup-style styling from book cover images.
+2. Book covers must display in a fixed vertical cover frame using a 6x9-style ratio.
+3. Use aspect-ratio: 2 / 3 or equivalent.
+4. The image must not stretch or distort.
+5. Use object-fit: contain so the full cover is visible.
+6. Use object-position: center center.
+7. Add a dark/near-black background behind the image frame so transparent or uneven cover edges still look clean.
+8. Keep the current card layout, text, buttons, borders, colors, spacing, and section structure exactly as they are.
+9. The first book cover and second book cover should visually match in size/presentation style.
+10. The “Human Command” cover must not be cropped so hard that the title is cut off.
+11. The cover should sit cleanly on the left side of each book card and look like a real book cover, not a stretched banner or angled mockup.
+
+Implementation guidance:
+Find the CSS/classes used for the book cover images in the Books section. Update only those classes.
+
+Desired CSS behavior:
+.book-cover-frame {
+  width: clamp(120px, 13vw, 160px);
+  aspect-ratio: 2 / 3;
+  background: #030506;
+  border-right: 1px solid rgba(16, 185, 129, 0.25);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.book-cover-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center center;
+  display: block;
+  transform: none !important;
+  perspective: none !important;
+  filter: none;
+}
+
+If the current class names are different, adapt this to the existing class names instead of creating unnecessary new structure.
+
+Also make sure mobile remains clean:
+- On smaller screens, the cover can stay above the text or shrink slightly.
+- Do not let the image stretch horizontally.
+- Do not crop the title or author line.
+
+Final result:
+The Books section should look exactly the same overall, except both book covers should now appear straight, flat, proportional, and professionally aligned.
