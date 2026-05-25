@@ -107,13 +107,13 @@ export const REPORTS: Report[] = [
     reportNumber: 'RSR Civic Policy #001',
     title: 'Immigration & National Cohesion',
     subtitle: 'A Citizens-First Framework for Borders, Belonging, and Civic Trust',
-    slug: 'immigration-and-national-cohesion',
+    slug: 'immigration-national-cohesion',
     category: 'Civic Policy',
     date: '2026-05-24',
     author: 'RSR Policy Institute',
     featured: true,
     status: 'published',
-    pdfUrl: null,
+    pdfUrl: '/reports/RSR_Civic_Policy_001_Immigration_and_National_Cohesion.pdf',
     tags: ['Immigration', 'Citizenship', 'National Cohesion', 'Civic Trust', 'Borders'],
     description:
       'A citizens-first immigration framework focused on lawful borders, civic assimilation, public trust, and the long-term cohesion of the American community.',
@@ -131,7 +131,7 @@ export const REPORTS: Report[] = [
     author: 'RSR Policy Institute',
     featured: false,
     status: 'published',
-    pdfUrl: null,
+    pdfUrl: '/reports/RSR_Civic_Policy_002_Housing_and_Local_Survival.pdf',
     tags: ['Housing', 'Land Use', 'Local Power', 'Affordability', 'Communities'],
     description:
       'A housing framework that puts residents, families, and local communities ahead of speculative capital, opaque investment vehicles, and absentee ownership.',
@@ -149,7 +149,7 @@ export const REPORTS: Report[] = [
     author: 'RSR Policy Institute',
     featured: false,
     status: 'published',
-    pdfUrl: null,
+    pdfUrl: '/reports/RSR_Civic_Policy_003_Public_Safety_and_Civil_Order.pdf',
     tags: ['Public Safety', 'Civil Order', 'Due Process', 'Policing', 'Accountability'],
     description:
       'A public-safety framework grounded in lawful policing, due process, civilian oversight, and the right of communities to peace, accountability, and protection.',
@@ -167,7 +167,7 @@ export const REPORTS: Report[] = [
     author: 'RSR Policy Institute',
     featured: false,
     status: 'published',
-    pdfUrl: null,
+    pdfUrl: '/reports/RSR_Civic_Policy_004_American_Labor_and_Economic_Sovereignty.pdf',
     tags: ['Labor', 'Wages', 'Economic Sovereignty', 'Industrial Policy', 'Workers'],
     description:
       'A labor and economic-sovereignty framework that protects American workers, rebuilds productive industry, and resists the conversion of work into algorithmic management.',
@@ -185,7 +185,7 @@ export const REPORTS: Report[] = [
     author: 'RSR Policy Institute',
     featured: false,
     status: 'published',
-    pdfUrl: null,
+    pdfUrl: '/reports/RSR_Civic_Policy_005_Education_and_Civic_Formation.pdf',
     tags: ['Education', 'Civic Formation', 'Schools', 'Literacy', 'Free Minds'],
     description:
       'An education framework focused on literacy, civic knowledge, parental authority, and the formation of independent minds capable of self-government in the Intelligence Age.',

@@ -78,7 +78,7 @@ export default function DoctrineLibrary() {
                 </p>
                 <div className="flex items-center gap-3 flex-wrap">
                   <Link
-                    href="/policy-institute"
+                    href="/books/free-citizens"
                     className="inline-flex items-center gap-2 font-mono text-xs font-bold border border-amber-500/50 text-amber-500 px-4 py-2.5 hover:bg-amber-500 hover:text-black transition-all tracking-widest uppercase"
                   >
                     <Eye className="w-3 h-3" /> Preview Book

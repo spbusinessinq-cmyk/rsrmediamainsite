@@ -21,11 +21,17 @@ export function useAllReports(_enabled = true) {
   return { data, isLoading: false, isError: false };
 }
 
+// Map legacy slugs → current slugs so old shared URLs keep resolving.
+const LEGACY_SLUG_ALIASES: Record<string, string> = {
+  'immigration-and-national-cohesion': 'immigration-national-cohesion',
+};
+
 export function useReportBySlug(slug: string | undefined) {
-  const data = useMemo(
-    () => (slug ? REPORTS.find((r) => r.slug === slug && r.status === 'published') : undefined),
-    [slug],
-  );
+  const data = useMemo(() => {
+    if (!slug) return undefined;
+    const resolved = LEGACY_SLUG_ALIASES[slug] ?? slug;
+    return REPORTS.find((r) => r.slug === resolved && r.status === 'published');
+  }, [slug]);
   return { data, isLoading: false, isError: !slug ? false : !data };
 }
 

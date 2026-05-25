@@ -1,0 +1,280 @@
+We need to wire the RSR Policy Institute assets into the RSR Media site.
+
+Keep the site EdgeOne static-compatible.
+Do not add backend uploads.
+Do not require an API for public pages.
+Do not change deployment target.
+Do not redesign the whole site.
+Keep the dark RSR civic-intelligence style.
+
+FILES I UPLOADED / PLACED:
+
+Book 1:
+public/books/free-citizens/Free_Citizens_Cover_1600x2560_RGB.jpg
+public/books/free-citizens/Free_Citizens_Preview_Excerpt.pdf
+
+Book 2:
+public/books/human-command/Human_Command_Cover_1600x2560_RGB.jpg
+public/books/human-command/Human_Command_Preview_Excerpt_First_24_Pages.pdf
+
+Civic policy PDFs:
+public/reports/RSR_Civic_Policy_001_Immigration_and_National_Cohesion.pdf
+public/reports/RSR_Civic_Policy_002_Housing_and_Local_Survival.pdf
+public/reports/RSR_Civic_Policy_003_Public_Safety_and_Civil_Order.pdf
+public/reports/RSR_Civic_Policy_004_American_Labor_and_Economic_Sovereignty.pdf
+public/reports/RSR_Civic_Policy_005_Education_and_Civic_Formation.pdf
+public/reports/RSR_Civic_Policy_006_Digital_Rights_and_Free_Speech.pdf
+
+MAIN GOAL:
+Institute is the main hub. Reports should be an archive inside Institute, not a top-level nav item.
+
+NAVIGATION:
+Use:
+Home
+Broadcasts
+Institute
+Doctrine
+Mission
+Channels
+RSR Intel
+Hotline
+Systems
+
+Remove Reports from top nav.
+Institute links to /policy-institute.
+Doctrine links to /doctrine-library.
+Keep /reports working for old links, but place it inside Institute as Full Report Archive.
+
+BOOK STATUS REQUIREMENT:
+Set both books to non-sale status.
+
+Book 1:
+Free Citizens, Not Managed Populations
+Status: Coming June 8, 2026
+Substatus: Paperback proof ordered / release scheduled
+Remove all active Buy Paperback, Buy Now, Digital Edition, Purchase, checkout, or live sale language.
+Buttons:
+Preview Book -> /books/free-citizens
+Coming June 8
+Store Coming Soon
+Use cover: /books/free-citizens/Free_Citizens_Cover_1600x2560_RGB.jpg
+Use preview: /books/free-citizens/Free_Citizens_Preview_Excerpt.pdf
+
+Book 2:
+Human Command
+Status: Final Proof Preview
+Substatus: Full release coming later
+Remove all active purchase buttons.
+Buttons:
+Read Preview -> /books/human-command
+Download Preview PDF -> /books/human-command/Human_Command_Preview_Excerpt_First_24_Pages.pdf
+Coming Soon
+Use cover: /books/human-command/Human_Command_Cover_1600x2560_RGB.jpg
+Use preview: /books/human-command/Human_Command_Preview_Excerpt_First_24_Pages.pdf
+Core line: The machine may assist. The human must command.
+
+BOOK PAGES:
+Create or fix:
+/books/free-citizens
+/books/human-command
+
+/books/free-citizens should show cover, title, subtitle, status Coming June 8, 2026, substatus Paperback proof ordered / release scheduled, description, and buttons:
+Open Preview
+Download Preview PDF
+Store Coming Soon
+No buy button. No checkout link.
+
+/books/human-command should show cover, title, subtitle, status Final Proof Preview, substatus Full release coming later, description, core line, and buttons:
+Open Preview
+Download Preview PDF
+Coming Soon
+No buy button. No checkout link.
+
+Fix the bug where the first book routes to /reports. It must route to /books/free-citizens.
+Human Command must route to /books/human-command.
+
+POLICY INSTITUTE PAGE:
+Update /policy-institute with these sections:
+
+1. Books
+Show both book cards in non-sale status using the cover images above.
+
+2. Policy Files
+Show all reports where category = Policy File.
+
+3. Civic Policy Positions
+Show the six civic policies below. Feature Immigration & National Cohesion first.
+
+4. Sovereignty Briefs
+Show category = Sovereignty Brief.
+
+5. Editorial Standards
+Show category = Editorial Standard.
+
+6. Investigations
+Add coming-soon card:
+RSR Investigation File #001 - AI in Los Angeles Public Systems
+Subtitle: What tools are being used, who sold them, who audits them, and whether citizens can appeal.
+Status: Opening File Soon
+
+7. Full Report Archive
+Button: Open Archive -> /reports
+
+CIVIC POLICY METADATA:
+Add/update these entries in src/data/reports.ts. Only show status published publicly.
+
+Civic Policy #001:
+id: rsr-civic-policy-001
+reportNumber: RSR Civic Policy #001
+title: Immigration & National Cohesion
+subtitle: A citizens-first framework for borders, belonging, and civic trust.
+slug: immigration-national-cohesion
+category: Civic Policy
+date: 2026-05-24
+author: RSR Policy Institute
+featured: true
+status: published
+pdfUrl: /reports/RSR_Civic_Policy_001_Immigration_and_National_Cohesion.pdf
+tags: Immigration, Citizenship, National Cohesion, Border Security, Civic Trust
+description: A citizens-first immigration framework focused on lawful borders, civic assimilation, public trust, and the long-term cohesion of the American community.
+fullDescription: Immigration & National Cohesion establishes RSR's citizens-first immigration standard: lawful entry, secure borders, civic assimilation, employer accountability, local impact review, transparent systems, and humane but firm enforcement.
+
+Civic Policy #002:
+id: rsr-civic-policy-002
+reportNumber: RSR Civic Policy #002
+title: Housing & Local Survival
+subtitle: Why working citizens are being priced out of normal life.
+slug: housing-and-local-survival
+category: Civic Policy
+date: 2026-05-24
+author: RSR Policy Institute
+featured: false
+status: published
+pdfUrl: /reports/RSR_Civic_Policy_002_Housing_and_Local_Survival.pdf
+tags: Housing, Local Survival, Working Class, Rent, Community Stability
+description: A citizens-first housing framework arguing that shelter is not merely a market asset, but the foundation of family formation, community stability, and local survival.
+fullDescription: Housing & Local Survival argues that a country that makes basic shelter unreachable for working citizens is manufacturing instability. RSR supports housing policy that protects local residents, working families, first-time buyers, and community continuity.
+
+Civic Policy #003:
+id: rsr-civic-policy-003
+reportNumber: RSR Civic Policy #003
+title: Public Safety & Civil Order
+subtitle: A free society cannot survive without lawful order.
+slug: public-safety-and-civil-order
+category: Civic Policy
+date: 2026-05-24
+author: RSR Policy Institute
+featured: false
+status: published
+pdfUrl: /reports/RSR_Civic_Policy_003_Public_Safety_and_Civil_Order.pdf
+tags: Public Safety, Civil Order, Policing, Victims, Rule of Law
+description: A civic standard for constitutional public safety, victim protection, due process, and lawful order without police-state abuse or soft-on-crime collapse.
+fullDescription: Public Safety & Civil Order argues that a free society cannot survive without lawful order, but order must remain constitutional, accountable, and grounded in public trust.
+
+Civic Policy #004:
+id: rsr-civic-policy-004
+reportNumber: RSR Civic Policy #004
+title: American Labor & Economic Sovereignty
+subtitle: Why work must mean dignity, ownership, and national strength.
+slug: american-labor-and-economic-sovereignty
+category: Civic Policy
+date: 2026-05-24
+author: RSR Policy Institute
+featured: false
+status: published
+pdfUrl: /reports/RSR_Civic_Policy_004_American_Labor_and_Economic_Sovereignty.pdf
+tags: Labor, Wages, Economic Sovereignty, Workers, National Strength
+description: A citizens-first labor policy arguing that Americans cannot remain free if they become disposable labor inside a global economic machine.
+fullDescription: American Labor & Economic Sovereignty calls for protected wages, productive capacity, meaningful work, domestic industry, and an economy that serves citizens before corporate labor arbitrage.
+
+Civic Policy #005:
+id: rsr-civic-policy-005
+reportNumber: RSR Civic Policy #005
+title: Education & Civic Formation
+subtitle: Schools should form citizens, not managed consumers.
+slug: education-and-civic-formation
+category: Civic Policy
+date: 2026-05-24
+author: RSR Policy Institute
+featured: false
+status: published
+pdfUrl: /reports/RSR_Civic_Policy_005_Education_and_Civic_Formation.pdf
+tags: Education, Civic Formation, Schools, Citizenship, Youth
+description: A civic education framework arguing that schools must produce capable citizens with literacy, discipline, historical understanding, practical skill, and independent thought.
+fullDescription: Education & Civic Formation argues that a school system that cannot produce capable citizens cannot sustain a republic. Education must serve the formation of responsible, literate, useful, and free people.
+
+Civic Policy #006:
+id: rsr-civic-policy-006
+reportNumber: RSR Civic Policy #006
+title: Digital Rights & Free Speech
+subtitle: The public square cannot be controlled by invisible rules.
+slug: digital-rights-and-free-speech
+category: Civic Policy
+date: 2026-05-24
+author: RSR Policy Institute
+featured: false
+status: published
+pdfUrl: /reports/RSR_Civic_Policy_006_Digital_Rights_and_Free_Speech.pdf
+tags: Free Speech, Digital Rights, Platforms, Visibility, Public Square
+description: A digital-rights policy arguing that free speech means little if the modern public square can quietly make citizens invisible without transparency or appeal.
+fullDescription: Digital Rights & Free Speech establishes RSR's standard for visibility, deplatforming, algorithmic suppression, state pressure, platform power, and the right to challenge digital restrictions.
+
+REPORTS PAGE:
+Keep /reports working but make it the archive under the Institute.
+Subtitle:
+The public archive of the RSR Policy Institute: policy files, civic positions, sovereignty briefs, editorial standards, and investigations.
+Add button near top:
+Back to Policy Institute -> /policy-institute
+
+DOCTRINE LIBRARY:
+Keep /doctrine-library working.
+Fix both book cards there:
+Book 1 = Coming June 8, 2026, no buy button.
+Book 2 = Final Proof Preview, no buy button.
+Both should route to their correct book pages.
+
+VISUAL POLISH:
+Lighten readability while keeping the dark RSR identity:
+- slightly lighter card panels
+- brighter body text
+- clearer spacing
+- less dead empty black space
+- controlled emerald accents
+- amber/gold only for featured/coming soon
+- thin borders
+- uppercase micro-labels
+Do not turn the site white. Do not use bright SaaS colors.
+
+HOMEPAGE:
+Add/update section:
+RSR Policy Institute
+Copy: Books, policy files, civic positions, weekly briefs, and investigations for the Intelligence Age.
+Button: Enter Policy Institute -> /policy-institute
+
+FOOTER LINE:
+Published by Red State Rhetoric. Produced through Pacific Systems.
+
+TEST:
+Run build and confirm:
+/policy-institute works
+/reports works and has Back to Policy Institute
+/reports/:slug works
+/doctrine-library works
+/books/free-citizens works
+/books/human-command works
+Book 1 shows Coming June 8, 2026
+Book 2 shows Final Proof Preview
+No book has active buy/checkout buttons
+First book card no longer routes to /reports
+Civic Policy Positions #001-#006 appear
+Immigration & National Cohesion is featured
+Reports is removed from top nav
+Institute is in top nav
+Homepage links to Policy Institute
+EdgeOne static compatibility remains intact
+
+Run:
+pnpm build
+
+If this repo uses npm:
+npm run build

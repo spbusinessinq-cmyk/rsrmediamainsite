@@ -24,6 +24,8 @@ import Channels from "@/pages/Channels";
 import Broadcasts from "@/pages/Broadcasts";
 import DoctrineLibrary from "@/pages/DoctrineLibrary";
 import PolicyInstitute from "@/pages/PolicyInstitute";
+import BookFreeCitizens from "@/pages/BookFreeCitizens";
+import BookHumanCommand from "@/pages/BookHumanCommand";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +41,8 @@ function Router() {
       <Route path="/doctrine" component={DoctrineLibrary} />
       <Route path="/policy-institute" component={PolicyInstitute} />
       <Route path="/institute" component={PolicyInstitute} />
+      <Route path="/books/free-citizens" component={BookFreeCitizens} />
+      <Route path="/books/human-command" component={BookHumanCommand} />
       <Route path="/broadcasts" component={Broadcasts} />
       <Route path="/channels" component={Channels} />
       <Route path="/hotline" component={Hotline} />

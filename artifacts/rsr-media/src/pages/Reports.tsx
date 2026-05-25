@@ -4,7 +4,7 @@ import { useSEO } from '@/lib/seo';
 import { ReportCard } from '@/components/reports/ReportCard';
 import { usePublishedReports } from '@/hooks/useReports';
 import { REPORT_CATEGORIES } from '@/types/report';
-import { Search, Phone } from 'lucide-react';
+import { Search, Phone, ArrowLeft } from 'lucide-react';
 import { SITE_EMAIL } from '@/config/site';
 
 export default function Reports() {
@@ -42,6 +42,12 @@ export default function Reports() {
     <div className="w-full pt-12 pb-24 overflow-x-hidden">
       <div className="container mx-auto px-4 sm:px-6 max-w-5xl">
         <div className="mb-12">
+          <Link
+            href="/policy-institute"
+            className="inline-flex items-center gap-2 font-mono text-[0.65rem] text-muted-foreground hover:text-primary tracking-widest uppercase mb-6 transition-colors"
+          >
+            <ArrowLeft className="w-3 h-3" /> Back to Policy Institute
+          </Link>
           <div className="font-mono text-[0.65rem] text-muted-foreground/45 tracking-widest uppercase flex items-center gap-2 mb-4">
             <span className="w-8 h-px bg-primary/40" /> // PUBLIC.REPORT.ARCHIVE
           </div>
@@ -51,8 +57,13 @@ export default function Reports() {
           >
             REPORTS
           </h1>
-          <p className="font-sans text-base text-muted-foreground max-w-xl leading-relaxed">
-            Policy files, doctrine, civic reports, and investigations from RSR Media. Verification-first — published when confirmed.
+          <p className="font-sans text-base text-muted-foreground max-w-2xl leading-relaxed">
+            Full searchable archive of every published RSR file — policy files, civic policy
+            positions, sovereignty briefs, editorial standards, and investigations. The{' '}
+            <Link href="/policy-institute" className="text-primary hover:underline">
+              Policy Institute
+            </Link>{' '}
+            is the main hub; this page is the complete archive.
           </p>
         </div>
 

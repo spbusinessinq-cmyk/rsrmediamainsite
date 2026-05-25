@@ -9,16 +9,22 @@ const BOOK_ONE = {
   title: 'Free Citizens, Not Managed Populations',
   subtitle: 'The Sovereignty Doctrine for the Age of Artificial Intelligence',
   status: 'Coming June 8, 2026',
+  substatus: 'Paperback proof ordered / release scheduled',
   description:
     'The founding manifesto of the Sovereignty Doctrine. A civic text for the age of artificial intelligence, invisible power, digital systems, and managed society.',
+  href: '/books/free-citizens',
+  coverUrl: '/books/free-citizens/Free_Citizens_Cover_1600x2560_RGB.jpg',
+  previewPdfUrl: '/books/free-citizens/Free_Citizens_Preview_Excerpt.pdf',
 };
 
 const BOOK_TWO = {
   title: 'Human Command',
   subtitle: 'The Sovereignty Doctrine for the Intelligence Age',
   status: 'Final Proof Preview',
+  substatus: 'Full release coming later',
   description:
     'Book 2 of the Sovereignty Doctrine. Human Command argues that artificial intelligence may become infrastructure, but infrastructure cannot become authority. The machine may assist. The human must command.',
+  href: '/books/human-command',
   coverUrl: '/books/human-command/Human_Command_Cover_1600x2560_RGB.jpg',
   previewPdfUrl: '/books/human-command/Human_Command_Preview_Excerpt_First_24_Pages.pdf',
 };
@@ -97,8 +103,9 @@ export default function PolicyInstitute() {
   );
   const sovereigntyBriefs = reports.filter((r) => r.category === 'Sovereignty Brief');
   const editorialStandards = reports.filter((r) => r.category === 'Editorial Standard');
-  const pdfAvailable = useAssetAvailable(BOOK_TWO.previewPdfUrl);
-  const coverAvailable = useAssetAvailable(BOOK_TWO.coverUrl);
+  const book2PdfAvailable = useAssetAvailable(BOOK_TWO.previewPdfUrl);
+  const book2CoverAvailable = useAssetAvailable(BOOK_TWO.coverUrl);
+  const book1CoverAvailable = useAssetAvailable(BOOK_ONE.coverUrl);
 
   return (
     <div className="w-full pt-12 pb-24 overflow-x-hidden">
@@ -147,12 +154,23 @@ export default function PolicyInstitute() {
             {/* Book 1 — Free Citizens (coming soon) */}
             <div className="border border-amber-500/30 bg-card/35 corner-bracket overflow-hidden flex flex-col">
               <div className="grid grid-cols-[140px_1fr] gap-0">
-                <div className="bg-black/40 flex items-center justify-center border-r border-amber-500/15 p-6">
-                  <BookOpen className="w-10 h-10 text-amber-500/55" />
+                <div className="relative bg-black/40 flex items-center justify-center border-r border-amber-500/15 overflow-hidden">
+                  {book1CoverAvailable ? (
+                    <img
+                      src={BOOK_ONE.coverUrl}
+                      alt={`${BOOK_ONE.title} cover`}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <BookOpen className="w-10 h-10 text-amber-500/55" aria-hidden />
+                  )}
                 </div>
                 <div className="p-5 flex flex-col">
-                  <div className="font-mono text-[0.58rem] text-amber-500/85 tracking-widest uppercase mb-2 flex items-center gap-2">
+                  <div className="font-mono text-[0.58rem] text-amber-500/85 tracking-widest uppercase mb-1 flex items-center gap-2">
                     <Lock className="w-3 h-3" /> {BOOK_ONE.status.toUpperCase()}
+                  </div>
+                  <div className="font-mono text-[0.55rem] text-amber-500/55 tracking-widest uppercase mb-2">
+                    // {BOOK_ONE.substatus}
                   </div>
                   <h3
                     className="text-xl font-bold uppercase mb-1 leading-tight"
@@ -168,7 +186,7 @@ export default function PolicyInstitute() {
                   </p>
                   <div className="flex flex-wrap gap-2 mt-auto">
                     <Link
-                      href="/doctrine-library"
+                      href={BOOK_ONE.href}
                       className="inline-flex items-center gap-2 font-mono text-[0.65rem] font-bold border border-amber-500/50 text-amber-500 px-3 py-2 hover:bg-amber-500 hover:text-black transition-all tracking-widest uppercase"
                     >
                       <Eye className="w-3 h-3" /> Preview Book
@@ -188,7 +206,7 @@ export default function PolicyInstitute() {
             <div className="border border-primary/30 bg-card/35 corner-bracket overflow-hidden flex flex-col">
               <div className="grid grid-cols-[140px_1fr] gap-0">
                 <div className="relative bg-black/40 flex items-center justify-center border-r border-primary/15 overflow-hidden">
-                  {coverAvailable ? (
+                  {book2CoverAvailable ? (
                     <img
                       src={BOOK_TWO.coverUrl}
                       alt={`${BOOK_TWO.title} cover`}
@@ -199,8 +217,11 @@ export default function PolicyInstitute() {
                   )}
                 </div>
                 <div className="p-5 flex flex-col">
-                  <div className="font-mono text-[0.58rem] text-primary/85 tracking-widest uppercase mb-2 flex items-center gap-2">
+                  <div className="font-mono text-[0.58rem] text-primary/85 tracking-widest uppercase mb-1 flex items-center gap-2">
                     <FileSearch className="w-3 h-3" /> {BOOK_TWO.status.toUpperCase()}
+                  </div>
+                  <div className="font-mono text-[0.55rem] text-primary/55 tracking-widest uppercase mb-2">
+                    // {BOOK_TWO.substatus}
                   </div>
                   <h3
                     className="text-xl font-bold uppercase mb-1 leading-tight"
@@ -215,7 +236,7 @@ export default function PolicyInstitute() {
                     {BOOK_TWO.description}
                   </p>
                   <div className="flex flex-wrap gap-2 mt-auto">
-                    {pdfAvailable ? (
+                    {book2PdfAvailable ? (
                       <>
                         <a
                           href={BOOK_TWO.previewPdfUrl}
