@@ -23,6 +23,7 @@ import AdminDashboard from "@/pages/AdminDashboard";
 import Channels from "@/pages/Channels";
 import Broadcasts from "@/pages/Broadcasts";
 import DoctrineLibrary from "@/pages/DoctrineLibrary";
+import PolicyInstitute from "@/pages/PolicyInstitute";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +37,8 @@ function Router() {
       <Route path="/reports/:slug" component={ReportDetail} />
       <Route path="/doctrine-library" component={DoctrineLibrary} />
       <Route path="/doctrine" component={DoctrineLibrary} />
+      <Route path="/policy-institute" component={PolicyInstitute} />
+      <Route path="/institute" component={PolicyInstitute} />
       <Route path="/broadcasts" component={Broadcasts} />
       <Route path="/channels" component={Channels} />
       <Route path="/hotline" component={Hotline} />

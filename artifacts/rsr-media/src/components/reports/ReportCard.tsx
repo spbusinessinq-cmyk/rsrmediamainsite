@@ -5,6 +5,8 @@ import { Star, FileText } from 'lucide-react';
 
 const categoryColors: Record<string, string> = {
   'Policy File': 'border-primary/50 text-primary bg-primary/5',
+  'Civic Policy': 'border-accent/50 text-accent bg-accent/5',
+  'Editorial Standard': 'border-zinc-400/40 text-zinc-300 bg-zinc-400/5',
   'Doctrine': 'border-amber-500/50 text-amber-500 bg-amber-500/5',
   'Civic Report': 'border-accent/50 text-accent bg-accent/5',
   'Investigation': 'border-primary/50 text-primary bg-primary/5',
@@ -27,8 +29,8 @@ export function ReportCard({ report, featured }: ReportCardProps) {
     <Link
       href={`/reports/${report.slug}`}
       data-testid={`card-report-${report.id}`}
-      className={`block border bg-card/20 corner-bracket hover:bg-card/40 transition-all group overflow-hidden hover-glow-emerald ${
-        featured ? 'border-amber-500/30 hover:border-amber-500/60' : 'border-border/50 hover:border-primary/50'
+      className={`block border bg-card/30 corner-bracket hover:bg-card/45 transition-all group overflow-hidden hover-glow-emerald ${
+        featured ? 'border-amber-500/35 hover:border-amber-500/60' : 'border-border/55 hover:border-primary/50'
       }`}
     >
       {hero && (
@@ -66,7 +68,7 @@ export function ReportCard({ report, featured }: ReportCardProps) {
           </p>
         )}
 
-        <p className="font-sans text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-3">
+        <p className="font-sans text-[0.92rem] text-foreground/75 leading-relaxed mb-4 line-clamp-3">
           {report.description}
         </p>
 

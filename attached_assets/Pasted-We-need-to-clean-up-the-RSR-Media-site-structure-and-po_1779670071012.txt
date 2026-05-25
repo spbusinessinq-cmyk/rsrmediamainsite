@@ -1,0 +1,207 @@
+We need to clean up the RSR Media site structure and polish the visual readability.
+
+Keep the site EdgeOne static-compatible.
+Do not add backend storage.
+Do not change deployment target.
+Do not redesign the whole site.
+Keep the RSR black/green civic-intelligence identity.
+
+GOALS:
+1. Create or polish the RSR Policy Institute section.
+2. Keep Reports as the archive.
+3. Keep Doctrine Library as the bookshelf/archive.
+4. Move reports/policies/books into clearer shelves.
+5. Change both books to coming-soon / preview status.
+6. Lighten the overall visual readability without turning the site into a bright site.
+
+NEW / UPDATED ROUTE:
+Create or update:
+/policy-institute
+
+PAGE TITLE:
+RSR Policy Institute
+
+SUBTITLE:
+Books, policy files, civic policy positions, weekly briefs, editorial standards, and investigations for the Intelligence Age.
+
+INTRO COPY:
+RSR Policy Institute is the doctrine and civic-policy arm of Red State Rhetoric. It publishes books, policy files, civic positions, weekly briefs, editorial standards, and investigations designed to make power visible and defend the citizen.
+
+PROMINENT LINE:
+Read the documents. Decode the systems. Publish the files. Defend the citizen.
+
+SECTIONS ON /policy-institute:
+
+1. BOOKS
+
+Book card 1:
+Title:
+Free Citizens, Not Managed Populations
+
+Subtitle:
+The Sovereignty Doctrine for the Age of Artificial Intelligence
+
+Status:
+Coming June 8, 2026
+
+Description:
+The founding manifesto of the Sovereignty Doctrine. A civic text for the age of artificial intelligence, invisible power, digital systems, and managed society.
+
+Important:
+This book is not fully live for sale yet. Remove or disable any “Buy Paperback” or “Digital Edition” purchase language for this book until release day.
+
+Buttons:
+Preview Book
+Coming June 8
+Store Coming Soon
+
+Book card 2:
+Title:
+Human Command
+
+Subtitle:
+The Sovereignty Doctrine for the Intelligence Age
+
+Status:
+Final Proof Preview
+
+Description:
+Book 2 of the Sovereignty Doctrine. Human Command argues that artificial intelligence may become infrastructure, but infrastructure cannot become authority. The machine may assist. The human must command.
+
+Buttons:
+Read Preview
+Download Preview PDF
+Coming Soon
+
+Use these files if available:
+public/books/human-command/Human_Command_Cover_1600x2560_RGB.jpg
+public/books/human-command/Human_Command_Preview_Excerpt_First_24_Pages.pdf
+
+2. POLICY FILES
+
+Show reports where category is:
+Policy File
+
+Description:
+Foundational doctrine reports on artificial intelligence, public power, digital infrastructure, records, identity, government automation, and human command.
+
+3. CIVIC POLICY POSITIONS
+
+Show reports where category is:
+Civic Policy
+or
+Civic Policy Position
+
+Description:
+Citizens-first policy frameworks on immigration, housing, public safety, labor, education, and digital rights.
+
+Current lineup:
+#001 — Immigration & National Cohesion
+#002 — Housing & Local Survival
+#003 — Public Safety & Civil Order
+#004 — American Labor & Economic Sovereignty
+#005 — Education & Civic Formation
+#006 — Digital Rights & Free Speech
+
+Feature:
+Immigration & National Cohesion
+
+4. SOVEREIGNTY BRIEFS
+
+Show reports where category is:
+Sovereignty Brief
+
+Description:
+Weekly analysis on AI, technology, institutional power, digital infrastructure, and human sovereignty.
+
+5. EDITORIAL STANDARDS
+
+Show reports where category is:
+Editorial Standard
+
+Description:
+The standards RSR uses for verification, source protection, corrections, conflicts, AI use, and publication discipline.
+
+6. INVESTIGATIONS
+
+Add coming-soon card:
+Title:
+RSR Investigation File #001 — AI in Los Angeles Public Systems
+
+Subtitle:
+What tools are being used, who sold them, who audits them, and whether citizens can appeal.
+
+Status:
+Opening File Soon
+
+NAVIGATION:
+Add “Policy Institute” to the main navigation if space allows.
+If nav is crowded, replace “Doctrine” with “Institute” or add Policy Institute under Reports/Doctrine.
+Keep /reports working.
+Keep /doctrine-library working.
+Do not break existing report detail pages.
+
+BOOK STATUS CHANGE:
+Find all places where Free Citizens, Not Managed Populations appears with:
+Buy Paperback
+Digital Edition
+Buy Now
+For Sale
+
+Replace active purchase language with:
+Coming June 8, 2026
+Preview Book
+Store Coming Soon
+
+VISUAL POLISH:
+Do a readability/contrast polish across Reports, Doctrine Library, and Policy Institute.
+
+Do not brighten the whole site into a white layout.
+Keep the black RSR identity.
+
+Make these improvements:
+- Use slightly lighter dark panels instead of pure black where content sits.
+- Increase body text contrast.
+- Make report descriptions easier to read.
+- Add clearer section spacing.
+- Keep green accents but make them controlled and premium.
+- Use amber/gold only for featured labels/stars.
+- Make cards feel like institutional archive cards, not empty terminal boxes.
+- Keep uppercase micro-labels.
+- Keep thin borders.
+- Keep serious civic-intelligence tone.
+
+HOMEPAGE:
+Add or update a section:
+RSR Policy Institute
+
+Copy:
+Books, policy files, civic positions, weekly briefs, and investigations for the Intelligence Age.
+
+Button:
+Enter Policy Institute
+
+FOOTER LINE:
+Published by Red State Rhetoric. Produced through Pacific Systems.
+
+TEST:
+Run the build and confirm:
+/policy-institute works
+/reports still works
+/reports/:slug still works
+/doctrine-library still works
+Book 1 shows Coming June 8, 2026
+Book 1 no longer appears fully for sale
+Human Command appears as Final Proof Preview
+Civic Policy Positions section appears
+Policy Files section appears
+Sovereignty Briefs section appears
+Editorial Standards section appears
+Homepage links to Policy Institute
+The site remains EdgeOne static-compatible
+
+Run:
+pnpm build
+
+If this repo uses npm:
+npm run build

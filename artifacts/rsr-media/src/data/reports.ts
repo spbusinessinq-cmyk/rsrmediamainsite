@@ -100,4 +100,114 @@ export const REPORTS: Report[] = [
     fullDescription:
       'Local Power in the Intelligence Age is RSR Policy File #004. It brings the Sovereignty Doctrine down to the local level and argues that communities must have visibility, consent, records access, and public accountability when AI infrastructure is built around them.',
   },
+
+  // ─── CIVIC POLICY POSITIONS ─────────────────────────────────────────
+  {
+    id: 'rsr-civic-policy-001',
+    reportNumber: 'RSR Civic Policy #001',
+    title: 'Immigration & National Cohesion',
+    subtitle: 'A Citizens-First Framework for Borders, Belonging, and Civic Trust',
+    slug: 'immigration-and-national-cohesion',
+    category: 'Civic Policy',
+    date: '2026-05-24',
+    author: 'RSR Policy Institute',
+    featured: true,
+    status: 'published',
+    pdfUrl: null,
+    tags: ['Immigration', 'Citizenship', 'National Cohesion', 'Civic Trust', 'Borders'],
+    description:
+      'A citizens-first immigration framework focused on lawful borders, civic assimilation, public trust, and the long-term cohesion of the American community.',
+    fullDescription:
+      'RSR Civic Policy #001 establishes the RSR Policy Institute’s civic position on immigration: borders, lawful entry, civic assimilation, and the long-term cohesion of the American community come before institutional convenience or short-term labor demands.',
+  },
+  {
+    id: 'rsr-civic-policy-002',
+    reportNumber: 'RSR Civic Policy #002',
+    title: 'Housing & Local Survival',
+    subtitle: 'A Citizens-First Framework for Shelter, Land Use, and Local Resilience',
+    slug: 'housing-and-local-survival',
+    category: 'Civic Policy',
+    date: '2026-05-24',
+    author: 'RSR Policy Institute',
+    featured: false,
+    status: 'published',
+    pdfUrl: null,
+    tags: ['Housing', 'Land Use', 'Local Power', 'Affordability', 'Communities'],
+    description:
+      'A housing framework that puts residents, families, and local communities ahead of speculative capital, opaque investment vehicles, and absentee ownership.',
+    fullDescription:
+      'RSR Civic Policy #002 outlines the Policy Institute’s housing standard: a citizens-first approach to shelter, land use, zoning, and local resilience that prevents communities from being financialized into instability.',
+  },
+  {
+    id: 'rsr-civic-policy-003',
+    reportNumber: 'RSR Civic Policy #003',
+    title: 'Public Safety & Civil Order',
+    subtitle: 'A Citizens-First Framework for Lawful Policing, Due Process, and Civic Peace',
+    slug: 'public-safety-and-civil-order',
+    category: 'Civic Policy',
+    date: '2026-05-24',
+    author: 'RSR Policy Institute',
+    featured: false,
+    status: 'published',
+    pdfUrl: null,
+    tags: ['Public Safety', 'Civil Order', 'Due Process', 'Policing', 'Accountability'],
+    description:
+      'A public-safety framework grounded in lawful policing, due process, civilian oversight, and the right of communities to peace, accountability, and protection.',
+    fullDescription:
+      'RSR Civic Policy #003 defines the Policy Institute’s standard for public safety and civil order: lawful policing, due process, transparent accountability, and the civic right to safe streets without surrendering civil liberties.',
+  },
+  {
+    id: 'rsr-civic-policy-004',
+    reportNumber: 'RSR Civic Policy #004',
+    title: 'American Labor & Economic Sovereignty',
+    subtitle: 'A Citizens-First Framework for Work, Wages, and Industrial Independence',
+    slug: 'american-labor-and-economic-sovereignty',
+    category: 'Civic Policy',
+    date: '2026-05-24',
+    author: 'RSR Policy Institute',
+    featured: false,
+    status: 'published',
+    pdfUrl: null,
+    tags: ['Labor', 'Wages', 'Economic Sovereignty', 'Industrial Policy', 'Workers'],
+    description:
+      'A labor and economic-sovereignty framework that protects American workers, rebuilds productive industry, and resists the conversion of work into algorithmic management.',
+    fullDescription:
+      'RSR Civic Policy #004 articulates the Policy Institute’s position on labor and economic sovereignty: wages, working conditions, productive industry, and protection of workers from algorithmic management and outsourced power.',
+  },
+  {
+    id: 'rsr-civic-policy-005',
+    reportNumber: 'RSR Civic Policy #005',
+    title: 'Education & Civic Formation',
+    subtitle: 'A Citizens-First Framework for Schools, Civic Knowledge, and Independent Minds',
+    slug: 'education-and-civic-formation',
+    category: 'Civic Policy',
+    date: '2026-05-24',
+    author: 'RSR Policy Institute',
+    featured: false,
+    status: 'published',
+    pdfUrl: null,
+    tags: ['Education', 'Civic Formation', 'Schools', 'Literacy', 'Free Minds'],
+    description:
+      'An education framework focused on literacy, civic knowledge, parental authority, and the formation of independent minds capable of self-government in the Intelligence Age.',
+    fullDescription:
+      'RSR Civic Policy #005 outlines the Policy Institute’s standard for education and civic formation: literacy, civic knowledge, parental authority, and the long-term capacity of citizens to think, judge, and govern themselves.',
+  },
+  {
+    id: 'rsr-civic-policy-006',
+    reportNumber: 'RSR Civic Policy #006',
+    title: 'Digital Rights & Free Speech',
+    subtitle: 'A Citizens-First Framework for Expression, Platforms, and Algorithmic Power',
+    slug: 'digital-rights-and-free-speech',
+    category: 'Civic Policy',
+    date: '2026-05-24',
+    author: 'RSR Policy Institute',
+    featured: false,
+    status: 'published',
+    pdfUrl: null,
+    tags: ['Digital Rights', 'Free Speech', 'Platforms', 'Algorithmic Power', 'Censorship'],
+    description:
+      'A digital-rights framework protecting expression, association, anonymity, and citizen voice from platform throttling, opaque moderation, and algorithmic suppression.',
+    fullDescription:
+      'RSR Civic Policy #006 establishes the Policy Institute’s position on digital rights and free speech: expression, association, anonymity, and the right of citizens to be heard inside privately owned but publicly essential infrastructure.',
+  },
 ];

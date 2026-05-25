@@ -2,6 +2,8 @@ export type ReportStatus = 'draft' | 'published';
 
 export type ReportCategory =
   | 'Policy File'
+  | 'Civic Policy'
+  | 'Editorial Standard'
   | 'Doctrine'
   | 'Civic Report'
   | 'Investigation'
@@ -10,6 +12,8 @@ export type ReportCategory =
 
 export const REPORT_CATEGORIES: ReportCategory[] = [
   'Policy File',
+  'Civic Policy',
+  'Editorial Standard',
   'Doctrine',
   'Civic Report',
   'Investigation',

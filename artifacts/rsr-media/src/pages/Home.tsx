@@ -389,6 +389,33 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ─── POLICY INSTITUTE ────────────────────────────────────── */}
+      <section className="py-14 bg-card/[0.05] border-b border-border/15">
+        <div className="mx-auto px-4 sm:px-6 max-w-[1360px]">
+          <div className="border border-primary/25 bg-card/30 corner-bracket p-7 md:p-10 grid md:grid-cols-[1fr_auto] gap-6 items-center">
+            <div>
+              <div className="font-mono text-[0.6rem] text-primary/75 tracking-widest uppercase mb-3 flex items-center gap-2">
+                <span className="w-5 h-px bg-primary/60" /> // RSR.POLICY.INSTITUTE
+              </div>
+              <h2 className="text-2xl md:text-3xl uppercase mb-3 leading-tight" style={ORBITRON_BOLD}>
+                RSR Policy Institute
+              </h2>
+              <p className="font-sans text-base text-foreground/80 leading-relaxed max-w-2xl">
+                Books, policy files, civic positions, weekly briefs, and investigations for the
+                Intelligence Age.
+              </p>
+            </div>
+            <Link
+              href="/policy-institute"
+              className="shrink-0 inline-flex items-center h-11 px-5 text-[0.62rem] tracking-widest uppercase font-bold border border-primary/50 text-primary bg-primary/10 hover:bg-primary hover:text-white transition-all corner-bracket"
+              style={ORBITRON}
+            >
+              Enter Policy Institute →
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ─── CHANNELS TEASE ──────────────────────────────────────── */}
       <section className="py-10 bg-card/[0.02] border-b border-border/12">
         <div className="mx-auto px-4 sm:px-6 max-w-[1360px] flex items-center justify-between gap-4">

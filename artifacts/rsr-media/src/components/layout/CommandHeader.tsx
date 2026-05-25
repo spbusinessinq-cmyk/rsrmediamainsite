@@ -23,6 +23,7 @@ const MAIN_LINKS = [
   { href: '/', label: 'HOME', exact: true },
   { href: '/broadcasts', label: 'BROADCASTS', exact: true },
   { href: '/reports', label: 'REPORTS', prefix: true },
+  { href: '/policy-institute', label: 'INSTITUTE', prefix: true },
   { href: '/doctrine-library', label: 'DOCTRINE', prefix: true },
   { href: '/mission', label: 'MISSION', exact: true },
   { href: '/channels', label: 'CHANNELS', exact: true },

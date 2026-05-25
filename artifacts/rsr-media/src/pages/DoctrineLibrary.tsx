@@ -3,17 +3,14 @@ import { Link } from 'wouter';
 import { useSEO } from '@/lib/seo';
 import { usePublishedReports } from '@/hooks/useReports';
 import { ReportCard } from '@/components/reports/ReportCard';
-import { ARMORY_URL } from '@/config/site';
-import { BookOpen, ShoppingBag, ArrowRight, Download } from 'lucide-react';
+import { BookOpen, Lock, ArrowRight, Eye } from 'lucide-react';
 
 const BOOK = {
-  href: ARMORY_URL,
   title: 'Free Citizens, Not Managed Populations',
   subtitle: 'The Sovereignty Doctrine for the Age of Artificial Intelligence',
+  status: 'Coming June 8, 2026',
   description:
     'The founding manifesto of the Sovereignty Doctrine. A civic text for the age of artificial intelligence, invisible power, digital systems, and managed society.',
-  paperbackUrl: ARMORY_URL,
-  digitalUrl: ARMORY_URL,
 };
 
 export default function DoctrineLibrary() {
@@ -64,8 +61,8 @@ export default function DoctrineLibrary() {
                 </div>
               </div>
               <div className="p-8 md:p-10 flex flex-col justify-center">
-                <div className="font-mono text-[0.6rem] text-amber-500/80 tracking-widest uppercase mb-3">
-                  // FOUNDING MANIFESTO
+                <div className="font-mono text-[0.6rem] text-amber-500/85 tracking-widest uppercase mb-3 flex items-center gap-2">
+                  <Lock className="w-3 h-3" /> // FOUNDING MANIFESTO · {BOOK.status.toUpperCase()}
                 </div>
                 <h2
                   className="text-3xl md:text-4xl font-bold uppercase mb-3"
@@ -73,37 +70,25 @@ export default function DoctrineLibrary() {
                 >
                   {BOOK.title}
                 </h2>
-                <p className="font-sans text-base text-muted-foreground italic mb-4 leading-relaxed">
+                <p className="font-sans text-base text-foreground/70 italic mb-4 leading-relaxed">
                   {BOOK.subtitle}
                 </p>
-                <p className="font-sans text-sm text-foreground/75 leading-relaxed mb-6">
+                <p className="font-sans text-sm text-foreground/80 leading-relaxed mb-6">
                   {BOOK.description}
                 </p>
                 <div className="flex items-center gap-3 flex-wrap">
-                  <a
-                    href={BOOK.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <Link
+                    href="/policy-institute"
                     className="inline-flex items-center gap-2 font-mono text-xs font-bold border border-amber-500/50 text-amber-500 px-4 py-2.5 hover:bg-amber-500 hover:text-black transition-all tracking-widest uppercase"
                   >
-                    View Book <ArrowRight className="w-3 h-3" />
-                  </a>
-                  <a
-                    href={BOOK.paperbackUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 font-mono text-xs border border-border/45 text-foreground/80 px-4 py-2.5 hover:border-foreground/40 hover:text-foreground transition-all tracking-widest uppercase"
-                  >
-                    <ShoppingBag className="w-3 h-3" /> Buy Paperback
-                  </a>
-                  <a
-                    href={BOOK.digitalUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 font-mono text-xs border border-border/45 text-foreground/80 px-4 py-2.5 hover:border-foreground/40 hover:text-foreground transition-all tracking-widest uppercase"
-                  >
-                    <Download className="w-3 h-3" /> Digital Edition
-                  </a>
+                    <Eye className="w-3 h-3" /> Preview Book
+                  </Link>
+                  <span className="inline-flex items-center gap-2 font-mono text-xs border border-border/45 text-foreground/80 bg-card/30 px-4 py-2.5 tracking-widest uppercase">
+                    Coming June 8
+                  </span>
+                  <span className="inline-flex items-center gap-2 font-mono text-xs border border-border/30 text-muted-foreground/60 px-4 py-2.5 tracking-widest uppercase">
+                    Store Coming Soon
+                  </span>
                 </div>
               </div>
             </div>
